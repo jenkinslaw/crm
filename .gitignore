@@ -1,0 +1,13 @@
+/.buildpath/
+*.swp
+en.error
+updb.error
+cc.error
+seleniumhq
+error
+tags
+Test*yaml.inc
+*.coder.orig
+cscope*
+settings.php
+/default*
