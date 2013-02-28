@@ -1,0 +1,36 @@
+<?php
+/**
+ * @file
+ * Basic functional and Unit testing for Customer Database Application.
+ */
+
+class CdbTestCase extends DrupalWebTestCase {
+
+  function setUp() {
+    // Enabled cdb module.
+    parent::setUp('cdb');
+  }
+
+
+  /**
+   *  Initialize.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Customer Detabase Default Tests.',
+      'description' => 'Some test for our Customer Database Web app',
+      'group' => 'Jenkins',
+    );
+  }
+
+
+  /**
+   * Test that certain default modules are enabled on our system.
+   */
+  public function testCheckEnabledModules() {
+    $this->assertTrue(module_exists('cdb'), "The cdb module is enabled.");
+    $this->assertTrue(module_exists('views'), "The Views module is enabled.");
+  }
+
+
+}

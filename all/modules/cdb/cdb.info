@@ -1,0 +1,8 @@
+name = Customer Database
+description = Global module for all Jenkins Customer Databse Needs.
+core = 7.x
+package = Jenkins
+version = "7.x-0.1-alpha"
+
+dependencies[] = views
+files[] = tests/cdb.test
