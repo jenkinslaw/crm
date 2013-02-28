@@ -6,48 +6,48 @@
 
   <exec command="drush php-eval ${has.admin.code}" outputProperty="has.admin" />
 
-    <target name="deploy">
-      <phingcall target='en-dev' />
-    </target>
-    
-
-    <!-- Tasks Start Here -->
-
-    <target name="create-results-directories">
-      <mkdir dir="${simpletest.results}"/>
-    </target>
-
-    <target name="en-dev">
-      <phingcall target='set-dev-defaults' />
-      <exec  command="drush --yes en cdb-dev"  />
-      <exec  command="drush --yes perm-grant 'Authenticated User' 'access devel'" />
-      <exec  command="drush --yes perm-grant 'Annonymous User' 'access devel'" />
-      <phingcall target='dis-caches' />
-    </target>
-
-    <target name="set-dev-defaults">
-    </target>
-
-    <target name='dis-caches'>
-      <exec command="drush vset cache 0" />
-      <exec command="drush vset preprocess_js 0" />
-      <exec command="drush vset preprocess_css 0" />
-    </target>
-
-    <target name="dis-dev">
-      <exec  command="drush --yes dis devel simpletest devel_themer coder"  />
-      <exec  command="drush --yes perm-revoke 'Authenticated User' 'access devel'" />
-      <exec  command="drush --yes perm-revole 'Annonymous User' 'access devel'" />
-    </target>
-
-    <target name='clear-caches'>
-      <exec command="drush --yes cc all" />
-    </target>
+  <target name="deploy">
+    <phingcall target='en-dev' />
+  </target>
 
 
-    <target name="test-run">
-      <exec command="drush test-run --uri=${drush.uri} Cdb --xml='sites/${simpletest.results}' " />
-      <exec command="casperjs test --url=${drush.uri} --xunit='results/casper/results.xml' --ignore-ssl-errors='yes' --casperIncludes='all/modules/jenkins/tests/casper-includes' --includes='all/modules/jenkins/tests/casper-includes/Eval.js'  all/modules/jenkins/tests/casper" />
-    </target>
+  <!-- Tasks Start Here -->
+
+  <target name="create-results-directories">
+    <mkdir dir="${simpletest.results}"/>
+  </target>
+
+  <target name="en-dev">
+    <phingcall target='set-dev-defaults' />
+    <exec  command="drush --yes en cdb-dev"  />
+    <exec  command="drush --yes perm-grant 'Authenticated User' 'access devel'" />
+    <exec  command="drush --yes perm-grant 'Annonymous User' 'access devel'" />
+    <phingcall target='dis-caches' />
+  </target>
+
+  <target name="set-dev-defaults">
+  </target>
+
+  <target name='dis-caches'>
+    <exec command="drush vset cache 0" />
+    <exec command="drush vset preprocess_js 0" />
+    <exec command="drush vset preprocess_css 0" />
+  </target>
+
+  <target name="dis-dev">
+    <exec  command="drush --yes dis devel simpletest devel_themer coder"  />
+    <exec  command="drush --yes perm-revoke 'Authenticated User' 'access devel'" />
+    <exec  command="drush --yes perm-revole 'Annonymous User' 'access devel'" />
+  </target>
+
+  <target name='clear-caches'>
+    <exec command="drush --yes cc all" />
+  </target>
+
+
+  <target name="test-run">
+    <exec command="drush test-run --uri=${drush.uri} Cdb --xml='sites/${simpletest.results}' " />
+    <exec command="casperjs test --url=${drush.uri} --xunit='results/casper/results.xml' --ignore-ssl-errors='yes' --casperIncludes='all/modules/jenkins/tests/casper-includes' --includes='all/modules/jenkins/tests/casper-includes/Eval.js'  all/modules/jenkins/tests/casper" />
+  </target>
 
 </project>
