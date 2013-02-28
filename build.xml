@@ -19,7 +19,7 @@
 
     <target name="en-dev">
       <phingcall target='set-dev-defaults' />
-      <exec  command="drush --yes en devel simpletest coder roleusers state_test"  />
+      <exec  command="drush --yes en cdb-dev"  />
       <exec  command="drush --yes perm-grant 'Authenticated User' 'access devel'" />
       <exec  command="drush --yes perm-grant 'Annonymous User' 'access devel'" />
       <phingcall target='dis-caches' />

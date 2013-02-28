@@ -5,4 +5,8 @@ package = Jenkins
 version = "7.x-0.1-alpha"
 
 dependencies[] = views
-files[] = tests/cdb.test
+dependencies[] = simpletest
+dependencies[] = devel
+dependencies[] = coder 
+dependencies[] = roleusers
+

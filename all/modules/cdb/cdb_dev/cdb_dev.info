@@ -1,0 +1,12 @@
+name = Customer Database Developer Modules
+description = Convinience module to automatically enable our dev modules.
+core = 7.x
+package = Jenkins
+version = "7.x-0.1"
+
+dependencies[] = simplehtmldom
+dependencies[] = devel
+dependencies[] = coder
+dependencies[] = devel_themer
+
+
