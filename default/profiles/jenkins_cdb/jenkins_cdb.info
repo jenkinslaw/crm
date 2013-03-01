@@ -1,7 +1,9 @@
 name = CDB Installation
 description = Install profile for installing the Jenkins Customer Database.
-version = VERSION
+version = "7.20"
+project = "drupal"
 core = 7.x
+
 dependencies[] = toolbar
 dependencies[] = menu
 dependencies[] = field_ui
