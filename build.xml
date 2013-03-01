@@ -1,10 +1,6 @@
 <project name="cdb" default="deploy" description="Customer Database Phing Build Procedures">
 
-  <property name="has.admin.sql" value='"select count(uid) from users where name=\"drupal\" limit 1;"' />
-  <property name="has.admin.code" value="'echo db_result(db_query(${has.admin.sql}))'" />
   <property name="simpletest.results" value="results/simpletest" />
-
-  <exec command="drush php-eval ${has.admin.code}" outputProperty="has.admin" />
 
   <target name="deploy">
     <phingcall target='en-dev' />
@@ -43,7 +39,6 @@
   <target name='clear-caches'>
     <exec command="drush --yes cc all" />
   </target>
-
 
   <target name="test-run">
     <exec command="drush test-run --uri=${drush.uri} Cdb --xml='sites/${simpletest.results}' " />
