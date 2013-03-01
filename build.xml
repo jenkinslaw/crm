@@ -50,4 +50,11 @@
     <exec command="casperjs test --url=${drush.uri} --xunit='results/casper/results.xml' --ignore-ssl-errors='yes' --casperIncludes='all/modules/jenkins/tests/casper-includes' --includes='all/modules/jenkins/tests/casper-includes/Eval.js'  all/modules/jenkins/tests/casper" />
   </target>
 
+  <target name="reset-site">
+    <chmod file="default/settings.php" mode="0644" />
+    <exec command="drush --yes site-install jenkins_cdb --site-name='Jenkins Customer Database'" />
+    <exec command="drush --yes en simpletest" />
+    <exec command="drush --yes test-run Jenkins" />
+  </target>
+
 </project>
