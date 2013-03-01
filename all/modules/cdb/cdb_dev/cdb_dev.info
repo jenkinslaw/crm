@@ -9,5 +9,6 @@ dependencies[] = devel
 dependencies[] = coder
 dependencies[] = devel_themer
 dependencies[] = diff
+dependencies[] = eck
 
 
