@@ -8,5 +8,6 @@ dependencies[] = simplehtmldom
 dependencies[] = devel
 dependencies[] = coder
 dependencies[] = devel_themer
+dependencies[] = diff
 
 
