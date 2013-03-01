@@ -30,6 +30,8 @@ class CdbTestCase extends DrupalWebTestCase {
   public function testCheckEnabledModules() {
     $this->assertTrue(module_exists('cdb'), "The cdb module is enabled.");
     $this->assertTrue(module_exists('views'), "The Views module is enabled.");
+    $this->assertTrue(module_exists('features'), "The Features  module is enabled.");
+    $this->assertTrue(module_exists('entity'), "The Entity_API module is enabled.");
   }
 
 

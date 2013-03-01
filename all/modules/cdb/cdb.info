@@ -4,6 +4,11 @@ core = 7.x
 package = Jenkins
 version = "7.x-0.1-alpha"
 
-dependencies[] = views
+dependencies[] = ctools
 dependencies[] = features
+dependencies[] = views
+dependencies[] = panels
+dependencies[] = entity
 
+
+files[] = tests/cdb.test
