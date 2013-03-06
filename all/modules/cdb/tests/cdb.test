@@ -34,5 +34,11 @@ class CdbTestCase extends DrupalWebTestCase {
     $this->assertTrue(module_exists('entity'), "The Entity_API module is enabled.");
   }
 
+  public function testSiteName() {
+    $expected = "Jenkins Law Library Customer Database";
+    $actual = variable_get('site_name');
+    $this->assertEqual($actual, $expected, "The site name is : $expected.");
+  }
+
 
 }

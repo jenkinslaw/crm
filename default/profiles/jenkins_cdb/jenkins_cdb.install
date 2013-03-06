@@ -228,9 +228,6 @@ function jenkins_cdb_install() {
     node_type_save($type);
     node_add_body_field($type);
   }
-
-  variable_set('site_name', 'Jenkins Law Library Customer Databse');
-
   // Default "Basic page" to not be promoted and have comments disabled.
   variable_set('node_options_page', array('status'));
   variable_set('comment_page', COMMENT_NODE_HIDDEN);

@@ -4,8 +4,9 @@ core = 7.x
 package = Jenkins
 version = "7.x-0.1"
 
-dependencies[] = simplehtmldom
 dependencies[] = devel
+dependencies[] = simpletest
+dependencies[] = simplehtmldom
 dependencies[] = coder
 dependencies[] = devel_themer
 dependencies[] = diff
