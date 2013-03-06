@@ -1,0 +1,12 @@
+name = Company
+description = Defines the CDB Company Feature
+core = 7.x
+package = Jenkins
+version = "7.x-0.1-alpha"
+
+dependencies[] = features
+
+features[eck_entity_type] = company
+features[eck_bundle_type] = company
+
+

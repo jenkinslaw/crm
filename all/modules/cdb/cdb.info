@@ -10,5 +10,6 @@ dependencies[] = views
 dependencies[] = panels
 dependencies[] = entity
 
+dependencies[] = company
 
 files[] = tests/cdb.test
