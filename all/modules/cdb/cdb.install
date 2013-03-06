@@ -1,0 +1,7 @@
+<?php
+
+function cdb_install() {
+  variable_set('site_name', "Jenkins Law Library Customer Database");
+}
+
+?>
