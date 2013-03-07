@@ -11,5 +11,6 @@ dependencies[] = panels
 dependencies[] = entity
 
 dependencies[] = company
+dependencies[] = person 
 
 files[] = tests/cdb.test
