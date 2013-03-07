@@ -435,6 +435,7 @@ function drush_features_export() {
       if (!drush_confirm(dt('Do you really want to continue?'))) {
         drush_die('Aborting.');
       }
+       _drush_features_export($items, $module, $directory);
     }
   }
   else {
