@@ -1,0 +1,98 @@
+<?php
+/**
+ * @file
+ * Unit test our understading of entities.
+ */
+
+class CdbEntityTestCase extends DrupalWebTestCase {
+
+  protected $entity;
+
+  function setUp() {
+    $this->setup = TRUE;
+  }
+
+  function tearDown(){
+  }
+
+
+  /**
+   *  Initialize.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Enity Assumptions Tests.',
+      'description' => 'Getting My Head Around Entities.',
+      'group' => 'Jenkins',
+    );
+  }
+
+
+  public function testCreateEnity() {
+    $company = array(
+      'type' => 'company',
+      'name' => '[unit-test] Company',
+      'some_non_existing_attribute' => array('[unit-test]'),
+      'mas90_name' => '[unit-test] Mass90 Name',
+      'weird attribute name' => false,
+      'field_mas90_name' => 'My name is a mistery',
+    );
+
+    // Create an entity but does not save it.
+    $entity = entity_create('company', $company);
+    $this->assertTrue(is_object($entity), "The entity has ben created.");
+    $this->assertTrue(!isset($entity->id), "The entity id cannot be set unless it's saved.");
+
+    // Save the enity.  We could also just create the object ourselves.
+    $timestamp = time();
+    entity_save('company', $entity);
+    $this->assertEqual($entity->created, $timestamp, "A new entity has been saved.");
+    $this->entity = $entity;
+  }
+
+  public function testLoadEntity() {
+    // Returns an array of entities if no id are provided it will return all the
+    // entities and cache them.
+    $id = array($this->entity->id);
+    $expected = $this->entity;
+
+    // This method is provided by drupal core.
+    $actual = entity_load('company', $id);
+    $this->assertTrue(is_array($actual), "entity_load() returns an array");
+    $actual = array_shift($actual);
+    $this->assertEqual($actual->id, $expected->id, "entity_load() can return a specific entity.");
+
+    // We could have used entity_load_single here intead.
+    $expected = $actual;
+    $actual = entity_load_single('company', $expected->id);
+    $this->assertEqual($actual, $expected, "entity_load_single() returns one entity.");
+
+  }
+
+  public function testSelectEntityAttribute() {
+    $entity = entity_load_single('company', $this->entity->id);
+    $actual = $entity->created;
+    $expected = $this->entity->created;
+    $this->assertEqual($actual, $expected, "We can retrieve/select saved attributes.");
+  }
+
+  public function testSelectEnityField() {
+    // We need to access fields via the wrapper class.
+    $company = entity_load_single('company', $this->entity->id);
+    $wrapper = entity_metadata_wrapper('company', $company);
+    var_dump($wrapper->field_mas90_name->value());
+    $expected = $this->entity->field_mas90_name;
+
+    //$this->assertEqual($actual, $expected, "We can retrieve/select saved field values.");
+  }
+
+  public function testUpdateEnityAttribute() {
+  }
+
+  public function testUpdateEnityField() {
+  }
+
+  public function testDeleteEntity() {
+  }
+
+}
