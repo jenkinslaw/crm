@@ -1,0 +1,12 @@
+diff --git a/all/modules/contrib/features/features.drush.inc b/all/modules/contrib/features/features.drush.inc
+index 0d7a10d..9c9b49f 100644
+--- a/all/modules/contrib/features/features.drush.inc
++++ b/all/modules/contrib/features/features.drush.inc
+@@ -435,6 +435,7 @@ function drush_features_export() {
+       if (!drush_confirm(dt('Do you really want to continue?'))) {
+         drush_die('Aborting.');
+       }
++       _drush_features_export($items, $module, $directory);
+     }
+   }
+   else {
