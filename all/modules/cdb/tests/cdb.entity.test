@@ -48,6 +48,7 @@ class CdbEntityTestCase extends DrupalWebTestCase {
     entity_save('company', $entity);
     $this->assertEqual($entity->created, $timestamp, "A new entity has been saved.");
     $this->entity = $entity;
+
   }
 
   public function testLoadEntity() {
@@ -74,25 +75,62 @@ class CdbEntityTestCase extends DrupalWebTestCase {
     $actual = $entity->created;
     $expected = $this->entity->created;
     $this->assertEqual($actual, $expected, "We can retrieve/select saved attributes.");
+
+  }
+
+  public function testUpdateEnityAttribute() {
+    // Use the entity wrapper for easier CRUD.
+    $wrapper = entity_metadata_wrapper('company', $this->entity);
+    $current_time = time();
+    $wrapper->created->set($current_time);
+
+    $actual = $wrapper->created->value();
+    $expected= $current_time;
+    $this->assertEqual($actual, $expected, "We can edit attributes via the entity metadata wrapper");
+    
+    
+  }
+
+  public function testUpdateEnityField() {
+    // Use the entity wrapper for easer CRUD
+    // The entity attached to the object is different than.
+    $entity = entity_load_single('company', $this->entity->id);
+    $wrapper = entity_metadata_wrapper('company', $entity);
+    $wrapper->field_mas90_name->set("My name is known");
+
+    $actual = $wrapper->field_mas90_name->value();
+    $expected= "My name is known";
+    $result = print_r(array(
+      'actual' => $actual,
+      'expected' => $expected,
+    ), true);
+    $this->assertEqual($actual, $expected, "We can edit attributes via the entity metadata wrapper: $result");
   }
 
   public function testSelectEnityField() {
     // We need to access fields via the wrapper class.
     $company = entity_load_single('company', $this->entity->id);
     $wrapper = entity_metadata_wrapper('company', $company);
-    var_dump($wrapper->field_mas90_name->value());
-    $expected = $this->entity->field_mas90_name;
 
-    //$this->assertEqual($actual, $expected, "We can retrieve/select saved field values.");
+    $actual = $wrapper->field_mas90_name->value();
+    $expected = "My name is known";
+    $this->assertEqual($actual, $expected, "We can retrieve our set values.");
   }
 
-  public function testUpdateEnityAttribute() {
-  }
-
-  public function testUpdateEnityField() {
-  }
 
   public function testDeleteEntity() {
+    $company = entity_load_single('company', $this->entity->id);
+    $wrapper = entity_metadata_wrapper('company', $company);
+    $wrapper->delete();
+
+
+    $actual = entity_load_single('company', $this->entity->id);
+    $expected = FALSE;
+    $result = print_r(array(
+      'actual' => $actual,
+      'expected' => $expected,
+    ), true);
+    $this->assertEqual($actual, $expected, "We can delete the enity: $result.");
   }
 
 }
