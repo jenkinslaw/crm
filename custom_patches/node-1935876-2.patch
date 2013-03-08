@@ -1,0 +1,82 @@
+diff --git a/features.drush.inc b/features.drush.inc
+index 0d7a10d..cf2aaa0 100644
+--- a/features.drush.inc
++++ b/features.drush.inc
+@@ -435,6 +435,7 @@ function drush_features_export() {
+       if (!drush_confirm(dt('Do you really want to continue?'))) {
+         drush_die('Aborting.');
+       }
++      _drush_features_export($items, $module, $directory);
+     }
+   }
+   else {
+diff --git a/tests/features.test b/tests/features.test
+index 8da66a3..9c9f915 100644
+--- a/tests/features.test
++++ b/tests/features.test
+@@ -280,3 +280,65 @@ class FeaturesCtoolsIntegrationTest extends DrupalWebTestCase {
+     }
+   }
+ }
++
++
++
++/**
++ * Tests Features Drush Functionality.
++ */
++class FeaturesDrushExportTest extends DrupalWebTestCase {
++  protected $profile = 'testing';
++  private $test_module = 'my_sweet_feature';
++  private $test_module_path = "sites/all/modules/my_sweet_feature";
++
++  /**
++   * Test info.
++   */
++  public static function getInfo() {
++    return array(
++      'name' => t('Features drush functionality.'),
++      'description' => t('Run functional tests on Features `drush` commands.') ,
++      'group' => t('Features'),
++    );
++  }
++
++  /**
++   * Set up test.
++   */
++  public function setUp() {
++    parent::setUp(array('features',));
++  }
++
++  public function tearDown() {
++    $this->deleteTestModuleFiles();
++    parent::tearDown();
++  }
++
++  /**
++   * Test features-export command when module is not present.
++   */
++  public function testModuleExportNew(){
++    // We need to make sure the module does not exists.
++    $this->deleteTestModuleFiles();
++
++    // Verify the module files are not present.
++    $module_file_exists = is_dir($this->test_module_path);
++    $this->assertFalse($module_file_exists, "The test module files are not present.");
++
++    // Run drush then check that the module was created.
++    exec("drush -y fe $this->test_module node:page", $output);
++
++    $module_file_exists = is_dir($this->test_module_path);
++    $this->assertTrue($module_file_exists, "The test module has been created");
++
++  }
++
++
++  /**
++   * If a test module is found, remove it from the system.
++   */
++  private function deleteTestModuleFiles() {
++    file_unmanaged_delete_recursive($this->test_module_path);
++  }
++
++}
