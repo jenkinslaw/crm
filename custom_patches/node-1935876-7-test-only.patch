@@ -1,15 +1,3 @@
-diff --git a/features.drush.inc b/features.drush.inc
-index 0d7a10d..cf2aaa0 100644
---- a/features.drush.inc
-+++ b/features.drush.inc
-@@ -435,6 +435,7 @@ function drush_features_export() {
-       if (!drush_confirm(dt('Do you really want to continue?'))) {
-         drush_die('Aborting.');
-       }
-+      _drush_features_export($items, $module, $directory);
-     }
-   }
-   else {
 diff --git a/tests/features.test b/tests/features.test
 index 8da66a3..9c9f915 100644
 --- a/tests/features.test
@@ -35,7 +23,7 @@ index 8da66a3..9c9f915 100644
 +  public static function getInfo() {
 +    return array(
 +      'name' => t('Features drush functionality.'),
-+      'description' => t('Run functional tests on Features `drush` commands.') ,
++      'description' => t('Run functional tests on Features `drush` commands.'),
 +      'group' => t('Features'),
 +    );
 +  }
@@ -44,7 +32,7 @@ index 8da66a3..9c9f915 100644
 +   * Set up test.
 +   */
 +  public function setUp() {
-+    parent::setUp(array('features',));
++    parent::setUp(array('features', ));
 +  }
 +
 +  public function tearDown() {
@@ -55,7 +43,7 @@ index 8da66a3..9c9f915 100644
 +  /**
 +   * Test features-export command when module is not present.
 +   */
-+  public function testModuleExportNew(){
++  public function testModuleExportNew() {
 +    // We need to make sure the module does not exists.
 +    $this->deleteTestModuleFiles();
 +
@@ -80,3 +68,4 @@ index 8da66a3..9c9f915 100644
 +  }
 +
 +}
+
