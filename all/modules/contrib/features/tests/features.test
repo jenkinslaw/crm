@@ -318,7 +318,7 @@ class FeaturesDrushExportTest extends DrupalWebTestCase {
    * Test features-export command when module is not present.
    */
   public function testModuleExportNew() {
-    // We need to make sure the module does not exists.
+    // We need to make sure the module does not exist.
     $this->deleteTestModuleFiles();
 
     // Verify the module files are not present.
