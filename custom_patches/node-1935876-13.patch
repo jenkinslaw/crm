@@ -1,15 +1,14 @@
 diff --git a/features.drush.inc b/features.drush.inc
-index 0d7a10d..74a223f 100644
+index 0d7a10d..ab5b1f0 100644
 --- a/features.drush.inc
 +++ b/features.drush.inc
-@@ -435,6 +435,15 @@ function drush_features_export() {
+@@ -435,6 +435,14 @@ function drush_features_export() {
        if (!drush_confirm(dt('Do you really want to continue?'))) {
          drush_die('Aborting.');
        }
 +      _drush_features_export($items, $module, $directory);
-+      module_enable(array($module), TRUE);
 +      drupal_flush_all_caches();
-+      if (($feature = features_load_feature($module, TRUE)) && module_exists($module)) {
++      if (($feature = features_load_feature($module, TRUE))) {
 +        module_load_include('inc', 'features', 'features.export');
 +        _features_populate($items, $feature->info, $feature->name);
 +        _drush_features_export($feature->info, $feature->name, dirname($feature->filename));
@@ -19,31 +18,29 @@ index 0d7a10d..74a223f 100644
    }
    else {
 diff --git a/tests/features.test b/tests/features.test
-index 8da66a3..8b25ef7 100644
+index 8da66a3..d2ed9a0 100644
 --- a/tests/features.test
 +++ b/tests/features.test
-@@ -280,3 +280,69 @@ class FeaturesCtoolsIntegrationTest extends DrupalWebTestCase {
+@@ -280,3 +280,54 @@ class FeaturesCtoolsIntegrationTest extends DrupalWebTestCase {
      }
    }
  }
 +
-+
-+
 +/**
-+ * Tests Features Drush Functionality.
++ * Tests Features' Drush integration.
 + */
 +class FeaturesDrushExportTest extends DrupalWebTestCase {
 +  protected $profile = 'testing';
 +  private $test_module = 'my_sweet_feature';
-+  private $test_module_path = "sites/all/modules/my_sweet_feature";
++  private $test_module_path = 'sites/all/modules/my_sweet_feature';
 +
 +  /**
 +   * Test info.
 +   */
 +  public static function getInfo() {
 +    return array(
-+      'name' => t('Features drush functionality.'),
-+      'description' => t('Run functional tests on Features `drush` commands.'),
++      'name' => t('Drush integration'),
++      'description' => t('Run tests on Features\' `drush` commands.'),
 +      'group' => t('Features'),
 +    );
 +  }
@@ -52,42 +49,29 @@ index 8da66a3..8b25ef7 100644
 +   * Set up test.
 +   */
 +  public function setUp() {
-+    parent::setUp(array('features', ));
++    parent::setUp(array('features'));
 +  }
 +
-+  public function tearDown() {
-+    $this->deleteTestModuleFiles();
-+    parent::tearDown();
-+  }
 +
 +  /**
 +   * Test features-export command when module is not present.
 +   */
 +  public function testModuleExportNew() {
-+    // We need to make sure the module does not exist.
-+    $this->deleteTestModuleFiles();
-+
 +    // Verify the module files are not present.
 +    $module_file_exists = is_dir($this->test_module_path);
-+    $this->assertFalse($module_file_exists, "The test module files are not present.");
++    $this->assertFalse($module_file_exists, 'The test module files are not present.');
 +
-+    // Run drush then check that the module was created.
-+    exec("drush -y fe $this->test_module node:page", $output);
++    // Run drush command then check that the module was created.
++    exec("drush fe $this->test_module node:page -y", $output);
 +
 +    $module_file_exists = is_dir($this->test_module_path);
-+    $this->assertTrue($module_file_exists, "The test module has been created");
++    $this->assertTrue($module_file_exists, 'The test module has been created');
 +
 +    // Verify the component was exported.
 +    $component_exported = is_file("$this->test_module_path/my_sweet_feature.features.field.inc");
-+    $this->assertTrue($component_exported, "The component was exported succesfully.");
++    $this->assertTrue($component_exported, 'The component was exported succesfully.');
 +
-+  }
-+
-+
-+  /**
-+   * If a test module is found, remove it from the system.
-+   */
-+  private function deleteTestModuleFiles() {
++    // Remove the test module.
 +    file_unmanaged_delete_recursive($this->test_module_path);
 +  }
 +
