@@ -1,5 +1,25 @@
+diff --git a/features.drush.inc b/features.drush.inc
+index 0d7a10d..74a223f 100644
+--- a/features.drush.inc
++++ b/features.drush.inc
+@@ -435,6 +435,15 @@ function drush_features_export() {
+       if (!drush_confirm(dt('Do you really want to continue?'))) {
+         drush_die('Aborting.');
+       }
++      _drush_features_export($items, $module, $directory);
++      module_enable(array($module), TRUE);
++      drupal_flush_all_caches();
++      if (($feature = features_load_feature($module, TRUE)) && module_exists($module)) {
++        module_load_include('inc', 'features', 'features.export');
++        _features_populate($items, $feature->info, $feature->name);
++        _drush_features_export($feature->info, $feature->name, dirname($feature->filename));
++      }
++
+     }
+   }
+   else {
 diff --git a/tests/features.test b/tests/features.test
-index 8da66a3..04d77b6 100644
+index 8da66a3..8b25ef7 100644
 --- a/tests/features.test
 +++ b/tests/features.test
 @@ -280,3 +280,69 @@ class FeaturesCtoolsIntegrationTest extends DrupalWebTestCase {
@@ -44,7 +64,7 @@ index 8da66a3..04d77b6 100644
 +   * Test features-export command when module is not present.
 +   */
 +  public function testModuleExportNew() {
-+    // We need to make sure the module does not exists.
++    // We need to make sure the module does not exist.
 +    $this->deleteTestModuleFiles();
 +
 +    // Verify the module files are not present.

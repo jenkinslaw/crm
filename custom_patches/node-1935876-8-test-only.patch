@@ -19,7 +19,7 @@ index 0d7a10d..74a223f 100644
    }
    else {
 diff --git a/tests/features.test b/tests/features.test
-index 8da66a3..04d77b6 100644
+index 8da66a3..8b25ef7 100644
 --- a/tests/features.test
 +++ b/tests/features.test
 @@ -280,3 +280,69 @@ class FeaturesCtoolsIntegrationTest extends DrupalWebTestCase {
@@ -64,7 +64,7 @@ index 8da66a3..04d77b6 100644
 +   * Test features-export command when module is not present.
 +   */
 +  public function testModuleExportNew() {
-+    // We need to make sure the module does not exists.
++    // We need to make sure the module does not exist.
 +    $this->deleteTestModuleFiles();
 +
 +    // Verify the module files are not present.
