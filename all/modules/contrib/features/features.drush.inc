@@ -435,7 +435,15 @@ function drush_features_export() {
       if (!drush_confirm(dt('Do you really want to continue?'))) {
         drush_die('Aborting.');
       }
-       _drush_features_export($items, $module, $directory);
+      _drush_features_export($items, $module, $directory);
+      module_enable(array($module), TRUE);
+      drupal_flush_all_caches();
+      if (($feature = features_load_feature($module, TRUE)) && module_exists($module)) {
+        module_load_include('inc', 'features', 'features.export');
+        _features_populate($items, $feature->info, $feature->name);
+        _drush_features_export($feature->info, $feature->name, dirname($feature->filename));
+      }
+
     }
   }
   else {

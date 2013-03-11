@@ -1,20 +1,28 @@
 diff --git a/features.drush.inc b/features.drush.inc
-index 0d7a10d..cf2aaa0 100644
+index 0d7a10d..74a223f 100644
 --- a/features.drush.inc
 +++ b/features.drush.inc
-@@ -435,6 +435,7 @@ function drush_features_export() {
+@@ -435,6 +435,15 @@ function drush_features_export() {
        if (!drush_confirm(dt('Do you really want to continue?'))) {
          drush_die('Aborting.');
        }
 +      _drush_features_export($items, $module, $directory);
++      module_enable(array($module), TRUE);
++      drupal_flush_all_caches();
++      if (($feature = features_load_feature($module, TRUE)) && module_exists($module)) {
++        module_load_include('inc', 'features', 'features.export');
++        _features_populate($items, $feature->info, $feature->name);
++        _drush_features_export($feature->info, $feature->name, dirname($feature->filename));
++      }
++
      }
    }
    else {
 diff --git a/tests/features.test b/tests/features.test
-index 8da66a3..9c9f915 100644
+index 8da66a3..04d77b6 100644
 --- a/tests/features.test
 +++ b/tests/features.test
-@@ -280,3 +280,65 @@ class FeaturesCtoolsIntegrationTest extends DrupalWebTestCase {
+@@ -280,3 +280,69 @@ class FeaturesCtoolsIntegrationTest extends DrupalWebTestCase {
      }
    }
  }
@@ -35,7 +43,7 @@ index 8da66a3..9c9f915 100644
 +  public static function getInfo() {
 +    return array(
 +      'name' => t('Features drush functionality.'),
-+      'description' => t('Run functional tests on Features `drush` commands.') ,
++      'description' => t('Run functional tests on Features `drush` commands.'),
 +      'group' => t('Features'),
 +    );
 +  }
@@ -68,6 +76,10 @@ index 8da66a3..9c9f915 100644
 +
 +    $module_file_exists = is_dir($this->test_module_path);
 +    $this->assertTrue($module_file_exists, "The test module has been created");
++
++    // Verify the component was exported.
++    $component_exported = is_file("$this->test_module_path/my_sweet_feature.features.field.inc");
++    $this->assertTrue($component_exported, "The component was exported succesfully.");
 +
 +  }
 +

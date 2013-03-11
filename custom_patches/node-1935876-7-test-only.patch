@@ -1,8 +1,8 @@
 diff --git a/tests/features.test b/tests/features.test
-index 8da66a3..9c9f915 100644
+index 8da66a3..04d77b6 100644
 --- a/tests/features.test
 +++ b/tests/features.test
-@@ -280,3 +280,65 @@ class FeaturesCtoolsIntegrationTest extends DrupalWebTestCase {
+@@ -280,3 +280,69 @@ class FeaturesCtoolsIntegrationTest extends DrupalWebTestCase {
      }
    }
  }
@@ -57,6 +57,10 @@ index 8da66a3..9c9f915 100644
 +    $module_file_exists = is_dir($this->test_module_path);
 +    $this->assertTrue($module_file_exists, "The test module has been created");
 +
++    // Verify the component was exported.
++    $component_exported = is_file("$this->test_module_path/my_sweet_feature.features.field.inc");
++    $this->assertTrue($component_exported, "The component was exported succesfully.");
++
 +  }
 +
 +
@@ -68,4 +72,3 @@ index 8da66a3..9c9f915 100644
 +  }
 +
 +}
-
