@@ -1,5 +1,5 @@
 diff --git a/tests/features.test b/tests/features.test
-index 8da66a3..d2ed9a0 100644
+index 8da66a3..3d6462c 100644
 --- a/tests/features.test
 +++ b/tests/features.test
 @@ -280,3 +280,54 @@ class FeaturesCtoolsIntegrationTest extends DrupalWebTestCase {
@@ -13,7 +13,7 @@ index 8da66a3..d2ed9a0 100644
 +class FeaturesDrushExportTest extends DrupalWebTestCase {
 +  protected $profile = 'testing';
 +  private $test_module = 'my_sweet_feature';
-+  private $test_module_path = 'sites/all/modules/my_sweet_feature';
++  private $test_module_path = 'public://my_sweet_feature';
 +
 +  /**
 +   * Test info.
@@ -33,27 +33,27 @@ index 8da66a3..d2ed9a0 100644
 +    parent::setUp(array('features'));
 +  }
 +
-+
 +  /**
 +   * Test features-export command when module is not present.
 +   */
 +  public function testModuleExportNew() {
 +    // Verify the module files are not present.
-+    $module_file_exists = is_dir($this->test_module_path);
++    $stream_wrapper = file_stream_wrapper_get_instance_by_uri($this->test_module_path);
++    $directory = $stream_wrapper->getDirectoryPath();
++    $module_path = "$directory/$this->test_module";
++
++    $module_file_exists = is_dir($module_path);
 +    $this->assertFalse($module_file_exists, 'The test module files are not present.');
 +
 +    // Run drush command then check that the module was created.
-+    exec("drush fe $this->test_module node:page -y", $output);
++    exec("drush fe $this->test_module node:page -y --destination=\"$directory\"", $output);
 +
-+    $module_file_exists = is_dir($this->test_module_path);
++    $module_file_exists = is_dir($module_path);
 +    $this->assertTrue($module_file_exists, 'The test module has been created');
 +
 +    // Verify the component was exported.
-+    $component_exported = is_file("$this->test_module_path/my_sweet_feature.features.field.inc");
++    $component_exported = is_file("$module_path/my_sweet_feature.features.field.inc");
 +    $this->assertTrue($component_exported, 'The component was exported succesfully.');
-+
-+    // Remove the test module.
-+    file_unmanaged_delete_recursive($this->test_module_path);
 +  }
 +
 +}
