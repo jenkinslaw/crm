@@ -1,5 +1,5 @@
 diff --git a/features.drush.inc b/features.drush.inc
-index 0d7a10d..9a0b978 100644
+index 0d7a10d..d0353f8 100644
 --- a/features.drush.inc
 +++ b/features.drush.inc
 @@ -435,6 +435,9 @@ function drush_features_export() {
@@ -12,7 +12,7 @@ index 0d7a10d..9a0b978 100644
      }
    }
    else {
-@@ -529,34 +532,8 @@ function _drush_features_export($info, $module_name = NULL, $directory = NULL) {
+@@ -529,34 +532,7 @@ function _drush_features_export($info, $module_name = NULL, $directory = NULL) {
      }
      if (is_dir($directory)) {
        drupal_flush_all_caches();
@@ -44,12 +44,11 @@ index 0d7a10d..9a0b978 100644
 -        $version = implode('.', $version_explode);
 -        $export['version'] = $version;
 -      }
-+      variable_set('trace', 'test');
 +      $export = _features_generate_export($info, $module_name);
        $files = features_export_render($export, $module_name, TRUE);
        foreach ($files as $extension => $file_contents) {
          if (!in_array($extension, array('module', 'info'))) {
-@@ -576,6 +553,46 @@ function _drush_features_export($info, $module_name = NULL, $directory = NULL) {
+@@ -576,6 +552,46 @@ function _drush_features_export($info, $module_name = NULL, $directory = NULL) {
  }
  
  /**
@@ -97,10 +96,10 @@ index 0d7a10d..9a0b978 100644
   * Optionally accept a list of components to revert.
   */
 diff --git a/tests/features.test b/tests/features.test
-index 8da66a3..3d6462c 100644
+index 8da66a3..ab48f74 100644
 --- a/tests/features.test
 +++ b/tests/features.test
-@@ -280,3 +280,54 @@ class FeaturesCtoolsIntegrationTest extends DrupalWebTestCase {
+@@ -280,3 +280,53 @@ class FeaturesCtoolsIntegrationTest extends DrupalWebTestCase {
      }
    }
  }
@@ -135,17 +134,16 @@ index 8da66a3..3d6462c 100644
 +   * Test features-export command when module is not present.
 +   */
 +  public function testModuleExportNew() {
-+    // Verify the module files are not present.
 +    $stream_wrapper = file_stream_wrapper_get_instance_by_uri($this->test_module_path);
 +    $directory = $stream_wrapper->getDirectoryPath();
 +    $module_path = "$directory/$this->test_module";
 +
++    // Verify the module files are not present.
 +    $module_file_exists = is_dir($module_path);
 +    $this->assertFalse($module_file_exists, 'The test module files are not present.');
 +
 +    // Run drush command then check that the module was created.
 +    exec("drush fe $this->test_module node:page -y --destination=\"$directory\"", $output);
-+
 +    $module_file_exists = is_dir($module_path);
 +    $this->assertTrue($module_file_exists, 'The test module has been created');
 +

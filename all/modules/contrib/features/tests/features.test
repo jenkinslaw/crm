@@ -311,17 +311,16 @@ class FeaturesDrushExportTest extends DrupalWebTestCase {
    * Test features-export command when module is not present.
    */
   public function testModuleExportNew() {
-    // Verify the module files are not present.
     $stream_wrapper = file_stream_wrapper_get_instance_by_uri($this->test_module_path);
     $directory = $stream_wrapper->getDirectoryPath();
     $module_path = "$directory/$this->test_module";
 
+    // Verify the module files are not present.
     $module_file_exists = is_dir($module_path);
     $this->assertFalse($module_file_exists, 'The test module files are not present.');
 
     // Run drush command then check that the module was created.
     exec("drush fe $this->test_module node:page -y --destination=\"$directory\"", $output);
-
     $module_file_exists = is_dir($module_path);
     $this->assertTrue($module_file_exists, 'The test module has been created');
 

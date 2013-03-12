@@ -532,7 +532,6 @@ function _drush_features_export($info, $module_name = NULL, $directory = NULL) {
     }
     if (is_dir($directory)) {
       drupal_flush_all_caches();
-      variable_set('trace', 'test');
       $export = _features_generate_export($info, $module_name);
       $files = features_export_render($export, $module_name, TRUE);
       foreach ($files as $extension => $file_contents) {
