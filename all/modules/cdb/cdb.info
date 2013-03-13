@@ -14,3 +14,4 @@ dependencies[] = company
 dependencies[] = person 
 
 files[] = tests/cdb.test
+files[] = tests/cdb.entity.test

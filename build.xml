@@ -1,6 +1,7 @@
 <project name="cdb" default="deploy" description="Customer Database Phing Build Procedures">
 
   <property name="simpletest.results" value="results/simpletest" />
+  <property environment="env"/>
 
   <target name="deploy">
     <phingcall target='en-dev' />
@@ -46,10 +47,25 @@
   </target>
 
   <target name="reset-site">
-    <chmod file="default/settings.php" mode="0644" />
-    <exec command="drush --yes site-install jenkins_cdb --site-name='Jenkins Customer Database'" />
-    <exec command="drush --yes en simpletest" />
-    <exec command="drush --yes test-run Jenkins" />
+    <if>
+        <or>
+          <equals arg1="${env.db_su_pw}" arg2='' />
+          <equals arg1="${env.account_name}" arg2='' />
+          <equals arg1="${env.account_pass}" arg2='' />
+        </or>
+      <then>
+        <fail message="${env.db_su_pw} ${env.account_name} ${env.account_pass} The environment variables $db_su_pw, $account_name, $account_pass must all be set."/>
+      </then>
+      <else>
+        <chmod file="default/settings.php" mode="0644" />
+        <exec command="drush --yes site-install jenkins_cdb \
+          --db-su-pw=${env.db_su_pw} \
+          --account-name=${env.account_name} \
+          --account_pass=${env.account_pass}" />
+        <exec command="drush --yes en simpletest" />
+        <exec command="drush --yes test-run Jenkins" />
+      </else>
+    </if>
   </target>
 
 </project>
