@@ -38,24 +38,34 @@ class CdbEntityTestCase extends DrupalWebTestCase {
       'field_mas90_name' => 'My name is a mistery',
     );
 
+    $person = array(
+      'type'                  => 'person',
+      'name'                  => '[unit-test] Person',
+      'field_person_category' => array('Billing Contact','Customer'),
+      'field_status'          => array('Attorney'),
+      'field_address'         => array('country' => 'US',
+                                       'administrative_area' => 'PA',
+                                       'postal_code' => '19130')
+    );
+
     // Create an entity but does not save it.
-    $entity = entity_create('company', $company);
-    $this->assertTrue(is_object($entity), "The entity has ben created.");
-    $this->assertTrue(!isset($entity->id), "The entity id cannot be set unless it's saved.");
+    $company_entity = entity_create('company', $company);
+    $this->assertTrue(is_object($company_entity), "The entity has ben created.");
+    $this->assertTrue(!isset($company_entity->id), "The entity id cannot be set unless it's saved.");
 
     // Save the enity.  We could also just create the object ourselves.
     $timestamp = time();
-    entity_save('company', $entity);
-    $this->assertEqual($entity->created, $timestamp, "A new entity has been saved.");
-    $this->entity = $entity;
+    entity_save('company', $company_entity);
+    $this->assertEqual($company_entity->created, $timestamp, "A new entity has been saved.");
+    $this->company_entity = $company_entity;
 
   }
 
   public function testLoadEntity() {
     // Returns an array of entities if no id are provided it will return all the
     // entities and cache them.
-    $id = array($this->entity->id);
-    $expected = $this->entity;
+    $id = array($this->company_entity->id);
+    $expected = $this->company_entity;
 
     // This method is provided by drupal core.
     $actual = entity_load('company', $id);
@@ -71,16 +81,16 @@ class CdbEntityTestCase extends DrupalWebTestCase {
   }
 
   public function testSelectEntityAttribute() {
-    $entity = entity_load_single('company', $this->entity->id);
-    $actual = $entity->created;
-    $expected = $this->entity->created;
+    $company_entity = entity_load_single('company', $this->company_entity->id);
+    $actual = $company_entity->created;
+    $expected = $this->company_entity->created;
     $this->assertEqual($actual, $expected, "We can retrieve/select saved attributes.");
 
   }
 
   public function testUpdateEnityAttribute() {
     // Use the entity wrapper for easier CRUD.
-    $wrapper = entity_metadata_wrapper('company', $this->entity);
+    $wrapper = entity_metadata_wrapper('company', $this->company_entity);
     $current_time = time();
     $wrapper->created->set($current_time);
 
@@ -92,8 +102,8 @@ class CdbEntityTestCase extends DrupalWebTestCase {
   public function testUpdateEnityField() {
     // Use the entity wrapper for easer CRUD
     // The entity attached to the object is different than.
-    $entity = entity_load_single('company', $this->entity->id);
-    $wrapper = entity_metadata_wrapper('company', $entity);
+    $company_entity = entity_load_single('company', $this->company_entity->id);
+    $wrapper = entity_metadata_wrapper('company', $company_entity);
     $wrapper->field_mas90_name->set("My name is known");
 
     $actual = $wrapper->field_mas90_name->value();
@@ -107,7 +117,7 @@ class CdbEntityTestCase extends DrupalWebTestCase {
 
   public function testSelectEnityField() {
     // We need to access fields via the wrapper class.
-    $company = entity_load_single('company', $this->entity->id);
+    $company = entity_load_single('company', $this->company_entity->id);
     $wrapper = entity_metadata_wrapper('company', $company);
 
     $actual = $wrapper->field_mas90_name->value();
@@ -124,12 +134,12 @@ class CdbEntityTestCase extends DrupalWebTestCase {
   }
 
   public function testDeleteEntity() {
-    $company = entity_load_single('company', $this->entity->id);
+    $company = entity_load_single('company', $this->company_entity->id);
     $wrapper = entity_metadata_wrapper('company', $company);
     $wrapper->delete();
 
 
-    $actual = entity_load_single('company', $this->entity->id);
+    $actual = entity_load_single('company', $this->company_entity->id);
     $expected = FALSE;
     $result = print_r(array(
       'actual' => $actual,

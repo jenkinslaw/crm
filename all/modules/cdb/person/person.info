@@ -1,0 +1,9 @@
+name = person
+core = 7.x
+package = Features
+php = 5.2.4
+dependencies[] = eck
+dependencies[] = features
+eck_entity_type[] = person
+features[eck_entity_type][] = person
+features[features_api][] = api:1
