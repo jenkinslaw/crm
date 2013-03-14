@@ -75,7 +75,11 @@
 
   <target name="update-core">
     <delete file="${project.basedir}/../profiles/jenkins_cdb" />
+    <copy todir="${project.basedir}/../profiles/jenkins_cdb" >
+      <fileset dir="${project.basedir}/default/profiles/jenkins_cdb" includes="*" />
+    </copy>
     <exec command="drush --yes up drupal" />
+    <delete dir="${project.basedir}/../profiles/jenkins_cdb" />
     <exec command="ln -s ${project.basedir}/default/profiles/jenkins_cdb ${project.basedir}/../profiles/jenkins_cdb" />
   </target>
 
