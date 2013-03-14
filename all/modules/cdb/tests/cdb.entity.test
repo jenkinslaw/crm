@@ -53,31 +53,42 @@ class CdbEntityTestCase extends DrupalWebTestCase {
     $this->assertTrue(is_object($company_entity), "The entity has ben created.");
     $this->assertTrue(!isset($company_entity->id), "The entity id cannot be set unless it's saved.");
 
+    $person_entity = entity_create('person', $person);
+    $this->assertTrue(is_object($person_entity), "The person entity has been created");
+
     // Save the enity.  We could also just create the object ourselves.
     $timestamp = time();
     entity_save('company', $company_entity);
-    $this->assertEqual($company_entity->created, $timestamp, "A new entity has been saved.");
+    entity_save('person', $person_entity);
+    $this->assertEqual($company_entity->created, $timestamp, "Company  entity has been saved.");
+    $this->assertEqual($person_entity->created, $timestamp, "Person entity has been saved");
     $this->company_entity = $company_entity;
-
+    $this->person_entity = $person_entity;
   }
 
   public function testLoadEntity() {
     // Returns an array of entities if no id are provided it will return all the
     // entities and cache them.
-    $id = array($this->company_entity->id);
-    $expected = $this->company_entity;
+    $company_id = array($this->company_entity->id);
+    $person_id  = array($this->person_entity->id);
+    $company_expected = $this->company_entity;
+    $person_expected  = $this->person_entity;
 
     // This method is provided by drupal core.
-    $actual = entity_load('company', $id);
-    $this->assertTrue(is_array($actual), "entity_load() returns an array");
-    $actual = array_shift($actual);
-    $this->assertEqual($actual->id, $expected->id, "entity_load() can return a specific entity.");
+    $company_actual = entity_load('company', $company_id);
+    $person_actual  = entity_load('person', $person_id);
+    $this->assertTrue(is_array($company_actual), "entity_load() returns an array");
+    $company_actual = array_shift($company_actual);
+    $person_actual  = array_shift($person_actual);
+    $this->assertEqual($company_actual->id, $company_expected->id, "entity_load() can return a specific entity.");
 
     // We could have used entity_load_single here intead.
-    $expected = $actual;
-    $actual = entity_load_single('company', $expected->id);
-    $this->assertEqual($actual, $expected, "entity_load_single() returns one entity.");
-
+    $company_expected = $company_actual;
+    $person_expected = $person_actual;
+    $company_actual = entity_load_single('company', $company_expected->id);
+    $person_actual = entity_load_single('person', $person_expected->id);
+    $this->assertEqual($company_actual, $company_expected, "entity_load_single() returns one entity.");
+    $this->assertEqual($person_actual, $person_expected, "Person enity returned via entity_load_cingle");
   }
 
   public function testSelectEntityAttribute() {
@@ -99,7 +110,7 @@ class CdbEntityTestCase extends DrupalWebTestCase {
     $this->assertEqual($actual, $expected, "We can edit attributes via the entity metadata wrapper");
   }
 
-  public function testUpdateEnityField() {
+  public function testUpdateCompanyEnityField() {
     // Use the entity wrapper for easer CRUD
     // The entity attached to the object is different than.
     $company_entity = entity_load_single('company', $this->company_entity->id);
@@ -113,6 +124,17 @@ class CdbEntityTestCase extends DrupalWebTestCase {
       'expected' => $expected,
     ), true);
     $this->assertEqual($actual, $expected, "We can edit attributes via the entity metadata wrapper: $result");
+  }
+
+  public function testUpdatePersonEntityField() {
+    //Try to update an entity reference field
+    $company_entity = entity_load_single('company', $this->company_entity->id);
+    $person_entity = entity_load_single('person', $this->person_entity->id);
+    $wrapper = entity_metadata_wrapper("person", $person_entity);
+    $wrapper->field_company->set($company_entity);
+
+    $actual = $wrapper->field_company->value();
+    $this->assertTrue(!empty($actual));
   }
 
   public function testSelectEnityField() {
