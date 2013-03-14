@@ -9,6 +9,7 @@ dependencies[] = features
 dependencies[] = views
 dependencies[] = panels
 dependencies[] = entity
+dependencies[] = panalizer
 
 dependencies[] = company
 dependencies[] = person 
