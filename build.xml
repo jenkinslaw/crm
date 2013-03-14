@@ -68,4 +68,15 @@
     </if>
   </target>
 
+  <!-- Updating core on our environment needs a little juggling. -->
+  <target name='update-drupal'>
+    <phingcall target='update-core'/>
+  </target>
+
+  <target name="update-core">
+    <delete file="${project.basedir}/../profiles/jenkins_cdb" />
+    <exec command="drush --yes up drupal" />
+    <exec command="ln -s ${project.basedir}/default/profiles/jenkins_cdb ${project.basedir}/../profiles/jenkins_cdb" />
+  </target>
+
 </project>
