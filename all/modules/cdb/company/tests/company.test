@@ -1,0 +1,103 @@
+<?php
+/**
+ * @file
+ * Basic functional and Unit testing for Company Entity.
+ */
+
+class CompanyTestCase extends DrupalWebTestCase {
+
+  private $company;
+
+  function setUp() {
+    $this->setup = TRUE;
+  }
+
+  function tearDown() {
+  }
+
+
+  /**
+   *  Initialize.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Company Entity tests.',
+      'description' => 'Unit tests for Company entity.',
+      'group' => 'Jenkins',
+    );
+  }
+
+
+  /**
+   * Test that the company has all recommeded fields.
+   */
+  public function testCheckCompanyEntityInfo() {
+    $company = new Cdb\Company();
+
+    // Verify our field_mas90_name assertions.
+    $mas90_name = $company->fieldInfo('mas90_name');
+
+    $this->assertTrue(is_array($mas90_name), "Company has field_mas90_name");
+    $this->assertEqual($mas90_name['type'], 'text', "field_mas90_name is a textfield.");
+    $this->assertEqual($mas90_name['label'], 'MAS90 Name', 'field_mas90_name label is "MAS90 Name".');
+    $this->assertEqual($mas90_name['required'], true, 'field_mas90_name label is required.');
+    $this->assertTrue(empty($mas90_name['property defaults']), 'field_mas90_name has no defaults.');
+
+  }
+
+
+  public function testCompanyConstructor() {
+    $company = new Cdb\Company();
+    $expected = "Cdb\Company";
+    $actual = get_class($company);
+    $this->assertEqual($expected, $actual, "The class is type Company: $actual.");
+    $this->company = $company;
+  }
+
+  public function testGetCompanyFieldValue() {
+    $expected = '';
+    $actual = $this->company->mas90_name;
+    $this->assertEqual($expected, $actual, "We can retrieve field values.");
+  }
+
+  public function testSetCompanyFieldValue() {
+    $expected = "[unit-test] Company Name";
+    $this->company->mas90_name = "[unit-test] Company Name";
+    $actual = $this->company->mas90_name;
+    $this->assertEqual($expected, $actual, "We can set values that exist");
+
+    try {
+      $message = "Cannot add value to non existing field.";
+      $this->company->someRandomField = $message;
+      $this->fail($message);
+    }
+    catch(Exception $e) {
+      $this->pass($message);
+    }
+  }
+
+  public function testSaveCompany() {
+    $id = $this->company->id;
+    $this->assertEqual($id, NULL, "The id is not set before it is saved.");
+
+    $this->company->save();
+    $id = $this->company->id;
+    $this->assertTrue(is_numeric($id), "Cdb\Company can be saved.");
+
+    $company = new Cdb\Company($id);
+    $this->assertEqual($id, $company->id, "We can retrieve the saved company");
+
+  }
+
+  public function testDeleteCompany() {
+    $this->company->delete();
+    $actual = entity_load_single('company', $this->company->id);
+    $expected = FALSE;
+    $result = print_r(array(
+      'actual' => $actual,
+      'expected' => $expected,
+    ), true);
+    $this->assertEqual($actual, $expected, "We can delete the company: $result.");
+  }
+
+}
