@@ -62,8 +62,8 @@
         <exec command="drush --yes site-install jenkins_cdb \
           --db-su-pw=${env.db_su_pw} \
           --account-name=${env.account_name} \
-          --account_pass=${env.account_pass}" />
-        <exec command="drush --yes en simpletest" />
+          --account-pass=${env.account_pass}" />
+        <exec command="drush --yes en cdb_dev" />
         <exec command="drush --yes test-run Jenkins" />
       </else>
     </if>
