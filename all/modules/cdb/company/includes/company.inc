@@ -1,10 +1,21 @@
 <?php
-/**
- * A Class to hold the business specif logic for our Company entity.
- */
 
 namespace Cdb;
 
+/**
+ * The Cdb\Entity class is a wrapper for the entity wrapper found in entity_api.
+ *
+ * This wrapper is a lot more intuitive than that one.
+ * For instance, given a known field_name we can set and retrive values:
+ *
+ *     $entity->name = 'value';
+ *     $name_value = $entity->name;
+
+ * This is a marked improvement over the wrapper that comes with entity_api:
+ *
+ *     $entity->field_name->set('value');
+ *     $name_value = $entity->field_name->value();
+ */
 class Entity {
 
   private $entity;
@@ -16,14 +27,20 @@ class Entity {
 
   // We can handle handle some crud via magic methods.
   public function __get($name) {
-    if (isset($this->entity->{"field_$name"})) {
-      return $this->entity->{"field_$name"}->value();
-    }
+    $name = $this->formatFieldName($name);
     return $this->entity->$name->value();
   }
 
+  private function formatFieldName($name) {
+    if (isset($this->entity->{"field_$name"})) {
+      return "field_$name";
+    }
+    return $name;
+  }
+
   public function __set($name, $value) {
-    return $this->entity->{"field_$name"}->set($value);
+    $name = $this->formatFieldName($name);
+    return $this->entity->$name->set($value);
   }
 
   public function save() {
@@ -35,8 +52,8 @@ class Entity {
   }
 
   public function fieldInfo($name) {
-    $info = $this->entity->{"field_$name"}->info();
-    return $info;
+    $name = $this->formatFieldName($name);
+    return $this->entity->$name->info();
   }
 
   private function getWrapper($id = NULL) {
@@ -55,6 +72,9 @@ class Entity {
 
 }
 
+/**
+ * A Class to hold the business specif logic for our Company entity.
+ */
 class Company extends Entity{
 
   function __construct($id = NULL) {
