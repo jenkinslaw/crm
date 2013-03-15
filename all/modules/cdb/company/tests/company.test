@@ -58,6 +58,11 @@ class CompanyTestCase extends DrupalWebTestCase {
     $expected = '';
     $actual = $this->company->mas90_name;
     $this->assertEqual($expected, $actual, "We can retrieve field values.");
+
+    // Assert that value() method also works.
+    $expected = $actual;
+    $actual = $this->company->mas90_name()->value();
+    $this->assertEqual($expected, $actual, "the value() method works as expected.");
   }
 
   public function testSetCompanyFieldValue() {
@@ -66,6 +71,13 @@ class CompanyTestCase extends DrupalWebTestCase {
     $actual = $this->company->mas90_name;
     $this->assertEqual($expected, $actual, "We can set values that exist");
 
+    // Check that we can still set values using the standard wrapper method.
+    $expected = "[unit-test] Set standard";
+    $this->company->mas90_name()->set($expected);
+    $actual = $this->company->mas90_name()->value();
+    $this->assertEqual($expected, $actual, "We can set values using the wrapper set() method.");
+
+    // Check that we cannot add values to non existing properties.
     try {
       $message = "Cannot add value to non existing field.";
       $this->company->someRandomField = $message;

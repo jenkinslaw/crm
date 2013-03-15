@@ -10,7 +10,14 @@ namespace Cdb;
  *
  *     $entity->name = 'value';
  *     $name_value = $entity->name;
-
+ *
+ * But if we prefer we can still do:
+ *
+ *     $entiy->name()->set('value');
+ *
+ *     $entity->name()->value();
+ *
+ *
  * This is a marked improvement over the wrapper that comes with entity_api:
  *
  *     $entity->field_name->set('value');
@@ -23,6 +30,11 @@ class Entity {
 
   function __construct($id = NULL) {
     $this->entity = $this->getWrapper($id);
+  }
+
+  function __call($name, $arguments) {
+    $name = $this->formatFieldName($name);
+    return $this->entity->$name;
   }
 
   // We can handle handle some crud via magic methods.
@@ -43,6 +55,11 @@ class Entity {
     return $this->entity->$name->set($value);
   }
 
+  public function value() {
+    $name = $this->formatFieldName($name);
+    return $this->entity->$name->value();
+  }
+
   public function save() {
     $this->entity->save();
   }
@@ -56,7 +73,7 @@ class Entity {
     return $this->entity->$name->info();
   }
 
-  private function getWrapper($id = NULL) {
+  public function getWrapper($id = NULL) {
     $entity_type = $this->type;
     $bundle_type = $entity_type;
 
