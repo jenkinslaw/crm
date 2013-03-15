@@ -1,10 +1,10 @@
 <?php
 /**
  * @file
- * Basic functional and Unit testing for Company Entity.
+ * Unit tests for the CDBEntity Class.
  */
 
-class CompanyTestCase extends DrupalWebTestCase {
+class CdbEntityTestCase extends DrupalWebTestCase {
 
   private $company;
 
@@ -21,40 +21,22 @@ class CompanyTestCase extends DrupalWebTestCase {
    */
   public static function getInfo() {
     return array(
-      'name' => 'Company Entity tests.',
-      'description' => 'Unit tests for Company entity.',
+      'name' => 'CDbEntity tests.',
+      'description' => 'Unit tests for CdbEntity Class.',
       'group' => 'Jenkins',
     );
   }
 
 
-  /**
-   * Test that the company has all recommeded fields.
-   */
-  public function testCheckCompanyEntityInfo() {
-    $company = new Cdb\Company();
-
-    // Verify our field_mas90_name assertions.
-    $mas90_name = $company->fieldInfo('mas90_name');
-
-    $this->assertTrue(is_array($mas90_name), "Company has field_mas90_name");
-    $this->assertEqual($mas90_name['type'], 'text', "field_mas90_name is a textfield.");
-    $this->assertEqual($mas90_name['label'], 'MAS90 Name', 'field_mas90_name label is "MAS90 Name".');
-    $this->assertEqual($mas90_name['required'], true, 'field_mas90_name label is required.');
-    $this->assertTrue(empty($mas90_name['property defaults']), 'field_mas90_name has no defaults.');
-
-  }
-
-
-  public function testCompanyConstructor() {
-    $company = new Cdb\Company();
-    $expected = "Cdb\Company";
+  public function testConstruct() {
+    $company = new Company();
+    $expected = "Company";
     $actual = get_class($company);
     $this->assertEqual($expected, $actual, "The class is type Company: $actual.");
     $this->company = $company;
   }
 
-  public function testGetCompanyFieldValue() {
+  public function testGet() {
     $expected = '';
     $actual = $this->company->mas90_name;
     $this->assertEqual($expected, $actual, "We can retrieve field values.");
@@ -65,7 +47,7 @@ class CompanyTestCase extends DrupalWebTestCase {
     $this->assertEqual($expected, $actual, "the value() method works as expected.");
   }
 
-  public function testSetCompanyFieldValue() {
+  public function testSet() {
     $expected = "[unit-test] Company Name";
     $this->company->mas90_name = "[unit-test] Company Name";
     $actual = $this->company->mas90_name;
@@ -88,20 +70,20 @@ class CompanyTestCase extends DrupalWebTestCase {
     }
   }
 
-  public function testSaveCompany() {
+  public function testSave() {
     $id = $this->company->id;
     $this->assertEqual($id, NULL, "The id is not set before it is saved.");
 
     $this->company->save();
     $id = $this->company->id;
-    $this->assertTrue(is_numeric($id), "Cdb\Company can be saved.");
+    $this->assertTrue(is_numeric($id), "Company can be saved.");
 
-    $company = new Cdb\Company($id);
+    $company = new Company($id);
     $this->assertEqual($id, $company->id, "We can retrieve the saved company");
 
   }
 
-  public function testDeleteCompany() {
+  public function testDelete() {
     $this->company->delete();
     $actual = entity_load_single('company', $this->company->id);
     $expected = FALSE;

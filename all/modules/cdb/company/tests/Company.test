@@ -1,0 +1,45 @@
+<?php
+/**
+ * @file
+ * Basic functional and Unit testing for Company Entity.
+ */
+
+class CompanyTestCase extends DrupalWebTestCase {
+
+  private $company;
+
+  function setUp() {
+    $this->setup = TRUE;
+  }
+
+  function tearDown() {
+  }
+
+  /**
+   *  Initialize.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Company Entity tests.',
+      'description' => 'Unit tests for Company entity.',
+      'group' => 'Jenkins',
+    );
+  }
+
+  /**
+   * Test that the company has all recommeded fields.
+   */
+  public function testCheckCompanyEntityInfo() {
+    $company = new Company();
+
+    // Verify our field_mas90_name assertions.
+    $mas90_name = $company->mas90_name()->info();
+
+    $this->assertTrue(is_array($mas90_name), "Company has field_mas90_name");
+    $this->assertEqual($mas90_name['type'], 'text', "field_mas90_name is a textfield.");
+    $this->assertEqual($mas90_name['label'], 'MAS90 Name', 'field_mas90_name label is "MAS90 Name".');
+    $this->assertEqual($mas90_name['required'], true, 'field_mas90_name label is required.');
+    $this->assertTrue(empty($mas90_name['property defaults']), 'field_mas90_name has no defaults.');
+  }
+
+}

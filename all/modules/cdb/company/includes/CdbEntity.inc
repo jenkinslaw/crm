@@ -1,7 +1,4 @@
 <?php
-
-namespace Cdb;
-
 /**
  * The Cdb\Entity class is a wrapper for the entity wrapper found in entity_api.
  *
@@ -23,7 +20,8 @@ namespace Cdb;
  *     $entity->field_name->set('value');
  *     $name_value = $entity->field_name->value();
  */
-class Entity {
+
+class CdbEntity {
 
   private $entity;
   protected $type;
@@ -85,18 +83,6 @@ class Entity {
     }
     $wrapper = entity_metadata_wrapper($entity_type, $entity);
     return $wrapper;
-  }
-
-}
-
-/**
- * A Class to hold the business specif logic for our Company entity.
- */
-class Company extends Entity{
-
-  function __construct($id = NULL) {
-    $this->type = 'company';
-    parent::__construct($id);
   }
 
 }

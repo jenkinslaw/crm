@@ -12,5 +12,7 @@ features[eck_entity_type][] = company
 features[features_api][] = api:1
 features[field][] = company-company-field_mas90_name
 
-files[] = tests/company.test
-files[] = includes/company.inc
+files[] = tests/Company.test
+files[] = tests/CdbEntity.test
+files[] = includes/Company.inc
+files[] = includes/CdbEntity.inc
