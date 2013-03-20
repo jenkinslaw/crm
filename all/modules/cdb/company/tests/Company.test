@@ -10,6 +10,7 @@ class CompanyTestCase extends DrupalWebTestCase {
 
   function setUp() {
     $this->setup = TRUE;
+    $this->company = new Company();
   }
 
   function tearDown() {
@@ -27,26 +28,34 @@ class CompanyTestCase extends DrupalWebTestCase {
   }
 
   /**
-   * Test that the company has all recommeded fields.
+   * Verify mas90_name field assertions.
    */
-  public function testCheckCompanyEntityInfo() {
-    $company = new Company();
+  public function testMas90NameField() {
+    $mas90_name = $this->company->getFieldInfo('mas90_name');
 
-    // Verify our field_mas90_name assertions.
-    $mas90_name = $company->mas90_name()->info();
-    $this->assertTrue(is_array($mas90_name), "Company has field_mas90_name");
-    $this->assertEqual($mas90_name['type'], 'text', "field_mas90_name is a textfield.");
-    $this->assertEqual($mas90_name['label'], 'MAS90 Name', 'field_mas90_name label is "MAS90 Name".');
-    $this->assertEqual($mas90_name['required'], true, 'field_mas90_name label is required.');
-    $this->assertTrue(empty($mas90_name['property defaults']), 'field_mas90_name has no defaults.');
+    $this->assertTrue(isset($mas90_name['bundles']['company']), "mas90_name is a company field.");
+    $this->assertEqual($mas90_name['label'], 'Mas90 Name', "mas90_name label is 'Mas90 Name': $mas90_name[label].");
+    $this->assertTrue($mas90_name['required'], "mas90_name is required.");
+    $this->assertEqual($mas90_name['settings']['max_length'], 30, "mas90_name max_length is 30: $mas90_name[settings][max_length]");
 
-    // Verify the company_name field.
-    $company_name = $company->company_name()->info();
-    $this->assertTrue(is_array($company_name), "Company has company_name");
-    $this->assertEqual($company_name['type'], 'text', "company_name is a textfield.");
-    $this->assertEqual($company_name['label'], 'Company Name', 'field_company_name label is "Company Name".');
-    $this->assertTrue(empty($company_name['property defaults']), 'company_name has no defaults.');
-    var_dump($company_name);
   }
+
+  /**
+   * Verify suspended field assertions.
+   */
+  public function testSuspendedField() {
+    $suspended = $this->company->getFieldInfo('suspended');
+    $label = $suspended['label'];
+    $required = $suspended['required'];
+    $options = $this->company->suspended()->optionsList();
+
+    $this->assertEqual($label, 'Suspended', "suspended label is 'Suspended': $suspended[label].");
+    $this->assertTrue($required, "suspended is required.");
+
+    $expected_options = array('Y' => 'Yes', 'N' => 'No', 'P' => 'Probation');
+    $this->assertEqual($options, $expected_options, "The suspended options are as expected.");
+  }
+
+
 
 }
