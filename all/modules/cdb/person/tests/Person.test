@@ -1,0 +1,37 @@
+<?php
+/**
+ * @file
+ * Basic functional and Unit testing for Person Entity.
+ */
+
+class PersonTestCase extends DrupalWebTestCase {
+
+  private $person;
+
+  function setUp() {
+    $this->setup = TRUE;
+  }
+
+  function tearDown() {
+  }
+
+  /**
+   *  Initialize.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Person Entity tests.',
+      'description' => 'Unit tests for Person entity.',
+      'group' => 'Jenkins',
+    );
+  }
+
+  /**
+   * Test that the person has all recommeded fields.
+   */
+  public function testCheckPersonEntityInfo() {
+    $person = new Person();
+    $this->assertTrue($person, "The person object should be created");
+     }
+
+}

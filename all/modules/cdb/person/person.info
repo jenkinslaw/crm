@@ -18,3 +18,8 @@ features[field][] = person-person-field_foa
 features[field][] = person-person-field_person_category
 features[field][] = person-person-field_status
 features_exclude[dependencies][options] = options
+
+
+files[] = includes/Person.inc
+files[] = tests/Person.test
+
