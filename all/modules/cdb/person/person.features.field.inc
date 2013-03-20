@@ -10,83 +10,6 @@
 function person_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'person-person-field_address'.
-  $fields['person-person-field_address'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_address',
-      'foreign keys' => array(),
-      'indexes' => array(),
-      'locked' => '0',
-      'module' => 'addressfield',
-      'settings' => array(),
-      'translatable' => '0',
-      'type' => 'addressfield',
-    ),
-    'field_instance' => array(
-      'bundle' => 'person',
-      'default_value' => array(
-        0 => array(
-          'element_key' => 'person|person|field_address|und|0',
-          'thoroughfare' => '',
-          'premise' => '',
-          'locality' => '',
-          'administrative_area' => 'PA',
-          'postal_code' => '',
-          'country' => 'US',
-        ),
-      ),
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'addressfield',
-          'settings' => array(
-            'format_handlers' => array(
-              0 => 'address',
-            ),
-            'use_widget_handlers' => 1,
-          ),
-          'type' => 'addressfield_default',
-          'weight' => 1,
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'person',
-      'field_name' => 'field_address',
-      'label' => 'Address',
-      'required' => 0,
-      'settings' => array(
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'addressfield',
-        'settings' => array(
-          'available_countries' => array(),
-          'format_handlers' => array(
-            'address' => 'address',
-            'address-hide-country' => 0,
-            'organisation' => 0,
-            'name-full' => 0,
-            'name-oneline' => 0,
-          ),
-        ),
-        'type' => 'addressfield_standard',
-        'weight' => '2',
-      ),
-    ),
-  );
-
   // Exported field: 'person-person-field_company'.
   $fields['person-person-field_company'] = array(
     'field_config' => array(
@@ -386,7 +309,6 @@ function person_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Address');
   t('Company');
   t('FOA');
   t('Person Category');
