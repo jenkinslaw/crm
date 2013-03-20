@@ -99,9 +99,19 @@ class CdbEntity {
   }
 
   public function getEntity() {
-    return $this->entity->value();
-    return $this->wrapper->value();
+    $entity = $this->entity->value();
+    return $entity;
   }
 
+
+  public function getForm($op = 'add') {
+    $entity = $this->type;
+    $bundle = $entity;
+    $instance = $this->getEntity();
+    $form_id = "eck__entity__form__{$op}_{$entity}_{$bundle}";
+    $form = entity_ui_get_form($form_id, $instance, $op);
+
+    return $form;
+  }
 
 }
