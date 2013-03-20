@@ -16,6 +16,4 @@ features[field][] = company-company-address
 features[field][] = company-company-mas90_name
 features[field][] = company-company-suspended
 files[] = tests/Company.test
-files[] = tests/CdbEntity.test
 files[] = includes/Company.inc
-files[] = includes/CdbEntity.inc
