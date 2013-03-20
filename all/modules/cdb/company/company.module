@@ -1,4 +1,3 @@
 <?php
 include_once('company.features.inc');
-include_once('includes/CdbEntity.inc');
 include_once('includes/Company.inc');
