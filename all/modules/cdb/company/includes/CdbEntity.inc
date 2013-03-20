@@ -85,4 +85,23 @@ class CdbEntity {
     return $wrapper;
   }
 
+  public function getFieldInfo($name) {
+    $name = $this->formatFieldName($name);
+    $field_info_a = field_info_field($name);
+    $field_info_b = $this->entity->$name->info();
+
+    // Unset some fields that kind of get in the way.
+    unset($field_info_b['parent']);
+    unset($field_info_a['storage']);
+
+    $info = $field_info_a + $field_info_b;
+    return $info;
+  }
+
+  public function getEntity() {
+    return $this->entity->value();
+    return $this->wrapper->value();
+  }
+
+
 }
