@@ -94,4 +94,9 @@ class CdbEntityTestCase extends DrupalWebTestCase {
     $this->assertEqual($actual, $expected, "We can delete the company: $result.");
   }
 
+  public function testGetForm() {
+    $form = $this->company->getForm();
+    $this->assertTrue(is_array($form), "CdbEntity::getForm works as expected.");
+  }
+
 }
