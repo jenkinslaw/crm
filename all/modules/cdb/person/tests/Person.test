@@ -31,7 +31,18 @@ class PersonTestCase extends DrupalWebTestCase {
    */
   public function testCheckPersonEntityInfo() {
     $person = new Person();
-    $this->assertTrue($person, "The person object should be created");
-     }
+    $this->assertTrue(is_object($person), "The person object should be created");
 
+    $foa = $person->foa()->info();
+    $first_name = $person->first()->info();
+
+    $this->assertTrue(is_array($foa),"Person entity has the foa field");
+    $this->assertEqual($foa['type'], "list<text>", "foa is {$foa['type']}");
+    $this->assertFalse($foa['required'], "FOA is not required");
+
+    $this->assertTrue(is_array($first_name),"Person entity has the first name field");
+    $this->assertEqual($first_name['type'], "text", "foa is {$first_name['type']}");
+    $this->assertTrue($first_name['required'], "First name is required");
+
+     }
 }
