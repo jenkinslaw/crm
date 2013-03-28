@@ -29,20 +29,106 @@ class PersonTestCase extends DrupalWebTestCase {
   /**
    * Test that the person has all recommeded fields.
    */
-  public function testCheckPersonEntityInfo() {
-    $person = new Person();
-    $this->assertTrue(is_object($person), "The person object should be created");
+  public function testInstantiatePerson() {
+    $this->person = new Person();
+    $this->assertTrue(is_object($this->person), "The person object should be created");
+  }
 
-    $foa = $person->foa()->info();
-    $first_name = $person->first()->info();
+  public function testPersonCategory() {
 
-    $this->assertTrue(is_array($foa),"Person entity has the foa field");
+    $category = $this->person->person_category()->info();
+    $this->assertTrue($category['required'], "Person category is required" );
+    $this->assertEqual($category['type'], "list<text>", "Category is a text list");
+  }
+
+   public function testStatus() {
+    $status = $this->person->status()->info();
+    $fif_status = field_info_field('field_status');
+    $entity = entity_create('person', array('type' => 'person'));
+    $wrapper = entity_metadata_wrapper('person', $entity);
+    $wrapper_status = $wrapper->field_status->info();
+    $estatus = entity_get_property_info('person');
+    var_dump($fif_status);
+    print "\n\n sep \n\n";
+    var_dump($estatus);
+    $this->assertTrue($status['required'], "Status is required" );
+    $this->assertEqual($status['type'], "list<text>", "Status is a {$status['type']}");
+    $this->assertEqual($fif_status['type'], "list<text>", "Status is a {$fif_status['type']}");
+
+   }
+
+  public function testCompanyField() {
+    $company = $this->person->company()->info();
+    $this->assertTrue($company['required'], "Company is a required field");
+    $this->assertEqual($company['type'], "company", "The company field is {$company['type']}");
+  }
+
+  public function testName() {
+    $foa = $this->person->foa()->info();
     $this->assertEqual($foa['type'], "list<text>", "foa is {$foa['type']}");
-    $this->assertFalse($foa['required'], "FOA is not required");
-
-    $this->assertTrue(is_array($first_name),"Person entity has the first name field");
-    $this->assertEqual($first_name['type'], "text", "foa is {$first_name['type']}");
+    $first_name = $this->person->first()->info();
     $this->assertTrue($first_name['required'], "First name is required");
+    $this->assertEqual($first_name['type'], "text", "First name is {$first_name['type']}");
+    $middle_name = $this->person->middle()->info();
+    $this->assertEqual($middle_name['type'], "text", "Middle name is a text field");
+    $last_name = $this->person->last()->info();
+    $this->assertTrue($last_name['required'], "Last name is required");
+    $this->assertEqual($last_name['type'], "text", "Last name is a text field");
+    $suffix = $this->person->suffix()->info();
+    $this->assertEqual($suffix['type'], "text", "Suffix is a text field");
+  }
 
-     }
+  public function testEsquirenss() {
+    $esquire = $this->person->esquire()->info();
+    $this->assertEqual($esquire['type'], "boolean", "Esquire field is a {$esquire['type']}");
+  }
+
+  public function testEmail() {
+    $email = $this->person->email()->info();
+    $this->assertEqual($email['type'], "text", "Email is a text field");
+  }
+
+  public function testAddress() {
+    #$address = $this->person->address()->info();
+  }
+
+  public function testExpiresDate() {
+    #$expiration = $this->person->exp_date()->info();
+  }
+
+  public function testPatronType() {
+    #$patron_type = $this->person->patron_type()->info();
+  }
+
+  public function testSuspended() {
+    $suspended = $this->person->suspended()->info();
+    $this->assertEqual($suspended['type'], "list<text>", "Suspended is a {$suspended['type']}");
+  }
+
+  public function testBarcode() {
+    #$barcode = $this->person->barcode()->info();
+  }
+  public function testPhoneNumber() {
+    #$phone = $this->person->phone()->info();
+  }
+
+  public function testCleSpecial() {
+    $cle_special = $this->person->cle_special()->info();
+    $this->assertEqual($cle_special['type'], "list<text>", "CLE Special is a {$cle_special['type']}");
+  }
+
+  public function testMembershipNotes() {
+    $memb_notes = $this->person->memb_notes()->info();
+    $this->assertEqual($memb_notes['type'], "text_long", "Membership Notes is a {$memb_notes['type']}");
+  }
+
+  public function testCustomerServiceNotes() {
+    $cust_notes = $this->person->cust_notes()->info();
+    $this->assertEqual($cust_notes['type'], "text_long", "Customer Service Notes is {$cust_notes['type']} ");
+  }
+
+  public function testPennsylvaniaAttorneyId() {
+    $pa_attorney_id = $this->person->pa_attorney_id()->info();
+    $this->assertEqual($pa_attorney_id['type'], "integer", "PA Attorney ID  is {$pa_attorney_id['type']} ");
+  }
 }
