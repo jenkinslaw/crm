@@ -43,17 +43,8 @@ class PersonTestCase extends DrupalWebTestCase {
 
    public function testStatus() {
     $status = $this->person->status()->info();
-    $fif_status = field_info_field('field_status');
-    $entity = entity_create('person', array('type' => 'person'));
-    $wrapper = entity_metadata_wrapper('person', $entity);
-    $wrapper_status = $wrapper->field_status->info();
-    $estatus = entity_get_property_info('person');
-    var_dump($fif_status);
-    print "\n\n sep \n\n";
-    var_dump($estatus);
     $this->assertTrue($status['required'], "Status is required" );
     $this->assertEqual($status['type'], "list<text>", "Status is a {$status['type']}");
-    $this->assertEqual($fif_status['type'], "list<text>", "Status is a {$fif_status['type']}");
 
    }
 
@@ -93,7 +84,8 @@ class PersonTestCase extends DrupalWebTestCase {
   }
 
   public function testExpiresDate() {
-    #$expiration = $this->person->exp_date()->info();
+    $expiration = $this->person->exp_date()->info();
+    $this->assertEqual($expiration['type'], 'date', "Date is a {$expiration['type']}");
   }
 
   public function testPatronType() {
