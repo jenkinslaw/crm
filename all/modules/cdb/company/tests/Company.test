@@ -56,7 +56,6 @@ class CompanyTestCase extends DrupalWebTestCase {
     $this->assertEqual($options, $expected_options, "The suspended options are as expected.");
   }
 
-
   /**
    * Verify address field.
    */
@@ -69,6 +68,105 @@ class CompanyTestCase extends DrupalWebTestCase {
     $this->assertEqual($label, 'Address', "The address label is 'Address' : $label");
   }
 
+  /**
+   * Verify exp_date field assertions.
+   */
+  public function testExpDateField() {
+  }
 
+  /**
+   * Verify company_category field assertions.
+   */
+  public function testCompanyCategoryField() {
+  }
 
+  /**
+   * Verify billing_area field assertions.
+   */
+  public function testBillingAreaField() {
+  }
+
+  /**
+   * Verify phone field assertions.
+   */
+  public function testPhoneField() {
+  }
+
+  /**
+   * Verify website field assertions.
+   */
+  public function testWebsiteField() {
+  }
+
+  /**
+   * Verify cust_notes field assertions.
+   */
+  public function testCustomNotesField() {
+  }
+
+  /**
+   * Verify account_number field assertions.
+   */
+  public function testAccountNumberField() {
+  }
+
+  /**
+   * Verify last_updated field assertions.
+   */
+  public function testLastUpdatedField() {
+  }
+
+  /**
+   * Verify updated_by field assertions.
+   */
+  public function testUpdatedByField() {
+  }
+
+  /**
+   * Verify billing_contact field assertions.
+   */
+  public function testBillingContact() {
+  }
+
+  /**
+   * Verify membership_contact field assertions.
+   */
+  public function testMembershipContactField() {
+  }
+
+  /**
+   * Verify tax_exempt field assertions.
+   */
+  public function testTaxExemptField() {
+  }
+
+  /**
+   * Verify invoice field assertions.
+   */
+  public function testInvoiceField() {
+  }
+
+  /**
+   * Verify old_company_id field assertions.
+   */
+  public function testOldCompanyIdField() {
+  }
+
+  /**
+   * Verify system_comments field assertions.
+   */
+  public function testSystemCommentsField() {
+  }
+
+  /**
+   * Verify comment_range_start field assertions.
+   */
+  public function testCommentRangeStartField() {
+  }
+
+  /**
+   * Verify comment_range_end field assertions.
+   */
+  public function testCommentRangeEndField() {
+  }
 }
