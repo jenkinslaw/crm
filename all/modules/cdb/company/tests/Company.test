@@ -72,6 +72,15 @@ class CompanyTestCase extends DrupalWebTestCase {
    * Verify exp_date field assertions.
    */
   public function testExpDateField() {
+    // Always Jan 1 of the following year, unless the user is not a Company
+    // Administrator: in which case we default to Null or empty.
+    //
+    // When this field gets updated make sure that the Invoice field is also
+    // updated automatically.
+    $exp_date = $this->company->getFieldInfo('exp_date');
+    $this->assertEqual($exp_date['label'], "Expiration Date", "exp_date label is 'Expiration Date': $exp_date[label]");
+    $this->assertFalse($exp_date['required'], "exp_date is not required.");
+    $this->assertEqual($exp_date['type'], 'date', "exp_date type is Date: $exp_date[type].");
   }
 
   /**
