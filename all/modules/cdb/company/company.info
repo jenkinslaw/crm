@@ -17,5 +17,6 @@ features[field][] = company-company-address
 features[field][] = company-company-exp_date
 features[field][] = company-company-mas90_name
 features[field][] = company-company-suspended
+features[user_role][] = Company Administrator
 files[] = tests/Company.test
 files[] = includes/Company.inc

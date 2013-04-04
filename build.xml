@@ -16,6 +16,7 @@
 
   <target name="en-dev">
     <phingcall target='set-dev-defaults' />
+    <phingcall target='create-dev-users' />
     <exec  command="drush --yes en cdb_dev"  />
     <exec  command="drush --yes perm-grant 'Authenticated User' 'access devel'" />
     <exec  command="drush --yes perm-grant 'Annonymous User' 'access devel'" />
@@ -26,6 +27,13 @@
     <property name='dev-defaults' value='none'/>
   </target>
 
+  <target name='create-dev-users'>
+    <exec command="drush --yes user-create company-administrator \
+      --password='${env.account_pass}' \ 
+      --mail='webmaster+CDBCompanyAdminRoleUser@jenkinslaw.org'" />
+    <exec command="drush --yes user-add-role 'Company Administrator' \
+      --name=company-administrator" />
+  </target>
   <target name='dis-caches'>
     <exec command="drush vset cache 0" />
     <exec command="drush vset preprocess_js 0" />
