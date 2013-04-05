@@ -1,5 +1,6 @@
 <?php
 /**
+ * @file
  * The Cdb\Entity class is a wrapper for the entity wrapper found in entity_api.
  *
  * This wrapper is a lot more intuitive than that one.
@@ -26,21 +27,32 @@ class CdbEntity {
   protected $entity;
   protected $type;
 
-  function __construct($id = NULL) {
+  /**
+   * Entity Contructor.
+   */
+  protected function __construct($id = NULL) {
     $this->entity = $this->getWrapper($id);
   }
 
-  function __call($name, $arguments) {
+  /**
+   * Magic call method.
+   */
+  public function __call($name, $arguments) {
     $name = $this->formatFieldName($name);
     return $this->entity->$name;
   }
 
-  // We can handle handle some crud via magic methods.
+  /**
+   * We can handle handle some crud via magic methods.
+   */
   public function __get($name) {
     $name = $this->formatFieldName($name);
     return $this->entity->$name->value();
   }
 
+  /**
+   * Gets the Entity field name.
+   */
   private function formatFieldName($name) {
     if (isset($this->entity->{"field_$name"})) {
       return "field_$name";
@@ -48,35 +60,57 @@ class CdbEntity {
     return $name;
   }
 
+  /**
+   * Magic __set method.
+   */
   public function __set($name, $value) {
     $name = $this->formatFieldName($name);
     return $this->entity->$name->set($value);
   }
 
-  public function value() {
+  /**
+   * Given a field name, returns it's value.
+   *
+   * This may is a redundency for magic __get.
+   */
+  public function value($name) {
     $name = $this->formatFieldName($name);
     return $this->entity->$name->value();
   }
 
+  /**
+   * Save the Entity to the database.
+   */
   public function save() {
     $this->entity->save();
   }
 
+  /**
+   * Delete the Entity from the database.
+   *
+   * This may also delete multiple entities at once.
+   */
   public function delete() {
     $this->entity->delete();
   }
 
+  /**
+   * Returns some basic field info.
+   */
   public function fieldInfo($name) {
     $name = $this->formatFieldName($name);
     return $this->entity->$name->info();
   }
 
+  /**
+   * Get the wrapped entity (it's so nice.).
+   */
   public function getWrapper($id = NULL) {
     $entity_type = $this->type;
     $bundle_type = $entity_type;
 
     if (is_numeric($id)) {
-      $entity= entity_load_single($entity_type, $id);
+      $entity = entity_load_single($entity_type, $id);
     }
     else {
       $entity = entity_create($entity_type, array('type' => $bundle_type));
@@ -85,6 +119,12 @@ class CdbEntity {
     return $wrapper;
   }
 
+  /**
+   * Bundles together field information using two techniques. 
+   *
+   * Sometimes you just need more information than what the basic
+   * fieldInfo gives you.
+   */
   public function getFieldInfo($name) {
     $name = $this->formatFieldName($name);
     $field_info_a = field_info_field($name);
@@ -98,12 +138,24 @@ class CdbEntity {
     return $info;
   }
 
+  /**
+   * Returns the wrapped entity that is part of the objec. 
+   *
+   * This is not like Entity::getWrapper() because we don't need
+   * to pass the id in this case. We're simply accessing a value
+   * that has already been instantiated.
+   */
   public function getEntity() {
     $entity = $this->entity->value();
     return $entity;
   }
 
-
+  /**
+   * Returns the form def array for given operation.
+   *
+   * This is a nicer than having to remember all those weird
+   * form names.
+   */
   public function getForm($op = 'add') {
     $entity = $this->type;
     $bundle = $entity;
@@ -113,6 +165,9 @@ class CdbEntity {
     return drupal_get_form($form_id, $instance);
   }
 
+  /**
+   * Helper function for hooking into hook_form_alter.
+   */
   public function hookForm(&$form, &$form_state, &$form_id) {
   }
 

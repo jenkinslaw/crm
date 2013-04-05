@@ -1,5 +1,10 @@
 <?php
-include_once('includes/CdbEntity.inc');
+/**
+ * @file
+ * The CDB module will hold global domain space logic.
+ */
+
+include_once 'includes/CdbEntity.inc';
 
 /**
  * Implements hook_field_validate.

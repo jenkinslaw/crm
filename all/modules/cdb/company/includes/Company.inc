@@ -1,12 +1,20 @@
 <?php
+/**
+ * @file
+ * Define the Company object.
+ */
 
-module_load_include('inc', 'cdb','includes/CdbEntity');
+module_load_include('inc', 'cdb', 'includes/CdbEntity');
+
 /**
  * A Class to hold the business specif logic for our Company entity.
  */
-class Company extends CdbEntity{
+class Company extends CdbEntity {
 
-  function __construct($id = NULL) {
+  /**
+   * Company constructor.
+   */
+  public function __construct($id = NULL) {
     $this->type = 'company';
     parent::__construct($id);
   }

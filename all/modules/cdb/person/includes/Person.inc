@@ -1,12 +1,19 @@
 <?php
+/**
+ * @file
+ * Define the Person object.
+ */
 
-module_load_include('inc', 'cdb','includes/CdbEntity');
+module_load_include('inc', 'cdb', 'includes/CdbEntity');
 /**
  * A Class to hold the business specif logic for our Company entity.
  */
-class Person extends CdbEntity{
+class Person extends CdbEntity {
 
-  function __construct($id = NULL) {
+  /**
+   * Person constructor.
+   */
+  public function __construct($id = NULL) {
     $this->type = 'person';
     parent::__construct($id);
   }
