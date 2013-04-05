@@ -6,18 +6,24 @@
 
 class CompanyTestCase extends DrupalWebTestCase {
 
-  private $company;
+  protected $company;
 
-  function setUp() {
+  /**
+   * Sets up tests.
+   */
+  public function setUp() {
     $this->setup = TRUE;
     $this->company = new Company();
   }
 
-  function tearDown() {
+  /**
+   * Teardown tests.
+   */
+  public function tearDown() {
   }
 
   /**
-   *  Initialize.
+   * Initialize.
    */
   public static function getInfo() {
     return array(
@@ -177,5 +183,12 @@ class CompanyTestCase extends DrupalWebTestCase {
    * Verify comment_range_end field assertions.
    */
   public function testCommentRangeEndField() {
+  }
+
+  /**
+   * Test Company::hookForm().
+   */
+  public function testHookForm() {
+    $form = $this->company->getForm();
   }
 }

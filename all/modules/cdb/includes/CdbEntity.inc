@@ -23,7 +23,7 @@
 
 class CdbEntity {
 
-  private $entity;
+  protected $entity;
   protected $type;
 
   function __construct($id = NULL) {
@@ -109,9 +109,11 @@ class CdbEntity {
     $bundle = $entity;
     $instance = $this->getEntity();
     $form_id = "eck__entity__form__{$op}_{$entity}_{$bundle}";
-    $form = entity_ui_get_form($form_id, $instance, $op);
 
-    return $form;
+    return drupal_get_form($form_id, $instance);
+  }
+
+  public function hookForm(&$form, &$form_state, &$form_id) {
   }
 
 }

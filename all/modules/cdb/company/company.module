@@ -1,3 +1,16 @@
 <?php
-include_once('company.features.inc');
-include_once('includes/Company.inc');
+/**
+ * @file
+ * Main file to hold Copany Domain specific hook code.
+ */
+
+require_once 'company.features.inc';
+require_once 'includes/Company.inc';
+
+
+/**
+ * Implements hook_form_alter().
+ */
+function company_form_alter(&$form, &$form_state, $form_id) {
+  Company::hookForm($form, $form_state, $form_id);
+}
