@@ -87,6 +87,7 @@ class CompanyTestCase extends DrupalWebTestCase {
     $this->assertEqual($exp_date['label'], "Expiration Date", "exp_date label is 'Expiration Date': $exp_date[label]");
     $this->assertFalse($exp_date['required'], "exp_date is not required.");
     $this->assertEqual($exp_date['type'], 'date', "exp_date type is Date: $exp_date[type].");
+
   }
 
   /**
@@ -190,5 +191,55 @@ class CompanyTestCase extends DrupalWebTestCase {
    */
   public function testHookForm() {
     $form = $this->company->getForm();
+  }
+
+
+  /**
+   * Unit Test ::loginAs().
+   */
+  public function testLoginAs() {
+    $current_user = $this->loginAs('Company Administrator');
+    global $user;
+    $this->assertEqual($user->name, $this->roleToName('Company Administrator'), "::loginAs() works as expected.");
+    $user = $current_user;
+  }
+
+  /**
+   * Login as user with specified role.
+   */
+  protected function loginAs($role = 'Administrator') {
+    global $user;
+
+    $role_user = $this->getUserFromRole($role);
+    if ($role_user) {
+      $tem_user = $user;
+      $user = $role_user;
+    }
+    return $user;
+  }
+
+  /**
+   * Given a role returns a user object.
+   */
+  protected function getUserFromRole($role) {
+    $name = $this->roleToName($role);
+    $query = db_query("select uid from users where name = '$name' limit 1;");
+    $uid   = $query->fetchField();
+    $user = user_load($uid);
+    return $user;
+  }
+
+
+  /**
+   * Given a string returns user name formated string.
+   */
+  protected function roleToName($role = '') {
+    $name = strtolower($role);
+    $name = trim($name);
+    $name = preg_replace("/[^a-z0-9_\s-]/", "", $name);
+    $name = preg_replace("/[\s-]+/", " ", $name);
+    $name = preg_replace("/[\s_]/", "-", $name);
+
+    return $name;
   }
 }
