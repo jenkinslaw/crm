@@ -222,10 +222,13 @@ class CompanyTestCase extends DrupalWebTestCase {
    * Given a role returns a user object.
    */
   protected function getUserFromRole($role) {
+    global $user;
     $name = $this->roleToName($role);
     $query = db_query("select uid from users where name = '$name' limit 1;");
     $uid   = $query->fetchField();
-    $user = user_load($uid);
+    if ($uid) {
+      return user_load($uid);
+    }
     return $user;
   }
 
