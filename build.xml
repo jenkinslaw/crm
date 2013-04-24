@@ -17,10 +17,8 @@
   <target name="en-dev">
     <phingcall target='set-dev-defaults' />
     <phingcall target='create-dev-users' />
+    <phingcall target='en-dev-perms' />
     <exec  command="drush --yes en cdb_dev"  />
-    <exec  command="drush --yes perm-grant 'Authenticated User' 'access devel'" />
-    <exec  command="drush --yes perm-grant 'Annonymous User' 'access devel'" />
-    <exec  command="drush --yes perm-grant 'Company Administrator' 'access devel'" />
     <phingcall target='dis-caches' />
   </target>
 
@@ -36,6 +34,12 @@
       --name=company-administrator" />
   </target>
 
+  <target name="en-dev-perms">
+    <exec  command='drush --yes role-add-perm "authenticated user" "access devel information"' />
+    <exec  command="drush --yes role-add-perm 'anonymous user' 'access devel information'" />
+    <exec  command="drush --yes role-add-perm 'Company Administrator' 'access devel information'" />
+  </target>
+
   <target name='dis-caches'>
     <exec command="drush vset cache 0" />
     <exec command="drush vset preprocess_js 0" />
@@ -44,9 +48,9 @@
 
   <target name="dis-dev">
     <exec  command="drush --yes dis devel simpletest devel_themer coder"  />
-    <exec  command="drush --yes perm-revoke 'Authenticated User' 'access devel'" />
-    <exec  command="drush --yes perm-revole 'Annonymous User' 'access devel'" />
-    <exec  command="drush --yes perm-revole 'Company Administrator' 'access devel'" />
+    <exec  command="drush --yes role-remove-perm 'authenticated User' 'access devel'" />
+    <exec  command="drush --yes role-remove-perm 'anonymous User' 'access devel'" />
+    <exec  command="drush --yes role-remove-perm 'Company Administrator' 'access devel'" />
   </target>
 
   <target name='clear-caches'>
