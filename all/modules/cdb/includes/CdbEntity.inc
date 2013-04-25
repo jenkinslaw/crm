@@ -173,7 +173,16 @@ class CdbEntity {
    */
   public function getElement($element_id, $index = 0) {
     $form = $this->getForm();
-    return $form[$element_id]['und'][$index];
+    $array_index = $this->getArrayIndex($element_id, $index);
+    eval(' $item = $form[' . $array_index . '];');
+    return $item;
+  }
+
+  /**
+   * Given an elemen_id returns the index for that element.
+   */
+  protected function getArrayIndex($element_id, $index = 0) {
+    return "'{$element_id}']['und'][{$index}";
   }
 
   /**
@@ -190,7 +199,7 @@ class CdbEntity {
    */
   public function setDefaultElementValue($element_id, $value = '') {
     $type  = $this->type;
-    return variable_set("cdb_$type_$element_id_default_value", '');
+    return variable_set("cdb_{$type}_{$element_id}_default_value", $value);
   }
 
   /**

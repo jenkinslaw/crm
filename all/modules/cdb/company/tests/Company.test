@@ -12,6 +12,8 @@ class CompanyTestCase extends DrupalWebTestCase {
    * Sets up tests.
    */
   public function setUp() {
+    module_load_include('install', 'company');
+    company_set_defaults();
     $this->setup = TRUE;
     $this->company = new Company();
   }
@@ -83,6 +85,8 @@ class CompanyTestCase extends DrupalWebTestCase {
     global $user;
     $current_user = $this->loginAs('Company Administrator');
     $exp_date = $this->company->getElement('exp_date');
+    $default_exp_date = $this->company->getDefaultElementValue('exp_date');
+    $this->assertEqual($default_exp_date, 'Next Year January 1', "The default exp date has been set.: $default_exp_date");
 
     // When this field gets updated make sure that the Invoice field is also
     // updated automatically.

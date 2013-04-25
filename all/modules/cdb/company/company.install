@@ -1,0 +1,20 @@
+<?php
+/**
+ * @file
+ * Company module installation.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function company_install() {
+  company_set_defaults();
+}
+
+/**
+ * Set some default values for this module.
+ */
+function company_set_defaults() {
+  $company = new Company();
+  $company->setDefaultElementValue('exp_date', 'Next Year January 1');
+}
