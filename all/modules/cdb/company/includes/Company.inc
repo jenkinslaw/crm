@@ -19,4 +19,5 @@ class Company extends CdbEntity {
     parent::__construct($id);
   }
 
+
 }

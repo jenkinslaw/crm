@@ -80,7 +80,10 @@ class CompanyTestCase extends DrupalWebTestCase {
   public function testExpDateField() {
     // Always Jan 1 of the following year, unless the user is not a Company
     // Administrator: in which case we default to Null or empty.
-    //
+    global $user;
+    $current_user = $this->loginAs('Company Administrator');
+    $exp_date = $this->company->getElement('exp_date');
+
     // When this field gets updated make sure that the Invoice field is also
     // updated automatically.
     $exp_date = $this->company->getFieldInfo('exp_date');
