@@ -112,6 +112,9 @@ class CdbEntity {
     if (is_numeric($id)) {
       $entity = entity_load_single($entity_type, $id);
     }
+    elseif (is_object($id)) {
+      $entity = $id;
+    }
     else {
       $entity = entity_create($entity_type, array('type' => $bundle_type));
     }
@@ -163,6 +166,31 @@ class CdbEntity {
     $form_id = "eck__entity__form__{$op}_{$entity}_{$bundle}";
 
     return drupal_get_form($form_id, $instance);
+  }
+
+  /**
+   * Returns the form element associated to element_id.
+   */
+  public function getElement($element_id, $index = 0) {
+    $form = $this->getForm();
+    return $form[$element_id]['und'][$index];
+  }
+
+  /**
+   * Returns a default element value.
+   */
+  public function getDefaultElementValue($element_id) {
+    $type  = $this->type;
+    $value = variable_get("cdb_{$type}_{$element_id}_default_value", '');
+    return $value;
+  }
+
+  /**
+   * Sets a default element value.
+   */
+  public function setDefaultElementValue($element_id, $value = '') {
+    $type  = $this->type;
+    return variable_set("cdb_$type_$element_id_default_value", '');
   }
 
   /**

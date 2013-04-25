@@ -12,5 +12,7 @@ require_once 'includes/Company.inc';
  * Implements hook_form_alter().
  */
 function company_form_alter(&$form, &$form_state, $form_id) {
+  $company = new Company($form['#entity']);
+  $form['exp_date']['und'][0]['#default_value']['value'] = $company->getDefaultElementValue('exp_date');
   Company::hookForm($form, $form_state, $form_id);
 }
