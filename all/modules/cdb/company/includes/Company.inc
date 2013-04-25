@@ -23,17 +23,36 @@ class Company extends CdbEntity {
    * Helper function for hooking into hook_form_alter.
    */
   public function hookForm(&$form, &$form_state, $form_id) {
-    $this->setDefaultExpDate($form);
+    if ($this->isCompanyForm($form)) {
+      $this->setDefaultExpDate($form);
+    }
+  }
+
+  /**
+   * Checks to see if this is ic a Company form.
+   */
+  protected function isCompanyForm(&$form) {
+    return (isset($form['#entity_type']) && $form['#entity_type'] == 'company');
   }
 
   /**
    * Given a Company form sets the default exp_date.
    */
   protected function setDefaultExpDate(&$form) {
-    // Evaluates to $item =& $form[foo][bar][baz];
-    eval($this->buildItemEval('exp_date'));
-    $exp_date = $this->getDefaultElementValue('exp_date');
-    $item['#default_value']['value'] = $exp_date;
+    if ($this->userIsCompanyAdmin()) {
+      // Evaluates to $item =& $form[foo][bar][baz];
+      eval($this->buildItemEval('exp_date'));
+      $exp_date = $this->getDefaultElementValue('exp_date');
+      $item['#default_value']['value'] = $exp_date;
+    }
+  }
+
+  /**
+   * Verifies if the current user is a Company Administrator.
+   */
+  public function userIsCompanyAdmin() {
+    global $user;
+    return (in_array('Company Administrator', $user->roles));
   }
 
   /**
