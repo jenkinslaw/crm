@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Basic functional and Unit testing for Person Entity.
+ * Basic functional and Unit testing for Person module.
  */
 
 class PersonTestCase extends DrupalWebTestCase {
@@ -20,107 +20,38 @@ class PersonTestCase extends DrupalWebTestCase {
    */
   public static function getInfo() {
     return array(
-      'name' => 'Person Entity tests.',
-      'description' => 'Unit tests for Person entity.',
+      'name' => 'Person Module Unit tests.',
+      'description' => 'Unit tests for Person module.',
       'group' => 'Jenkins',
     );
   }
 
-  /**
-   * Test that the person has all recommeded fields.
-   */
-  public function testInstantiatePerson() {
-    $this->person = new Person();
-    $this->assertTrue(is_object($this->person), "The person object should be created");
+  public function testEmailRegex() {
+    $valid_numbers = array('1234567890',
+                          '(123)4567890',
+                          '(123) 4567890',
+                          '(123) 456 7890',
+                          '(123)-456-7890',
+                          '123 456 7890',
+                          '123-456-7890',
+                          '123.456.7890',
+                        );
+    $invalid_numbers = array('800-can-talk','1234567');
+    foreach ($valid_numbers as $number){
+      $message = "{$number} is no a valid number";
+      $this->assertTrue(phone_number_regex_match($number), $message);
+    }
+    foreach ($invalid_numbers as $number) {
+      $message = "{$number} should not be a valid number";
+      $this->assertFalse(phone_number_regex_match($number), $message);
+    }
   }
 
-  public function testPersonCategory() {
-
-    $category = $this->person->person_category()->info();
-    $this->assertTrue($category['required'], "Person category is required" );
-    $this->assertEqual($category['type'], "list<text>", "Category is a text list");
-  }
-
-   public function testStatus() {
-    $status = $this->person->status()->info();
-    $this->assertTrue($status['required'], "Status is required" );
-    $this->assertEqual($status['type'], "list<text>", "Status is a {$status['type']}");
-
-   }
-
-  public function testCompanyField() {
-    $company = $this->person->company()->info();
-    $this->assertTrue($company['required'], "Company is a required field");
-    $this->assertEqual($company['type'], "company", "The company field is {$company['type']}");
-  }
-
-  public function testName() {
-    $foa = $this->person->foa()->info();
-    $this->assertEqual($foa['type'], "list<text>", "foa is {$foa['type']}");
-    $first_name = $this->person->first()->info();
-    $this->assertTrue($first_name['required'], "First name is required");
-    $this->assertEqual($first_name['type'], "text", "First name is {$first_name['type']}");
-    $middle_name = $this->person->middle()->info();
-    $this->assertEqual($middle_name['type'], "text", "Middle name is a text field");
-    $last_name = $this->person->last()->info();
-    $this->assertTrue($last_name['required'], "Last name is required");
-    $this->assertEqual($last_name['type'], "text", "Last name is a text field");
-    $suffix = $this->person->suffix()->info();
-    $this->assertEqual($suffix['type'], "text", "Suffix is a text field");
-  }
-
-  public function testEsquirenss() {
-    $esquire = $this->person->esquire()->info();
-    $this->assertEqual($esquire['type'], "boolean", "Esquire field is a {$esquire['type']}");
-  }
-
-  public function testEmail() {
-    $email = $this->person->email()->info();
-    $this->assertEqual($email['type'], "text", "Email is a text field");
-  }
-
-  public function testAddress() {
-    #$address = $this->person->address()->info();
-  }
-
-  public function testExpiresDate() {
-    $expiration = $this->person->exp_date()->info();
-    $this->assertEqual($expiration['type'], 'date', "Date is a {$expiration['type']}");
-  }
-
-  public function testPatronType() {
-    #$patron_type = $this->person->patron_type()->info();
-  }
-
-  public function testSuspended() {
-    $suspended = $this->person->suspended()->info();
-    $this->assertEqual($suspended['type'], "list<text>", "Suspended is a {$suspended['type']}");
-  }
-
-  public function testBarcode() {
-    #$barcode = $this->person->barcode()->info();
-  }
-  public function testPhoneNumber() {
-    #$phone = $this->person->phone()->info();
-  }
-
-  public function testCleSpecial() {
-    $cle_special = $this->person->cle_special()->info();
-    $this->assertEqual($cle_special['type'], "list<text>", "CLE Special is a {$cle_special['type']}");
-  }
-
-  public function testMembershipNotes() {
-    $memb_notes = $this->person->memb_notes()->info();
-    $this->assertEqual($memb_notes['type'], "text_long", "Membership Notes is a {$memb_notes['type']}");
-  }
-
-  public function testCustomerServiceNotes() {
-    $cust_notes = $this->person->cust_notes()->info();
-    $this->assertEqual($cust_notes['type'], "text_long", "Customer Service Notes is {$cust_notes['type']} ");
-  }
-
-  public function testPennsylvaniaAttorneyId() {
-    $pa_attorney_id = $this->person->pa_attorney_id()->info();
-    $this->assertEqual($pa_attorney_id['type'], "integer", "PA Attorney ID  is {$pa_attorney_id['type']} ");
+  public function testOnlyNumericInPhoneNumber() {
+    $matches = phone_number_regex_match('(123)-456.7890');
+    $number = phone_number_only_numeric($matches);
+    $this->assertEqual($number, '1234567890', "{$number} should be 10 digits");
   }
 }
+
+
