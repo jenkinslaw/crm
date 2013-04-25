@@ -32,3 +32,4 @@ features[field][] = person-person-suspended
 features_exclude[dependencies][options] = options
 files[] = includes/Person.inc
 files[] = tests/Person.test
+files[] = tests/PersonEntity.test
