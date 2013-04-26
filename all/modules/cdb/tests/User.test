@@ -1,0 +1,53 @@
+<?php
+/**
+ * @file
+ * Unit tests for the User Class.
+ */
+
+class UserTestCase extends DrupalWebTestCase {
+
+  protected $user;
+
+  /**
+   * Initialize.
+   */
+  public function setUp() {
+    $this->setup = TRUE;
+    $this->user = new User();
+  }
+
+  /**
+   * Override the parent::tearDown().
+   */
+  public function tearDown() {
+
+  }
+
+  /**
+   * Initialize.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'User tests.',
+      'description' => 'Unit tests for User Class.',
+      'group' => 'Jenkins',
+    );
+  }
+
+  /**
+   * Checks the User constructor.
+   */
+  public function testConstruct() {
+    $actual = get_class($this->user);
+    $this->assertEqual($actual, 'User', "The class is type User: $actual.");
+  }
+
+  /**
+   * The global user is available to us.
+   */
+  public function testGlobalUser() {
+    global $user;
+    $wrapper_user = $this->user->getSelf();
+    $this->assertEqual($user, $wrapper_user, "The global user is equal to our user.");
+  }
+}
