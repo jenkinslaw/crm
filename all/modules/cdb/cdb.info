@@ -15,5 +15,7 @@ dependencies[] = person
 
 files[] = tests/cdb.test
 files[] = tests/cdb.entity.test
+files[] = tests/User.test
 files[] = tests/CdbEntity.test
 files[] = includes/CdbEntity.inc
+files[] = includes/User.inc

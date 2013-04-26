@@ -5,6 +5,7 @@
  */
 
 module_load_include('inc', 'cdb', 'includes/CdbEntity');
+module_load_include('inc', 'cdb', 'includes/User');
 
 /**
  * A Class to hold the business specific logic for our Company entity.
@@ -39,20 +40,12 @@ class Company extends CdbEntity {
    * Given a Company form sets the default exp_date.
    */
   protected function setDefaultExpDate(&$form) {
-    if ($this->userIsCompanyAdmin()) {
+    if (User::isCompanyAdmin()) {
       // Evaluates to $item =& $form[foo][bar][baz];
       eval($this->buildItemEval('exp_date'));
       $exp_date = $this->getDefaultElementValue('exp_date');
       $item['#default_value']['value'] = $exp_date;
     }
-  }
-
-  /**
-   * Verifies if the current user is a Company Administrator.
-   */
-  public function userIsCompanyAdmin() {
-    global $user;
-    return (in_array('Company Administrator', $user->roles));
   }
 
   /**

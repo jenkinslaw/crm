@@ -27,4 +27,12 @@ class User {
     return $this->user;
   }
 
+  /**
+   * Verifies if the current user is a Company Administrator.
+   */
+  public function isCompanyAdmin() {
+    global $user;
+    return (in_array('Company Administrator', $user->roles));
+  }
+
 }
