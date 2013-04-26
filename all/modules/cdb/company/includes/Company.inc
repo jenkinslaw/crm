@@ -40,7 +40,8 @@ class Company extends CdbEntity {
    * Given a Company form sets the default exp_date.
    */
   protected function setDefaultExpDate(&$form) {
-    if (User::isCompanyAdmin()) {
+    $user = new User();
+    if ($user->hasRole('Company Administrator')) {
       // Evaluates to $item =& $form[foo][bar][baz];
       eval($this->buildItemEval('exp_date'));
       $exp_date = $this->getDefaultElementValue('exp_date');

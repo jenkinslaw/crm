@@ -28,16 +28,16 @@ class User {
   }
 
   /**
-   * Verifies if the current user is a Company Administrator.
+   * Checks that the user has a specific role.
    */
-  public function isCompanyAdmin() {
+  public function hasRole($role) {
     if (isset($this->user)) {
       $user = $this->user;
     }
     else {
       global $user;
     }
-    return (in_array('Company Administrator', $user->roles));
+    return (in_array($role, $user->roles));
   }
 
 }
