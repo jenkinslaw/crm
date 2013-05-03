@@ -16,6 +16,7 @@ class CompanyTestCase extends DrupalWebTestCase {
     company_set_defaults();
     $this->setup = TRUE;
     $this->company = new Company();
+    $this->form = new CompanyEntityForm($this->company->getEntity());
   }
 
   /**
@@ -36,7 +37,7 @@ class CompanyTestCase extends DrupalWebTestCase {
   }
 
   /**
-   * Verify mas90_name field assertions.
+   * Verify mas90_name field assertions
    */
   public function testMas90NameField() {
     $mas90_name = $this->company->getFieldInfo('mas90_name');
@@ -82,8 +83,8 @@ class CompanyTestCase extends DrupalWebTestCase {
   public function testExpDateField() {
     // Always Jan 1 of the following year, unless the user is not a Company
     // Administrator: in which case we default to Null or empty.
-    $exp_date = $this->company->getElement('exp_date');
-    $default_exp_date = $this->company->getDefaultElementValue('exp_date');
+    $exp_date = $this->form->getElement('exp_date');
+    $default_exp_date = $this->form->getDefaultElementValue('exp_date');
     $this->assertEqual($default_exp_date, 'Next Year January 1', "The default exp date has been set.: $default_exp_date");
 
     // Verify that a non Company Administrator default to empty exp_date.
@@ -92,8 +93,11 @@ class CompanyTestCase extends DrupalWebTestCase {
     // Verify Company Administrators get a default exp_date.
     global $user;
     $current_user = $this->loginAs('Company Administrator');
-    $exp_date = $this->company->getElement('exp_date');
+    krumo($default_exp_date);
+    return;
+    $exp_date = $this->form->getElement('exp_date');
     $this->assertEqual($exp_date['#default_value']['value'], '2014-01-01 00:00:00', "Company administrators get a default exp_date.");
+    $user = $current_user;
 
     // When this field gets updated make sure that the Invoice field is also
     // updated automatically.
@@ -108,6 +112,8 @@ class CompanyTestCase extends DrupalWebTestCase {
    * Verify company_category field assertions.
    */
   public function testCompanyCategoryField() {
+    return;
+    $item = $this->form->getElement('company_category');
   }
 
   /**
@@ -204,7 +210,6 @@ class CompanyTestCase extends DrupalWebTestCase {
    * Test Company::hookForm().
    */
   public function testHookForm() {
-    $form = $this->company->getForm();
   }
 
 
@@ -223,13 +228,12 @@ class CompanyTestCase extends DrupalWebTestCase {
    */
   protected function loginAs($role = 'Administrator') {
     global $user;
-
     $role_user = $this->getUserFromRole($role);
     if ($role_user) {
-      $tem_user = $user;
+      $temp_user = $user;
       $user = $role_user;
     }
-    return $user;
+    return $temp_user;
   }
 
   /**

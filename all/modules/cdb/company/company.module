@@ -12,6 +12,6 @@ require_once 'includes/Company.inc';
  * Implements hook_form_alter().
  */
 function company_form_alter(&$form, &$form_state, $form_id) {
-  $company = new Company($form['#entity']);
-  $company->hookForm($form, $form_state, $form_id);
+  $company_form = new CompanyEntityForm($form);
+  $company_form->hookForm($form, $form_state, $form_id);
 }

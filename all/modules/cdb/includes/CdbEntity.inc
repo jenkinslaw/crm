@@ -35,6 +35,26 @@ class CdbEntity {
   }
 
   /**
+   * Get the wrapped entity (it's so nice.).
+   */
+  public function getWrapper($id = NULL) {
+    $entity_type = $this->type;
+    $bundle_type = $entity_type;
+
+    if (is_numeric($id)) {
+      $entity = entity_load_single($entity_type, $id);
+    }
+    elseif (is_object($id)) {
+      $entity = $id;
+    }
+    else {
+      $entity = entity_create($entity_type, array('type' => $bundle_type));
+    }
+    $wrapper = entity_metadata_wrapper($entity_type, $entity);
+    return $wrapper;
+  }
+
+  /**
    * Magic call method.
    */
   public function __call($name, $arguments) {
@@ -47,7 +67,10 @@ class CdbEntity {
    */
   public function __get($name) {
     $name = $this->formatFieldName($name);
-    return $this->entity->$name->value();
+    if (is_object($this->entity->$name)) {
+      return $this->entity->$name->value();
+    }
+    return '';
   }
 
   /**
@@ -65,7 +88,9 @@ class CdbEntity {
    */
   public function __set($name, $value) {
     $name = $this->formatFieldName($name);
-    return $this->entity->$name->set($value);
+    if (is_object($this->entity->$name)) {
+      return $this->entity->$name->set($value);
+    }
   }
 
   /**
@@ -102,25 +127,6 @@ class CdbEntity {
     return $this->entity->$name->info();
   }
 
-  /**
-   * Get the wrapped entity (it's so nice.).
-   */
-  public function getWrapper($id = NULL) {
-    $entity_type = $this->type;
-    $bundle_type = $entity_type;
-
-    if (is_numeric($id)) {
-      $entity = entity_load_single($entity_type, $id);
-    }
-    elseif (is_object($id)) {
-      $entity = $id;
-    }
-    else {
-      $entity = entity_create($entity_type, array('type' => $bundle_type));
-    }
-    $wrapper = entity_metadata_wrapper($entity_type, $entity);
-    return $wrapper;
-  }
 
   /**
    * Bundles together field information using two techniques. 
@@ -154,47 +160,6 @@ class CdbEntity {
   }
 
   /**
-   * Returns the form def array for given operation.
-   *
-   * This is a nicer than having to remember all those weird
-   * form names.
-   */
-  public function getForm($op = 'add') {
-    $entity = $this->type;
-    $bundle = $entity;
-    $instance = $this->getEntity();
-    $form_id = "eck__entity__form__{$op}_{$entity}_{$bundle}";
-
-    return drupal_get_form($form_id, $instance);
-  }
-
-  /**
-   * Returns the form element associated to element_id.
-   */
-  public function getElement($element_id, $index = 0) {
-    $form = $this->getForm();
-    $array_index = $this->getArrayIndex($element_id, $index);
-    eval(' $item = $form[' . $array_index . '];');
-    return $item;
-  }
-
-  /**
-   * Given an elemen_id returns the index for that element.
-   */
-  protected function getArrayIndex($element_id, $index = 0) {
-    return "'{$element_id}']['und'][{$index}";
-  }
-
-  /**
-   * Returns a default element value.
-   */
-  public function getDefaultElementValue($element_id) {
-    $type  = $this->type;
-    $value = variable_get("cdb_{$type}_{$element_id}_default_value", '');
-    return $value;
-  }
-
-  /**
    * Sets a default element value.
    */
   public function setDefaultElementValue($element_id, $value = '') {
@@ -208,4 +173,129 @@ class CdbEntity {
   public function hookForm(&$form, &$form_state, &$form_id) {
   }
 
+}
+
+class EntityForm {
+
+  protected $form;
+  protected $entity;
+
+  /**
+   * Entity Form Contructor.
+   */
+  public function __construct($entity_wrapper) {
+    $this->setForm($entity_wrapper);
+  }
+
+  /**
+   * Returns the form def array for given operation.
+   *
+   * This is a nicer than having to remember all those weird
+   * form names.
+   */
+  public function getForm($op = 'add') {
+    return $this->form;
+  }
+
+  /**
+   * Sets the enity form after building it.
+   */
+  protected function setForm($entity) {
+    if (is_array($entity) && isset($entity['entity'])) {
+      $this->form = $entity;
+      $this->entity = $entity['entity'];
+    }
+    else {
+      $type = $entity->type;
+      $bundle = $type;
+      $form_id = "eck__entity__form__add_{$type}_{$bundle}";
+
+      $this->form = drupal_get_form($form_id, $entity);
+      $this->entity = $entity;
+    }
+  }
+
+  /**
+   * Helper function for hooking into hook_form_alter.
+   */
+  public function hookForm(&$form, &$form_state, $form_id) {
+    if ($this->isCompanyForm($form)) {
+      $this->setDefaultExpDate($form);
+    }
+  }
+
+  /**
+   * Given a Company form sets the default exp_date.
+   */
+  protected function setDefaultExpDate(&$form) {
+    $user = new User();
+    if ($user->hasRole('Company Administrator')) {
+      // Evaluates to $item =& $form[foo][bar][baz];
+      eval($this->buildItemEval('exp_date'));
+      $exp_date = $this->getDefaultElementValue('exp_date');
+      $item['#default_value']['value'] = $exp_date;
+    }
+  }
+
+  /**
+   * Returns a default element value.
+   */
+  public function getDefaultElementValue($element_id) {
+    $type  = $this->entity->type;
+    $value = variable_get("cdb_{$type}_{$element_id}_default_value", '');
+    return $value;
+  }
+
+
+  /**
+   * Builds an evaluation to reference a specific form element.
+   */
+  protected function buildItemEval($element_id) {
+    $index = $this->getArrayIndex($element_id);
+    // Evaluates to $item =& $form[foo][bar][baz];
+    $eval = '$item =& $form[' . $index . '];';
+    return $eval;
+  }
+
+  /**
+   * Returns the form element associated to element_id.
+   */
+  public function getElement($element_id, $index = 0) {
+    $array_index = $this->getArrayIndex($element_id, $index);
+    eval(' $item = $this->form[' . $array_index . '];');
+    return $item;
+  }
+
+  /**
+   * Given an elemen_id returns the index for that element.
+   */
+  protected function getArrayIndex($element_id, $index = 0) {
+    $index_string = "'{$element_id}'";
+
+    if ($this->form[$element_id]['#type'] != 'container') {
+      return $index;
+    }
+    else {
+      $index_string .= "]['und'";
+    }
+
+    if (isset($this->form[$element_id]['und']['#type'])) {
+      return $index_string;
+    }
+    else {
+      $index_string .= "][$index";
+    }
+
+    return $index_string;
+  }
+}
+
+class CompanyEntityForm extends EntityForm {
+
+  /**
+   * Checks to see if this is ic a Company form.
+   */
+  protected function isCompanyForm(&$form) {
+    return (isset($form['#entity_type']) && $form['#entity_type'] == 'company');
+  }
 }
