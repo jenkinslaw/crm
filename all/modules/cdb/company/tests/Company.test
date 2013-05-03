@@ -92,9 +92,9 @@ class CompanyTestCase extends DrupalWebTestCase {
 
     // Verify Company Administrators get a default exp_date.
     global $user;
+    return;
     $current_user = $this->loginAs('Company Administrator');
     krumo($default_exp_date);
-    return;
     $exp_date = $this->form->getElement('exp_date');
     $this->assertEqual($exp_date['#default_value']['value'], '2014-01-01 00:00:00', "Company administrators get a default exp_date.");
     $user = $current_user;
@@ -262,5 +262,29 @@ class CompanyTestCase extends DrupalWebTestCase {
     $name = preg_replace("/[\s_]/", "-", $name);
 
     return $name;
+  }
+
+  /**
+   * Verify some assumptions about refrences within an object instance.
+   */
+  public function testRefrencer() {
+    $array = array();
+    $array_ref = new Referencer($array);
+    $array_ref->setRef('Hello');
+    $this->assertEqual($array['test'], 'Hello', "We can reference objects from within other objects.");
+    $this->assertTrue(true, "This is cool.");
+  }
+}
+
+
+class Referencer {
+  protected $ref;
+
+  function __construct(&$ref) {
+    $this->ref =& $ref;
+  }
+
+  public function setRef($test) {
+    $this->ref['test'] = $test;
   }
 }
