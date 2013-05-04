@@ -45,7 +45,7 @@ class CdbEntity {
       $entity = entity_load_single($entity_type, $id);
     }
     elseif (is_object($id)) {
-      $entity = $id;
+      $entity =& $id;
     }
     else {
       $entity = entity_create($entity_type, array('type' => $bundle_type));
@@ -165,12 +165,6 @@ class CdbEntity {
   public function setDefaultElementValue($element_id, $value = '') {
     $type  = $this->type;
     return variable_set("cdb_{$type}_{$element_id}_default_value", $value);
-  }
-
-  /**
-   * Helper function for hooking into hook_form_alter.
-   */
-  public function hookForm(&$form, &$form_state, &$form_id) {
   }
 
 }
