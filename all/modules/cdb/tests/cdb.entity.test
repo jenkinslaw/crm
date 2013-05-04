@@ -115,9 +115,9 @@ class CdbEntityTestCase extends DrupalWebTestCase {
     // The entity attached to the object is different than.
     $company_entity = entity_load_single('company', $this->company_entity->id);
     $wrapper = entity_metadata_wrapper('company', $company_entity);
-    $wrapper->field_mas90_name->set("My name is known");
+    $wrapper->mas90_name->set("My name is known");
 
-    $actual = $wrapper->field_mas90_name->value();
+    $actual = $wrapper->mas90_name->value();
     $expected= "My name is known";
     $result = print_r(array(
       'actual' => $actual,
@@ -142,7 +142,7 @@ class CdbEntityTestCase extends DrupalWebTestCase {
     $company = entity_load_single('company', $this->company_entity->id);
     $wrapper = entity_metadata_wrapper('company', $company);
 
-    $actual = $wrapper->field_mas90_name->value();
+    $actual = $wrapper->mas90_name->value();
     $expected = "My name is known";
     $this->assertEqual($actual, $expected, "We can retrieve our set values.");
   }
@@ -152,7 +152,7 @@ class CdbEntityTestCase extends DrupalWebTestCase {
     $company = entity_create('company', array('type' => 'company'));
     $form = entity_ui_get_form('eck__entity__form__add_company_company', $company, 'add');
     $this->assertTrue(is_array($form), "Retrieved Company add form.");
-    $this->assertTrue(isset($form['field_mas90_name']), 'The form has expected fields.');
+    $this->assertTrue(isset($form['mas90_name']), 'The form has expected fields.');
   }
 
   public function testDeleteEntity() {
