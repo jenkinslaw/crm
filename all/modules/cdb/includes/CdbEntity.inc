@@ -30,14 +30,14 @@ class CdbEntity {
   /**
    * Entity Contructor.
    */
-  protected function __construct($id = NULL) {
-    $this->entity = $this->getWrapper($id);
+  protected function __construct(&$id = NULL) {
+    $this->entity =& $this->getWrapper($id);
   }
 
   /**
    * Get the wrapped entity (it's so nice.).
    */
-  public function getWrapper($id = NULL) {
+  public function getWrapper(&$id = NULL) {
     $entity_type = $this->type;
     $bundle_type = $entity_type;
 
@@ -183,8 +183,8 @@ class EntityForm {
   /**
    * Entity Form Contructor.
    */
-  public function __construct($entity_wrapper) {
-    $this->setForm($entity_wrapper);
+  public function __construct(&$form) {
+    $this->setForm($form);
   }
 
   /**
@@ -200,37 +200,38 @@ class EntityForm {
   /**
    * Sets the enity form after building it.
    */
-  protected function setForm($entity) {
-    if (is_array($entity) && isset($entity['entity'])) {
-      $this->form = $entity;
-      $this->entity = $entity['entity'];
+  protected function setForm(&$form) {
+    if (is_array($form) && isset($form['#entity'])) {
+      $this->form =& $form;
+      $this->entity =& $form['#entity'];
     }
     else {
+      $entity =& $form;
       $type = $entity->type;
       $bundle = $type;
       $form_id = "eck__entity__form__add_{$type}_{$bundle}";
 
       $this->form = drupal_get_form($form_id, $entity);
-      $this->entity = $entity;
+      $this->entity =& $entity;
     }
   }
 
   /**
    * Helper function for hooking into hook_form_alter.
    */
-  public function hookForm(&$form, &$form_state, $form_id) {
-    if ($this->isCompanyForm($form)) {
-      $this->setDefaultExpDate($form);
+  public function hookForm() {
+    if ($this->isCompanyForm()) {
+      $this->setDefaultExpDate();
     }
   }
 
   /**
    * Given a Company form sets the default exp_date.
    */
-  protected function setDefaultExpDate(&$form) {
+  protected function setDefaultExpDate() {
     $user = new User();
     if ($user->hasRole('Company Administrator')) {
-      // Evaluates to $item =& $form[foo][bar][baz];
+      // Evaluates to $item =& $this->form[foo][bar][baz];
       eval($this->buildItemEval('exp_date'));
       $exp_date = $this->getDefaultElementValue('exp_date');
       $item['#default_value']['value'] = $exp_date;
@@ -253,7 +254,7 @@ class EntityForm {
   protected function buildItemEval($element_id) {
     $index = $this->getArrayIndex($element_id);
     // Evaluates to $item =& $form[foo][bar][baz];
-    $eval = '$item =& $form[' . $index . '];';
+    $eval = '$item =& $this->form[' . $index . '];';
     return $eval;
   }
 
@@ -295,7 +296,7 @@ class CompanyEntityForm extends EntityForm {
   /**
    * Checks to see if this is ic a Company form.
    */
-  protected function isCompanyForm(&$form) {
-    return (isset($form['#entity_type']) && $form['#entity_type'] == 'company');
+  protected function isCompanyForm() {
+    return (isset($this->form['#entity_type']) && $this->form['#entity_type'] == 'company');
   }
 }

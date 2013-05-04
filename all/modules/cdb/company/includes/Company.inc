@@ -15,7 +15,7 @@ class Company extends CdbEntity {
   /**
    * Company constructor.
    */
-  public function __construct($id = NULL) {
+  public function __construct(&$id = NULL) {
     $this->type = 'company';
     parent::__construct($id);
   }

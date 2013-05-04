@@ -92,10 +92,9 @@ class CompanyTestCase extends DrupalWebTestCase {
 
     // Verify Company Administrators get a default exp_date.
     global $user;
-    return;
     $current_user = $this->loginAs('Company Administrator');
-    krumo($default_exp_date);
-    $exp_date = $this->form->getElement('exp_date');
+    $form = new CompanyEntityForm($this->company->getEntity());
+    $exp_date = $form->getElement('exp_date');
     $this->assertEqual($exp_date['#default_value']['value'], '2014-01-01 00:00:00', "Company administrators get a default exp_date.");
     $user = $current_user;
 
@@ -112,7 +111,6 @@ class CompanyTestCase extends DrupalWebTestCase {
    * Verify company_category field assertions.
    */
   public function testCompanyCategoryField() {
-    return;
     $item = $this->form->getElement('company_category');
   }
 

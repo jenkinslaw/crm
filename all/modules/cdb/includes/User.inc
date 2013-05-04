@@ -15,9 +15,9 @@ class User {
   /**
    * User Contructor.
    */
-  public function __construct($id = NULL) {
+  public function __construct() {
     global $user;
-    $this->user = $user;
+    $this->user =& $user;
   }
 
   /**
@@ -31,13 +31,7 @@ class User {
    * Checks that the user has a specific role.
    */
   public function hasRole($role) {
-    if (isset($this->user)) {
-      $user = $this->user;
-    }
-    else {
-      global $user;
-    }
-    return (in_array($role, $user->roles));
+    $has_role = (in_array($role, $this->user->roles));
+    return $has_role;
   }
-
 }
