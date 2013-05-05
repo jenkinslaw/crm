@@ -89,6 +89,96 @@ function company_field_default_fields() {
     ),
   );
 
+  // Exported field: 'company-company-company_category'.
+  $fields['company-company-company_category'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'company_category',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          1 => 'Sole Practitioner',
+          2 => 'Firm 2-10 Attorneys',
+          3 => 'Firm 11-25 Attorneys',
+          4 => 'Firm 26-50 Attorneys',
+          5 => 'Firm 51-75 Attorneys',
+          6 => 'Firm 76-99 Attorneys',
+          7 => 'Firm 100 or More Attorneys',
+          'a' => 'Judge - City',
+          'b' => 'Judge - State',
+          'g' => 'Judge - Federal',
+          'c' => 'City Government',
+          's' => 'State Government',
+          'f' => 'Federal Government',
+          'p' => 'Corporate Legal',
+          'n' => 'Public Interest/Non Profit',
+          'e' => 'Organizational Subscriber',
+          'k' => 'Satellite Subscriber',
+          'j' => 'Jenkins Employee',
+          'h' => 'Public Interest/Non Profit-Comp.',
+          'i' => 'Misc. Comps.',
+          'q' => 'Non-member',
+          'r' => 'Individual Subscriber',
+          'z' => 'Palawlibrary',
+          't' => 'County Law Library',
+          'u' => 'Law Student',
+          'v' => 'Paralegal Student',
+          'l' => 'Government Subscriber',
+          8 => 'Branch Office',
+          'm' => 'Firm Subscriber',
+        ),
+        'allowed_values_function' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'company',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 5,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'company',
+      'field_name' => 'company_category',
+      'label' => 'Company Category',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => 4,
+      ),
+    ),
+  );
+
   // Exported field: 'company-company-exp_date'.
   $fields['company-company-exp_date'] = array(
     'field_config' => array(
@@ -316,6 +406,7 @@ function company_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Address');
+  t('Company Category');
   t('Expiration Date');
   t('Mas90 Name');
   t('Suspended');

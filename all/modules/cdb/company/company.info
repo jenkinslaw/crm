@@ -14,6 +14,7 @@ features[eck_bundle][] = company_company
 features[eck_entity_type][] = company
 features[features_api][] = api:1
 features[field][] = company-company-address
+features[field][] = company-company-company_category
 features[field][] = company-company-exp_date
 features[field][] = company-company-mas90_name
 features[field][] = company-company-suspended
