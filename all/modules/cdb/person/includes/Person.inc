@@ -13,7 +13,7 @@ class Person extends CdbEntity {
   /**
    * Person constructor.
    */
-  public function __construct($id = NULL) {
+  public function __construct(&$id = NULL) {
     $this->type = 'person';
     parent::__construct($id);
   }
