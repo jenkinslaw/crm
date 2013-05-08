@@ -9,6 +9,9 @@ dependencies[] = features
 dependencies[] = views
 dependencies[] = panels
 dependencies[] = entity
+dependencies[] = entityreference
+dependencies[] = field_group
+dependencies[] = field_group_multiple
 
 dependencies[] = company
 dependencies[] = person 
