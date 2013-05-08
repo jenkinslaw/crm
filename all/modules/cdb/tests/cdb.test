@@ -28,7 +28,6 @@ class CdbTestCase extends DrupalWebTestCase {
    * Test that certain default modules are enabled on our system.
    */
   public function testCheckEnabledModules() {
-
     // Test that our dependencies are enabled.
     $this->assertTrue(module_exists('cdb'), "The cdb module is enabled.");
     $this->assertTrue(module_exists('views'), "The Views module is enabled.");
@@ -38,6 +37,15 @@ class CdbTestCase extends DrupalWebTestCase {
     // Tests our custom module are enabled.
     $this->assertTrue(module_exists('company'), "The company feature exists.");
     $this->assertTrue(module_exists('person'), "The person features exists.");
+
+  }
+
+  /**
+   * Verify that the company entity has been loaded.
+   */
+  public function testCompanyEntityLoaded() {
+    $info = entity_get_info('company');
+    $this->assertTrue(is_array($info), "The company entity has been created.");
   }
 
   public function testSiteName() {

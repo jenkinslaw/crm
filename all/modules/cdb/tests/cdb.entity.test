@@ -21,14 +21,14 @@ class CdbEntityTestCase extends DrupalWebTestCase {
    */
   public static function getInfo() {
     return array(
-      'name' => 'Enity Assumptions Tests.',
+      'name' => 'Entity Assumptions Tests.',
       'description' => 'Getting My Head Around Entities.',
       'group' => 'Jenkins',
     );
   }
 
 
-  public function testCreateEnity() {
+  public function testCreateEntity() {
     $company = array(
       'type' => 'company',
       'name' => '[unit-test] Company',

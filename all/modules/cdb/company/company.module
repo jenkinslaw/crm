@@ -6,6 +6,7 @@
 
 require_once 'company.features.inc';
 require_once 'includes/Company.inc';
+require_once 'includes/CompanyEntityForm.inc';
 
 
 /**

@@ -5,9 +5,9 @@
  */
 
 /**
- * Implements hook_install().
+ * Implements hook_update_N().
  */
-function company_install() {
+function company_update_7000() {
   company_set_defaults();
 }
 
@@ -18,3 +18,4 @@ function company_set_defaults() {
   $company = new Company();
   $company->setDefaultElementValue('exp_date', 'Next Year January 1');
 }
+
