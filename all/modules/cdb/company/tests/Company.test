@@ -37,7 +37,7 @@ class CompanyTestCase extends DrupalWebTestCase {
   }
 
   /**
-   * Verify mas90_name field assertions
+   * Verify mas90_name field assertions.
    */
   public function testMas90NameField() {
     $mas90_name = $this->company->getFieldInfo('mas90_name');
@@ -112,7 +112,7 @@ class CompanyTestCase extends DrupalWebTestCase {
    */
   public function testCompanyCategoryField() {
     $field = $this->form->getElement('company_category');
-    $this->assertEqual($field['#title'], 'Company Category', "The company category field exists.");
+    $this->assertEqual($field['#title'], 'Company Category', "Company Field company_category exists.");
     $this->assertEqual($field['#type'], 'select', 'field company_category is a select list.');
     $this->assertFalse($field['#required'], 'field company_category is not required.');
     $this->assertEqual(count($field['#options']), 30, 'field company_category has 30 options.');
@@ -122,6 +122,19 @@ class CompanyTestCase extends DrupalWebTestCase {
    * Verify billing_area field assertions.
    */
   public function testBillingAreaField() {
+    $field = $this->form->getElement('billing_area');
+    $this->assertEqual($field['#title'], 'Billing Area', "field billing_area exists.");
+    $this->assertEqual($field['#type'], 'select', "field billing_area type is select.");
+    $this->assertEqual(count($field['#options']), 4, "field billing_area has 4 options by default.");
+    $expected_options = array(
+      '_none' => '- None -',
+      'L' => 'Local - within 11 miles',
+      'R' => 'Regional - 11 to 50 miles',
+      'M' => 'Remote - more than 50 miles',
+    );
+    $this->assertEqual($field['#options'], $expected_options, "field billing_area has the expected options.");
+    $this->assertFalse($field['#required'], 'field billing_area is not required by default.');
+
   }
 
   /**

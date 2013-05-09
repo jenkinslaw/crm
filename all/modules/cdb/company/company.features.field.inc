@@ -89,6 +89,70 @@ function company_field_default_fields() {
     ),
   );
 
+  // Exported field: 'company-company-billing_area'.
+  $fields['company-company-billing_area'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'billing_area',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          'L' => 'Local - within 11 miles',
+          'R' => 'Regional - 11 to 50 miles',
+          'M' => 'Remote - more than 50 miles',
+        ),
+        'allowed_values_function' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'company',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 6,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'company',
+      'field_name' => 'billing_area',
+      'label' => 'Billing Area',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => 5,
+      ),
+    ),
+  );
+
   // Exported field: 'company-company-company_category'.
   $fields['company-company-company_category'] = array(
     'field_config' => array(
@@ -406,6 +470,7 @@ function company_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Address');
+  t('Billing Area');
   t('Company Category');
   t('Expiration Date');
   t('Mas90 Name');
