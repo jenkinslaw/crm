@@ -6,14 +6,8 @@
 
 class CdbTestCase extends DrupalWebTestCase {
 
-  function setUp() {
-    // Enabled cdb module.
-    parent::setUp('cdb');
-  }
-
-
   /**
-   *  Initialize.
+   * Initialize.
    */
   public static function getInfo() {
     return array(
@@ -21,6 +15,14 @@ class CdbTestCase extends DrupalWebTestCase {
       'description' => 'Some test for our Customer Database Web app',
       'group' => 'Jenkins',
     );
+  }
+
+  /**
+   * Set up.
+   */
+  public function setUp() {
+    // Enabled cdb module.
+    parent::setUp('cdb');
   }
 
 
@@ -48,6 +50,9 @@ class CdbTestCase extends DrupalWebTestCase {
     $this->assertTrue(is_array($info), "The company entity has been created.");
   }
 
+  /**
+   * Check that we are setting the correct site name on installation.
+   */
   public function testSiteName() {
     $expected = "Jenkins Law Library Customer Database";
     $actual = variable_get('site_name');
