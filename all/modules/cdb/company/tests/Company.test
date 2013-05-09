@@ -135,6 +135,13 @@ class CompanyTestCase extends DrupalWebTestCase {
     $this->assertEqual($field['#options'], $expected_options, "field billing_area has the expected options.");
     $this->assertFalse($field['#required'], 'field billing_area is not required by default.');
 
+    // Check the billing_are is required for Company Administrators.
+    $user = new User();
+    $user->loginAs('Company Administrator');
+    $form = new CompanyEntityForm($this->company->getEntity());
+    $field = $form->getElement('billing_area');
+    $this->assertTrue($field['#required'], 'field billing_area is required for Company Administrator.');
+
   }
 
   /**

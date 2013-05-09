@@ -15,6 +15,7 @@ class CompanyEntityForm extends EntityForm {
   public function hookForm() {
     if ($this->isCompanyForm()) {
       $this->setDefaultExpDate();
+      $this->makeBillingAreaRequired();
     }
   }
 
@@ -26,7 +27,7 @@ class CompanyEntityForm extends EntityForm {
   }
 
   /**
-   * Given a Company form sets the default exp_date.
+   * Sets the default exp_date.
    */
   protected function setDefaultExpDate() {
     $user = new User();
@@ -35,6 +36,17 @@ class CompanyEntityForm extends EntityForm {
       eval($this->buildItemEval('exp_date'));
       $exp_date = $this->getDefaultElementValue('exp_date');
       $item['#default_value']['value'] = $exp_date;
+    }
+  }
+
+  /**
+   * Makes billing_area a required field for Company Administrators.
+   */
+  protected function makeBillingAreaRequired() {
+    $user = new User();
+    if ($user->hasRole('Company Administrator')) {
+      eval($this->buildItemEval('billing_area'));
+      $item['#required'] = TRUE;
     }
   }
 
