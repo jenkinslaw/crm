@@ -111,7 +111,11 @@ class CompanyTestCase extends DrupalWebTestCase {
    * Verify company_category field assertions.
    */
   public function testCompanyCategoryField() {
-    $item = $this->form->getElement('company_category');
+    $field = $this->form->getElement('company_category');
+    $this->assertEqual($field['#title'], 'Company Category', "The company category field exists.");
+    $this->assertEqual($field['#type'], 'select', 'field company_category is a select list.');
+    $this->assertFalse($field['#required'], 'field company_category is not required.');
+    $this->assertEqual(count($field['#options']), 30, 'field company_category has 30 options.');
   }
 
   /**
