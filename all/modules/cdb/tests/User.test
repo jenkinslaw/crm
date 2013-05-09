@@ -43,11 +43,23 @@ class UserTestCase extends DrupalWebTestCase {
   }
 
   /**
+   * Unit Test ::loginAs().
+   */
+  public function testLoginAs() {
+    $a_user = new User();
+    $a_user->loginAs('Company Administrator');
+    global $user;
+    $this->assertEqual($user->name, $a_user->roleToName('Company Administrator'), "::loginAs() works as expected.");
+    $a_user->reset();
+  }
+
+  /**
    * The global user is available to us.
    */
   public function testGlobalUser() {
     global $user;
-    $wrapper_user = $this->user->getSelf();
+    $a_user = new User();
+    $wrapper_user = $a_user->getSelf();
     $this->assertEqual($user, $wrapper_user, "The global user is equal to our user.");
   }
 }
