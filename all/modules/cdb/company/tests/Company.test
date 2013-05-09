@@ -91,12 +91,12 @@ class CompanyTestCase extends DrupalWebTestCase {
     $this->assertEqual($exp_date['#default_value']['value'], '', "Non Company administrators get no exp_date defaults.");
 
     // Verify Company Administrators get a default exp_date.
-    global $user;
-    $current_user = $this->loginAs('Company Administrator');
+    $user = new User();
+    $user->loginAs('Company Administrator');
     $form = new CompanyEntityForm($this->company->getEntity());
     $exp_date = $form->getElement('exp_date');
     $this->assertEqual($exp_date['#default_value']['value'], '2014-01-01 00:00:00', "Company administrators get a default exp_date.");
-    $user = $current_user;
+    $user->reset();
 
     // When this field gets updated make sure that the Invoice field is also
     // updated automatically.
