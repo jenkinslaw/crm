@@ -54,9 +54,26 @@ class EntityForm {
   }
 
   /**
-   * Helper function for hooking into hook_form_alter.
+   * Set the a value for a form element property.
+   *
+   * @param String $element
+   *   Usually the field name.
+   *
+   * @param Mixed  $property_index
+   *   If String, the form element property name (i.e. '#required').
+   *   If Array, the keys define an index where the last element
+   *   is assigend the $value (i.e. array('#default_value', 'name'))
+   *
+   * @param Mixed $value
+   *   Can be any kind of value.
+   *
+   * @return void
+   *   This function acts directly on its referenced form.
    */
-  public function hookForm() {
+  public function setElementPropertyValue($element, $property_index, $value) {
+    // Evaluates to $item =& $this->form[foo][bar][baz];
+    eval($this->buildItemEval($element, $property_index));
+    $item = $value;
   }
 
   /**
@@ -72,11 +89,38 @@ class EntityForm {
   /**
    * Builds an evaluation to reference a specific form element.
    */
-  protected function buildItemEval($element_id) {
+  protected function buildItemEval($element_id, $property = array()) {
     $index = $this->getArrayIndex($element_id);
+    $property_index = $this->arrayToIndex($property);
+
     // Evaluates to $item =& $form[foo][bar][baz];
-    $eval = '$item =& $this->form[' . $index . '];';
+    $eval = '$item =& $this->form[' . $index . ']' . $property_index . ';';
     return $eval;
+  }
+
+  /**
+   * Given an array returns a string representing and an array index.
+   *
+   * @param Mixed $array
+   *   Any array that you want to mash into a string index.
+   *   Or, a key value that you want to represent as an array index.
+   *
+   * @return String
+   *   The string representation of the index. (i.e. '[foo][bar][baz]').
+   */
+  protected function arrayToIndex($array = array()) {
+    $index = '';
+    if (!empty($array)) {
+      if (is_string($array)) {
+        $index .= "['" . $array . "']";
+      }
+      elseif (is_array($array)) {
+        foreach ($array as $key) {
+          $index .= "['" . $key . "']";
+        }
+      }
+    }
+    return $index;
   }
 
   /**
@@ -110,4 +154,11 @@ class EntityForm {
 
     return $index_string;
   }
+
+  /**
+   * Helper function for hooking into hook_form_alter.
+   */
+  public function hookForm() {
+  }
+
 }

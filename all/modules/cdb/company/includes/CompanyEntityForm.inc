@@ -32,10 +32,9 @@ class CompanyEntityForm extends EntityForm {
   protected function setDefaultExpDate() {
     $user = new User();
     if ($user->hasRole('Company Administrator')) {
-      // Evaluates to $item =& $this->form[foo][bar][baz];
-      eval($this->buildItemEval('exp_date'));
       $exp_date = $this->getDefaultElementValue('exp_date');
-      $item['#default_value']['value'] = $exp_date;
+      $this->setElementPropertyValue('exp_date',
+        array('#default_value', 'value'), $exp_date);
     }
   }
 
@@ -45,8 +44,7 @@ class CompanyEntityForm extends EntityForm {
   protected function makeBillingAreaRequired() {
     $user = new User();
     if ($user->hasRole('Company Administrator')) {
-      eval($this->buildItemEval('billing_area'));
-      $item['#required'] = TRUE;
+      $this->setElementPropertyValue('billing_area', '#required', TRUE);
     }
   }
 
