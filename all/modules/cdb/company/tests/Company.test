@@ -83,19 +83,21 @@ class CompanyTestCase extends DrupalWebTestCase {
   public function testExpDateField() {
     // Always Jan 1 of the following year, unless the user is not a Company
     // Administrator: in which case we default to Null or empty.
-    $exp_date = $this->form->getElement('exp_date');
     $default_exp_date = $this->form->getDefaultElementValue('exp_date');
     $this->assertEqual($default_exp_date, 'Next Year January 1', "The default exp date has been set.: $default_exp_date");
 
     // Verify that a non Company Administrator default to empty exp_date.
-    $this->assertEqual($exp_date['#default_value']['value'], '', "Non Company administrators get no exp_date defaults.");
+    $exp_date = $this->form
+      ->getElementPropertyValue('exp_date', array('#default_value', 'value'));
+    $this->assertEqual($exp_date, '', "Non Company administrators get no exp_date defaults.");
 
     // Verify Company Administrators get a default exp_date.
     $user = new User();
     $user->loginAs('Company Administrator');
     $form = new CompanyEntityForm($this->company->getEntity());
-    $exp_date = $form->getElement('exp_date');
-    $this->assertEqual($exp_date['#default_value']['value'], '2014-01-01 00:00:00', "Company administrators get a default exp_date.");
+    $exp_date = $form->getElementPropertyValue('exp_date',
+      array('#default_value', 'value'));
+    $this->assertEqual($exp_date, '2014-01-01 00:00:00', "Company administrators get a default exp_date.");
     $user->reset();
 
     // When this field gets updated make sure that the Invoice field is also

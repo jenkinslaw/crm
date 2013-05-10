@@ -68,23 +68,65 @@ class EntityForm {
    *   Can be any kind of value.
    *
    * @return void
-   *   This function acts directly on its referenced form.
+   *   This function acts directly the referenced item.
    */
   public function setElementPropertyValue($element, $property_index, $value) {
     // Evaluates to $item =& $this->form[foo][bar][baz];
-    eval($this->buildItemEval($element, $property_index));
+    $item =& $this->getEvaluatedItem($element, $property_index);
     $item = $value;
   }
 
+
   /**
-   * Returns a default element value.
+   * Gets a reference to the form element associated to element_id.
+   *
+   * @param String $element
+   *   The element name.
+   *
+   * @return ref
+   *   A reference to the form element.
    */
-  public function getDefaultElementValue($element_id) {
-    $type  = $this->entity->type;
-    $value = variable_get("cdb_{$type}_{$element_id}_default_value", '');
-    return $value;
+  public function &getElement($element) {
+    return $this->getElementPropertyValue($element, '');
   }
 
+  /**
+   * Gets the a value for a form element property.
+   *
+   * @param String $element
+   *   Usually the field name.
+   *
+   * @param Mixed  $property_index
+   *   If String, the form element property name (i.e. '#required').
+   *   If Array, the keys define an index where the last element
+   *   is assigend the $value (i.e. array('#default_value', 'name'))
+   *
+   * @return Reference
+   *   Returns a reference to the element property.
+   */
+  public function &getElementPropertyValue($element, $property_index) {
+    // Evaluates to $item =& $this->form[foo][bar][baz];
+    return $this->getEvaluatedItem($element, $property_index);
+  }
+
+  /**
+   * Evaluates a form item and returns it as a reference.
+   *
+   * @param String $element
+   *   Usually the field name.
+   *
+   * @param Mixed  $property_index
+   *   If String, the form element property name (i.e. '#required').
+   *   If Array, the keys define an index where the last element
+   *   is assigend the $value (i.e. array('#default_value', 'name'))
+   *
+   * @return void
+   *   This function acts directly on its referenced item.
+   */
+  protected function &getEvaluatedItem($element, $property_index) {
+    eval($this->buildItemEval($element, $property_index));
+    return $item;
+  }
 
   /**
    * Builds an evaluation to reference a specific form element.
@@ -124,15 +166,6 @@ class EntityForm {
   }
 
   /**
-   * Returns the form element associated to element_id.
-   */
-  public function getElement($element_id, $index = 0) {
-    $array_index = $this->getArrayIndex($element_id, $index);
-    eval(' $item = $this->form[' . $array_index . '];');
-    return $item;
-  }
-
-  /**
    * Given an elemen_id returns the index for that element.
    */
   protected function getArrayIndex($element_id, $index = 0) {
@@ -155,6 +188,14 @@ class EntityForm {
     return $index_string;
   }
 
+  /**
+   * Returns a default element value.
+   */
+  public function getDefaultElementValue($element_id) {
+    $type  = $this->entity->type;
+    $value = variable_get("cdb_{$type}_{$element_id}_default_value", '');
+    return $value;
+  }
   /**
    * Helper function for hooking into hook_form_alter.
    */
