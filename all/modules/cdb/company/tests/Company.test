@@ -244,7 +244,7 @@ class CompanyTestCase extends DrupalWebTestCase {
     $array_ref = new Referencer($array);
     $array_ref->setRef('Hello');
     $this->assertEqual($array['test'], 'Hello', "We can reference objects from within other objects.");
-    $this->assertTrue(true, "This is cool.");
+    $this->assertTrue(TRUE, "This is cool.");
   }
 }
 
@@ -252,10 +252,16 @@ class CompanyTestCase extends DrupalWebTestCase {
 class Referencer {
   protected $ref;
 
-  function __construct(&$ref) {
+  /**
+   * Referencer constructor.
+   */
+  public function __construct(&$ref) {
     $this->ref =& $ref;
   }
 
+  /**
+   * Intializes the refereced object.
+   */
   public function setRef($test) {
     $this->ref['test'] = $test;
   }
