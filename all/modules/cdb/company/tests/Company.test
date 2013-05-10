@@ -147,9 +147,28 @@ class CompanyTestCase extends DrupalWebTestCase {
   }
 
   /**
-   * Verify phone field assertions.
+   * Verify phone_type field assertions.
    */
-  public function testPhoneField() {
+  public function testPhoneTypeField() {
+    $field = $this->form->getElement('phone_type');
+    $this->assertEqual($field['#title'], 'Type', "field phone_type exists.");
+    $this->assertEqual($field['#type'], 'select', "field phone_type type is select.");
+    $expected_options = array(
+      '_none' => '- None -',
+      'Phone' => 'Phone',
+      'Fax' => 'Fax',
+    );
+    $this->assertEqual($field['#options'], $expected_options, "field phone_type has the expected options.");
+  }
+
+  /**
+   * Verify phone_number field assertions.
+   */
+  public function testPhoneNumberField() {
+    $field = $this->form->getElement('phone_number');
+    $type = $field['value']['#type'];
+    $this->assertEqual($field['#title'], '', "field phone_number exists.");
+    $this->assertEqual($type, 'textfield', 'field phone_number is type textfield');
   }
 
   /**
