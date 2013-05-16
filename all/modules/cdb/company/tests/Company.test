@@ -202,6 +202,17 @@ class CompanyTestCase extends DrupalWebTestCase {
   }
 
   /**
+   * Verify number_of_attorneys assertions.
+   *
+   * TODO: Add field behavior.
+   */
+  public function testNumberAttorneysField() {
+    $attribute = $this->company->getFieldInfo('number_of_attorneys');
+    $this->assertEqual($attribute['label'], 'Number of Attorneys', 'The number_of_attorneys attribute exists.');
+    $this->assertEqual($attribute['type'], 'integer', 'The number_of_attorney attribute is type integer.');
+  }
+
+  /**
    * Verify last_updated field assertions.
    */
   public function testLastUpdatedField() {

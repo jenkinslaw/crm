@@ -58,6 +58,11 @@ $items = array(
       'type' => 'text',
       'behavior' => '',
     ),
+    'number_of_attorneys' => array(
+      'label' => 'Number of Attorneys',
+      'type' => 'integer',
+      'behavior' => '',
+    ),
   ),
 ),
   );
