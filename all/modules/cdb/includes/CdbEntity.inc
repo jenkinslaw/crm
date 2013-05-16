@@ -136,14 +136,17 @@ class CdbEntity {
    */
   public function getFieldInfo($name) {
     $name = $this->formatFieldName($name);
-    $field_info_a = field_info_field($name);
+    
     $field_info_b = $this->entity->$name->info();
-
-    // Unset some fields that kind of get in the way.
     unset($field_info_b['parent']);
-    unset($field_info_a['storage']);
+    $info = $field_info_b;
 
-    $info = $field_info_a + $field_info_b;
+    if ($field_info_a = field_info_field($name)) {
+      // Unset some fields that kind of get in the way.
+      unset($field_info_a['storage']);
+      $info = $info + $field_info_a;
+    }
+
     return $info;
   }
 
