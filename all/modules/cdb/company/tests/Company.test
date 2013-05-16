@@ -182,13 +182,13 @@ class CompanyTestCase extends DrupalWebTestCase {
   }
 
   /**
-   * Verify member_notes field assertions.
+   * Verify cust_notes field assertions.
    */
-  public function testMemberNotes() {
-    $field = $this->form->getElement('member_notes');
+  public function testCustomNotesField() {
+    $field = $this->form->getElement('cust_notes');
     $type = $field['value']['#type'];
-    $this->assertEqual($field['#title'], 'Membership Notes', "field member_notes exists.");
-    $this->assertEqual($type, 'textarea', 'field member_notes is type textarea.');
+    $this->assertEqual($field['#title'], 'Customer Service Notes', "field website exists.");
+    $this->assertEqual($type, 'textarea', 'field cust_notes is type textarea.');
   }
 
   /**
