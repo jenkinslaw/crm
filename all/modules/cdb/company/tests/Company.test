@@ -225,6 +225,9 @@ class CompanyTestCase extends DrupalWebTestCase {
    * Verify updated_by field assertions.
    */
   public function testUpdatedByField() {
+    $attribute = $this->company->getFieldInfo('updated_by');
+    $this->assertEqual($attribute['label'], 'Last Updated By', 'The updated_by attribute exists.');
+    $this->assertEqual($attribute['type'], 'user', 'The updated_by attribute is type user.');
   }
 
   /**

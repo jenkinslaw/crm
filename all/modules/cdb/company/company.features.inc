@@ -38,11 +38,6 @@ $items = array(
   'name' => 'company',
   'label' => 'company',
   'properties' => array(
-    'created' => array(
-      'label' => 'Created',
-      'type' => 'integer',
-      'behavior' => 'created',
-    ),
     'company_name' => array(
       'label' => 'Company Name',
       'type' => 'text',
@@ -58,15 +53,15 @@ $items = array(
       'type' => 'integer',
       'behavior' => '',
     ),
-    'uid' => array(
-      'label' => 'Author',
-      'type' => 'integer',
-      'behavior' => 'author',
-    ),
     'last_updated' => array(
       'label' => 'Last Updated',
       'type' => 'integer',
       'behavior' => 'changed',
+    ),
+    'updated_by' => array(
+      'label' => 'Last Updated By',
+      'type' => 'integer',
+      'behavior' => 'author',
     ),
   ),
 ),
