@@ -599,6 +599,66 @@ function company_field_default_fields() {
     ),
   );
 
+  // Exported field: 'company-company-website'.
+  $fields['company-company-website'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'website',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'locked' => '0',
+      'module' => 'url',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'url',
+    ),
+    'field_instance' => array(
+      'bundle' => 'company',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'url',
+          'settings' => array(
+            'nofollow' => FALSE,
+            'trim_length' => 80,
+          ),
+          'type' => 'url_default',
+          'weight' => 9,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'company',
+      'field_name' => 'website',
+      'label' => 'Website',
+      'required' => 0,
+      'settings' => array(
+        'title_fetch' => 0,
+        'title_field' => 0,
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'url',
+        'settings' => array(
+          'size' => '40',
+        ),
+        'type' => 'url_external',
+        'weight' => 9,
+      ),
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Address');
@@ -609,6 +669,7 @@ function company_field_default_fields() {
   t('Number');
   t('Suspended');
   t('Type');
+  t('Website');
 
   return $fields;
 }

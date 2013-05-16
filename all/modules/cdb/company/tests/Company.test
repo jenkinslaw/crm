@@ -175,6 +175,10 @@ class CompanyTestCase extends DrupalWebTestCase {
    * Verify website field assertions.
    */
   public function testWebsiteField() {
+    $field = $this->form->getElement('website');
+    $type = $field['value']['#type'];
+    $this->assertEqual($field['#title'], 'Website', "field website exists.");
+    $this->assertEqual($type, 'textfield', 'field webite is type text.');
   }
 
   /**
