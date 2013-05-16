@@ -195,6 +195,10 @@ class CompanyTestCase extends DrupalWebTestCase {
    * Verify account_number field assertions.
    */
   public function testAccountNumberField() {
+    $attribute= $this->company->getFieldInfo('account_number');
+    $this->assertEqual($attribute['label'], 'Account Number', 'The account_number attribute exists.');
+    $this->assertEqual($attribute['type'], 'text', "The account_number attribute is type text.");
+
   }
 
   /**

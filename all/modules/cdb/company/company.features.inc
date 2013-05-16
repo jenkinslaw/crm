@@ -53,6 +53,11 @@ $items = array(
       'type' => 'text',
       'behavior' => 'title',
     ),
+    'account_number' => array(
+      'label' => 'Account Number',
+      'type' => 'text',
+      'behavior' => '',
+    ),
   ),
 ),
   );
