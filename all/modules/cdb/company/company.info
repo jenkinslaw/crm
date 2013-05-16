@@ -21,6 +21,7 @@ features[field][] = company-company-billing_area
 features[field][] = company-company-company_category
 features[field][] = company-company-exp_date
 features[field][] = company-company-mas90_name
+features[field][] = company-company-member_notes
 features[field][] = company-company-phone_number
 features[field][] = company-company-phone_type
 features[field][] = company-company-suspended

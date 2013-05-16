@@ -399,6 +399,73 @@ function company_field_default_fields() {
     ),
   );
 
+  // Exported field: 'company-company-member_notes'.
+  $fields['company-company-member_notes'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'member_notes',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'text',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'text_long',
+    ),
+    'field_instance' => array(
+      'bundle' => 'company',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 10,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'company',
+      'field_name' => 'member_notes',
+      'label' => 'Membership Notes',
+      'required' => 0,
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'rows' => '5',
+        ),
+        'type' => 'text_textarea',
+        'weight' => 10,
+      ),
+    ),
+  );
+
   // Exported field: 'company-company-phone_number'.
   $fields['company-company-phone_number'] = array(
     'field_config' => array(
@@ -666,6 +733,7 @@ function company_field_default_fields() {
   t('Company Category');
   t('Expiration Date');
   t('Mas90 Name');
+  t('Membership Notes');
   t('Number');
   t('Suspended');
   t('Type');
