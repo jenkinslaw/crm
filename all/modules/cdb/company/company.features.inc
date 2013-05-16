@@ -43,11 +43,6 @@ $items = array(
       'type' => 'integer',
       'behavior' => 'created',
     ),
-    'changed' => array(
-      'label' => 'Changed',
-      'type' => 'integer',
-      'behavior' => 'changed',
-    ),
     'company_name' => array(
       'label' => 'Company Name',
       'type' => 'text',
@@ -62,6 +57,16 @@ $items = array(
       'label' => 'Number of Attorneys',
       'type' => 'integer',
       'behavior' => '',
+    ),
+    'uid' => array(
+      'label' => 'Author',
+      'type' => 'integer',
+      'behavior' => 'author',
+    ),
+    'last_updated' => array(
+      'label' => 'Last Updated',
+      'type' => 'integer',
+      'behavior' => 'changed',
     ),
   ),
 ),

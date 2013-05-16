@@ -216,6 +216,9 @@ class CompanyTestCase extends DrupalWebTestCase {
    * Verify last_updated field assertions.
    */
   public function testLastUpdatedField() {
+    $attribute = $this->company->getFieldInfo('last_updated');
+    $this->assertEqual($attribute['label'], 'Last Updated', 'The last_updated attribute exists.');
+    $this->assertEqual($attribute['type'], 'date', 'The last updated attribute is type date.');
   }
 
   /**
