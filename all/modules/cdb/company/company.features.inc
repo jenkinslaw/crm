@@ -38,6 +38,11 @@ $items = array(
   'name' => 'company',
   'label' => 'company',
   'properties' => array(
+    'created' => array(
+      'label' => 'Created',
+      'type' => 'integer',
+      'behavior' => 'created',
+    ),
     'company_name' => array(
       'label' => 'Company Name',
       'type' => 'text',
