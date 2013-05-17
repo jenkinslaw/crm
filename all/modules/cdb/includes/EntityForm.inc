@@ -19,12 +19,9 @@ class EntityForm {
   }
 
   /**
-   * Returns the form def array for given operation.
-   *
-   * This is a nicer than having to remember all those weird
-   * form names.
+   * Returns a refernce to our form.
    */
-  public function getForm() {
+  public function &getForm() {
     return $this->form;
   }
 
@@ -72,10 +69,9 @@ class EntityForm {
    */
   public function setElementPropertyValue($element, $property_index, $value) {
     // Evaluates to $item =& $this->form[foo][bar][baz];
-    $item =& $this->getEvaluatedItem($element, $property_index);
+    $item =& $this->getElementPropertyValue($element, $property_index);
     $item = $value;
   }
-
 
   /**
    * Gets a reference to the form element associated to element_id.
@@ -101,91 +97,66 @@ class EntityForm {
    *   If Array, the keys define an index where the last element
    *   is assigend the $value (i.e. array('#default_value', 'name'))
    *
-   * @return Reference
+   * @return ref
    *   Returns a reference to the element property.
    */
-  public function &getElementPropertyValue($element, $property_index) {
-    // Evaluates to $item =& $this->form[foo][bar][baz];
-    return $this->getEvaluatedItem($element, $property_index);
-  }
-
-  /**
-   * Evaluates a form item and returns it as a reference.
-   *
-   * @param String $element
-   *   Usually the field name.
-   *
-   * @param Mixed  $property_index
-   *   If String, the form element property name (i.e. '#required').
-   *   If Array, the keys define an index where the last element
-   *   is assigend the $value (i.e. array('#default_value', 'name'))
-   *
-   * @return void
-   *   This function acts directly on its referenced item.
-   */
-  protected function &getEvaluatedItem($element, $property_index) {
-    eval($this->buildItemEval($element, $property_index));
+  public function &getElementPropertyValue($element, $property_index = array()) {
+    $item =&  $this->getElementItem($element);
+    $item =& $this->getElementProperty($item, $property_index);
     return $item;
   }
 
   /**
-   * Builds an evaluation to reference a specific form element.
+   * Given an element_id returns a reference to that element.
    */
-  protected function buildItemEval($element_id, $property = array()) {
-    $index = $this->getArrayIndex($element_id);
-    $property_index = $this->arrayToIndex($property);
+  protected function &getElementItem($element_id, $index = 0) {
 
-    // Evaluates to $item =& $form[foo][bar][baz];
-    $eval = '$item =& $this->form[' . $index . ']' . $property_index . ';';
-    return $eval;
+    $item =& $this->form[$element_id];
+
+    if ($item['#type'] != 'container') {
+      return $item;
+    }
+    else {
+      $item =& $item['und'];
+    }
+
+    if (isset($item['#type'])) {
+      return $item;
+    }
+    else {
+      $item =& $item[$index];
+    }
+
+    return $item;
   }
 
   /**
-   * Given an array returns a string representing and an array index.
+   * Traverse an array to return a reference to an internal of the array.
+   * 
+   * @param Array $item
+   *   A reference to the array being traversed.
    *
-   * @param Mixed $array
-   *   Any array that you want to mash into a string index.
-   *   Or, a key value that you want to represent as an array index.
+   * @param Mixed $index
+   *   Any array that defines the index used to traverse the $item.
    *
-   * @return String
-   *   The string representation of the index. (i.e. '[foo][bar][baz]').
+   * @return ref
+   *   A reference to the property of an item as detertimed by traversing
+   *   the item using the index provided.
    */
-  protected function arrayToIndex($array = array()) {
-    $index = '';
-    if (!empty($array)) {
-      if (is_string($array)) {
-        $index .= "['" . $array . "']";
+  protected function &getElementProperty(&$item, $index = array()) {
+    if (!empty($index)) {
+      if (is_string($index) && isset($item[$index])) {
+        $item =& $item[$index];
       }
-      elseif (is_array($array)) {
-        foreach ($array as $key) {
-          $index .= "['" . $key . "']";
+      elseif (is_array($index)) {
+        foreach ($index as $key) {
+          if (isset($item[$key])) {
+            $item =& $item[$key];
+          }
         }
       }
     }
-    return $index;
-  }
-
-  /**
-   * Given an elemen_id returns the index for that element.
-   */
-  protected function getArrayIndex($element_id, $index = 0) {
-    $index_string = "'{$element_id}'";
-
-    if ($this->form[$element_id]['#type'] != 'container') {
-      return $index;
-    }
-    else {
-      $index_string .= "]['und'";
-    }
-
-    if (isset($this->form[$element_id]['und']['#type'])) {
-      return $index_string;
-    }
-    else {
-      $index_string .= "][$index";
-    }
-
-    return $index_string;
+    return $item;
   }
 
   /**
