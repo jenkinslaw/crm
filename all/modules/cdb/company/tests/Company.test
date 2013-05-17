@@ -234,6 +234,11 @@ class CompanyTestCase extends DrupalWebTestCase {
    * Verify billing_contact field assertions.
    */
   public function testBillingContact() {
+    // TODO: Check the reference view display for company people.
+    $field = $this->form->getElement('billing_contact');
+    $type = $field['#type'];
+    $this->assertEqual($field['#title'], 'Billing Contact', "field billing_contact exists.");
+    $this->assertEqual($type, 'textfield', 'field billing_contact is type textarea.');
   }
 
   /**

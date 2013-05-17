@@ -15,6 +15,13 @@ function company_ctools_plugin_api() {
 }
 
 /**
+ * Implements hook_views_api().
+ */
+function company_views_api() {
+  return array("api" => "3.0");
+}
+
+/**
  * Implements hook_eck_bundle_info().
  */
 function company_eck_bundle_info() {
@@ -38,11 +45,6 @@ $items = array(
   'name' => 'company',
   'label' => 'company',
   'properties' => array(
-    'created' => array(
-      'label' => 'Created',
-      'type' => 'integer',
-      'behavior' => 'created',
-    ),
     'company_name' => array(
       'label' => 'Company Name',
       'type' => 'text',
@@ -67,6 +69,11 @@ $items = array(
       'label' => 'Last Updated By',
       'type' => 'integer',
       'behavior' => 'author',
+    ),
+    'created' => array(
+      'label' => 'Created',
+      'type' => 'integer',
+      'behavior' => 'created',
     ),
   ),
 ),
