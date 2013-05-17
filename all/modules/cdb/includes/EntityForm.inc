@@ -126,6 +126,10 @@ class EntityForm {
     else {
       $item =& $item[$index];
     }
+    // References have a target.
+    if (isset($item['target_id'])) {
+      $item =& $item['target_id'];
+    }
 
     return $item;
   }
