@@ -6,18 +6,24 @@
 
 class CdbEntityTestCase extends DrupalWebTestCase {
 
-  private $company;
+  protected $company;
 
-  function setUp() {
+  /**
+   * Set up the tests.
+   */
+  public function setUp() {
     $this->setup = TRUE;
   }
 
-  function tearDown() {
+  /**
+   * Tear down.
+   */
+  public function tearDown() {
   }
 
 
   /**
-   *  Initialize.
+   * Initialize.
    */
   public static function getInfo() {
     return array(
@@ -28,6 +34,9 @@ class CdbEntityTestCase extends DrupalWebTestCase {
   }
 
 
+  /**
+   * Test that the CdbeEntity contructor works as expected.
+   */
   public function testConstruct() {
     $company = new Company();
     $expected = "Company";
@@ -36,6 +45,9 @@ class CdbEntityTestCase extends DrupalWebTestCase {
     $this->company = $company;
   }
 
+  /**
+   * Test that the CdbEntity get method works as expeced.
+   */
   public function testGet() {
     $expected = '';
     $actual = $this->company->mas90_name;
@@ -47,6 +59,9 @@ class CdbEntityTestCase extends DrupalWebTestCase {
     $this->assertEqual($expected, $actual, "the value() method works as expected.");
   }
 
+  /**
+   * Test that the CdbEntity set method works as expected.
+   */
   public function testSet() {
     $expected = "[unit-test] Company Name";
     $this->company->mas90_name = "[unit-test] Company Name";
@@ -70,6 +85,9 @@ class CdbEntityTestCase extends DrupalWebTestCase {
     }
   }
 
+  /**
+   * Test that the CdbEntity save method works as expected.
+   */
   public function testSave() {
     $id = $this->company->id;
     $this->assertEqual($id, NULL, "The id is not set before it is saved.");
@@ -83,6 +101,9 @@ class CdbEntityTestCase extends DrupalWebTestCase {
 
   }
 
+  /**
+   * Test that the CdbEnity delete method works as expected.
+   */
   public function testDelete() {
     $this->company->delete();
     $actual = entity_load_single('company', $this->company->id);
@@ -90,10 +111,13 @@ class CdbEntityTestCase extends DrupalWebTestCase {
     $result = print_r(array(
       'actual' => $actual,
       'expected' => $expected,
-    ), true);
+    ), TRUE);
     $this->assertEqual($actual, $expected, "We can delete the company: $result.");
   }
 
+  /**
+   * Test that the CdbEntity getForm() method works as expected.
+   */
   public function testGetForm() {
     $form = $this->company->getForm();
     $this->assertTrue(is_array($form), "CdbEntity::getForm works as expected.");
