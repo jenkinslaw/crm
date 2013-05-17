@@ -238,13 +238,17 @@ class CompanyTestCase extends DrupalWebTestCase {
     $field = $this->form->getElement('billing_contact');
     $type = $field['#type'];
     $this->assertEqual($field['#title'], 'Billing Contact', "field billing_contact exists.");
-    $this->assertEqual($type, 'textfield', 'field billing_contact is type textarea.');
+    $this->assertEqual($type, 'textfield', 'field billing_contact is type texfield.');
   }
 
   /**
    * Verify membership_contact field assertions.
    */
   public function testMembershipContactField() {
+    $field = $this->form->getElement('membership_contact');
+    $type = $field['#type'];
+    $this->assertEqual($field['#title'], 'Membership Contact', "field billing_contact exists.");
+    $this->assertEqual($type, 'textfield', 'field membership_contact is type textfield.');
   }
 
   /**

@@ -618,6 +618,93 @@ function company_field_default_fields() {
     ),
   );
 
+  // Exported field: 'company-company-membership_contact'.
+  $fields['company-company-membership_contact'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'membership_contact',
+      'foreign keys' => array(
+        'node' => array(
+          'columns' => array(
+            'target_id' => 'nid',
+          ),
+          'table' => 'node',
+        ),
+      ),
+      'indexes' => array(
+        'target_id' => array(
+          0 => 'target_id',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'entityreference',
+      'settings' => array(
+        'handler' => 'views',
+        'handler_settings' => array(
+          'behaviors' => array(
+            'views-select-list' => array(
+              'status' => 0,
+            ),
+          ),
+          'view' => array(
+            'args' => array(
+              0 => '%nid',
+            ),
+            'display_name' => 'entityreference_company_persons',
+            'view_name' => 'company_people',
+          ),
+        ),
+        'target_type' => 'person',
+      ),
+      'translatable' => '0',
+      'type' => 'entityreference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'company',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'entityreference',
+          'settings' => array(
+            'link' => FALSE,
+          ),
+          'type' => 'entityreference_label',
+          'weight' => 13,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'company',
+      'field_name' => 'membership_contact',
+      'label' => 'Membership Contact',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'entityreference',
+        'settings' => array(
+          'match_operator' => 'CONTAINS',
+          'path' => '',
+          'size' => '60',
+        ),
+        'type' => 'entityreference_autocomplete',
+        'weight' => 13,
+      ),
+    ),
+  );
+
   // Exported field: 'company-company-phone_number'.
   $fields['company-company-phone_number'] = array(
     'field_config' => array(
@@ -887,6 +974,7 @@ function company_field_default_fields() {
   t('Customer Service Notes');
   t('Expiration Date');
   t('Mas90 Name');
+  t('Membership Contact');
   t('Membership Notes');
   t('Number');
   t('Suspended');
