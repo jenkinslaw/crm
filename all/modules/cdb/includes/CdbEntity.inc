@@ -76,7 +76,7 @@ class CdbEntity {
   /**
    * Gets the Entity field name.
    */
-  private function formatFieldName($name) {
+  protected function formatFieldName($name) {
     if (isset($this->entity->{"field_$name"})) {
       return "field_$name";
     }
@@ -136,7 +136,6 @@ class CdbEntity {
    */
   public function getFieldInfo($name) {
     $name = $this->formatFieldName($name);
-    
     $field_info_b = $this->entity->$name->info();
     unset($field_info_b['parent']);
     $info = $field_info_b;
