@@ -255,6 +255,12 @@ class CompanyTestCase extends DrupalWebTestCase {
    * Verify tax_exempt field assertions.
    */
   public function testTaxExemptField() {
+    $field = $this->form->getElement('tax_exempt');
+    $type = $field['#type'];
+    $default = $field['#default_value'];
+    $this->assertEqual($field['#title'], 'Tax Exempt', "field tax_exempt exists.");
+    $this->assertEqual($type, 'checkbox', 'field tax_exempt is type textfield.');
+    $this->assertEqual($default, 1, 'fileld tax_exempt is checked by default.');
   }
 
   /**
