@@ -16,10 +16,10 @@ dependencies[] = field_group_multiple
 dependencies[] = company
 dependencies[] = person 
 
-files[] = tests/cdb.test
-files[] = tests/cdb.entity.test
-files[] = tests/User.test
-files[] = tests/CdbEntity.test
 files[] = includes/CdbEntity.inc
 files[] = includes/EntityForm.inc
 files[] = includes/User.inc
+files[] = tests/Cdb.test
+files[] = tests/CdbEntity.test
+files[] = tests/CdbEntityAssumptions.test
+files[] = tests/User.test
