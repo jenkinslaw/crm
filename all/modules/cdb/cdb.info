@@ -10,8 +10,10 @@ dependencies[] = views
 dependencies[] = panels
 dependencies[] = entity
 dependencies[] = entityreference
+dependencies[] = field
 dependencies[] = field_group
 dependencies[] = field_group_multiple
+dependencies[] = url
 
 dependencies[] = company
 dependencies[] = person 
