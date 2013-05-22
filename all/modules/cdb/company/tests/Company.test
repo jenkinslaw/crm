@@ -288,30 +288,6 @@ class CompanyTestCase extends DrupalWebTestCase {
   }
 
   /**
-   * Verify system_comments field assertions.
-   */
-  public function testSystemCommentsField() {
-  }
-
-  /**
-   * Verify comment_range_start field assertions.
-   */
-  public function testCommentRangeStartField() {
-  }
-
-  /**
-   * Verify comment_range_end field assertions.
-   */
-  public function testCommentRangeEndField() {
-  }
-
-  /**
-   * Test Company::hookForm().
-   */
-  public function testHookForm() {
-  }
-
-  /**
    * Verify some assumptions about refrences within an object instance.
    */
   public function testRefrencer() {
