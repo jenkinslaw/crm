@@ -195,7 +195,7 @@ class CompanyTestCase extends DrupalWebTestCase {
    * Verify account_number field assertions.
    */
   public function testAccountNumberField() {
-    $attribute= $this->company->getFieldInfo('account_number');
+    $attribute = $this->company->getFieldInfo('account_number');
     $this->assertEqual($attribute['label'], 'Account Number', 'The account_number attribute exists.');
     $this->assertEqual($attribute['type'], 'text', "The account_number attribute is type text.");
 
@@ -260,13 +260,19 @@ class CompanyTestCase extends DrupalWebTestCase {
     $default = $field['#default_value'];
     $this->assertEqual($field['#title'], 'Tax Exempt', "field tax_exempt exists.");
     $this->assertEqual($type, 'checkbox', 'field tax_exempt is type textfield.');
-    $this->assertEqual($default, 1, 'fileld tax_exempt is checked by default.');
+    $this->assertEqual($default, 0, 'field tax_exempt is not checked by default.');
   }
 
   /**
    * Verify invoice field assertions.
    */
   public function testInvoiceField() {
+    $field = $this->form->getElement('invoice');
+    $type = $field['#type'];
+    $default = $field['#default_value'];
+    $this->assertEqual($field['#title'], 'Invoice', "field invoice exists.");
+    $this->assertEqual($type, 'checkbox', 'field invoice is type textfield.');
+    $this->assertEqual($default, 1, 'fileld checked is checked by default.');
   }
 
   /**

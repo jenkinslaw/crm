@@ -233,7 +233,7 @@ function company_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'entityreference_autocomplete',
-        'weight' => 12,
+        'weight' => '12',
       ),
     ),
   );
@@ -390,7 +390,7 @@ function company_field_default_fields() {
           'rows' => '5',
         ),
         'type' => 'text_textarea',
-        'weight' => 11,
+        'weight' => '11',
       ),
     ),
   );
@@ -474,6 +474,75 @@ function company_field_default_fields() {
         ),
         'type' => 'date_select',
         'weight' => '3',
+      ),
+    ),
+  );
+
+  // Exported field: 'company-company-invoice'.
+  $fields['company-company-invoice'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'invoice',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => '',
+          1 => '',
+        ),
+        'allowed_values_function' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_boolean',
+    ),
+    'field_instance' => array(
+      'bundle' => 'company',
+      'default_value' => array(
+        0 => array(
+          'value' => 1,
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 15,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'company',
+      'field_name' => 'invoice',
+      'label' => 'Invoice',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(
+          'display_label' => 1,
+        ),
+        'type' => 'options_onoff',
+        'weight' => '15',
       ),
     ),
   );
@@ -613,7 +682,7 @@ function company_field_default_fields() {
           'rows' => '5',
         ),
         'type' => 'text_textarea',
-        'weight' => 10,
+        'weight' => '10',
       ),
     ),
   );
@@ -700,7 +769,7 @@ function company_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'entityreference_autocomplete',
-        'weight' => 13,
+        'weight' => '13',
       ),
     ),
   );
@@ -935,7 +1004,7 @@ function company_field_default_fields() {
       'bundle' => 'company',
       'default_value' => array(
         0 => array(
-          'value' => 1,
+          'value' => 0,
         ),
       ),
       'deleted' => '0',
@@ -969,7 +1038,7 @@ function company_field_default_fields() {
           'display_label' => 1,
         ),
         'type' => 'options_onoff',
-        'weight' => 14,
+        'weight' => '14',
       ),
     ),
   );
@@ -1029,7 +1098,7 @@ function company_field_default_fields() {
           'size' => '40',
         ),
         'type' => 'url_external',
-        'weight' => 9,
+        'weight' => '9',
       ),
     ),
   );
@@ -1042,6 +1111,7 @@ function company_field_default_fields() {
   t('Company Category');
   t('Customer Service Notes');
   t('Expiration Date');
+  t('Invoice');
   t('Mas90 Name');
   t('Membership Contact');
   t('Membership Notes');
