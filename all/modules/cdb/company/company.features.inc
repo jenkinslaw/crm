@@ -75,6 +75,11 @@ $items = array(
       'type' => 'integer',
       'behavior' => 'created',
     ),
+    'old_company_id' => array(
+      'label' => 'Old Company Id',
+      'type' => 'text',
+      'behavior' => '',
+    ),
   ),
 ),
   );

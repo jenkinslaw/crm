@@ -279,6 +279,12 @@ class CompanyTestCase extends DrupalWebTestCase {
    * Verify old_company_id field assertions.
    */
   public function testOldCompanyIdField() {
+    // Addding this as an attribute because users will not access it directly.
+    $attribute = $this->company->getFieldInfo('old_company_id');
+    $this->assertEqual($attribute['label'],
+      'Old Company Id', 'The old_company_id attribute exists.');
+    $this->assertEqual($attribute['type'],
+      'text', 'The old_company_id attribute is type text.');
   }
 
   /**
