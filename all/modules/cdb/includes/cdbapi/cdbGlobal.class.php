@@ -30,11 +30,11 @@ class cdb
 	/*
 	 *  MODIFY THE BELOW CONSTANTS FOR APPROPRIATE DB
 	 */
-	const DB_SERVER 	= $_ENV['_CDB_DB_SERVER'];
-	const DB_USER 		= $_ENV['_CDB_DB_USER'];
-	const DB_PASSWORD	= $_ENV['_CDB_DB_PASSWORD'];
-	const DB_TYPE		= $_ENV['_CDB_TYPE'];
-	const DB_DEBUG		= (bool) $_ENV['_CDB_DEBUG'];
+  private $DB_SERVER;
+	private $DB_USER;
+	private $DB_PASSWORD;
+	private $DB_TYPE;
+	private $DB_DEBUG;
 
 	/*
 	 *  DO NOT CHANGE ANYTHING BELOW THIS!!!!
@@ -47,6 +47,12 @@ class cdb
 
 	private function __construct()
 	{
+  $this->DB_SERVER   = $_ENV['_CDB_DB_SERVER'];
+  $this->DB_USER 		= $_ENV['_CDB_DB_USER'];
+  $this->DB_PASSWORD	= $_ENV['_CDB_DB_PASSWORD'];
+  $this->DB_TYPE		= $_ENV['_CDB_TYPE'];
+  $this->DB_DEBUG		= (bool) $_ENV['_CDB_DEBUG'];
+
 		$this->db = ADONewConnection(self::DB_TYPE);
 		$this->db->debug = self::DB_DEBUG;
 		// Use $this->db->PConnect() ????
