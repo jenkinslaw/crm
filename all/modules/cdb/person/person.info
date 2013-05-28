@@ -11,6 +11,9 @@ dependencies[] = field_group_multiple
 dependencies[] = list
 dependencies[] = number
 dependencies[] = text
+
+dependencies[] = company
+
 eck_entity_type[] = person
 features[ctools][] = field_group:field_group:1
 features[eck_bundle][] = person_person

@@ -12,6 +12,9 @@ dependencies[] = list
 dependencies[] = options
 dependencies[] = url
 dependencies[] = views
+
+dependencies[] = cdb
+
 eck_entity_type[] = company
 features[ctools][] = field_group:field_group:1
 features[ctools][] = views:views_default:3.0

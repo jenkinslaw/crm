@@ -15,8 +15,6 @@ dependencies[] = field_group
 dependencies[] = field_group_multiple
 dependencies[] = url
 
-dependencies[] = company
-dependencies[] = person 
 
 files[] = includes/CdbEntity.inc
 files[] = includes/EntityForm.inc
