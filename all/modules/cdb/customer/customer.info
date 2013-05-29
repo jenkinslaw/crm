@@ -1,0 +1,9 @@
+name = "Customer Database Migration"
+description = "Our migration process from Old CDB to New CDB."
+package = "Jenkins"
+core = 7.x
+
+files[] = customer.module
+files[] = company.inc
+files[] = person.inc
+
