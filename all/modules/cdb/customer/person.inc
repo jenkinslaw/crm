@@ -32,16 +32,10 @@ class PersonMigration extends BasicMigration {
     $source_url = 'http://cnelson.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/person.json';
 
     $this->source = new MigrateSourceJSON($source_url, 'id', $fields,
-      array('reader_class' => 'CompanyJSONReader'));
+      array('reader_class' => 'PersonJSONReader'));
 
     $this->destination = new MigrateDestinationEntityAPI('person', 'person');
 
-    $this->addFieldMapping('title', 'name')
-         ->description(t('Mapping beer name in source to node title'));
-    $this->addFieldMapping('sticky')
-         ->description(t('Should we default this to 0 or 1?'))
-         ->issueGroup(t('Client questions'))
-         ->issueNumber(765736)
-         ->issuePriority(MigrateFieldMapping::ISSUE_PRIORITY_LOW);
+    $this->addFieldMapping('title', 'name');
   }
 }
