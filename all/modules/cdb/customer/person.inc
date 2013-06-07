@@ -36,6 +36,43 @@ class PersonMigration extends BasicMigration {
 
     $this->destination = new MigrateDestinationEntityAPI('person', 'person');
 
-    $this->addFieldMapping('title', 'name');
+    $this->addFieldMapping('old_customer_id', 'old_customer_id')
+      ->description('Mapping old_customer_id to entity id');
+    $this->addFieldMapping('barcode', 'barcode')
+      ->description('Mapping barcode to barcode');
+    $this->addFieldMapping('status', 'status')
+      ->description('Mapping status to status');
+    $this->addFieldMapping('patron_type', 'patron_type')
+      ->description('Mapping patron_type to patron_type');
+    $this->addFieldMapping('area', 'area')
+      ->description('Mapping area to area');
+    $this->addFieldMapping('foa', 'foa')
+      ->description('Mapping foa to foa');
+    $this->addFieldMapping('first', 'first')
+      ->description('Mapping first to first');
+    $this->addFieldMapping('middle', 'middle')
+      ->description('Mapping middle to middle');
+    $this->addFieldMapping('last', 'last')
+      ->description('Mapping last to last');
+    $this->addFieldMapping('title', 'title')
+      ->description('Mapping title to title');
+    $this->addFieldMapping('email', 'email')
+      ->description('Mapping email to email');
+    $this->addFieldMapping('CM', 'CM')
+      ->description('Mapping CM to CM');
+    $this->addFieldMapping('suspended', 'suspended')
+      ->description('Mapping suspended to suspended');
+    $this->addFieldMapping('dues', 'dues')
+      ->description('Mapping dues to dues');
+    $this->addFieldMapping('exp_date', 'exp_date')
+      ->description('Mapping exp_date to expt_date');
+    $this->addFieldMapping('memb_notes', 'memb_notes')
+      ->description('Mapping memb_notes to memb_notes');
+    $this->addFieldMapping('cust_notes', 'cust_notes')
+      ->description('Mapping cust_notes to cust_notes');
+    $this->addFieldMapping('last_update', 'last_update')
+      ->description('Mapping last_update to last_update');
+    $this->addFieldMapping('address', 'address')
+      ->description('Mapping address to address');
   }
 }
