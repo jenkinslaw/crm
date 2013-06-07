@@ -53,18 +53,39 @@ class CompanyMigration extends BasicMigration {
     parent::__construct();
     $this->description = t('Company Migration');
 
-    $source_url = 'http://cnelson.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/company.json';
+    $source_url = 'sites/all/modules/jenkins/cdb_access/cdbapi/migration/company.php';
     $this->source = new MigrateSourceJSON($source_url, 'id', $fields,
       array('reader_class' => 'CompanyJSONReader'));
 
     $this->destination = new MigrateDestinationEntityAPI('company', 'company');
 
-    $this->addFieldMapping('title', 'name')
-         ->description(t('Mapping beer name in source to node title'));
-    $this->addFieldMapping('sticky')
-         ->description(t('Should we default this to 0 or 1?'))
-         ->issueGroup(t('Client questions'))
-         ->issueNumber(765736)
-         ->issuePriority(MigrateFieldMapping::ISSUE_PRIORITY_LOW);
+    $this->addFieldMapping('old_company_id', 'id')
+      ->description('Mapping old_copany_id to entity_id');
+    $this->addFieldMapping('company_name', 'company_name')
+      ->description('Mapping company_name to company_name');
+    $this->addFieldMapping('suspended', 'suspended')
+      ->description('Mapping suspended to suspended');
+    $this->addFieldMapping('address', 'address')
+      ->description('Mapping address to address');
+    $this->addFieldMapping('exp_date', 'exp_date')
+      ->description('Mapping exp_date to exp_date');
+    $this->addFieldMapping('company_category', 'company_category')
+      ->description('Mapping company_category to company_category');
+    $this->addFieldMapping('billing_area', 'billing_area')
+      ->description('Mapping billing_area to billing_area');
+    $this->addFieldMapping('website', 'website')
+      ->description('Mapping website to website');
+    $this->addFieldMapping('memb_notes', 'memb_notes')
+      ->description('Mapping member_notes to member_notes');
+    $this->addFieldMapping('cust_notes', 'cust_notes')
+      ->description('Mapping cust_notes to cust_notes');
+    $this->addFieldMapping('account_number', 'account_number')
+      ->description('Mapping account_number to account_number');
+    $this->addFieldMapping('number_of_attorneys', 'number_of_attorneys')
+      ->description('Mapping number_of_attorneys to number_of_attorneys');
+    $this->addFieldMapping('last_updated', 'last_updated')
+      ->description('Mapping last_updated to last_updated');
+    $this->addFieldMapping('updated_by', 'updated_by')
+      ->description('Mapping updated_by to updated_by');
   }
 }
