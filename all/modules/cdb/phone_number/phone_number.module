@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Phone NUmber feature.
+ */
+
+include_once 'phone_number.features.inc';
