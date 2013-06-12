@@ -10,49 +10,62 @@
 function company_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'company-company-address'.
-  $fields['company-company-address'] = array(
+  // Exported field: 'company-company-address_entity'.
+  $fields['company-company-address_entity'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
-      'field_name' => 'address',
-      'foreign keys' => array(),
-      'indexes' => array(),
+      'field_name' => 'address_entity',
+      'foreign keys' => array(
+        'node' => array(
+          'columns' => array(
+            'target_id' => 'nid',
+          ),
+          'table' => 'node',
+        ),
+      ),
+      'indexes' => array(
+        'target_id' => array(
+          0 => 'target_id',
+        ),
+      ),
       'locked' => '0',
-      'module' => 'addressfield',
-      'settings' => array(),
+      'module' => 'entityreference',
+      'settings' => array(
+        'handler' => 'base',
+        'handler_settings' => array(
+          'behaviors' => array(
+            'views-select-list' => array(
+              'status' => 0,
+            ),
+          ),
+          'sort' => array(
+            'type' => 'none',
+          ),
+          'target_bundles' => array(
+            'address' => 'address',
+          ),
+        ),
+        'target_type' => 'address',
+      ),
       'translatable' => '0',
-      'type' => 'addressfield',
+      'type' => 'entityreference',
     ),
     'field_instance' => array(
       'bundle' => 'company',
-      'default_value' => array(
-        0 => array(
-          'element_key' => 'company|company|address|und|0',
-          'thoroughfare' => '',
-          'premise' => '',
-          'locality' => 'Philadelphia',
-          'administrative_area' => 'PA',
-          'postal_code' => '',
-          'country' => 'US',
-        ),
-      ),
       'deleted' => '0',
       'description' => '',
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'addressfield',
+          'module' => 'entityreference',
           'settings' => array(
-            'format_handlers' => array(
-              0 => 'address',
-            ),
-            'use_widget_handlers' => 1,
+            'link' => FALSE,
           ),
-          'type' => 'addressfield_default',
-          'weight' => 2,
+          'type' => 'entityreference_label',
+          'weight' => 16,
         ),
         'teaser' => array(
           'label' => 'above',
@@ -62,7 +75,7 @@ function company_field_default_fields() {
         ),
       ),
       'entity_type' => 'company',
-      'field_name' => 'address',
+      'field_name' => 'address_entity',
       'label' => 'Address',
       'required' => 0,
       'settings' => array(
@@ -70,21 +83,17 @@ function company_field_default_fields() {
       ),
       'widget' => array(
         'active' => 1,
-        'module' => 'addressfield',
+        'module' => 'inline_entity_form',
         'settings' => array(
-          'available_countries' => array(
-            'US' => 'US',
-          ),
-          'format_handlers' => array(
-            'address' => 'address',
-            'address-hide-country' => 'address-hide-country',
-            'organisation' => 'organisation',
-            'name-full' => 0,
-            'name-oneline' => 0,
+          'fields' => array(),
+          'type_settings' => array(
+            'allow_existing' => 1,
+            'delete_references' => 0,
+            'match_operator' => 'CONTAINS',
           ),
         ),
-        'type' => 'addressfield_standard',
-        'weight' => '2',
+        'type' => 'inline_entity_form_single',
+        'weight' => 16,
       ),
     ),
   );
@@ -161,14 +170,7 @@ function company_field_default_fields() {
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'billing_contact',
-      'foreign keys' => array(
-        'node' => array(
-          'columns' => array(
-            'target_id' => 'nid',
-          ),
-          'table' => 'node',
-        ),
-      ),
+      'foreign keys' => array(),
       'indexes' => array(
         'target_id' => array(
           0 => 'target_id',
@@ -695,14 +697,7 @@ function company_field_default_fields() {
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'membership_contact',
-      'foreign keys' => array(
-        'node' => array(
-          'columns' => array(
-            'target_id' => 'nid',
-          ),
-          'table' => 'node',
-        ),
-      ),
+      'foreign keys' => array(),
       'indexes' => array(
         'target_id' => array(
           0 => 'target_id',
