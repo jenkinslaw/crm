@@ -10,6 +10,95 @@
 function person_field_default_fields() {
   $fields = array();
 
+  // Exported field: 'person-person-address_entity'.
+  $fields['person-person-address_entity'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'address_entity',
+      'foreign keys' => array(
+        'node' => array(
+          'columns' => array(
+            'target_id' => 'nid',
+          ),
+          'table' => 'node',
+        ),
+      ),
+      'indexes' => array(
+        'target_id' => array(
+          0 => 'target_id',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'entityreference',
+      'settings' => array(
+        'handler' => 'base',
+        'handler_settings' => array(
+          'behaviors' => array(
+            'views-select-list' => array(
+              'status' => 0,
+            ),
+          ),
+          'sort' => array(
+            'type' => 'none',
+          ),
+          'target_bundles' => array(
+            'address' => 'address',
+          ),
+        ),
+        'target_type' => 'address',
+      ),
+      'translatable' => '0',
+      'type' => 'entityreference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'person',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'entityreference',
+          'settings' => array(
+            'link' => FALSE,
+          ),
+          'type' => 'entityreference_label',
+          'weight' => 20,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'person',
+      'field_name' => 'address_entity',
+      'label' => 'Address',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(
+          'fields' => array(),
+          'type_settings' => array(
+            'allow_existing' => 1,
+            'delete_references' => 0,
+            'match_operator' => 'CONTAINS',
+          ),
+        ),
+        'type' => 'options_select',
+        'weight' => '23',
+      ),
+    ),
+  );
+
   // Exported field: 'person-person-cle_special'.
   $fields['person-person-cle_special'] = array(
     'field_config' => array(
@@ -1253,6 +1342,7 @@ function person_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Address');
   t('Company');
   t('Customer Service Notes');
   t('Email');
