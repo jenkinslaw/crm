@@ -31,6 +31,7 @@ features[field][] = company-company-mas90_name
 features[field][] = company-company-member_notes
 features[field][] = company-company-membership_contact
 features[field][] = company-company-phone_number
+features[field][] = company-company-phone_number_entity
 features[field][] = company-company-phone_type
 features[field][] = company-company-suspended
 features[field][] = company-company-tax_exempt
