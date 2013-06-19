@@ -27,4 +27,4 @@ dependencies[] = path
 dependencies[] = dblog
 dependencies[] = overlay
 
-dependencies[] = cdb
+dependencies[] = person

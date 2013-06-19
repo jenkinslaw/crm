@@ -6,6 +6,8 @@
 
 class CdbTestCase extends DrupalWebTestCase {
 
+  protected $profile = 'testing';
+
   /**
    * Initialize.
    */
@@ -22,7 +24,7 @@ class CdbTestCase extends DrupalWebTestCase {
    */
   public function setUp() {
     // Enabled cdb module.
-    parent::setUp('cdb');
+    parent::setUp('person');
   }
 
 
