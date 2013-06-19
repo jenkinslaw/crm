@@ -9,7 +9,7 @@
 
 
 function person_form_alter(&$form, &$form_state, $form_id) {
-    if ($form_id == 'eck__entity__form_add_person_person') {
+  if ($form_id == 'eck__entity__form_add_person_person') {
       $form['#validate'][] = "person_form_validate";
     }
 }

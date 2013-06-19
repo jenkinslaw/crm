@@ -80,7 +80,7 @@ class PersonEntityTestCase extends DrupalWebTestCase {
   }
 
   public function testAddress() {
-    #$address = $this->person->address()->info();
+    $address = $this->person->address()->info();
   }
 
   public function testExpiresDate() {
@@ -101,7 +101,8 @@ class PersonEntityTestCase extends DrupalWebTestCase {
     #$barcode = $this->person->barcode()->info();
   }
   public function testPhoneNumber() {
-    #$phone = $this->person->phone()->info();
+    $phone = $this->person->phone_number()->info();
+    $this->assertEqual($phone['type'], "entityreference", "Phone should be an {$phone['type']}");
   }
 
   public function testCleSpecial() {
