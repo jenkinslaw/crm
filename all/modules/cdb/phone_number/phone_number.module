@@ -5,3 +5,49 @@
  */
 
 include_once 'phone_number.features.inc';
+
+/**
+ * Implements hook_inline_entity_form_alter().
+ */
+function phone_number_inline_entity_form_entity_form_alter(&$entity_form, &$form_state) {
+  if ($entity_form['#entity_type'] == "phone_number") {
+    $entity_form['#element_validate'][] = "_phone_number_validate";
+  }
+}
+
+function _phone_number_validate(&$form_state, $entity_form) {
+  $number = $form_state['number']['und'][0]['value']['#value'];
+  $matches = phone_number_regex_match($number);
+  if (!$matches) {
+    $field = 'phone_entity][und][form][number][und][0][value';
+    form_set_error($field, t('Phone number is not right!'));
+  }
+  else {
+    $form_state['number']['und'][0]['value']['#value'] = phone_number_only_numeric($number); 
+  }
+}
+
+/**
+ * Checks for valid US phone number, ie  10 digits in 3 groups
+ * Takes phone number with or without parenthesis around area code
+ * Takes no space, space, dash or period between number groups
+ * Returns array with 4 elements : 
+ * Number as entered, 
+ * Three digits of group 1
+ * Three digits of group 2 
+ * Three digits of group 3
+ * 
+ */
+function phone_number_regex_match($number){
+  $pattern = '/^\(?(\d{3})\)?[[:space:]-.]?(\d{3})[[:space:]-.]?(\d{4})$/';
+  preg_match($pattern, $number, $matches);
+  return $matches;
+}
+/**
+ * Transforms 4 element regex matches array from phone_number_regex_match
+ * into a 10 digit string.  
+ */
+function phone_number_only_numeric($number_array){
+  return join(array_slice($number_array, 1));
+}
+

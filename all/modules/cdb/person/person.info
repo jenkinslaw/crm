@@ -39,5 +39,4 @@ features[field][] = person-person-phone_entity
 features[field][] = person-person-suffix
 features[field][] = person-person-suspended
 files[] = includes/Person.inc
-files[] = tests/Person.test
 files[] = tests/PersonEntity.test
