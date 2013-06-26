@@ -27,7 +27,7 @@ class PersonMigration extends BasicMigration {
   public function __construct() {
     parent::__construct();
     $this->description = t('Person Migration');
-    $this->dependencies = array('CompanyMigration');
+    $this->dependencies = array('Company');
 
     $source_url = 'http://cnelson.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/person.json';
 
