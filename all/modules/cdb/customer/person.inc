@@ -7,9 +7,9 @@
  * Migration tasks for person entity.
  */
 
-class PersonJSONReader extends MigrationJSONReader {
+class PersonJSONReader extends MigrateJSONReader {
   /**
-   * Implements MigrationJSONReader::next().
+   * Implements MigrateJSONReader::next().
    */
   public function next() {
     // Overide here for company specific JSON parson.

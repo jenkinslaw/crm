@@ -8,5 +8,6 @@ files[] = company.inc
 files[] = person.inc
 
 dependencies = migrate
+dependencies = migrate_extras
 dependencies = company
 dependencies = person

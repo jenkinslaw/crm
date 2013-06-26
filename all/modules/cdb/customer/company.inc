@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * company.inc
@@ -7,9 +6,11 @@
  * Migrates company opbjects to D7 from Cdb.
  */
 
-class CompanyJSONReader extends MigrationJSONReader {
+module_load_include('inc', 'migrate_extras', 'entity_api');
+
+class CompanyJSONReader extends MigrateJSONReader {
   /**
-   * Implements MigrationJSONReader::next().
+   * Implements MigrateJSONReader::next().
    */
   public function next() {
     // Overide here for company specific JSON parson.
