@@ -16,6 +16,7 @@ function customer_migrate_api() {
     'migrations' => array(
       'Company' => array('class_name' => 'CompanyMigration'),
       'Person' => array('class_name' => 'PersonMigration'),
+      'Address' => array('class_name' => 'AddressMigration'),
     ),
   );
   return $api;

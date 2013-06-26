@@ -6,6 +6,7 @@ core = 7.x
 files[] = customer.module
 files[] = company.inc
 files[] = person.inc
+files[] = address.inc
 
 dependencies = migrate
 dependencies = migrate_extras
