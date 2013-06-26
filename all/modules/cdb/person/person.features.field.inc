@@ -10,6 +10,94 @@
 function person_field_default_fields() {
   $fields = array();
 
+  // Exported field: 'person-person-address_entity'.
+  $fields['person-person-address_entity'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'address_entity',
+      'foreign keys' => array(
+        'node' => array(
+          'columns' => array(
+            'target_id' => 'nid',
+          ),
+          'table' => 'node',
+        ),
+      ),
+      'indexes' => array(
+        'target_id' => array(
+          0 => 'target_id',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'entityreference',
+      'settings' => array(
+        'handler' => 'base',
+        'handler_settings' => array(
+          'behaviors' => array(
+            'views-select-list' => array(
+              'status' => 0,
+            ),
+          ),
+          'sort' => array(
+            'type' => 'none',
+          ),
+          'target_bundles' => array(
+            'address' => 'address',
+          ),
+        ),
+        'target_type' => 'address',
+      ),
+      'translatable' => '0',
+      'type' => 'entityreference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'person',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'entityreference',
+          'settings' => array(
+            'link' => FALSE,
+          ),
+          'type' => 'entityreference_label',
+          'weight' => 17,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'person',
+      'field_name' => 'address_entity',
+      'label' => 'Address',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'inline_entity_form',
+        'settings' => array(
+          'fields' => array(),
+          'type_settings' => array(
+            'allow_existing' => 1,
+            'delete_references' => 0,
+            'match_operator' => 'CONTAINS',
+          ),
+        ),
+        'type' => 'inline_entity_form',
+        'weight' => '17',
+      ),
+    ),
+  );
+
   // Exported field: 'person-person-cle_special'.
   $fields['person-person-cle_special'] = array(
     'field_config' => array(
@@ -361,7 +449,14 @@ function person_field_default_fields() {
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_company',
-      'foreign keys' => array(),
+      'foreign keys' => array(
+        'eck_company' => array(
+          'columns' => array(
+            'target_id' => 'id',
+          ),
+          'table' => 'eck_company',
+        ),
+      ),
       'indexes' => array(
         'target_id' => array(
           0 => 'target_id',
@@ -979,116 +1074,61 @@ function person_field_default_fields() {
     ),
   );
 
-  // Exported field: 'person-person-phone_number'.
-  $fields['person-person-phone_number'] = array(
+  // Exported field: 'person-person-phone_entity'.
+  $fields['person-person-phone_entity'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '-1',
+      'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
-      'field_name' => 'phone_number',
+      'field_name' => 'phone_entity',
       'foreign keys' => array(
-        'format' => array(
+        'node' => array(
           'columns' => array(
-            'format' => 'format',
+            'target_id' => 'nid',
           ),
-          'table' => 'filter_format',
+          'table' => 'node',
         ),
       ),
       'indexes' => array(
-        'format' => array(
-          0 => 'format',
+        'target_id' => array(
+          0 => 'target_id',
         ),
       ),
       'locked' => '0',
-      'module' => 'text',
+      'module' => 'entityreference',
       'settings' => array(
-        'max_length' => '15',
+        'handler' => 'base',
+        'handler_settings' => array(
+          'behaviors' => array(
+            'views-select-list' => array(
+              'status' => 0,
+            ),
+          ),
+          'sort' => array(
+            'type' => 'none',
+          ),
+          'target_bundles' => array(
+            'phone_number' => 'phone_number',
+          ),
+        ),
+        'target_type' => 'phone_number',
       ),
       'translatable' => '0',
-      'type' => 'text',
+      'type' => 'entityreference',
     ),
     'field_instance' => array(
       'bundle' => 'person',
-      'default_value' => NULL,
       'deleted' => '0',
       'description' => '',
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
-          'settings' => array(),
-          'type' => 'text_default',
-          'weight' => 17,
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'person',
-      'field_name' => 'phone_number',
-      'label' => 'Number',
-      'required' => 0,
-      'settings' => array(
-        'text_processing' => '0',
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'text',
-        'settings' => array(
-          'size' => '30',
-        ),
-        'type' => 'text_textfield',
-        'weight' => '21',
-      ),
-    ),
-  );
-
-  // Exported field: 'person-person-phone_type'.
-  $fields['person-person-phone_type'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '-1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'phone_type',
-      'foreign keys' => array(),
-      'indexes' => array(
-        'value' => array(
-          0 => 'value',
-        ),
-      ),
-      'locked' => '0',
-      'module' => 'list',
-      'settings' => array(
-        'allowed_values' => array(
-          'Phone' => 'Phone',
-          'Fax' => 'Fax',
-        ),
-        'allowed_values_function' => '',
-      ),
-      'translatable' => '0',
-      'type' => 'list_text',
-    ),
-    'field_instance' => array(
-      'bundle' => 'person',
-      'default_value' => array(
-        0 => array(
-          'value' => 'Phone',
-        ),
-      ),
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'list',
-          'settings' => array(),
-          'type' => 'list_default',
+          'module' => 'entityreference',
+          'settings' => array(
+            'link' => FALSE,
+          ),
+          'type' => 'entityreference_label',
           'weight' => 18,
         ),
         'teaser' => array(
@@ -1099,18 +1139,25 @@ function person_field_default_fields() {
         ),
       ),
       'entity_type' => 'person',
-      'field_name' => 'phone_type',
-      'label' => 'Type',
+      'field_name' => 'phone_entity',
+      'label' => 'Phone Number',
       'required' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
       'widget' => array(
         'active' => 1,
-        'module' => 'options',
-        'settings' => array(),
-        'type' => 'options_select',
-        'weight' => '20',
+        'module' => 'inline_entity_form',
+        'settings' => array(
+          'fields' => array(),
+          'type_settings' => array(
+            'allow_existing' => 1,
+            'delete_references' => 0,
+            'match_operator' => 'CONTAINS',
+          ),
+        ),
+        'type' => 'inline_entity_form',
+        'weight' => 18,
       ),
     ),
   );
@@ -1253,6 +1300,7 @@ function person_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Address');
   t('Company');
   t('Customer Service Notes');
   t('Email');
@@ -1263,13 +1311,12 @@ function person_field_default_fields() {
   t('Last Name');
   t('Membership Notes');
   t('Middle Name');
-  t('Number');
   t('PA Attorney ID');
   t('Person Category');
+  t('Phone Number');
   t('Status');
   t('Suspended');
   t('The type of person (contact or otherwise)');
-  t('Type');
   t('cle_special');
   t('suffix');
 

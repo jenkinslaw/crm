@@ -23,8 +23,8 @@ function company_field_group_info() {
     'label' => 'Phone',
     'weight' => '6',
     'children' => array(
-      0 => 'phone_type',
-      1 => 'phone_number',
+      0 => 'phone_number',
+      1 => 'phone_type',
     ),
     'format_type' => 'field_group_multiple_container',
     'format_settings' => array(

@@ -1,0 +1,13 @@
+name = Address
+core = 7.x
+package = Jenkins
+php = 5.2.4
+dependencies[] = addressfield
+dependencies[] = eck
+dependencies[] = eck
+dependencies[] = features
+features[eck_bundle][] = address_address
+features[eck_entity_type][] = address
+features[features_api][] = api:1
+features[field][] = address-address-address
+project path = sites/all/modules/cdb

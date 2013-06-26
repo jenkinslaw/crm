@@ -1,0 +1,17 @@
+name = Phone Number
+core = 7.x
+package = Jenkins
+php = 5.2.4
+dependencies[] = eck
+dependencies[] = eck
+dependencies[] = features
+dependencies[] = list
+dependencies[] = options
+dependencies[] = text
+features[eck_bundle][] = phone_number_phone_number
+features[eck_entity_type][] = phone_number
+features[features_api][] = api:1
+features[field][] = phone_number-phone_number-number
+features[field][] = phone_number-phone_number-phone_type
+project path = sites/all/modules/cdb
+files[] = tests/phone_number.test

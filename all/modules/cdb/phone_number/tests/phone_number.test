@@ -1,10 +1,10 @@
 <?php
 /**
  * @file
- * Basic functional and Unit testing for Person module.
+ * Basic functional and Unit testing for phone number module.
  */
 
-class PersonTestCase extends DrupalWebTestCase {
+class PhoneNumberTestCase extends DrupalWebTestCase {
 
   private $person;
 
@@ -20,8 +20,8 @@ class PersonTestCase extends DrupalWebTestCase {
    */
   public static function getInfo() {
     return array(
-      'name' => 'Person Module Unit tests.',
-      'description' => 'Unit tests for Person module.',
+      'name' => 'Phone NUmber Module Unit tests.',
+      'description' => 'Unit tests for Phone Number module.',
       'group' => 'Jenkins',
     );
   }
