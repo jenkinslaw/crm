@@ -1,0 +1,44 @@
+<?php
+/**
+ * @file
+ * Basic functional and Unit testing for address module.
+ */
+
+class AddressTestCase extends DrupalWebTestCase {
+
+  protected $person;
+
+  /**
+   * Overrides parent::setUp().
+   */
+  public function setUp() {
+    $this->setup = TRUE;
+    $this->address = new Address();
+    $this->form = new AddressEntityForm($this->address->getEntity());
+  }
+
+  /**
+   * Overrides parent::tearDown().
+   */
+  public function tearDown() {
+  }
+
+  /**
+   * Overrides parent::getInfo().
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Address Module Unit tests.',
+      'description' => 'Unit tests for Address module.',
+      'group' => 'Jenkins',
+    );
+  }
+
+  /**
+   * Verify phone_number field assertions.
+   */
+  public function testAddressField() {
+    $field = $this->form->getElement('address');
+    $form = $this->form->getForm();
+  }
+}

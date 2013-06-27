@@ -11,3 +11,6 @@ features[eck_entity_type][] = address
 features[features_api][] = api:1
 features[field][] = address-address-address
 project path = sites/all/modules/cdb
+files[] = tests/Address.test
+files[] = includes/Address.inc
+files[] = includes/AddressEntityForm.inc
