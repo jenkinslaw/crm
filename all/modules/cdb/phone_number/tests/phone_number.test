@@ -10,6 +10,8 @@ class PhoneNumberTestCase extends DrupalWebTestCase {
 
   function setUp() {
     $this->setup = TRUE;
+    $this->phoneNumber = new PhoneNumber();
+    $this->form = new PhoneNumberEntityForm($this->phoneNumber->getEntity());
   }
 
   function tearDown() {
@@ -51,6 +53,31 @@ class PhoneNumberTestCase extends DrupalWebTestCase {
     $matches = phone_number_regex_match('(123)-456.7890');
     $number = phone_number_only_numeric($matches);
     $this->assertEqual($number, '1234567890', "{$number} should be 10 digits");
+  }
+
+  /**
+   * Verify phone_type field assertions.
+   */
+  public function testPhoneTypeField() {
+    $field = $this->form->getElement('phone_type');
+    $this->assertEqual($field['#title'], 'Type', "field phone_type exists.");
+    $this->assertEqual($field['#type'], 'select', "field phone_type type is select.");
+    $expected_options = array(
+      '_none' => '- None -',
+      'Phone' => 'Phone',
+      'Fax' => 'Fax',
+    );
+    $this->assertEqual($field['#options'], $expected_options, "field phone_type has the expected options.");
+  }
+
+  /**
+   * Verify phone_number field assertions.
+   */
+  public function testPhoneNumberField() {
+    $field = $this->form->getElement('number');
+    $type = $field['value']['#type'];
+    $this->assertEqual($field['#title'], '', "field number exists.");
+    $this->assertEqual($type, 'textfield', 'field number is type textfield');
   }
 }
 

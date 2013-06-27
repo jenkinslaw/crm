@@ -15,3 +15,5 @@ features[field][] = phone_number-phone_number-number
 features[field][] = phone_number-phone_number-phone_type
 project path = sites/all/modules/cdb
 files[] = tests/phone_number.test
+files[] = includes/PhoneNumber.inc
+files[] = includes/PhoneNumberEntityForm.inc
