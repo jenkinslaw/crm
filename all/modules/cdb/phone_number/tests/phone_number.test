@@ -6,19 +6,25 @@
 
 class PhoneNumberTestCase extends DrupalWebTestCase {
 
-  private $person;
+  protected $person;
 
-  function setUp() {
+  /**
+   * Overides parent::setUp().
+   */
+  public function setUp() {
     $this->setup = TRUE;
     $this->phoneNumber = new PhoneNumber();
     $this->form = new PhoneNumberEntityForm($this->phoneNumber->getEntity());
   }
 
-  function tearDown() {
+  /**
+   * Overides parent::tearDown().
+   */
+  public function tearDown() {
   }
 
   /**
-   *  Initialize.
+   * Overides parent::getInfo().
    */
   public static function getInfo() {
     return array(
@@ -28,18 +34,21 @@ class PhoneNumberTestCase extends DrupalWebTestCase {
     );
   }
 
+  /**
+   * Verify phone_number_regex_match works as expected.
+   */
   public function testEmailRegex() {
     $valid_numbers = array('1234567890',
-                          '(123)4567890',
-                          '(123) 4567890',
-                          '(123) 456 7890',
-                          '(123)-456-7890',
-                          '123 456 7890',
-                          '123-456-7890',
-                          '123.456.7890',
-                        );
+      '(123)4567890',
+      '(123) 4567890',
+      '(123) 456 7890',
+      '(123)-456-7890',
+      '123 456 7890',
+      '123-456-7890',
+      '123.456.7890',
+    );
     $invalid_numbers = array('800-can-talk','1234567');
-    foreach ($valid_numbers as $number){
+    foreach ($valid_numbers as $number) {
       $message = "{$number} is no a valid number";
       $this->assertTrue(phone_number_regex_match($number), $message);
     }
@@ -49,6 +58,9 @@ class PhoneNumberTestCase extends DrupalWebTestCase {
     }
   }
 
+  /**
+   * Check that phone_only_meric() works as expected.
+   */
   public function testOnlyNumericInPhoneNumber() {
     $matches = phone_number_regex_match('(123)-456.7890');
     $number = phone_number_only_numeric($matches);
@@ -80,5 +92,3 @@ class PhoneNumberTestCase extends DrupalWebTestCase {
     $this->assertEqual($type, 'textfield', 'field number is type textfield');
   }
 }
-
-
