@@ -38,7 +38,11 @@ class AddressTestCase extends DrupalWebTestCase {
    * Verify phone_number field assertions.
    */
   public function testAddressField() {
-    $field = $this->form->getElement('address');
-    $form = $this->form->getForm();
+    $field = $this->address->getFieldInfo('address');
+    $this->assertEqual($field['label'], 'address',
+      "The address field exists");
+
+    $this->assertEqual($field['type'], 'addressfield',
+      "The address field type is addressfield");
   }
 }
