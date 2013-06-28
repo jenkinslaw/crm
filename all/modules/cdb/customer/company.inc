@@ -13,8 +13,9 @@ class CompanyJSONReader extends MigrateJSONReader {
    * Implements MigrateJSONReader::next().
    */
   public function next() {
-    // Overide here for company specific JSON parson.
+    // Overide here for company specific JSON parsor.
     parent::next();
+    $this->currentElement->address = $this->currentElement->address->addr_id;
   }
 }
 
