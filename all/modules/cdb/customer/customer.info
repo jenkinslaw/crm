@@ -8,6 +8,7 @@ files[] = company.inc
 files[] = person.inc
 files[] = address.inc
 files[] = phone.inc
+files[] = company.json
 
 dependencies = migrate
 dependencies = migrate_extras

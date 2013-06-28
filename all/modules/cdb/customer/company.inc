@@ -54,8 +54,27 @@ class CompanyMigration extends BasicMigration {
     parent::__construct();
     $this->description = t('Company Migration');
 
-    $source_url = 'sites/all/modules/jenkins/cdb_access/cdbapi/migration/company.php';
-    $this->source = new MigrateSourceJSON($source_url, 'id', $fields,
+    $fields = array(
+      'id' => 'Company id',
+      'company_name' => 'The Company name.',
+      'suspended' => 'Whether or not company is suspended.',
+      'address' => 'Reference id to the Company address.',
+      'exp_date' => 'Date the company membership ends.',
+      'company_category' => 'Type of membership.',
+      'billing_area' => 'One of Local or State or Regional',
+      'website' => 'URL for the Company website.',
+      'memb_notes' => 'Random misc. noets.',
+      'cust_notes' => '',
+      'account_number' => 'Company account number',
+      'number_of_attorneys' => 'Total number of attorneys in Company.',
+      'last_updated' => 'The last date/time the Company record was updated.',
+      'updated_by' => 'The uid of the User who updated the Company Record.',
+    );
+
+    // $source_url = 'http://dkinzer.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/company.php';
+    $source_url = 'sites/all/modules/cdb/customer/company.json';
+
+    $this->source = new MigrateSourceJSON($source_url, 'old_company_id', $fields,
       array('reader_class' => 'CompanyJSONReader'));
 
     $this->destination = new MigrateDestinationEntityAPI('company', 'company');
