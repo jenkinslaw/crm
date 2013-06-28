@@ -77,6 +77,21 @@ class CompanyMigration extends BasicMigration {
     $this->source = new MigrateSourceJSON($source_url, 'old_company_id', $fields,
       array('reader_class' => 'CompanyJSONReader'));
 
+    $this->map = new MigrateSQLMap($this->machineName,
+      array(
+        'companyid' => array(
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+          'description' => 'Company ID',
+          'alias' => 'c',
+        ),
+      ),
+      MigrateDestinationNode::getKeySchema(),
+      'default',
+      array('track_last_imported' => TRUE)
+    );
+
     $this->destination = new MigrateDestinationEntityAPI('company', 'company');
 
     $this->addFieldMapping('old_company_id', 'id')
