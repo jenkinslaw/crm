@@ -44,7 +44,7 @@ class PersonEntityTestCase extends DrupalWebTestCase {
    public function testStatus() {
     $status = $this->person->status()->info();
     $this->assertTrue($status['required'], "Status is required" );
-    $this->assertEqual($status['type'], "list<text>", "Status is a {$status['type']}");
+    $this->assertEqual($status['type'], "text", "Status is a {$status['type']}");
 
    }
 
@@ -95,30 +95,31 @@ class PersonEntityTestCase extends DrupalWebTestCase {
 
   public function testSuspended() {
     $suspended = $this->person->suspended()->info();
-    $this->assertEqual($suspended['type'], "list<text>", "Suspended is a {$suspended['type']}");
+    $this->assertEqual($suspended['type'], "text", "Suspended is a {$suspended['type']}");
   }
 
   public function testBarcode() {
     #$barcode = $this->person->barcode()->info();
   }
+
   public function testPhoneNumber() {
     $phone = $this->person->phone_entity()->info();
-    $this->assertEqual($phone['type'], "phone_number", "Phone should be an {$phone['type']}");
+    $this->assertEqual($phone['type'], "list<phone_number>", "Phone is a {$phone['type']}");
   }
 
   public function testCleSpecial() {
     $cle_special = $this->person->cle_special()->info();
-    $this->assertEqual($cle_special['type'], "list<text>", "CLE Special is a {$cle_special['type']}");
+    $this->assertEqual($cle_special['type'], "text", "CLE Special is a {$cle_special['type']}");
   }
 
   public function testMembershipNotes() {
     $memb_notes = $this->person->memb_notes()->info();
-    $this->assertEqual($memb_notes['type'], "text_long", "Membership Notes is a {$memb_notes['type']}");
+    $this->assertEqual($memb_notes['type'], "text", "Membership Notes is a {$memb_notes['type']}");
   }
 
   public function testCustomerServiceNotes() {
     $cust_notes = $this->person->cust_notes()->info();
-    $this->assertEqual($cust_notes['type'], "text_long", "Customer Service Notes is {$cust_notes['type']} ");
+    $this->assertEqual($cust_notes['type'], "text", "Customer Service Notes is {$cust_notes['type']} ");
   }
 
   public function testPennsylvaniaAttorneyId() {
