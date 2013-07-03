@@ -69,7 +69,7 @@ class CompanyTestCase extends DrupalWebTestCase {
    * Verify address field.
    */
   public function testAddressField() {
-    $address = $this->company->getFieldInfo('address');
+    $address = $this->company->getFieldInfo('address_entity');
     $label = $address['label'];
     $required = $address['required'];
     $this->assertTrue(is_array($address), "The address field is present in comany.");
