@@ -13,9 +13,28 @@ class CompanyJSONReader extends MigrateJSONReader {
    * Implements MigrateJSONReader::next().
    */
   public function next() {
+
     // Overide here for company specific JSON parsor.
     parent::next();
-    $this->currentElement->address = $this->currentElement->address->addr_id;
+
+    $address = $this->currentElement->address->addr_id;
+    unset($this->currentElement->address);
+    $this->currentElement->address = $address;
+
+    $phone_numbers = $this->currentElement->phone_numbers;
+    unset($this->currentElement->phone_numbers);
+    $this->currentElement->phone_numbers = array();
+
+    if (is_array($phone_numbers)) {
+      foreach ($phone_numbers as $number) {
+        $this->currentElement->phone_numbers[] = $number->id;
+      }
+    }
+
+    $billing_contact = $this->currentElement->billing_contact;
+    unset($this->currentElement->billing_contact);
+    $this->currentElement->billing_contact = $billing_contact->old_contact_id;
+
   }
 }
 
