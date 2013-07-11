@@ -14,6 +14,11 @@ class PersonJSONReader extends MigrateJSONReader {
   public function next() {
     // Overide here for company specific JSON parson.
     parent::next();
+
+    $address = $this->currentElement->address->addr_id;
+    unset($this->currentElement->address);
+    $this->currentElement->address = $address;
+
   }
 }
 
