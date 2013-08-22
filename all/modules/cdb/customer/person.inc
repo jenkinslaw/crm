@@ -34,7 +34,7 @@ class PersonMigration extends BasicMigration {
     $this->description = t('Person Migration');
     $this->dependencies = array('Company');
 
-    $source_url = 'http://cnelson.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/person.json';
+    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/customer.php';
 
     $this->source = new MigrateSourceJSON($source_url, 'id', $fields,
       array('reader_class' => 'PersonJSONReader'));

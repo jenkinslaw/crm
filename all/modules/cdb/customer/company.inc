@@ -91,8 +91,7 @@ class CompanyMigration extends BasicMigration {
       'updated_by' => 'The uid of the User who updated the Company Record.',
     );
 
-    // $source_url = 'http://dkinzer.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/company.php';
-    $source_url = 'sites/all/modules/cdb/customer/company.json';
+    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/company.php';
 
     $this->source = new MigrateSourceJSON($source_url, 'old_company_id', $fields,
       array('reader_class' => 'CompanyJSONReader'));
