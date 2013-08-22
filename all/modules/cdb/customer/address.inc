@@ -29,7 +29,7 @@ class AddressMigration extends BasicMigration {
     $this->description = t('Address Migration');
     $this->dependencies = array('Company');
 
-    $source_url = 'http://cnelson.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/address.json';
+    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/address.php';
 
     $this->source = new MigrateSourceJSON($source_url, 'id', $fields,
       array('reader_class' => 'AddressJSONReader'));

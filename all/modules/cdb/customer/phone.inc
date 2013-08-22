@@ -30,7 +30,7 @@ class PhoneMigration extends BasicMigration {
     $this->description = t('Phone Migration');
     $this->dependencies = array('Company');
 
-    $source_url = 'http://cnelson.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/phone.json';
+    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/phone.php';
 
     $this->source = new MigrateSourceJSON($source_url, 'id', $fields,
       array('reader_class' => 'PhoneJSONReader'));
