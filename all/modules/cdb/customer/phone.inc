@@ -13,11 +13,13 @@ class PhoneJSONReader extends MigrateJSONReader {
   public function next() {
     // Overide here for company specific JSON parson.
     parent::next();
+    // convert old cdb phone type Key to new phone_type key 
+    $this->phone_type = ($this->phone_type != "F")? "Phone" : "Fax";
   }
 }
 
 /**
- * Migration steps for Company entity.
+ * Migration steps for Phone entity.
  */
 class PhoneMigration extends BasicMigration {
   /**
@@ -35,9 +37,11 @@ class PhoneMigration extends BasicMigration {
 
     $this->destination = new MigrateDestinationEntityAPI('phone', 'phone');
 
-    $this->addFieldMapping('id', 'entity_id')
-      ->description('Mapping id to entity id');
-    $this->addFieldMapping('phone', 'phone')
-      ->description('Mapping phone to phone');
+    $this->addFieldMapping('phone_id', 'id')
+      ->description('Mapping phone id to entity id');
+    $this->addFieldMapping('number', 'number')
+      ->description('Mapping number to number');
+    $this->addFieldMapping('phone_type', 'phone_type')
+      ->description('Mapping phone type key to phone type');
   }
 }
