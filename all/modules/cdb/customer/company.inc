@@ -75,10 +75,10 @@ class CompanyMigration extends BasicMigration {
     $this->description = t('Company Migration');
 
     $fields = array(
-      'id' => 'Company id',
+      'old_company_id' => 'Company id',
       'company_name' => 'The Company name.',
       'suspended' => 'Whether or not company is suspended.',
-      'address' => 'Reference id to the Company address.',
+      'address' => 'Reference IDS to the Company addresses (Multiples Possible).',
       'exp_date' => 'Date the company membership ends.',
       'company_category' => 'Type of membership.',
       'billing_area' => 'One of Local or State or Regional',
@@ -89,6 +89,10 @@ class CompanyMigration extends BasicMigration {
       'number_of_attorneys' => 'Total number of attorneys in Company.',
       'last_updated' => 'The last date/time the Company record was updated.',
       'updated_by' => 'The uid of the User who updated the Company Record.',
+      'phone_numbes' => 'ID of Company Phone Numbers (Multiples Possible).',
+      'membership_contact' => 'Person ID for membership contact.',
+      'billing_contact' => 'Person ID for billing contact.',
+      'mas90_name' => 'Mas90 Name.',
     );
 
     $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/company.php';
@@ -113,7 +117,7 @@ class CompanyMigration extends BasicMigration {
 
     $this->destination = new MigrateDestinationEntityAPI('company', 'company');
 
-    $this->addFieldMapping('old_company_id', 'id')
+    $this->addFieldMapping('id', 'old_company_id')
       ->description('Mapping old_copany_id to entity_id');
     $this->addFieldMapping('company_name', 'company_name')
       ->description('Mapping company_name to company_name');
@@ -139,7 +143,15 @@ class CompanyMigration extends BasicMigration {
       ->description('Mapping number_of_attorneys to number_of_attorneys');
     $this->addFieldMapping('last_updated', 'last_updated')
       ->description('Mapping last_updated to last_updated');
+    $this->addFieldMapping('phone_numbers', 'phone_numbers')
+      ->description('Mapping phone_numbers to phone_numbers');
     $this->addFieldMapping('updated_by', 'updated_by')
       ->description('Mapping updated_by to updated_by');
+    $this->addFieldMapping('membership_contact', 'membership_contact')
+      ->description('Mapping membership_contact to membership_contact');
+    $this->addFieldMapping('billng_contact', 'billing_contact')
+      ->description('Mapping billng_contact to billng_contact');
+    $this->addFieldMapping('mas90_name', 'mas90_name')
+      ->description('Mapping mas90_name to mas90_name');
   }
 }
