@@ -99,4 +99,8 @@
     <exec command="ln -s ${project.basedir}/default/profiles/jenkins_cdb ${project.basedir}/../profiles/jenkins_cdb" />
   </target>
 
+  <target name="migrate-barcodes">
+    <exec command="drush mi Barcode" />
+  </target>
+
 </project>
