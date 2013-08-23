@@ -18,3 +18,23 @@ function barcode_eck_bundle_info() {
   );
   return $items;
 }
+
+/**
+ * Implements hook_eck_entity_type_info().
+ */
+function barcode_eck_entity_type_info() {
+$items = array(
+       'barcode' => array(
+  'name' => 'barcode',
+  'label' => 'barcode',
+  'properties' => array(
+    'title' => array(
+      'label' => 'Title',
+      'type' => 'text',
+      'behavior' => 'title',
+    ),
+  ),
+),
+  );
+  return $items;
+}
