@@ -14,7 +14,7 @@ function phone_number_field_default_fields() {
   $fields['phone_number-phone_number-number'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '-1',
+      'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'number',
@@ -74,7 +74,7 @@ function phone_number_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => 0,
+        'weight' => '0',
       ),
     ),
   );
@@ -146,7 +146,7 @@ function phone_number_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => 1,
+        'weight' => '1',
       ),
     ),
   );
