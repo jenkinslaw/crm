@@ -61,6 +61,8 @@ class BarcodeMigration extends BasicMigration {
 
     $this->addFieldMapping('id', 'id')
       ->description('Mapping id to entity_id');
+    $this->addFieldMapping('title', 'barcode')
+      ->description('Mapping barcode to entity title');
     $this->addFieldMapping('barcode', 'barcode')
       ->description('Mapping barcode to barcode field');
     $this->addFieldMapping('status', 'status')
