@@ -33,21 +33,24 @@ class PhoneMigration extends BasicMigration {
     $this->dependencies = array('Company');
 
     $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/phone.php';
+
     $fields = array(
       'phone_id' => "The unique identifier for this phone number record",
       'number'   => "The phone number",
-      'type'     => "Key indicating if it is a Phone or Fax number",
+      'phone_type'     => "Key indicating if it is a Phone or Fax number",
     );
 
-    $this->source = new MigrateSourceJSON($source_url, 'id', $fields,
+    $this->source = new MigrateSourceJSON($source_url, 'phone_id', $fields,
       array('reader_class' => 'PhoneJSONReader'));
 
-    $this->destination = new MigrateDestinationEntityAPI('phone', 'phone');
+    $this->destination = new MigrateDestinationEntityAPI('phone_number', 'phone_number');
 
-    $this->addFieldMapping('phone_id', 'id')
-      ->description('Mapping phone id to entity id');
+    $this->addFieldMapping('id', 'phone_id')
+      ->description('Mapping phone_id to entity id');
     $this->addFieldMapping('number', 'number')
       ->description('Mapping number to number');
+    $this->addFieldMapping('title', 'number')
+      ->description('Mapping number type to phone entity title');
     $this->addFieldMapping('phone_type', 'phone_type')
       ->description('Mapping phone type key to phone type');
   }
