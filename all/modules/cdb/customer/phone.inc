@@ -6,6 +6,8 @@
  * Migration tasks for phone entity.
  */
 
+include_once DRUPAL_ROOT . "/sites/all/modules/cdb/phone_number/phone_number.module";
+
 class PhoneJSONReader extends MigrateJSONReader {
   /**
    * Implements MigrateJSONReader::next().
@@ -31,6 +33,11 @@ class PhoneMigration extends BasicMigration {
     $this->dependencies = array('Company');
 
     $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/phone.php';
+    $fields - array(
+      'phone_id' => "The unique identifier for this phone number record",
+      'number'   => "The phone number",
+      'type'     => "Key indicating if it is a Phone or Fax number"
+    );
 
     $this->source = new MigrateSourceJSON($source_url, 'id', $fields,
       array('reader_class' => 'PhoneJSONReader'));
