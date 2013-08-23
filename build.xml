@@ -99,8 +99,17 @@
     <exec command="ln -s ${project.basedir}/default/profiles/jenkins_cdb ${project.basedir}/../profiles/jenkins_cdb" />
   </target>
 
+  <target name='migrate'>
+    <phingcall target='migrate-barcode'/>
+    <phingcall target='migrate-phones'/>
+  </target>
+
   <target name="migrate-barcodes">
     <exec command="drush mi Barcode" />
+  </target>
+
+  <target name="migrate-phones">
+    <exec command="drush mi Phone" />
   </target>
 
 </project>
