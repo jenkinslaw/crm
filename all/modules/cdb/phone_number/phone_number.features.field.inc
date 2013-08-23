@@ -97,8 +97,13 @@ function phone_number_field_default_fields() {
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
-          'Phone' => 'Phone',
-          'Fax' => 'Fax',
+          'O' => 'Office',
+          'D' => 'Direct LIne',
+          'H' => 'Home Office',
+          'F' => 'Fax',
+          'C' => 'Celluar',
+          'B' => 'Billing',
+          'M' => 'Membership',
         ),
         'allowed_values_function' => '',
       ),
@@ -109,7 +114,7 @@ function phone_number_field_default_fields() {
       'bundle' => 'phone_number',
       'default_value' => array(
         0 => array(
-          'value' => 'Fax',
+          'value' => 'O',
         ),
       ),
       'deleted' => '0',
