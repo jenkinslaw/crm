@@ -1074,14 +1074,14 @@ function person_field_default_fields() {
     ),
   );
 
-  // Exported field: 'person-person-phone_entity'.
-  $fields['person-person-phone_entity'] = array(
+  // Exported field: 'person-person-phone_number_entity'.
+  $fields['person-person-phone_number_entity'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '2',
+      'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
-      'field_name' => 'phone_entity',
+      'field_name' => 'phone_number_entity',
       'foreign keys' => array(
         'node' => array(
           'columns' => array(
@@ -1129,7 +1129,7 @@ function person_field_default_fields() {
             'link' => FALSE,
           ),
           'type' => 'entityreference_label',
-          'weight' => 18,
+          'weight' => 21,
         ),
         'teaser' => array(
           'label' => 'above',
@@ -1139,7 +1139,7 @@ function person_field_default_fields() {
         ),
       ),
       'entity_type' => 'person',
-      'field_name' => 'phone_entity',
+      'field_name' => 'phone_number_entity',
       'label' => 'Phone Number',
       'required' => 0,
       'settings' => array(
@@ -1157,7 +1157,7 @@ function person_field_default_fields() {
           ),
         ),
         'type' => 'inline_entity_form',
-        'weight' => 18,
+        'weight' => 24,
       ),
     ),
   );
