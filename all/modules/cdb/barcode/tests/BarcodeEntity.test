@@ -1,0 +1,57 @@
+<?php
+/**
+ * @file
+ * Basic functional and Unit testing for Barcode feature module.
+ */
+
+class BarcodeEntityTestCase extends DrupalWebTestCase {
+
+  protected $person;
+
+  /**
+   * Overrides parent::setUp().
+   */
+  public function setUp() {
+    $this->setup = TRUE;
+    $this->barcode = new Barcode();
+    $this->form = new BarcodeEntityForm($this->barcode->getEntity());
+  }
+
+  /**
+   * Overrides parent::tearDown().
+   */
+  public function tearDown() {
+  }
+
+  /**
+   * Overrides parent::getInfo().
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Barcode Module Unit tests.',
+      'description' => 'Unit tests for Barcode module.',
+      'group' => 'Jenkins',
+    );
+  }
+
+  /**
+   * Verify barcode field assertions.
+   */
+  public function testBarcodeField() {
+    $field = $this->barcode->getFieldInfo('barcode');
+    $this->assertEqual($field['label'], 'barcode',
+      "The barcode field exists");
+
+    $this->assertEqual($field['type'], 'text',
+      "The barcode field type is text");
+  }
+
+  public function testStatusField() {
+    $field = $this->barcode->getFieldInfo('status');
+    $this->assertEqual($field['label'], 'status',
+      "The status field exists");
+
+    $this->assertEqual($field['type'], 'boolean',
+      "The status field type is boolean");
+  }
+}
