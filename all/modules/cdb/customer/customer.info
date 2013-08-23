@@ -8,7 +8,7 @@ files[] = company.inc
 files[] = person.inc
 files[] = address.inc
 files[] = phone.inc
-files[] = company.json
+files[] = barcode.inc
 
 dependencies = migrate
 dependencies = migrate_extras
@@ -16,3 +16,4 @@ dependencies = company
 dependencies = person
 dependencies = phone_number
 dependencies = address
+dependencies = barcode
