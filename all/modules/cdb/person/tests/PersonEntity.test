@@ -99,7 +99,8 @@ class PersonEntityTestCase extends DrupalWebTestCase {
   }
 
   public function testBarcode() {
-    #$barcode = $this->person->barcode()->info();
+    $barcode = $this->person->barcode_entity()->info();
+    $this->assertEqual($barcode['type'], 'list<barcode>', "The barcode field is {$barcode['type']}");
   }
 
   public function testPhoneNumber() {
