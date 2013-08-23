@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the barcode feature.
+ */
+
+include_once 'barcode.features.inc';
