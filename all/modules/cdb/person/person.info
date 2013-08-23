@@ -20,6 +20,7 @@ features[eck_bundle][] = person_person
 features[eck_entity_type][] = person
 features[features_api][] = api:1
 features[field][] = person-person-address_entity
+features[field][] = person-person-barcode_entity
 features[field][] = person-person-cle_special
 features[field][] = person-person-cust_notes
 features[field][] = person-person-email
