@@ -15,7 +15,7 @@ class PhoneJSONReader extends MigrateJSONReader {
   public function next() {
     // Overide here for company specific JSON parson.
     parent::next();
-    // convert old cdb phone type Key to new phone_type key 
+    // Convert old cdb phone type Key to new phone_type key.
     $this->phone_type = ($this->phone_type != "F")? "Phone" : "Fax";
   }
 }
@@ -33,10 +33,10 @@ class PhoneMigration extends BasicMigration {
     $this->dependencies = array('Company');
 
     $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/phone.php';
-    $fields - array(
+    $fields = array(
       'phone_id' => "The unique identifier for this phone number record",
       'number'   => "The phone number",
-      'type'     => "Key indicating if it is a Phone or Fax number"
+      'type'     => "Key indicating if it is a Phone or Fax number",
     );
 
     $this->source = new MigrateSourceJSON($source_url, 'id', $fields,
