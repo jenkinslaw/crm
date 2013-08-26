@@ -34,7 +34,7 @@ function phone_number_field_default_fields() {
       'locked' => '0',
       'module' => 'text',
       'settings' => array(
-        'max_length' => 255,
+        'max_length' => '255',
       ),
       'translatable' => '0',
       'type' => 'text',
@@ -61,19 +61,20 @@ function phone_number_field_default_fields() {
       ),
       'entity_type' => 'phone_number',
       'field_name' => 'extension',
-      'label' => 'extension',
-      'required' => FALSE,
+      'label' => 'Extension',
+      'required' => 0,
       'settings' => array(
-        'text_processing' => 0,
+        'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
+        'active' => 1,
         'module' => 'text',
         'settings' => array(
-          'size' => 60,
+          'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => 2,
+        'weight' => '2',
       ),
     ),
   );
@@ -82,7 +83,7 @@ function phone_number_field_default_fields() {
   $fields['phone_number-phone_number-phone_type'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '-1',
+      'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'phone_type',
@@ -96,8 +97,13 @@ function phone_number_field_default_fields() {
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
-          'Phone' => 'Phone',
-          'Fax' => 'Fax',
+          'O' => 'Office',
+          'D' => 'Direct Line',
+          'H' => 'Home Office',
+          'F' => 'Fax (Office)',
+          'C' => 'Cellular Phone',
+          'B' => 'Billing',
+          'M' => 'Membership',
         ),
         'allowed_values_function' => '',
       ),
@@ -106,11 +112,7 @@ function phone_number_field_default_fields() {
     ),
     'field_instance' => array(
       'bundle' => 'phone_number',
-      'default_value' => array(
-        0 => array(
-          'value' => 'Fax',
-        ),
-      ),
+      'default_value' => NULL,
       'deleted' => '0',
       'description' => '',
       'display' => array(
@@ -147,8 +149,8 @@ function phone_number_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Extension');
   t('Type');
-  t('extension');
 
   return $fields;
 }
