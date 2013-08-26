@@ -15,8 +15,6 @@ class PhoneJSONReader extends MigrateJSONReader {
   public function next() {
     // Overide here for company specific JSON parson.
     parent::next();
-    // Convert old cdb phone type Key to new phone_type key.
-    $this->phone_type = ($this->phone_type != "F")? "Phone" : "Fax";
   }
 }
 
@@ -30,22 +28,36 @@ class PhoneMigration extends BasicMigration {
   public function __construct() {
     parent::__construct();
     $this->description = t('Phone Migration');
-    $this->dependencies = array('Company');
 
     $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/phone.php';
 
     $fields = array(
-      'phone_id' => "The unique identifier for this phone number record",
+      'id' => "The unique identifier for this phone number record",
       'number'   => "The phone number",
       'phone_type'     => "Key indicating if it is a Phone or Fax number",
     );
 
-    $this->source = new MigrateSourceJSON($source_url, 'phone_id', $fields,
+    $this->source = new MigrateSourceJSON($source_url, 'id', $fields,
       array('reader_class' => 'PhoneJSONReader'));
+
+    $this->map = new MigrateSQLMap($this->machineName,
+      array(
+        'id' => array(
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+          'description' => 'Phone ID',
+          'alias' => 'p',
+        ),
+      ),
+      MigrateDestinationNode::getKeySchema(),
+      'default',
+      array('track_last_imported' => TRUE)
+    );
 
     $this->destination = new MigrateDestinationEntityAPI('phone_number', 'phone_number');
 
-    $this->addFieldMapping('id', 'phone_id')
+    $this->addFieldMapping('id', 'id')
       ->description('Mapping phone_id to entity id');
     $this->addFieldMapping('number', 'number')
       ->description('Mapping number to number');
