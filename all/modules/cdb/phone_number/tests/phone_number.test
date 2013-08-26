@@ -87,8 +87,8 @@ class PhoneNumberTestCase extends DrupalWebTestCase {
    */
   public function testPhoneNumberField() {
     $field = $this->form->getElement('number');
-    $type = $field['value']['#type'];
-    $this->assertEqual($field['#title'], '', "field number exists.");
+    $type = $field['#type'];
+    $this->assertEqual($field['#title'], 'Number', "field number exists.");
     $this->assertEqual($type, 'textfield', 'field number is type textfield');
   }
 }

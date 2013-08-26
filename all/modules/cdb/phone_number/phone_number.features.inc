@@ -28,11 +28,6 @@ $items = array(
   'name' => 'phone_number',
   'label' => 'Phone Number',
   'properties' => array(
-    'title' => array(
-      'label' => 'Title',
-      'type' => 'text',
-      'behavior' => 'title',
-    ),
     'created' => array(
       'label' => 'Created',
       'type' => 'integer',
@@ -42,6 +37,11 @@ $items = array(
       'label' => 'Changed',
       'type' => 'integer',
       'behavior' => 'changed',
+    ),
+    'number' => array(
+      'label' => 'Number',
+      'type' => 'text',
+      'behavior' => 'title',
     ),
   ),
 ),
