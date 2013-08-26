@@ -13,7 +13,7 @@ function phone_number_eck_bundle_info() {
   'machine_name' => 'phone_number_phone_number',
   'entity_type' => 'phone_number',
   'name' => 'phone_number',
-  'label' => 'Phone Number',
+  'label' => 'phone number',
 ),
   );
   return $items;
@@ -26,7 +26,7 @@ function phone_number_eck_entity_type_info() {
 $items = array(
        'phone_number' => array(
   'name' => 'phone_number',
-  'label' => 'Phone Number',
+  'label' => 'phone number',
   'properties' => array(
     'created' => array(
       'label' => 'Created',

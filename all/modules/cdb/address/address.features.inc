@@ -13,7 +13,7 @@ function address_eck_bundle_info() {
   'machine_name' => 'address_address',
   'entity_type' => 'address',
   'name' => 'address',
-  'label' => 'Address',
+  'label' => 'address',
 ),
   );
   return $items;
@@ -26,7 +26,7 @@ function address_eck_entity_type_info() {
 $items = array(
        'address' => array(
   'name' => 'address',
-  'label' => 'Address',
+  'label' => 'address',
   'properties' => array(
     'created' => array(
       'label' => 'Created',
