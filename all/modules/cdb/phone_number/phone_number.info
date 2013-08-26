@@ -10,6 +10,7 @@ dependencies[] = text
 features[eck_bundle][] = phone_number_phone_number
 features[eck_entity_type][] = phone_number
 features[features_api][] = api:1
+features[field][] = phone_number-phone_number-extension
 features[field][] = phone_number-phone_number-phone_type
 files[] = tests/phone_number.test
 files[] = includes/PhoneNumber.inc
