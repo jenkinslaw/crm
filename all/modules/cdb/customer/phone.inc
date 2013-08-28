@@ -6,8 +6,6 @@
  * Migration tasks for phone entity.
  */
 
-include_once DRUPAL_ROOT . "/sites/all/modules/cdb/phone_number/phone_number.module";
-
 class PhoneJSONReader extends MigrateJSONReader {
   /**
    * Implements MigrateJSONReader::next().
@@ -32,9 +30,10 @@ class PhoneMigration extends BasicMigration {
     $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/phone.php';
 
     $fields = array(
-      'id' => "The unique identifier for this phone number record",
-      'number'   => "The phone number",
-      'phone_type'     => "Key indicating if it is a Phone or Fax number",
+      'id'         => "The unique identifier for this phone number record",
+      'number'     => "The phone number",
+      'extension'  => "Any characters after the inital 10 digits. Maybe an extension, maybe not?!?",
+      'phone_type' => "Key indicating the type of number",
     );
 
     $this->source = new MigrateSourceJSON($source_url, 'id', $fields,
@@ -61,8 +60,8 @@ class PhoneMigration extends BasicMigration {
       ->description('Mapping phone_id to entity id');
     $this->addFieldMapping('number', 'number')
       ->description('Mapping number to number');
-    $this->addFieldMapping('title', 'number')
-      ->description('Mapping number type to phone entity title');
+    $this->addFieldMapping('extension', 'extension')
+      ->description('Mapping extension to entension');
     $this->addFieldMapping('phone_type', 'phone_type')
       ->description('Mapping phone type key to phone type');
   }
