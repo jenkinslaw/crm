@@ -17,24 +17,6 @@ class CompanyJSONReader extends MigrateJSONReader {
     // Overide here for company specific JSON parsor.
     parent::next();
 
-    $address = $this->currentElement->address->addr_id;
-    unset($this->currentElement->address);
-    $this->currentElement->address = $address;
-
-    $phone_numbers = $this->currentElement->phone_numbers;
-    unset($this->currentElement->phone_numbers);
-    $this->currentElement->phone_numbers = array();
-
-    if (is_array($phone_numbers)) {
-      foreach ($phone_numbers as $number) {
-        $this->currentElement->phone_numbers[] = $number->id;
-      }
-    }
-
-    $billing_contact = $this->currentElement->billing_contact;
-    unset($this->currentElement->billing_contact);
-    $this->currentElement->billing_contact = $billing_contact->old_contact_id;
-
   }
 }
 
@@ -73,41 +55,43 @@ class CompanyMigration extends BasicMigration {
   public function __construct() {
     parent::__construct();
     $this->description = t('Company Migration');
+    
+    $this->dependencies = array('Address');
 
     $fields = array(
-      'old_company_id' => 'Company id',
+      'id' => 'Company id',
       'company_name' => 'The Company name.',
       'suspended' => 'Whether or not company is suspended.',
-      'address' => 'Reference IDS to the Company addresses (Multiples Possible).',
+      'address_id' => 'Reference ID to the Company addresses.',
       'exp_date' => 'Date the company membership ends.',
-      'company_category' => 'Type of membership.',
-      'billing_area' => 'One of Local or State or Regional',
+      'company_category' => 'Type of membership ID.',
+      'billing_area' => 'One of L or S or R, the Area ID.',
       'website' => 'URL for the Company website.',
-      'memb_notes' => 'Random misc. noets.',
-      'cust_notes' => '',
+      'memb_notes' => 'Random misc. notes.',
+      'cust_notes' => 'Random misc. customer notes',
       'account_number' => 'Company account number',
       'number_of_attorneys' => 'Total number of attorneys in Company.',
       'last_updated' => 'The last date/time the Company record was updated.',
       'updated_by' => 'The uid of the User who updated the Company Record.',
-      'phone_numbes' => 'ID of Company Phone Numbers (Multiples Possible).',
+      'phone_numbers' => 'IDs of Company Phone Numbers (Multiples Possible).',
       'membership_contact' => 'Person ID for membership contact.',
       'billing_contact' => 'Person ID for billing contact.',
       'mas90_name' => 'Mas90 Name.',
     );
 
-    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/company.php';
+    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/company.php?limit=2';
 
-    $this->source = new MigrateSourceJSON($source_url, 'old_company_id', $fields,
+    $this->source = new MigrateSourceJSON($source_url, 'id', $fields,
       array('reader_class' => 'CompanyJSONReader'));
 
     $this->map = new MigrateSQLMap($this->machineName,
       array(
-        'companyid' => array(
+        'id' => array(
           'type' => 'int',
           'unsigned' => TRUE,
           'not null' => TRUE,
           'description' => 'Company ID',
-          'alias' => 'c',
+          'alias' => 'cid',
         ),
       ),
       MigrateDestinationNode::getKeySchema(),
@@ -117,8 +101,8 @@ class CompanyMigration extends BasicMigration {
 
     $this->destination = new MigrateDestinationEntityAPI('company', 'company');
 
-    $this->addFieldMapping('id', 'old_company_id')
-      ->description('Mapping old_copany_id to entity_id');
+    $this->addFieldMapping('id', 'id')
+      ->description('Mapping company id to entity_id');
     $this->addFieldMapping('company_name', 'company_name')
       ->description('Mapping company_name to company_name');
     $this->addFieldMapping('suspended', 'suspended')
