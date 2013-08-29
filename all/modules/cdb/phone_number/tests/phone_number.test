@@ -28,7 +28,7 @@ class PhoneNumberTestCase extends DrupalWebTestCase {
    */
   public static function getInfo() {
     return array(
-      'name' => 'Phone NUmber Module Unit tests.',
+      'name' => 'Phone Number Module Unit tests.',
       'description' => 'Unit tests for Phone Number module.',
       'group' => 'Jenkins',
     );
