@@ -13,6 +13,7 @@
 function customer_migrate_api() {
   $api = array(
     'api' => 2,
+    'field handlers' => array('MigrateAddressFieldHandler'),
     'migrations' => array(
       'Company' => array('class_name' => 'CompanyMigration'),
       'Person' => array('class_name' => 'PersonMigration'),
