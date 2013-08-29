@@ -79,7 +79,7 @@ class CompanyMigration extends BasicMigration {
       'mas90_name' => 'Mas90 Name.',
     );
 
-    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/company.php?limit=2';
+    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/company.php?';
 
     $this->source = new MigrateSourceJSON($source_url, 'id', $fields,
       array('reader_class' => 'CompanyJSONReader'));
@@ -107,8 +107,9 @@ class CompanyMigration extends BasicMigration {
       ->description('Mapping company_name to company_name');
     $this->addFieldMapping('suspended', 'suspended')
       ->description('Mapping suspended to suspended');
-    $this->addFieldMapping('address', 'address')
-      ->description('Mapping address to address');
+    $this->addFieldMapping('address_entity', 'address_id')
+      ->description('Mapping address_id to address_entity')
+      ->sourceMigration('Address');
     $this->addFieldMapping('exp_date', 'exp_date')
       ->description('Mapping exp_date to exp_date');
     $this->addFieldMapping('company_category', 'company_category')
@@ -127,14 +128,17 @@ class CompanyMigration extends BasicMigration {
       ->description('Mapping number_of_attorneys to number_of_attorneys');
     $this->addFieldMapping('last_updated', 'last_updated')
       ->description('Mapping last_updated to last_updated');
-    $this->addFieldMapping('phone_numbers', 'phone_numbers')
-      ->description('Mapping phone_numbers to phone_numbers');
-    $this->addFieldMapping('updated_by', 'updated_by')
-      ->description('Mapping updated_by to updated_by');
+    $this->addFieldMapping('phone_entity', 'phone_numbers')
+      ->description('Mapping phone_numbers to phone_entity')
+      ->sourceMigration('Phone');
+    // $this->addFieldMapping('updated_by', 'updated_by')
+    // ->description('Mapping updated_by to updated_by');
     $this->addFieldMapping('membership_contact', 'membership_contact')
       ->description('Mapping membership_contact to membership_contact');
+    // ->sourceMigration('Person');
     $this->addFieldMapping('billng_contact', 'billing_contact')
       ->description('Mapping billng_contact to billng_contact');
+    // ->sourceMigration('Person');
     $this->addFieldMapping('mas90_name', 'mas90_name')
       ->description('Mapping mas90_name to mas90_name');
   }
