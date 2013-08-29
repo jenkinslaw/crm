@@ -28,7 +28,17 @@ function address_field_default_fields() {
     ),
     'field_instance' => array(
       'bundle' => 'address',
-      'default_value' => NULL,
+      'default_value' => array(
+        0 => array(
+          'element_key' => 'address|address|address|und|0',
+          'thoroughfare' => '',
+          'premise' => '',
+          'locality' => '',
+          'administrative_area' => 'PA',
+          'postal_code' => '',
+          'country' => 'US',
+        ),
+      ),
       'deleted' => '0',
       'description' => '',
       'display' => array(
@@ -54,16 +64,21 @@ function address_field_default_fields() {
       'entity_type' => 'address',
       'field_name' => 'address',
       'label' => 'address',
-      'required' => FALSE,
+      'required' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
       'widget' => array(
+        'active' => 1,
         'module' => 'addressfield',
         'settings' => array(
           'available_countries' => array(),
           'format_handlers' => array(
-            0 => 'address',
+            'address' => 'address',
+            'address-hide-country' => 0,
+            'organisation' => 0,
+            'name-full' => 0,
+            'name-oneline' => 0,
           ),
         ),
         'type' => 'addressfield_standard',

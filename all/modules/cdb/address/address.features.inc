@@ -38,11 +38,6 @@ $items = array(
       'type' => 'integer',
       'behavior' => 'changed',
     ),
-    'shortname' => array(
-      'label' => 'shortname',
-      'type' => 'text',
-      'behavior' => 'title',
-    ),
   ),
 ),
   );
