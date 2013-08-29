@@ -28,7 +28,7 @@ class AddressMigration extends BasicMigration {
     parent::__construct();
     $this->description = t('Address Migration');
 
-    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/address.php?limit=15';
+    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/address.php';
     $fields = array(
       "id"     => "The Address id",
       "Line 1"      => "First line of the address",
