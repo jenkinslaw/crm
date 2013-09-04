@@ -14,11 +14,6 @@ class PersonJSONReader extends MigrateJSONReader {
   public function next() {
     // Overide here for company specific JSON parson.
     parent::next();
-
-    $address = $this->currentElement->address->addr_id;
-    unset($this->currentElement->address);
-    $this->currentElement->address = $address;
-
   }
 }
 
@@ -32,12 +27,12 @@ class PersonMigration extends BasicMigration {
   public function __construct() {
     parent::__construct();
     $this->description = t('Person Migration');
-    $this->dependencies = array('Company');
 
+    $this->dependencies = array('Address');
     $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/customer.php';
 
     $fields = array(
-      'old_customer_id' => 'Cutomer Record ID.',
+      'id' => 'Cutomer Record ID.',
       'barcode' => 'Barcode ID.',
       'status' => 'Essentially type of patron occupation (i.e. Attorney)',
       'area' => 'Missing Map: A location category (i.e. Remote, Local, etc.)',
@@ -60,15 +55,31 @@ class PersonMigration extends BasicMigration {
     $this->source = new MigrateSourceJSON($source_url, 'id', $fields,
       array('reader_class' => 'PersonJSONReader'));
 
+    $this->map = new MigrateSQLMap($this->machineName,
+      array(
+        'id' => array(
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+          'description' => 'Person ID',
+          'alias' => 'pid',
+        ),
+      ),
+      MigrateDestinationNode::getKeySchema(),
+      'default',
+      array('track_last_imported' => TRUE)
+    );
+
+
     $this->destination = new MigrateDestinationEntityAPI('person', 'person');
 
-    $this->addFieldMapping('id', 'old_customer_id')
+    $this->addFieldMapping('id', 'id')
       ->description('Mapping old_customer_id to entity id');
-    // $this->addFieldMapping('barcode_entity', 'barcode')
-    // ->description('Mapping barcode to barcode_entity');
+    $this->addFieldMapping('barcode_entity', 'barcode')
+      ->description('Mapping barcode to barcode_entity');
     $this->addFieldMapping('field_status', 'status')
       ->description('Mapping status to field_status');
-    $this->addFieldMapping('type', 'patron_type')
+    $this->addFieldMapping('field_person_category', 'patron_type')
       ->description('Mapping patron_type to type');
     // $this->addFieldMapping('area', 'area')
     // ->description('Mapping area to area');
@@ -80,26 +91,27 @@ class PersonMigration extends BasicMigration {
       ->description('Mapping middle to middle');
     $this->addFieldMapping('last', 'last')
       ->description('Mapping last to last');
-    $this->addFieldMapping('esquire', 'title')
+    $this->addFieldMapping('esquire', 'esquire')
       ->description('Mapping title to esquire');
+    $this->addFieldMapping('suffix', 'suffix')
+      ->description('Mapping suffix to suffix');
     $this->addFieldMapping('email', 'email')
       ->description('Mapping email to email');
-    // $this->addFieldMapping('CM', 'CM')
-    // ->description('Mapping CM to CM');
     $this->addFieldMapping('suspended', 'suspended')
        ->description('Mapping suspended to suspended');
     // $this->addFieldMapping('dues', 'dues')
     // ->description('Mapping dues to dues');
     $this->addFieldMapping('exp_date', 'exp_date')
-      ->description('Mapping exp_date to expt_date');
+      ->description('Mapping exp_date to exp_date');
     $this->addFieldMapping('memb_notes', 'memb_notes')
       ->description('Mapping memb_notes to memb_notes');
     $this->addFieldMapping('cust_notes', 'cust_notes')
       ->description('Mapping cust_notes to cust_notes');
-    // $this->addFieldMapping('last_update', 'last_update')
+    // $this->addFieldMapping('last_update_date', 'last_update_date')
     // ->description('Mapping last_update to last_update');
     $this->addFieldMapping('phone_entity', 'phone')
-      ->description('Phone to Phone Numbers entity');
+      ->description('Phone to Phone Numbers entity')
+      ->sourceMigration('Phone');
     $this->addFieldMapping('address_entity', 'address')
       ->description('Mapping address to Address entity');
   }
