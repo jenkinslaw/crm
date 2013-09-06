@@ -16,3 +16,12 @@ function company_form_alter(&$form, &$form_state, $form_id) {
   $company_form = new CompanyEntityForm($form);
   $company_form->hookForm();
 }
+
+/**
+ * Implements hook_ctools_plugin_directory().
+ */
+function company_ctools_plugin_directory($owner, $plugin_type) {
+  if ($owner == 'panelizer') {
+    return "plugins/$plugin_type";
+  }
+}
