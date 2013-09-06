@@ -48,10 +48,10 @@ $items = array(
       'type' => 'integer',
       'behavior' => 'changed',
     ),
-    'another_property' => array(
-      'label' => 'Another property',
+    'name' => array(
+      'label' => 'Name',
       'type' => 'text',
-      'behavior' => '',
+      'behavior' => 'title',
     ),
   ),
 ),
