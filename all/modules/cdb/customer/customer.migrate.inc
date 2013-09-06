@@ -17,6 +17,7 @@ function customer_migrate_api() {
     'migrations' => array(
       'Company' => array('class_name' => 'CompanyMigration'),
       'Person' => array('class_name' => 'PersonMigration'),
+      'Contact' => array('class_name' => 'ContactMigration'),
       'Address' => array('class_name' => 'AddressMigration'),
       'Phone' => array('class_name' => 'PhoneMigration'),
       'Barcode' => array('class_name' => 'BarcodeMigration'),

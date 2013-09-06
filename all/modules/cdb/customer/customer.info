@@ -6,6 +6,7 @@ core = 7.x
 files[] = customer.module
 files[] = company.inc
 files[] = person.inc
+files[] = contact.inc
 files[] = address.inc
 files[] = phone.inc
 files[] = barcode.inc
