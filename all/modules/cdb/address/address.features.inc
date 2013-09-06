@@ -11,7 +11,7 @@ function address_eck_bundle_info() {
   $items = array(
   'address_address' => array(
   'machine_name' => 'address_address',
-  'entity_type' => 'address',
+  'entity_type' => 'cdb',
   'name' => 'address',
   'label' => 'address',
 ),

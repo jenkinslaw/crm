@@ -61,7 +61,7 @@ function address_field_default_fields() {
           'weight' => 0,
         ),
       ),
-      'entity_type' => 'address',
+      'entity_type' => 'cdb',
       'field_name' => 'address',
       'label' => 'address',
       'required' => 0,

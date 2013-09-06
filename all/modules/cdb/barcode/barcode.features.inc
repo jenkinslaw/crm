@@ -11,7 +11,7 @@ function barcode_eck_bundle_info() {
   $items = array(
   'barcode_barcode' => array(
   'machine_name' => 'barcode_barcode',
-  'entity_type' => 'barcode',
+  'entity_type' => 'cdb',
   'name' => 'barcode',
   'label' => 'barcode',
 ),

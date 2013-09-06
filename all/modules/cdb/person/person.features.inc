@@ -19,9 +19,9 @@ function person_ctools_plugin_api() {
  */
 function person_eck_bundle_info() {
   $items = array(
-  'person_person' => array(
-  'machine_name' => 'person_person',
-  'entity_type' => 'person',
+  'cdb_person' => array(
+  'machine_name' => 'cdb_person',
+  'entity_type' => 'cdb',
   'name' => 'person',
   'label' => 'person',
 ),

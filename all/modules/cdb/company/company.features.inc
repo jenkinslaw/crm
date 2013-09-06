@@ -28,7 +28,7 @@ function company_eck_bundle_info() {
   $items = array(
   'company_company' => array(
   'machine_name' => 'company_company',
-  'entity_type' => 'company',
+  'entity_type' => 'cdb',
   'name' => 'company',
   'label' => 'company',
 ),

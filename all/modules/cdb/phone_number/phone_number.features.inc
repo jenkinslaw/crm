@@ -11,7 +11,7 @@ function phone_number_eck_bundle_info() {
   $items = array(
   'phone_number_phone_number' => array(
   'machine_name' => 'phone_number_phone_number',
-  'entity_type' => 'phone_number',
+  'entity_type' => 'cdb',
   'name' => 'phone_number',
   'label' => 'phone number',
 ),
