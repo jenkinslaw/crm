@@ -179,17 +179,18 @@ function company_field_default_fields() {
       'locked' => '0',
       'module' => 'entityreference',
       'settings' => array(
-        'handler' => 'views',
+        'handler' => 'base',
         'handler_settings' => array(
           'behaviors' => array(
             'views-select-list' => array(
               'status' => 0,
             ),
           ),
-          'view' => array(
-            'args' => array(),
-            'display_name' => 'entityreference_company_persons',
-            'view_name' => 'company_people',
+          'sort' => array(
+            'type' => 'none',
+          ),
+          'target_bundles' => array(
+            'person' => 'person',
           ),
         ),
         'target_type' => 'person',
@@ -706,19 +707,18 @@ function company_field_default_fields() {
       'locked' => '0',
       'module' => 'entityreference',
       'settings' => array(
-        'handler' => 'views',
+        'handler' => 'base',
         'handler_settings' => array(
           'behaviors' => array(
             'views-select-list' => array(
               'status' => 0,
             ),
           ),
-          'view' => array(
-            'args' => array(
-              0 => '%nid',
-            ),
-            'display_name' => 'entityreference_company_persons',
-            'view_name' => 'company_people',
+          'sort' => array(
+            'type' => 'none',
+          ),
+          'target_bundles' => array(
+            'person' => 'person',
           ),
         ),
         'target_type' => 'person',
@@ -777,14 +777,7 @@ function company_field_default_fields() {
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'phone_entity',
-      'foreign keys' => array(
-        'node' => array(
-          'columns' => array(
-            'target_id' => 'nid',
-          ),
-          'table' => 'node',
-        ),
-      ),
+      'foreign keys' => array(),
       'indexes' => array(
         'target_id' => array(
           0 => 'target_id',
@@ -875,9 +868,9 @@ function company_field_default_fields() {
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
-          'Y' => 'Yes',
-          'N' => 'No',
-          'P' => 'Probation',
+          'y' => 'Yes',
+          'n' => 'No',
+          'p' => 'Probation',
         ),
         'allowed_values_function' => '',
       ),
