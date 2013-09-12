@@ -174,7 +174,7 @@ function person_field_default_fields() {
           ),
         ),
         'type' => 'inline_entity_form',
-        'weight' => 25,
+        'weight' => '25',
       ),
     ),
   );
@@ -688,9 +688,9 @@ function person_field_default_fields() {
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
-          'Customer' => 'Customer',
-          'Billing Contact' => 'Billing Contact',
-          'Membership Contact' => 'Membership Contact',
+          'c' => 'Customer',
+          'b' => 'Billing Contact',
+          'm' => 'Membership Contact',
         ),
         'allowed_values_function' => '',
       ),
@@ -701,7 +701,7 @@ function person_field_default_fields() {
       'bundle' => 'person',
       'default_value' => array(
         0 => array(
-          'value' => 'Customer',
+          'value' => 'Membership Contact',
         ),
       ),
       'deleted' => '0',
@@ -756,19 +756,19 @@ function person_field_default_fields() {
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
-          'Jenkins Employee' => 'Jenkins Employee',
-          'Attorney' => 'Attorney',
-          'Judge' => 'Judge',
-          'Paralegal' => 'Paralegal',
-          'Law Clerk' => 'Law Clerk',
-          'Support Staff' => 'Support Staff',
-          'Librarian' => 'Librarian',
-          'Student' => 'Student',
-          'Special Subscriber' => 'Special Subscriber',
-          'Summer Associate' => 'Summer Associate',
-          'Board Member' => 'Board Member',
-          'Firm Administrator' => 'Firm Administrator',
-          'Library Staff' => 'Library Staff',
+          'a' => 'Jenkins Employee',
+          'b' => 'Attorney',
+          'c' => 'Judge',
+          'd' => 'Paralegal',
+          'e' => 'Law Clerk',
+          'f' => 'Support Staff',
+          'g' => 'Librarian',
+          'h' => 'Student',
+          'i' => 'Special Subscriber',
+          'j' => 'Summer Associate',
+          'k' => 'Board Member',
+          'l' => 'Firm Administrator',
+          'm' => 'Misc',
         ),
         'allowed_values_function' => '',
       ),
@@ -1224,7 +1224,7 @@ function person_field_default_fields() {
           ),
         ),
         'type' => 'inline_entity_form',
-        'weight' => 24,
+        'weight' => '24',
       ),
     ),
   );
@@ -1315,9 +1315,9 @@ function person_field_default_fields() {
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
-          'Y' => 'Yes',
-          'N' => 'No',
-          'P' => 'Probation',
+          'y' => 'Yes',
+          'n' => 'No',
+          'p' => 'Probation',
         ),
         'allowed_values_function' => '',
       ),
@@ -1326,11 +1326,7 @@ function person_field_default_fields() {
     ),
     'field_instance' => array(
       'bundle' => 'person',
-      'default_value' => array(
-        0 => array(
-          'value' => 'n',
-        ),
-      ),
+      'default_value' => NULL,
       'deleted' => '0',
       'description' => '',
       'display' => array(
