@@ -135,7 +135,7 @@ class CompanyMigration extends BasicMigration {
     // ->description('Mapping updated_by to updated_by');
     $this->addFieldMapping('membership_contact', 'membership_contact')
       ->description('Mapping membership_contact to membership_contact')
-      ->sourceMigration('Contact');
+      ->sourceMigration('Contact')->callbacks(array($this, 'incrementContactID'));
     // ->sourceMigration('Person');
     $this->addFieldMapping('billng_contact', 'billing_contact')
       ->description('Mapping billng_contact to billng_contact')
@@ -143,5 +143,9 @@ class CompanyMigration extends BasicMigration {
     // ->sourceMigration('Person');
     $this->addFieldMapping('mas90_name', 'mas90_name')
       ->description('Mapping mas90_name to mas90_name');
+  }
+
+  protected function incrementContactID($cid){
+   return $cid + 100000;
   }
 }
