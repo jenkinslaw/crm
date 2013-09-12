@@ -67,11 +67,8 @@ class ContactMigration extends BasicMigration {
 
     $this->addFieldMapping('id', 'id')
       ->description('Mapping old_contact_id to entity id');
-    $this->addFieldMapping('barcode_entity')
-      ->description('Mapping barcode to barcode_entity')
-      ->defaultValue('');
     $this->addFieldMapping('field_person_category','patron_type')
-      ->callbacks($this, 'contactType');
+      ->callbacks(array($this, 'contactType'));
     $this->addFieldMapping('field_status')
       ->defaultValue('m')->description('All contacts get status m for Misc');
     $this->addFieldMapping('field_foa', 'foa')
@@ -98,7 +95,8 @@ class ContactMigration extends BasicMigration {
     $this->addFieldMapping('address_entity', 'address')
       ->description('Mapping address to Address entity')
       ->sourceMigration('Address');
-    $this->addUnmigratedDestinations(array('memb_notes', 'cust_notes','exp_date'));
+    $this->addUnmigratedDestinations(array(
+      'memb_notes', 'cust_notes','exp_date', 'barcode_entity'));
   }
 
   protected function contactType($type){
