@@ -67,8 +67,13 @@ class ContactMigration extends BasicMigration {
 
     $this->addFieldMapping('id', 'id')
       ->description('Mapping old_contact_id to entity id');
-    $this->addFieldMapping('field_person_category', 'patron_type')
-      ->description('Mapping patron_type to type');
+    $this->addFieldMapping('barcode_entity')
+      ->description('Mapping barcode to barcode_entity')
+      ->defaultValue('');
+    $this->addFieldMapping('field_person_category','patron_type')
+      ->callbacks($this, 'contactType');
+    $this->addFieldMapping('field_status')
+      ->defaultValue('m')->description('All contacts get status m for Misc');
     $this->addFieldMapping('field_foa', 'foa')
       ->description('Mapping foa to field_foa');
     $this->addFieldMapping('first', 'first')
@@ -85,11 +90,19 @@ class ContactMigration extends BasicMigration {
       ->description('Mapping constructed full name to name');
     $this->addFieldMapping('email', 'email')
       ->description('Mapping email to email');
+    $this->addFieldMapping('suspended')
+      ->defaultValue('y')->description('All contacts are by defaul suspended');
     $this->addFieldMapping('phone_number_entity', 'phone')
       ->description('Phone to Phone Numbers entity')
       ->sourceMigration('Phone');
     $this->addFieldMapping('address_entity', 'address')
       ->description('Mapping address to Address entity')
       ->sourceMigration('Address');
+    $this->addUnmigratedDestinations(array('memb_notes', 'cust_notes','exp_date'));
   }
+
+  protected function contactType($type){
+    return ($type == "Billing")? 'b' : 'm';
+  }
+
 }
