@@ -29,7 +29,7 @@ class PersonMigration extends BasicMigration {
     $this->description = t('Person Migration');
 
     $this->dependencies = array('Address');
-    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/customer.php?increment=100000';
+    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/customer.php';
     $fields = array(
       'id' => 'Cutomer Record ID.',
       'barcode' => 'Barcode ID.',
@@ -40,6 +40,7 @@ class PersonMigration extends BasicMigration {
       'middle' => 'Customer Middle Initial.',
       'last' => 'Customer Last Name.',
       'email' => 'Customer email.',
+      'name'  => "constructed field of Last name, First name",
       'CM' => '? Not to be imported.',
       'charging' => '? Not to be imported',
       'suspended' => 'Whether the individual is suspended or not.',
@@ -75,8 +76,10 @@ class PersonMigration extends BasicMigration {
     $this->addFieldMapping('id', 'id')
       ->description('Mapping old_customer_id to entity id');
     $this->addFieldMapping('barcode_entity', 'barcode')
-      ->description('Mapping barcode to barcode_entity');
+      ->description('Mapping barcode to barcode_entity')
+      ->sourceMigration('Barcode');
     $this->addFieldMapping('field_status', 'status')
+      ->callbacks(array($this, 'setStatusKey'))
       ->description('Mapping status to field_status');
     $this->addFieldMapping('field_person_category', 'patron_type')
       ->description('Mapping patron_type to type');
@@ -94,6 +97,8 @@ class PersonMigration extends BasicMigration {
       ->description('Mapping title to esquire');
     $this->addFieldMapping('suffix', 'suffix')
       ->description('Mapping suffix to suffix');
+    $this->addFieldMapping('name', 'name')
+      ->description('The constructed name for presentation');
     $this->addFieldMapping('email', 'email')
       ->description('Mapping email to email');
     $this->addFieldMapping('suspended', 'suspended')
@@ -112,6 +117,12 @@ class PersonMigration extends BasicMigration {
       ->description('Phone to Phone Numbers entity')
       ->sourceMigration('Phone');
     $this->addFieldMapping('address_entity', 'address')
-      ->description('Mapping address to Address entity');
+      ->description('Mapping address to Address entity')
+      ->sourceMigration('Address');
+  }
+
+  protected function setStatusKey($status) {
+    $status = ($status == "a" || $status == "c")? "m" : $status;
+    return $status;
   }
 }
