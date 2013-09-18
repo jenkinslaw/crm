@@ -81,7 +81,10 @@ class PersonMigration extends BasicMigration {
     $this->addFieldMapping('field_status', 'status')
       ->callbacks(array($this, 'setStatusKey'))
       ->description('Mapping status to field_status');
-    $this->addFieldMapping('field_person_category', 'patron_type')
+    $this->addFieldMapping('field_person_category')
+      ->defaultValue('c')
+      ->description('Create all Person as customer type');
+    $this->addFieldMapping('patron_type', 'patron_type')
       ->description('Mapping patron_type to type');
     // $this->addFieldMapping('area', 'area')
     // ->description('Mapping area to area');
