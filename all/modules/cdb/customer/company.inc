@@ -56,7 +56,7 @@ class CompanyMigration extends BasicMigration {
     parent::__construct();
     $this->description = t('Company Migration');
     
-    $this->dependencies = array('Address');
+    $this->dependencies = array('Address', 'Phone', 'Contact');
 
     $fields = array(
       'id' => 'Company id',

@@ -28,7 +28,7 @@ class PersonMigration extends BasicMigration {
     parent::__construct();
     $this->description = t('Person Migration');
 
-    $this->dependencies = array('Address');
+    $this->dependencies = array('Address','Phone','Barcode','Company');
     $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/customer.php';
     $fields = array(
       'id' => 'Cutomer Record ID.',

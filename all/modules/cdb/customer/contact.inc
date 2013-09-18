@@ -28,7 +28,7 @@ class ContactMigration extends BasicMigration {
     parent::__construct();
     $this->description = t('Contact Migration');
 
-    $this->dependencies = array('Address');
+    $this->dependencies = array('Address','Phone');
     $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/contact.php?increment=100000';
     $fields = array(
       'id' => 'Cutomer Record ID.',
