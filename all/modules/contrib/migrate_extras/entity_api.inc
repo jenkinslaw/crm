@@ -181,7 +181,7 @@ class MigrateDestinationEntityAPI extends MigrateDestinationEntity {
       }
     }
     elseif ($migration->getSystemOfRecord() == Migration::SOURCE) {
-      unset($entity->{$this->id});
+      // unset($entity->{$this->id});
     }
 
     if (isset($row->migrate_map_destid2)) {
@@ -229,7 +229,7 @@ class MigrateDestinationEntityAPI extends MigrateDestinationEntity {
 
       // If a destination id exists, the entity is obviously not new.
       if (!empty($new_entity->{$this->id}) && isset($new_entity->is_new)) {
-        unset($new_entity->is_new);
+        // unset($new_entity->is_new);
       }
       $entity = $new_entity;
       $this->prepare($entity, $row);
