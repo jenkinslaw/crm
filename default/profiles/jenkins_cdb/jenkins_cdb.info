@@ -27,4 +27,9 @@ dependencies[] = path
 dependencies[] = dblog
 dependencies[] = overlay
 
+dependencies[] = address
+dependencies[] = phone_number
+dependencies[] = barcode
+dependencies[] = company
 dependencies[] = person
+dependencies[] = migrate
