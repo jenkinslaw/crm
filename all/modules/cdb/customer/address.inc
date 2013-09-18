@@ -7,6 +7,8 @@
  * Migration tasks for address entity.
  */
 
+module_load_include('inc', 'migrate_extras', 'addressfield');
+
 class AddressJSONReader extends MigrateJSONReader {
   /**
    * Implements MigrateJSONReader::next().
@@ -41,7 +43,7 @@ class AddressMigration extends BasicMigration {
 
     $this->source = new MigrateSourceJSON($source_url, 'id', $fields,
       array('reader_class' => 'AddressJSONReader'));
-    
+
     $this->map = new MigrateSQLMap($this->machineName,
       array(
         'id' => array(
@@ -56,7 +58,6 @@ class AddressMigration extends BasicMigration {
       'default',
       array('track_last_imported' => TRUE)
     );
-
 
     $this->destination = new MigrateDestinationEntityAPI('address', 'address');
 
