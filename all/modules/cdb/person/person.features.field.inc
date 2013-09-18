@@ -1148,6 +1148,81 @@ function person_field_default_fields() {
     ),
   );
 
+  // Exported field: 'person-person-patron_type'.
+  $fields['person-person-patron_type'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'patron_type',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          1 => 'Full Member Borrower',
+          2 => 'Full Member Non-Borrower',
+          3 => 'Jenkins Employee',
+          4 => 'Paralegal Student Non-Borrower',
+          5 => 'Special',
+          6 => 'Special',
+          7 => 'Undefined',
+          8 => 'Special',
+          10 => 'Non-Member',
+          11 => 'Firm Borrower',
+          13 => 'Undefined',
+          14 => 'Collection Development',
+          15 => 'Law School Student Non-Borrower',
+          18 => 'Deceased',
+        ),
+        'allowed_values_function' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'person',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 23,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'person',
+      'field_name' => 'patron_type',
+      'label' => 'Patron Type',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => 26,
+      ),
+    ),
+  );
+
   // Exported field: 'person-person-phone_number_entity'.
   $fields['person-person-phone_number_entity'] = array(
     'field_config' => array(
@@ -1376,6 +1451,7 @@ function person_field_default_fields() {
   t('Membership Notes');
   t('Middle Name');
   t('PA Attorney ID');
+  t('Patron Type');
   t('Person Category');
   t('Phone Number');
   t('Status');
