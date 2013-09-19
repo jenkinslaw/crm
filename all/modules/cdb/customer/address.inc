@@ -33,6 +33,7 @@ class AddressMigration extends BasicMigration {
     $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/address.php';
     $fields = array(
       "id"     => "The Address id",
+      "title" => "Address Blurb",
       "Line 1"      => "First line of the address",
       "Line 2"      => "Second Line of the address",
       "City"        => "The City",
@@ -71,6 +72,8 @@ class AddressMigration extends BasicMigration {
 
     $this->addFieldMapping('id', 'id')
       ->description('Mapping id to entity id');
+    $this->addFieldMapping('title', 'title')
+      ->description('Mapping title to entity title');
     $this->addFieldMapping('address', 'Country')
       ->arguments($address_args)
       ->description('Mapping address fields to address');

@@ -38,6 +38,11 @@ $items = array(
       'type' => 'integer',
       'behavior' => 'changed',
     ),
+    'title' => array(
+      'label' => 'Title',
+      'type' => 'text',
+      'behavior' => 'title',
+    ),
   ),
 ),
   );
