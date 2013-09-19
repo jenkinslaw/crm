@@ -39,5 +39,6 @@ features[field][] = person-person-patron_type
 features[field][] = person-person-phone_number_entity
 features[field][] = person-person-suffix
 features[field][] = person-person-suspended
+features[user_role][] = Person Administrator
 files[] = includes/Person.inc
 files[] = tests/PersonEntity.test
