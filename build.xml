@@ -32,6 +32,14 @@
       --mail='webmaster+CDBCompanyAdminRoleUser@jenkinslaw.org'" />
     <exec command="drush --yes user-add-role 'Company Administrator' \
       --name=company-administrator" />
+    <exec command="drush --yes user-create person-administrator \
+      --password='${env.account_pass}' \ 
+      --mail='webmaster+CDBPersonAdminRoleUser@jenkinslaw.org'" />
+    <exec command="drush --yes user-add-role 'Person Administrator' \
+      --name=person-administrator" />
+    <exec command="drush --yes user-create authenticated-user \
+      --password='${env.account_pass}' \ 
+      --mail='webmaster+CDBAuthenticatedUser@jenkinslaw.org'" />
   </target>
 
   <target name="en-dev-perms">
