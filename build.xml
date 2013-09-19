@@ -18,7 +18,7 @@
     <phingcall target='set-dev-defaults' />
     <phingcall target='create-dev-users' />
     <phingcall target='en-dev-perms' />
-    <exec  command="drush --yes en cdb_dev"  />
+    <exec  command="drush --yes  en cdb_dev views_ui migrate"  />
     <phingcall target='dis-caches' />
   </target>
 
@@ -32,6 +32,14 @@
       --mail='webmaster+CDBCompanyAdminRoleUser@jenkinslaw.org'" />
     <exec command="drush --yes user-add-role 'Company Administrator' \
       --name=company-administrator" />
+    <exec command="drush --yes user-create person-administrator \
+      --password='${env.account_pass}' \ 
+      --mail='webmaster+CDBPersonAdminRoleUser@jenkinslaw.org'" />
+    <exec command="drush --yes user-add-role 'Person Administrator' \
+      --name=person-administrator" />
+    <exec command="drush --yes user-create authenticated-user \
+      --password='${env.account_pass}' \ 
+      --mail='webmaster+CDBAuthenticatedUser@jenkinslaw.org'" />
   </target>
 
   <target name="en-dev-perms">
@@ -81,6 +89,7 @@
         <exec command="drush --yes en cdb_dev" />
         <exec command="drush --yes en phone_number address barcode customer migrate_extras" />
         <exec command="drush --yes test-run Jenkins" />
+        <phingcall target='en-dev' />
       </else>
     </if>
   </target>

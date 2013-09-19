@@ -61,5 +61,14 @@ class CdbTestCase extends DrupalWebTestCase {
     $this->assertEqual($actual, $expected, "The site name is : $expected.");
   }
 
+  /**
+   * Verify roles.
+   */
+  public function testCdbRoles() {
+    // Verify Person Role.
+    $expected = 1;
+    $actual = db_query('select count(*) from role where name = "Person Administrator"')->fetchColumn();
+    $this->assertEqual($expected, $actual, "The Person Administrator role is present.");
+  }
 
 }
