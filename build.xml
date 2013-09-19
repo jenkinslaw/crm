@@ -18,7 +18,7 @@
     <phingcall target='set-dev-defaults' />
     <phingcall target='create-dev-users' />
     <phingcall target='en-dev-perms' />
-    <exec  command="drush --yes en cdb_dev"  />
+    <exec  command="drush --yes  en cdb_dev views_ui migrate"  />
     <phingcall target='dis-caches' />
   </target>
 
