@@ -89,6 +89,7 @@
         <exec command="drush --yes en cdb_dev" />
         <exec command="drush --yes en phone_number address barcode customer migrate_extras" />
         <exec command="drush --yes test-run Jenkins" />
+        <phingcall target='en-dev' />
       </else>
     </if>
   </target>
