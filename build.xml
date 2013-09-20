@@ -97,9 +97,9 @@
   <target name="import-data">
     <exec command="drush migrate-auto-register" />
     <phingcall target="import-phone" />
-    <phingcall target="import-adress" />
+    <phingcall target="import-address" />
     <phingcall target="import-barcode" />
-    <phingcall target="import-users" />
+    <!-- <phingcall target="import-users" /> -->
     <phingcall target="import-contact" />
     <phingcall target="import-company" />
     <phingcall target="import-person" />
@@ -107,59 +107,31 @@
 
   <target name="import-phone">
     <exec command="drush migrate-import Phone" />
-    <phingcall target="alter-table-increment">
-      <property name="table" value="phone_number" />
-    </phingcall>
   </target>
   
   <target name="import-address">
     <exec command="drush migrate-import Address" />
-    <phingcall target="alter-table-increment">
-      <property name="table" value="address" />
-    </phingcall>
   </target>
   
   <target name="import-barcode">
     <exec command="drush migrate-import Barcode" />
-    <phingcall target="alter-table-increment">
-      <property name="table" value="barcode" />
-    </phingcall>
   </target>
   
   <target name="import-user">
     <exec command="drush migrate-import User" />
-    <phingcall target="alter-table-increment">
-      <property name="table" value="user" />
-    </phingcall>
-  </target>
+ </target>
 
   <target name="import-contact">
     <exec command="drush migrate-import Contact" />
-     <phingcall target="alter-table-increment">
-      <property name="table" value="contact" />
-    </phingcall>
   </target>
   
   <target name="import-company">
     <exec command="drush migrate-import Company" />
-      <phingcall target="alter-table-increment">
-      <property name="table" value="company" />
-    </phingcall>
  </target>
   
   <target name="import-person">
     <exec command="drush migrate-import Person" />
-     <phingcall target="alter-table-increment">
-      <property name="table" value="person" />
-    </phingcall>
   </target>
-
-  <target name="alter-table-increment">
-    <exec command="drush sqlq --extra=--skip-column-names 'SELECT id from eck_${table} ORDERY BY id DESC LIMIT 1'"
-      returnProperty="id" />
-    <exec command='drush sqlq "ALTER table eck_${table} AUTO_INCREMENT = ${id}"' />
-  </target>
-
 
   <!-- Updating core on our environment needs a little juggling. -->
   <target name='update-drupal'>
