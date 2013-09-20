@@ -90,5 +90,387 @@ function company_views_default_views() {
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $export['company_people'] = $view;
 
+  $view = new view();
+  $view->name = 'company_search';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'eck_company';
+  $view->human_name = 'Company Search';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Company Search';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '100';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'views_bulk_operations' => 'views_bulk_operations',
+    'id' => 'id',
+    'account_number' => 'account_number',
+    'company_name' => 'company_name',
+    'phone_entity' => 'phone_entity',
+    'number_of_attorneys' => 'number_of_attorneys',
+    'exp_date' => 'exp_date',
+    'company_category' => 'company_category',
+    'billing_area' => 'billing_area',
+    'address_entity' => 'address_entity',
+  );
+  $handler->display->display_options['style_options']['default'] = 'account_number';
+  $handler->display->display_options['style_options']['info'] = array(
+    'views_bulk_operations' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'id' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'account_number' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'company_name' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'phone_entity' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'number_of_attorneys' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'exp_date' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'company_category' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'billing_area' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'address_entity' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Field: Bulk operations: Company */
+  $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'eck_company';
+  $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
+  /* Field: Company: Id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'eck_company';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  /* Field: Company: Account Number */
+  $handler->display->display_options['fields']['account_number']['id'] = 'account_number';
+  $handler->display->display_options['fields']['account_number']['table'] = 'eck_company';
+  $handler->display->display_options['fields']['account_number']['field'] = 'account_number';
+  $handler->display->display_options['fields']['account_number']['label'] = 'Account No.';
+  $handler->display->display_options['fields']['account_number']['element_label_colon'] = FALSE;
+  /* Field: Company: Company Name */
+  $handler->display->display_options['fields']['company_name']['id'] = 'company_name';
+  $handler->display->display_options['fields']['company_name']['table'] = 'eck_company';
+  $handler->display->display_options['fields']['company_name']['field'] = 'company_name';
+  $handler->display->display_options['fields']['company_name']['element_label_colon'] = FALSE;
+  /* Field: company: Phone Number */
+  $handler->display->display_options['fields']['phone_entity']['id'] = 'phone_entity';
+  $handler->display->display_options['fields']['phone_entity']['table'] = 'field_data_phone_entity';
+  $handler->display->display_options['fields']['phone_entity']['field'] = 'phone_entity';
+  $handler->display->display_options['fields']['phone_entity']['label'] = 'Phone';
+  $handler->display->display_options['fields']['phone_entity']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['phone_entity']['settings'] = array(
+    'link' => 0,
+  );
+  $handler->display->display_options['fields']['phone_entity']['delta_offset'] = '0';
+  /* Field: Company: Number of Attorneys */
+  $handler->display->display_options['fields']['number_of_attorneys']['id'] = 'number_of_attorneys';
+  $handler->display->display_options['fields']['number_of_attorneys']['table'] = 'eck_company';
+  $handler->display->display_options['fields']['number_of_attorneys']['field'] = 'number_of_attorneys';
+  $handler->display->display_options['fields']['number_of_attorneys']['label'] = '# Attys';
+  $handler->display->display_options['fields']['number_of_attorneys']['element_label_colon'] = FALSE;
+  /* Field: Field: Expiration Date */
+  $handler->display->display_options['fields']['exp_date']['id'] = 'exp_date';
+  $handler->display->display_options['fields']['exp_date']['table'] = 'field_data_exp_date';
+  $handler->display->display_options['fields']['exp_date']['field'] = 'exp_date';
+  $handler->display->display_options['fields']['exp_date']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['exp_date']['settings'] = array(
+    'format_type' => 'short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: company: Company Category */
+  $handler->display->display_options['fields']['company_category']['id'] = 'company_category';
+  $handler->display->display_options['fields']['company_category']['table'] = 'field_data_company_category';
+  $handler->display->display_options['fields']['company_category']['field'] = 'company_category';
+  $handler->display->display_options['fields']['company_category']['label'] = 'Category';
+  $handler->display->display_options['fields']['company_category']['element_label_colon'] = FALSE;
+  /* Field: company: Billing Area */
+  $handler->display->display_options['fields']['billing_area']['id'] = 'billing_area';
+  $handler->display->display_options['fields']['billing_area']['table'] = 'field_data_billing_area';
+  $handler->display->display_options['fields']['billing_area']['field'] = 'billing_area';
+  $handler->display->display_options['fields']['billing_area']['label'] = 'Area';
+  $handler->display->display_options['fields']['billing_area']['element_label_colon'] = FALSE;
+  /* Field: Field: Address */
+  $handler->display->display_options['fields']['address_entity']['id'] = 'address_entity';
+  $handler->display->display_options['fields']['address_entity']['table'] = 'field_data_address_entity';
+  $handler->display->display_options['fields']['address_entity']['field'] = 'address_entity';
+  $handler->display->display_options['fields']['address_entity']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['address_entity']['settings'] = array(
+    'link' => 0,
+  );
+  /* Filter criterion: Company: company type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'eck_company';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'company' => 'company',
+  );
+  /* Filter criterion: Company: Account Number */
+  $handler->display->display_options['filters']['account_number']['id'] = 'account_number';
+  $handler->display->display_options['filters']['account_number']['table'] = 'eck_company';
+  $handler->display->display_options['filters']['account_number']['field'] = 'account_number';
+  $handler->display->display_options['filters']['account_number']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['account_number']['expose']['operator_id'] = 'account_number_op';
+  $handler->display->display_options['filters']['account_number']['expose']['label'] = 'Account Number';
+  $handler->display->display_options['filters']['account_number']['expose']['operator'] = 'account_number_op';
+  $handler->display->display_options['filters']['account_number']['expose']['identifier'] = 'account_number';
+  $handler->display->display_options['filters']['account_number']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  /* Filter criterion: company: Billing Area (billing_area) */
+  $handler->display->display_options['filters']['billing_area_value']['id'] = 'billing_area_value';
+  $handler->display->display_options['filters']['billing_area_value']['table'] = 'field_data_billing_area';
+  $handler->display->display_options['filters']['billing_area_value']['field'] = 'billing_area_value';
+  $handler->display->display_options['filters']['billing_area_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['billing_area_value']['expose']['operator_id'] = 'billing_area_value_op';
+  $handler->display->display_options['filters']['billing_area_value']['expose']['label'] = 'Billing Area (billing_area)';
+  $handler->display->display_options['filters']['billing_area_value']['expose']['operator'] = 'billing_area_value_op';
+  $handler->display->display_options['filters']['billing_area_value']['expose']['identifier'] = 'billing_area_value';
+  $handler->display->display_options['filters']['billing_area_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  /* Filter criterion: company: Company Category (company_category) */
+  $handler->display->display_options['filters']['company_category_value']['id'] = 'company_category_value';
+  $handler->display->display_options['filters']['company_category_value']['table'] = 'field_data_company_category';
+  $handler->display->display_options['filters']['company_category_value']['field'] = 'company_category_value';
+  $handler->display->display_options['filters']['company_category_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['company_category_value']['expose']['operator_id'] = 'company_category_value_op';
+  $handler->display->display_options['filters']['company_category_value']['expose']['label'] = 'Company Category (company_category)';
+  $handler->display->display_options['filters']['company_category_value']['expose']['operator'] = 'company_category_value_op';
+  $handler->display->display_options['filters']['company_category_value']['expose']['identifier'] = 'company_category_value';
+  $handler->display->display_options['filters']['company_category_value']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['company_category_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  /* Filter criterion: Company: Company Name */
+  $handler->display->display_options['filters']['company_name']['id'] = 'company_name';
+  $handler->display->display_options['filters']['company_name']['table'] = 'eck_company';
+  $handler->display->display_options['filters']['company_name']['field'] = 'company_name';
+  $handler->display->display_options['filters']['company_name']['operator'] = 'contains';
+  $handler->display->display_options['filters']['company_name']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['company_name']['expose']['operator_id'] = 'company_name_op';
+  $handler->display->display_options['filters']['company_name']['expose']['label'] = 'Company Name';
+  $handler->display->display_options['filters']['company_name']['expose']['operator'] = 'company_name_op';
+  $handler->display->display_options['filters']['company_name']['expose']['identifier'] = 'company_name';
+  $handler->display->display_options['filters']['company_name']['expose']['required'] = TRUE;
+  $handler->display->display_options['filters']['company_name']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  /* Filter criterion: Company: Id */
+  $handler->display->display_options['filters']['id']['id'] = 'id';
+  $handler->display->display_options['filters']['id']['table'] = 'eck_company';
+  $handler->display->display_options['filters']['id']['field'] = 'id';
+  $handler->display->display_options['filters']['id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['id']['expose']['operator_id'] = 'id_op';
+  $handler->display->display_options['filters']['id']['expose']['label'] = 'Id';
+  $handler->display->display_options['filters']['id']['expose']['operator'] = 'id_op';
+  $handler->display->display_options['filters']['id']['expose']['identifier'] = 'id';
+  $handler->display->display_options['filters']['id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  /* Filter criterion: company: Membership Notes (member_notes) */
+  $handler->display->display_options['filters']['member_notes_value']['id'] = 'member_notes_value';
+  $handler->display->display_options['filters']['member_notes_value']['table'] = 'field_data_member_notes';
+  $handler->display->display_options['filters']['member_notes_value']['field'] = 'member_notes_value';
+  $handler->display->display_options['filters']['member_notes_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['member_notes_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['member_notes_value']['expose']['operator_id'] = 'member_notes_value_op';
+  $handler->display->display_options['filters']['member_notes_value']['expose']['label'] = 'Membership Notes (member_notes)';
+  $handler->display->display_options['filters']['member_notes_value']['expose']['operator'] = 'member_notes_value_op';
+  $handler->display->display_options['filters']['member_notes_value']['expose']['identifier'] = 'member_notes_value';
+  $handler->display->display_options['filters']['member_notes_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  /* Filter criterion: company: Phone Number (phone_entity) */
+  $handler->display->display_options['filters']['phone_entity_target_id']['id'] = 'phone_entity_target_id';
+  $handler->display->display_options['filters']['phone_entity_target_id']['table'] = 'field_data_phone_entity';
+  $handler->display->display_options['filters']['phone_entity_target_id']['field'] = 'phone_entity_target_id';
+  $handler->display->display_options['filters']['phone_entity_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['phone_entity_target_id']['expose']['operator_id'] = 'phone_entity_target_id_op';
+  $handler->display->display_options['filters']['phone_entity_target_id']['expose']['label'] = 'Phone Number (phone_entity)';
+  $handler->display->display_options['filters']['phone_entity_target_id']['expose']['operator'] = 'phone_entity_target_id_op';
+  $handler->display->display_options['filters']['phone_entity_target_id']['expose']['identifier'] = 'phone_entity_target_id';
+  $handler->display->display_options['filters']['phone_entity_target_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  /* Filter criterion: company: Website (website) */
+  $handler->display->display_options['filters']['website_value']['id'] = 'website_value';
+  $handler->display->display_options['filters']['website_value']['table'] = 'field_data_website';
+  $handler->display->display_options['filters']['website_value']['field'] = 'website_value';
+  $handler->display->display_options['filters']['website_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['website_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['website_value']['expose']['operator_id'] = 'website_value_op';
+  $handler->display->display_options['filters']['website_value']['expose']['label'] = 'Website (website)';
+  $handler->display->display_options['filters']['website_value']['expose']['operator'] = 'website_value_op';
+  $handler->display->display_options['filters']['website_value']['expose']['identifier'] = 'website_value';
+  $handler->display->display_options['filters']['website_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  /* Filter criterion: Field: Address (address_entity) */
+  $handler->display->display_options['filters']['address_entity_target_id']['id'] = 'address_entity_target_id';
+  $handler->display->display_options['filters']['address_entity_target_id']['table'] = 'field_data_address_entity';
+  $handler->display->display_options['filters']['address_entity_target_id']['field'] = 'address_entity_target_id';
+  $handler->display->display_options['filters']['address_entity_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['address_entity_target_id']['expose']['operator_id'] = 'address_entity_target_id_op';
+  $handler->display->display_options['filters']['address_entity_target_id']['expose']['label'] = 'Address (address_entity)';
+  $handler->display->display_options['filters']['address_entity_target_id']['expose']['operator'] = 'address_entity_target_id_op';
+  $handler->display->display_options['filters']['address_entity_target_id']['expose']['identifier'] = 'address_entity_target_id';
+  $handler->display->display_options['filters']['address_entity_target_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  /* Filter criterion: Field: Customer Service Notes (cust_notes) */
+  $handler->display->display_options['filters']['cust_notes_value']['id'] = 'cust_notes_value';
+  $handler->display->display_options['filters']['cust_notes_value']['table'] = 'field_data_cust_notes';
+  $handler->display->display_options['filters']['cust_notes_value']['field'] = 'cust_notes_value';
+  $handler->display->display_options['filters']['cust_notes_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['cust_notes_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['cust_notes_value']['expose']['operator_id'] = 'cust_notes_value_op';
+  $handler->display->display_options['filters']['cust_notes_value']['expose']['label'] = 'Customer Service Notes (cust_notes)';
+  $handler->display->display_options['filters']['cust_notes_value']['expose']['operator'] = 'cust_notes_value_op';
+  $handler->display->display_options['filters']['cust_notes_value']['expose']['identifier'] = 'cust_notes_value';
+  $handler->display->display_options['filters']['cust_notes_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  /* Filter criterion: Field: Expiration Date (exp_date) */
+  $handler->display->display_options['filters']['exp_date_value']['id'] = 'exp_date_value';
+  $handler->display->display_options['filters']['exp_date_value']['table'] = 'field_data_exp_date';
+  $handler->display->display_options['filters']['exp_date_value']['field'] = 'exp_date_value';
+  $handler->display->display_options['filters']['exp_date_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['exp_date_value']['expose']['operator_id'] = 'exp_date_value_op';
+  $handler->display->display_options['filters']['exp_date_value']['expose']['label'] = 'Expiration Date (exp_date)';
+  $handler->display->display_options['filters']['exp_date_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['exp_date_value']['expose']['operator'] = 'exp_date_value_op';
+  $handler->display->display_options['filters']['exp_date_value']['expose']['identifier'] = 'exp_date_value';
+  $handler->display->display_options['filters']['exp_date_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  /* Filter criterion: Field: Suspended (suspended) */
+  $handler->display->display_options['filters']['suspended_value']['id'] = 'suspended_value';
+  $handler->display->display_options['filters']['suspended_value']['table'] = 'field_data_suspended';
+  $handler->display->display_options['filters']['suspended_value']['field'] = 'suspended_value';
+  $handler->display->display_options['filters']['suspended_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['suspended_value']['expose']['operator_id'] = 'suspended_value_op';
+  $handler->display->display_options['filters']['suspended_value']['expose']['label'] = 'Suspended (suspended)';
+  $handler->display->display_options['filters']['suspended_value']['expose']['operator'] = 'suspended_value_op';
+  $handler->display->display_options['filters']['suspended_value']['expose']['identifier'] = 'suspended_value';
+  $handler->display->display_options['filters']['suspended_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['exposed_block'] = TRUE;
+  $handler->display->display_options['path'] = 'company-search';
+  $export['company_search'] = $view;
+
   return $export;
 }
