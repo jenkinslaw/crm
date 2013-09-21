@@ -325,7 +325,6 @@ function company_views_default_views() {
   $handler->display->display_options['filters']['company_name']['expose']['label'] = 'Company Name';
   $handler->display->display_options['filters']['company_name']['expose']['operator'] = 'company_name_op';
   $handler->display->display_options['filters']['company_name']['expose']['identifier'] = 'company_name';
-  $handler->display->display_options['filters']['company_name']['expose']['required'] = TRUE;
   $handler->display->display_options['filters']['company_name']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
@@ -468,7 +467,6 @@ function company_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['path'] = 'company-search';
   $export['company_search'] = $view;
 
