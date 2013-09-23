@@ -512,6 +512,76 @@ function company_views_default_views() {
     4 => 0,
     5 => 0,
   );
+  /* Filter criterion: address: address (address:thoroughfare) */
+  $handler->display->display_options['filters']['address_thoroughfare']['id'] = 'address_thoroughfare';
+  $handler->display->display_options['filters']['address_thoroughfare']['table'] = 'field_data_address';
+  $handler->display->display_options['filters']['address_thoroughfare']['field'] = 'address_thoroughfare';
+  $handler->display->display_options['filters']['address_thoroughfare']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['filters']['address_thoroughfare']['operator'] = 'contains';
+  $handler->display->display_options['filters']['address_thoroughfare']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['address_thoroughfare']['expose']['operator_id'] = 'address_thoroughfare_op';
+  $handler->display->display_options['filters']['address_thoroughfare']['expose']['label'] = 'Address Line 1';
+  $handler->display->display_options['filters']['address_thoroughfare']['expose']['operator'] = 'address_thoroughfare_op';
+  $handler->display->display_options['filters']['address_thoroughfare']['expose']['identifier'] = 'address_thoroughfare';
+  $handler->display->display_options['filters']['address_thoroughfare']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  /* Filter criterion: address: address (address:premise) */
+  $handler->display->display_options['filters']['address_premise']['id'] = 'address_premise';
+  $handler->display->display_options['filters']['address_premise']['table'] = 'field_data_address';
+  $handler->display->display_options['filters']['address_premise']['field'] = 'address_premise';
+  $handler->display->display_options['filters']['address_premise']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['filters']['address_premise']['operator'] = 'contains';
+  $handler->display->display_options['filters']['address_premise']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['address_premise']['expose']['operator_id'] = 'address_premise_op';
+  $handler->display->display_options['filters']['address_premise']['expose']['label'] = 'Address Line 2';
+  $handler->display->display_options['filters']['address_premise']['expose']['operator'] = 'address_premise_op';
+  $handler->display->display_options['filters']['address_premise']['expose']['identifier'] = 'address_premise';
+  $handler->display->display_options['filters']['address_premise']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  /* Filter criterion: address: address (address:locality) */
+  $handler->display->display_options['filters']['address_locality']['id'] = 'address_locality';
+  $handler->display->display_options['filters']['address_locality']['table'] = 'field_data_address';
+  $handler->display->display_options['filters']['address_locality']['field'] = 'address_locality';
+  $handler->display->display_options['filters']['address_locality']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['filters']['address_locality']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['address_locality']['expose']['operator_id'] = 'address_locality_op';
+  $handler->display->display_options['filters']['address_locality']['expose']['label'] = 'City';
+  $handler->display->display_options['filters']['address_locality']['expose']['operator'] = 'address_locality_op';
+  $handler->display->display_options['filters']['address_locality']['expose']['identifier'] = 'address_locality';
+  $handler->display->display_options['filters']['address_locality']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  /* Filter criterion: address: address (address:administrative_area) */
+  $handler->display->display_options['filters']['address_administrative_area']['id'] = 'address_administrative_area';
+  $handler->display->display_options['filters']['address_administrative_area']['table'] = 'field_data_address';
+  $handler->display->display_options['filters']['address_administrative_area']['field'] = 'address_administrative_area';
+  $handler->display->display_options['filters']['address_administrative_area']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['filters']['address_administrative_area']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['address_administrative_area']['expose']['operator_id'] = 'address_administrative_area_op';
+  $handler->display->display_options['filters']['address_administrative_area']['expose']['label'] = 'State';
+  $handler->display->display_options['filters']['address_administrative_area']['expose']['operator'] = 'address_administrative_area_op';
+  $handler->display->display_options['filters']['address_administrative_area']['expose']['identifier'] = 'address_administrative_area';
+  $handler->display->display_options['filters']['address_administrative_area']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
