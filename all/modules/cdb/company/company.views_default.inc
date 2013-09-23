@@ -123,7 +123,7 @@ function company_views_default_views() {
     'billing_area' => 'billing_area',
     'address_entity' => 'address_entity',
   );
-  $handler->display->display_options['style_options']['default'] = 'account_number';
+  $handler->display->display_options['style_options']['default'] = 'company_name';
   $handler->display->display_options['style_options']['info'] = array(
     'views_bulk_operations' => array(
       'align' => '',
@@ -138,7 +138,7 @@ function company_views_default_views() {
       'empty_column' => 0,
     ),
     'account_number' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -274,6 +274,7 @@ function company_views_default_views() {
   $handler->display->display_options['filters']['account_number']['id'] = 'account_number';
   $handler->display->display_options['filters']['account_number']['table'] = 'eck_company';
   $handler->display->display_options['filters']['account_number']['field'] = 'account_number';
+  $handler->display->display_options['filters']['account_number']['operator'] = 'contains';
   $handler->display->display_options['filters']['account_number']['exposed'] = TRUE;
   $handler->display->display_options['filters']['account_number']['expose']['operator_id'] = 'account_number_op';
   $handler->display->display_options['filters']['account_number']['expose']['label'] = 'Account Number';
