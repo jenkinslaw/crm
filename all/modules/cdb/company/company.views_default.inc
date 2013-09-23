@@ -200,6 +200,10 @@ function company_views_default_views() {
   $handler->display->display_options['fields']['id']['id'] = 'id';
   $handler->display->display_options['fields']['id']['table'] = 'eck_company';
   $handler->display->display_options['fields']['id']['field'] = 'id';
+  $handler->display->display_options['fields']['id']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['id']['alter']['path'] = 'company/company/[id]';
+  $handler->display->display_options['fields']['id']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['id']['separator'] = '';
   /* Field: Company: Account Number */
   $handler->display->display_options['fields']['account_number']['id'] = 'account_number';
   $handler->display->display_options['fields']['account_number']['table'] = 'eck_company';
