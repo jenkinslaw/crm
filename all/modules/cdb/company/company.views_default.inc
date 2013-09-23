@@ -103,11 +103,14 @@ function company_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Company Search';
+  $handler->display->display_options['hide_attachment_summary'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
-  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['type'] = 'input_required';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
+  $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'filtered_html';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '100';
   $handler->display->display_options['style_plugin'] = 'table';
@@ -196,6 +199,10 @@ function company_views_default_views() {
   $handler->display->display_options['relationships']['phone_entity_target_id']['id'] = 'phone_entity_target_id';
   $handler->display->display_options['relationships']['phone_entity_target_id']['table'] = 'field_data_phone_entity';
   $handler->display->display_options['relationships']['phone_entity_target_id']['field'] = 'phone_entity_target_id';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['address_entity_target_id']['id'] = 'address_entity_target_id';
+  $handler->display->display_options['relationships']['address_entity_target_id']['table'] = 'field_data_address_entity';
+  $handler->display->display_options['relationships']['address_entity_target_id']['field'] = 'address_entity_target_id';
   /* Field: Bulk operations: Company */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'eck_company';
@@ -482,6 +489,23 @@ function company_views_default_views() {
   $handler->display->display_options['filters']['suspended_value']['expose']['operator'] = 'suspended_value_op';
   $handler->display->display_options['filters']['suspended_value']['expose']['identifier'] = 'suspended_value';
   $handler->display->display_options['filters']['suspended_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    5 => 0,
+  );
+  /* Filter criterion: address: address (address:postal_code) */
+  $handler->display->display_options['filters']['address_postal_code']['id'] = 'address_postal_code';
+  $handler->display->display_options['filters']['address_postal_code']['table'] = 'field_data_address';
+  $handler->display->display_options['filters']['address_postal_code']['field'] = 'address_postal_code';
+  $handler->display->display_options['filters']['address_postal_code']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['filters']['address_postal_code']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['address_postal_code']['expose']['operator_id'] = 'address_postal_code_op';
+  $handler->display->display_options['filters']['address_postal_code']['expose']['label'] = 'Postal Code';
+  $handler->display->display_options['filters']['address_postal_code']['expose']['operator'] = 'address_postal_code_op';
+  $handler->display->display_options['filters']['address_postal_code']['expose']['identifier'] = 'address_postal_code';
+  $handler->display->display_options['filters']['address_postal_code']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
