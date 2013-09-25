@@ -96,11 +96,6 @@
 
   <target name="import-data">
     <exec command="drush migrate-auto-register" />
-    <phingcall target="import-phone" />
-    <phingcall target="import-address" />
-    <phingcall target="import-barcode" />
-    <!-- <phingcall target="import-users" /> -->
-    <phingcall target="import-contact" />
     <phingcall target="import-company" />
     <phingcall target="import-person" />
   </target>
@@ -126,6 +121,11 @@
   </target>
   
   <target name="import-company">
+    <phingcall target="import-phone" />
+    <phingcall target="import-address" />
+    <phingcall target="import-barcode" />
+    <!-- <phingcall target="import-users" /> -->
+    <phingcall target="import-contact" />
     <exec command="drush migrate-import Company" />
  </target>
   
