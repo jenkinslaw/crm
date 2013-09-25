@@ -95,44 +95,43 @@
   </target>
 
   <target name="import-data">
-    <exec "drush migrate-auto-register" />
+    <exec command="drush migrate-auto-register" />
     <phingcall target="import-phone" />
-    <phingcall target="import-adress" />
+    <phingcall target="import-address" />
     <phingcall target="import-barcode" />
-    <phingcall target="import-users" />
+    <!-- <phingcall target="import-users" /> -->
     <phingcall target="import-contact" />
     <phingcall target="import-company" />
     <phingcall target="import-person" />
   </target>
 
   <target name="import-phone">
-    <exec command="drush migrate-import phone_number" />
+    <exec command="drush migrate-import Phone" />
   </target>
   
   <target name="import-address">
-    <exec command="drush migrate-import address" />
+    <exec command="drush migrate-import Address" />
   </target>
   
   <target name="import-barcode">
-    <exec command="drush migrate-import barcode" />
+    <exec command="drush migrate-import Barcode" />
   </target>
   
   <target name="import-user">
-    <exec command="drush migrate-import user" />
-  </target>
+    <exec command="drush migrate-import User" />
+ </target>
 
   <target name="import-contact">
-    <exec command="drush migrate-import contact" />
+    <exec command="drush migrate-import Contact" />
   </target>
   
   <target name="import-company">
-    <exec command="drush migrate-import company" />
-  </target>
+    <exec command="drush migrate-import Company" />
+ </target>
   
   <target name="import-person">
-    <exec command="drush migrate-import person" />
+    <exec command="drush migrate-import Person" />
   </target>
-
 
   <!-- Updating core on our environment needs a little juggling. -->
   <target name='update-drupal'>
