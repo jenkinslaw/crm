@@ -3,6 +3,6 @@
  * @file
  * The CDB module will hold global domain space logic.
  */
-
+include_once 'cdb.features.inc';
 include_once 'includes/CdbEntity.inc';
 include_once 'includes/EntityForm.inc';
