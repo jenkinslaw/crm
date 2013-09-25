@@ -478,6 +478,7 @@ function company_views_default_views() {
     4 => 0,
     5 => 0,
   );
+  $handler->display->display_options['filters']['exp_date_value']['form_type'] = 'date_popup';
   /* Filter criterion: Field: Suspended (suspended) */
   $handler->display->display_options['filters']['suspended_value']['id'] = 'suspended_value';
   $handler->display->display_options['filters']['suspended_value']['table'] = 'field_data_suspended';
