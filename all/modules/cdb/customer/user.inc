@@ -28,7 +28,7 @@ class UserMigration extends BasicMigration {
     parent::__construct();
     $this->description = t('Person Migration');
 
-    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/customer.php';
+    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/user.php';
     $fields = array(
       'username' => 'The Username',
       'mail' => 'Email address of the user',
@@ -70,13 +70,24 @@ class UserMigration extends BasicMigration {
     $this->addFieldMapping('status','active')
       ->description('Map active to status');
     $this->addFieldMapping('created')
-      ->description('Create tim will be when imported into Drupal');
+      ->description('Created time will be when imported into Drupal');
     $this->addFieldMapping('access')
       ->description('Created and set to time of creation');
     $this->addFieldMapping('login')
       ->description('Created and set to time of creation');
     $this->addFieldMapping('roles','roles')
+      ->callbacks(array($this, 'roleMapping'))
       ->description('Role IDs to assign to the user');
+  }
+
+  public function roleMapping($role) {
+    if ($roles == '1') {
+      $roles = array(2, 4, 5, 6, 7, 8, 9);
+    }
+    else {
+      $roles = array(2, 8);
+    }
+    return $roles;
   }
 
 }
