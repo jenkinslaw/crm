@@ -17,6 +17,10 @@ dependencies[] = field_group_multiple
 dependencies[] = url
 
 
+features[features_api][] = api:1
+features[user_role][] = Payment Administrator
+features[user_role][] = Search Exporter
+features[user_role][] = Reference Invoicer
 files[] = includes/CdbEntity.inc
 files[] = includes/EntityForm.inc
 files[] = includes/User.inc
