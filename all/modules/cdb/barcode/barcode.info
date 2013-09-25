@@ -13,6 +13,7 @@ features[eck_entity_type][] = barcode
 features[features_api][] = api:1
 features[field][] = barcode-barcode-barcode
 features[field][] = barcode-barcode-status
+features[user_role][] = Barcode Administrator
 files[] = tests/BarcodeEntity.test
 files[] = includes/Barcode.inc
 files[] = includes/BarcodeEntityForm.inc
