@@ -37,7 +37,7 @@ class UserMigration extends BasicMigration {
       'roles' => 'The roles the user  should have',
    );
     
-    $this->source = new MigrateSourceJSON($source_url, 'id', $fields,
+    $this->source = new MigrateSourceJSON($source_url, 'username', $fields,
       array('reader_class' => 'UserJSONReader'));
 
     $this->map = new MigrateSQLMap($this->machineName,
@@ -56,12 +56,13 @@ class UserMigration extends BasicMigration {
     );
 
 
-    $options = array('is_new' => TRUE);
+    $options = array();
     $this->destination = new MigrateDestinationUser($options);
 
-    $this->addFieldMapping('uid', 'username')
+    $this->addFieldMapping('id', 'username')
       ->description('Mapping userid to uid');
     $this->addFieldMapping('name', 'username')
+      ->dedupe('users', 'name')
       ->description('Mapping username to name');
     $this->addFieldMapping('mail', 'mail')
       ->description('Mapping  email address to mail');
@@ -81,13 +82,13 @@ class UserMigration extends BasicMigration {
   }
 
   public function roleMapping($role) {
-    if ($roles == '1') {
-      $roles = array(2, 4, 5, 6, 7, 8, 9);
+    if ($role == '1') {
+      $role = array(2, 4, 5, 6, 7, 8, 9);
     }
     else {
-      $roles = array(2, 8);
+      $role = array(2, 8);
     }
-    return $roles;
+    return $role;
   }
 
 }
