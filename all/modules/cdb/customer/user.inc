@@ -26,18 +26,19 @@ class UserMigration extends BasicMigration {
    */
   public function __construct() {
     parent::__construct();
-    $this->description = t('Person Migration');
+    $this->description = t('User Migration');
 
     $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/user.php';
     $fields = array(
       'username' => 'The Username',
+      'id'  => 'Numeric hash of username.',
       'mail' => 'Email address of the user',
       'active' => "Is the user allowed to login",
       'password' => "Teh passw0rd",
-      'roles' => 'The roles the user  should have',
+      'roles' => 'The roles the user should have',
    );
     
-    $this->source = new MigrateSourceJSON($source_url, 'username', $fields,
+    $this->source = new MigrateSourceJSON($source_url, 'id', $fields,
       array('reader_class' => 'UserJSONReader'));
 
     $this->map = new MigrateSQLMap($this->machineName,
@@ -46,8 +47,8 @@ class UserMigration extends BasicMigration {
           'type' => 'int',
           'unsigned' => TRUE,
           'not null' => TRUE,
-          'description' => 'User ID',
-          'alias' => 'uid',
+          'description' => 'User name',
+          'alias' => 'username',
         ),
       ),
       MigrateDestinationNode::getKeySchema(),
@@ -59,8 +60,8 @@ class UserMigration extends BasicMigration {
     $options = array();
     $this->destination = new MigrateDestinationUser($options);
 
-    $this->addFieldMapping('id', 'username')
-      ->description('Mapping userid to uid');
+    $this->addFieldMapping('id', 'id')
+      ->description('Mapping hash_id to id');
     $this->addFieldMapping('name', 'username')
       ->dedupe('users', 'name')
       ->description('Mapping username to name');
