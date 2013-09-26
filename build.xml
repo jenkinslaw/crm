@@ -130,7 +130,7 @@
     <phingcall target="import-phone" />
     <phingcall target="import-address" />
     <phingcall target="import-barcode" />
-    <phingcall target="import-users" /> 
+    <phingcall target="import-user" /> 
     <phingcall target="import-contact" />
     <exec command="drush migrate-import Company" />
  </target>
