@@ -126,13 +126,13 @@ class CompanyMigration extends BasicMigration {
       ->description('Mapping account_number to account_number');
     $this->addFieldMapping('number_of_attorneys', 'number_of_attorneys')
       ->description('Mapping number_of_attorneys to number_of_attorneys');
-    $this->addFieldMapping('last_updated', 'last_updated')
-      ->description('Mapping last_updated to last_updated');
+    $this->addFieldMapping('changed', 'last_updated')
+      ->description('Mapping last_updated to changed');
     $this->addFieldMapping('phone_entity', 'phone_numbers')
       ->description('Mapping phone_numbers to phone_entity')
       ->sourceMigration('Phone');
-    $this->addFieldMapping('updated_by', 'updated_by')
-      ->description('Mapping updated_by to updated_by')
+    $this->addFieldMapping('uid', 'updated_by')
+      ->description('Mapping updated_by to uid')
       ->sourceMigration('User');
     $this->addFieldMapping('membership_contact', 'membership_contact')
       ->description('Mapping membership_contact to membership_contact')
