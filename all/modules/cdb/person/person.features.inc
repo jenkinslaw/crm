@@ -53,6 +53,11 @@ $items = array(
       'type' => 'text',
       'behavior' => 'title',
     ),
+    'uid' => array(
+      'label' => 'Last Updated By',
+      'type' => 'integer',
+      'behavior' => 'author',
+    ),
   ),
 ),
   );
