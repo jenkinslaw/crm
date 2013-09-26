@@ -101,35 +101,42 @@
   </target>
 
   <target name="import-phone">
+    <exec command="drush migrate-auto-register" />
     <exec command="drush migrate-import Phone" />
   </target>
   
   <target name="import-address">
+    <exec command="drush migrate-auto-register" />
     <exec command="drush migrate-import Address" />
   </target>
   
   <target name="import-barcode">
+    <exec command="drush migrate-auto-register" />
     <exec command="drush migrate-import Barcode" />
   </target>
   
   <target name="import-user">
+    <exec command="drush migrate-auto-register" />
     <exec command="drush migrate-import User" />
  </target>
 
   <target name="import-contact">
+    <exec command="drush migrate-auto-register" />
     <exec command="drush migrate-import Contact" />
   </target>
   
   <target name="import-company">
+    <exec command="drush migrate-auto-register" />
     <phingcall target="import-phone" />
     <phingcall target="import-address" />
     <phingcall target="import-barcode" />
-    <!-- <phingcall target="import-users" /> -->
+    <phingcall target="import-users" /> 
     <phingcall target="import-contact" />
     <exec command="drush migrate-import Company" />
  </target>
   
   <target name="import-person">
+    <exec command="drush migrate-auto-register" />
     <exec command="drush migrate-import Person" />
   </target>
 
