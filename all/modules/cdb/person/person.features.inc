@@ -44,7 +44,7 @@ $items = array(
       'behavior' => 'created',
     ),
     'changed' => array(
-      'label' => 'Changed',
+      'label' => 'Last Updated',
       'type' => 'integer',
       'behavior' => 'changed',
     ),
