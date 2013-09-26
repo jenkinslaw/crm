@@ -10,6 +10,7 @@ files[] = contact.inc
 files[] = address.inc
 files[] = phone.inc
 files[] = barcode.inc
+files[] = user.inc
 
 dependencies = migrate
 dependencies = migrate_extras
