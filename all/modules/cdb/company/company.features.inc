@@ -60,16 +60,6 @@ $items = array(
       'type' => 'integer',
       'behavior' => '',
     ),
-    'last_updated' => array(
-      'label' => 'Last Updated',
-      'type' => 'integer',
-      'behavior' => 'changed',
-    ),
-    'updated_by' => array(
-      'label' => 'Last Updated By',
-      'type' => 'integer',
-      'behavior' => 'author',
-    ),
     'created' => array(
       'label' => 'Created',
       'type' => 'integer',
@@ -79,6 +69,16 @@ $items = array(
       'label' => 'Old Company Id',
       'type' => 'text',
       'behavior' => '',
+    ),
+    'uid' => array(
+      'label' => 'Last Updated By',
+      'type' => 'integer',
+      'behavior' => 'author',
+    ),
+    'changed' => array(
+      'label' => 'Last Updated',
+      'type' => 'integer',
+      'behavior' => 'changed',
     ),
   ),
 ),

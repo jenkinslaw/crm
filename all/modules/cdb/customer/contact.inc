@@ -43,6 +43,8 @@ class ContactMigration extends BasicMigration {
       'email' => 'Customer email.',
       'address' => 'Address ID... Can be used ad Address entity ID Reference.',
       'phone' => 'Phone ID... Can be used as phone ID Reference.',
+      'last_update' => 'Date the record was last updated',
+      'updated_by'  => 'User the record was last updated by',
     );
     $this->source = new MigrateSourceJSON($source_url, 'id', $fields,
       array('reader_class' => 'ContactJSONReader'));
@@ -95,6 +97,12 @@ class ContactMigration extends BasicMigration {
     $this->addFieldMapping('address_entity', 'address')
       ->description('Mapping address to Address entity')
       ->sourceMigration('Address');
+    $this->addFieldMapping('changed', 'last_update')
+      ->description('Mapping last update to changed');
+    $this->addFieldMapping('uid', 'updated_by')
+      ->description('Mapping updated by to uid')
+      ->sourceMigration('User');
+   
     $this->addUnmigratedDestinations(array(
       'memb_notes', 'cust_notes','exp_date', 'barcode_entity'));
   }
