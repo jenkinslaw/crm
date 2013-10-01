@@ -868,9 +868,9 @@ function company_field_default_fields() {
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
-          'y' => 'Yes',
-          'n' => 'No',
-          'p' => 'Probation',
+          'Y' => 'Yes',
+          'N' => 'No',
+          'P' => 'Probation',
         ),
         'allowed_values_function' => '',
       ),
