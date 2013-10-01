@@ -44,7 +44,7 @@ $items = array(
       'behavior' => 'created',
     ),
     'changed' => array(
-      'label' => 'Changed',
+      'label' => 'Last Updated',
       'type' => 'integer',
       'behavior' => 'changed',
     ),
@@ -52,6 +52,11 @@ $items = array(
       'label' => 'Name',
       'type' => 'text',
       'behavior' => 'title',
+    ),
+    'uid' => array(
+      'label' => 'Last Updated By',
+      'type' => 'integer',
+      'behavior' => 'author',
     ),
   ),
 ),

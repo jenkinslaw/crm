@@ -113,8 +113,11 @@ class PersonMigration extends BasicMigration {
       ->description('Mapping memb_notes to memb_notes');
     $this->addFieldMapping('cust_notes', 'cust_notes')
       ->description('Mapping cust_notes to cust_notes');
-    // $this->addFieldMapping('last_update_date', 'last_update_date')
-    // ->description('Mapping last_update to last_update');
+    $this->addFieldMapping('changed', 'last_update_date')
+     ->description('Mapping last_update to changed');
+    $this->addFieldMapping('uid', 'last_update_by')
+      ->description('Mapping last_update_by to uid')
+      ->sourceMigration('User');
     $this->addFieldMapping('phone_entity', 'phone')
       ->description('Phone to Phone Numbers entity')
       ->sourceMigration('Phone');
