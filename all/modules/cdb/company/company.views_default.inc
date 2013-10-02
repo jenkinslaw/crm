@@ -588,6 +588,55 @@ function company_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'company/search';
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Company: Company Name */
+  $handler->display->display_options['filters']['company_name']['id'] = 'company_name';
+  $handler->display->display_options['filters']['company_name']['table'] = 'eck_company';
+  $handler->display->display_options['filters']['company_name']['field'] = 'company_name';
+  $handler->display->display_options['filters']['company_name']['operator'] = 'word';
+  $handler->display->display_options['filters']['company_name']['group'] = 1;
+  $handler->display->display_options['filters']['company_name']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['company_name']['expose']['operator_id'] = 'company_name_op';
+  $handler->display->display_options['filters']['company_name']['expose']['label'] = 'Company Name';
+  $handler->display->display_options['filters']['company_name']['expose']['operator'] = 'company_name_op';
+  $handler->display->display_options['filters']['company_name']['expose']['identifier'] = 'company_name';
+  $handler->display->display_options['filters']['company_name']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['company_name']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  $handler->display->display_options['filters']['company_name']['group_info']['label'] = 'Company Name';
+  $handler->display->display_options['filters']['company_name']['group_info']['identifier'] = 'company_name';
+  $handler->display->display_options['filters']['company_name']['group_info']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['company_name']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => '',
+      'operator' => 'contains',
+      'value' => '',
+    ),
+    2 => array(
+      'title' => '',
+      'operator' => 'contains',
+      'value' => '',
+    ),
+    3 => array(
+      'title' => '',
+      'operator' => 'contains',
+      'value' => '',
+    ),
+  );
+  $handler->display->display_options['path'] = 'company/multi-search';
   $export['company_search'] = $view;
 
   return $export;
