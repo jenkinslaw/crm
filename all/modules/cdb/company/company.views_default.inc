@@ -587,7 +587,7 @@ function company_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'company-search';
+  $handler->display->display_options['path'] = 'company/search';
   $export['company_search'] = $view;
 
   return $export;
