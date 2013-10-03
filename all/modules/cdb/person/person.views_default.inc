@@ -64,11 +64,14 @@ function person_views_default_views() {
   $handler->display->display_options['fields']['field_person_category']['field'] = 'field_person_category';
   $handler->display->display_options['fields']['field_person_category']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_person_category']['multi_type'] = 'ul';
-  /* Field: barcode: barcode */
-  $handler->display->display_options['fields']['barcode']['id'] = 'barcode';
-  $handler->display->display_options['fields']['barcode']['table'] = 'field_data_barcode';
-  $handler->display->display_options['fields']['barcode']['field'] = 'barcode';
-  $handler->display->display_options['fields']['barcode']['relationship'] = 'barcode_entity_target_id';
+  /* Field: person: Barcode */
+  $handler->display->display_options['fields']['barcode_entity']['id'] = 'barcode_entity';
+  $handler->display->display_options['fields']['barcode_entity']['table'] = 'field_data_barcode_entity';
+  $handler->display->display_options['fields']['barcode_entity']['field'] = 'barcode_entity';
+  $handler->display->display_options['fields']['barcode_entity']['settings'] = array(
+    'link' => 0,
+  );
+  $handler->display->display_options['fields']['barcode_entity']['delta_offset'] = '0';
   /* Field: person: FOA */
   $handler->display->display_options['fields']['field_foa']['id'] = 'field_foa';
   $handler->display->display_options['fields']['field_foa']['table'] = 'field_data_field_foa';
@@ -105,11 +108,73 @@ function person_views_default_views() {
     'multiple_from' => '',
     'multiple_to' => '',
   );
-  /* Field: address: address */
-  $handler->display->display_options['fields']['address']['id'] = 'address';
-  $handler->display->display_options['fields']['address']['table'] = 'field_data_address';
-  $handler->display->display_options['fields']['address']['field'] = 'address';
-  $handler->display->display_options['fields']['address']['relationship'] = 'address_entity_target_id';
+  /* Field: Company: Company Name */
+  $handler->display->display_options['fields']['company_name']['id'] = 'company_name';
+  $handler->display->display_options['fields']['company_name']['table'] = 'eck_company';
+  $handler->display->display_options['fields']['company_name']['field'] = 'company_name';
+  $handler->display->display_options['fields']['company_name']['relationship'] = 'field_company_target_id';
+  /* Field: company: Mas90 Name */
+  $handler->display->display_options['fields']['mas90_name']['id'] = 'mas90_name';
+  $handler->display->display_options['fields']['mas90_name']['table'] = 'field_data_mas90_name';
+  $handler->display->display_options['fields']['mas90_name']['field'] = 'mas90_name';
+  $handler->display->display_options['fields']['mas90_name']['relationship'] = 'field_company_target_id';
+  /* Field: Field: Expiration Date */
+  $handler->display->display_options['fields']['exp_date_1']['id'] = 'exp_date_1';
+  $handler->display->display_options['fields']['exp_date_1']['table'] = 'field_data_exp_date';
+  $handler->display->display_options['fields']['exp_date_1']['field'] = 'exp_date';
+  $handler->display->display_options['fields']['exp_date_1']['settings'] = array(
+    'format_type' => 'short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: Field: Address */
+  $handler->display->display_options['fields']['address_entity']['id'] = 'address_entity';
+  $handler->display->display_options['fields']['address_entity']['table'] = 'field_data_address_entity';
+  $handler->display->display_options['fields']['address_entity']['field'] = 'address_entity';
+  $handler->display->display_options['fields']['address_entity']['relationship'] = 'field_company_target_id';
+  $handler->display->display_options['fields']['address_entity']['label'] = 'Company Address';
+  $handler->display->display_options['fields']['address_entity']['settings'] = array(
+    'link' => 0,
+  );
+  /* Field: person: suffix */
+  $handler->display->display_options['fields']['suffix']['id'] = 'suffix';
+  $handler->display->display_options['fields']['suffix']['table'] = 'field_data_suffix';
+  $handler->display->display_options['fields']['suffix']['field'] = 'suffix';
+  $handler->display->display_options['fields']['suffix']['label'] = 'Suffix';
+  /* Field: person: Esquire */
+  $handler->display->display_options['fields']['esquire']['id'] = 'esquire';
+  $handler->display->display_options['fields']['esquire']['table'] = 'field_data_esquire';
+  $handler->display->display_options['fields']['esquire']['field'] = 'esquire';
+  /* Field: person: Phone Number */
+  $handler->display->display_options['fields']['phone_number_entity']['id'] = 'phone_number_entity';
+  $handler->display->display_options['fields']['phone_number_entity']['table'] = 'field_data_phone_number_entity';
+  $handler->display->display_options['fields']['phone_number_entity']['field'] = 'phone_number_entity';
+  $handler->display->display_options['fields']['phone_number_entity']['label'] = 'Person Phone';
+  $handler->display->display_options['fields']['phone_number_entity']['settings'] = array(
+    'link' => 0,
+  );
+  $handler->display->display_options['fields']['phone_number_entity']['delta_offset'] = '0';
+  /* Field: company: Phone Number */
+  $handler->display->display_options['fields']['phone_entity']['id'] = 'phone_entity';
+  $handler->display->display_options['fields']['phone_entity']['table'] = 'field_data_phone_entity';
+  $handler->display->display_options['fields']['phone_entity']['field'] = 'phone_entity';
+  $handler->display->display_options['fields']['phone_entity']['relationship'] = 'field_company_target_id';
+  $handler->display->display_options['fields']['phone_entity']['label'] = 'Company Phone';
+  $handler->display->display_options['fields']['phone_entity']['settings'] = array(
+    'link' => 0,
+  );
+  $handler->display->display_options['fields']['phone_entity']['delta_offset'] = '0';
+  /* Field: person: Email */
+  $handler->display->display_options['fields']['email']['id'] = 'email';
+  $handler->display->display_options['fields']['email']['table'] = 'field_data_email';
+  $handler->display->display_options['fields']['email']['field'] = 'email';
+  /* Field: person: cle_special */
+  $handler->display->display_options['fields']['cle_special']['id'] = 'cle_special';
+  $handler->display->display_options['fields']['cle_special']['table'] = 'field_data_cle_special';
+  $handler->display->display_options['fields']['cle_special']['field'] = 'cle_special';
+  $handler->display->display_options['fields']['cle_special']['label'] = 'CLE Special';
   /* Filter criterion: Person: person type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'eck_person';
