@@ -50,6 +50,7 @@ class PersonMigration extends BasicMigration {
       'last_udate' => 'The Last Udpated date and by',
       'address' => 'Address ID... Can be used ad Address entity ID Reference.',
       'phone' => 'Phone ID... Can be used as phone ID Reference.',
+      'company' => 'ID of the comapny the user is associated to',
     );
     $this->source = new MigrateSourceJSON($source_url, 'id', $fields,
       array('reader_class' => 'PersonJSONReader'));
@@ -118,12 +119,15 @@ class PersonMigration extends BasicMigration {
     $this->addFieldMapping('uid', 'last_update_by')
       ->description('Mapping last_update_by to uid')
       ->sourceMigration('User');
-    $this->addFieldMapping('phone_entity', 'phone')
+    $this->addFieldMapping('phone_number_entity', 'phone')
       ->description('Phone to Phone Numbers entity')
       ->sourceMigration('Phone');
     $this->addFieldMapping('address_entity', 'address')
       ->description('Mapping address to Address entity')
       ->sourceMigration('Address');
+    $this->addFieldMapping('field_company', 'company')
+      ->description("Mapping the company id to the field company")
+      ->sourceMigration("Company");
   }
 
   protected function setStatusKey($status) {
