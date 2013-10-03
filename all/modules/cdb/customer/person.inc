@@ -119,7 +119,7 @@ class PersonMigration extends BasicMigration {
     $this->addFieldMapping('uid', 'last_update_by')
       ->description('Mapping last_update_by to uid')
       ->sourceMigration('User');
-    $this->addFieldMapping('phone_entity', 'phone')
+    $this->addFieldMapping('phone_number_entity', 'phone')
       ->description('Phone to Phone Numbers entity')
       ->sourceMigration('Phone');
     $this->addFieldMapping('address_entity', 'address')
