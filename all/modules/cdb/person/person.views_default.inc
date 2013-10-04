@@ -591,7 +591,6 @@ function person_views_default_views() {
   $handler->display->display_options['filters']['field_foa_value']['expose']['label'] = 'FOA (field_foa)';
   $handler->display->display_options['filters']['field_foa_value']['expose']['operator'] = 'field_foa_value_op';
   $handler->display->display_options['filters']['field_foa_value']['expose']['identifier'] = 'field_foa_value';
-  $handler->display->display_options['filters']['field_foa_value']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_foa_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
@@ -679,7 +678,6 @@ function person_views_default_views() {
   $handler->display->display_options['filters']['field_status_value']['expose']['operator'] = 'field_status_value_op';
   $handler->display->display_options['filters']['field_status_value']['expose']['identifier'] = 'field_status_value';
   $handler->display->display_options['filters']['field_status_value']['expose']['remember'] = TRUE;
-  $handler->display->display_options['filters']['field_status_value']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_status_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
