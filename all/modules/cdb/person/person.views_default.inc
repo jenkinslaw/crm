@@ -28,6 +28,8 @@ function person_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['style_plugin'] = 'table';
@@ -431,6 +433,12 @@ function person_views_default_views() {
       'address' => 'address',
     ),
   );
+  /* Sort criterion: Person: Id */
+  $handler->display->display_options['sorts']['id']['id'] = 'id';
+  $handler->display->display_options['sorts']['id']['table'] = 'eck_person';
+  $handler->display->display_options['sorts']['id']['field'] = 'id';
+  $handler->display->display_options['sorts']['id']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['id']['expose']['label'] = 'Member Number';
   /* Sort criterion: person: Barcode (barcode_entity) */
   $handler->display->display_options['sorts']['barcode_entity_target_id']['id'] = 'barcode_entity_target_id';
   $handler->display->display_options['sorts']['barcode_entity_target_id']['table'] = 'field_data_barcode_entity';
@@ -509,12 +517,535 @@ function person_views_default_views() {
   $handler->display->display_options['sorts']['address_postal_code']['relationship'] = 'address_entity_target_id';
   $handler->display->display_options['sorts']['address_postal_code']['exposed'] = TRUE;
   $handler->display->display_options['sorts']['address_postal_code']['expose']['label'] = 'Zip';
-  /* Filter criterion: Person: person type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'eck_person';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'person' => 'person',
+  /* Filter criterion: person: Person Category (field_person_category) */
+  $handler->display->display_options['filters']['field_person_category_value']['id'] = 'field_person_category_value';
+  $handler->display->display_options['filters']['field_person_category_value']['table'] = 'field_data_field_person_category';
+  $handler->display->display_options['filters']['field_person_category_value']['field'] = 'field_person_category_value';
+  $handler->display->display_options['filters']['field_person_category_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_person_category_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_person_category_value']['expose']['operator_id'] = 'field_person_category_value_op';
+  $handler->display->display_options['filters']['field_person_category_value']['expose']['label'] = 'Person Category';
+  $handler->display->display_options['filters']['field_person_category_value']['expose']['operator'] = 'field_person_category_value_op';
+  $handler->display->display_options['filters']['field_person_category_value']['expose']['identifier'] = 'field_person_category_value';
+  $handler->display->display_options['filters']['field_person_category_value']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_person_category_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  /* Filter criterion: Person: Id */
+  $handler->display->display_options['filters']['id']['id'] = 'id';
+  $handler->display->display_options['filters']['id']['table'] = 'eck_person';
+  $handler->display->display_options['filters']['id']['field'] = 'id';
+  $handler->display->display_options['filters']['id']['group'] = 1;
+  $handler->display->display_options['filters']['id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['id']['expose']['operator_id'] = 'id_op';
+  $handler->display->display_options['filters']['id']['expose']['label'] = 'Id';
+  $handler->display->display_options['filters']['id']['expose']['operator'] = 'id_op';
+  $handler->display->display_options['filters']['id']['expose']['identifier'] = 'id';
+  $handler->display->display_options['filters']['id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  /* Filter criterion: person: Barcode (barcode_entity) */
+  $handler->display->display_options['filters']['barcode_entity_target_id']['id'] = 'barcode_entity_target_id';
+  $handler->display->display_options['filters']['barcode_entity_target_id']['table'] = 'field_data_barcode_entity';
+  $handler->display->display_options['filters']['barcode_entity_target_id']['field'] = 'barcode_entity_target_id';
+  $handler->display->display_options['filters']['barcode_entity_target_id']['group'] = 1;
+  $handler->display->display_options['filters']['barcode_entity_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['barcode_entity_target_id']['expose']['operator_id'] = 'barcode_entity_target_id_op';
+  $handler->display->display_options['filters']['barcode_entity_target_id']['expose']['label'] = 'Barcode';
+  $handler->display->display_options['filters']['barcode_entity_target_id']['expose']['operator'] = 'barcode_entity_target_id_op';
+  $handler->display->display_options['filters']['barcode_entity_target_id']['expose']['identifier'] = 'barcode_entity_target_id';
+  $handler->display->display_options['filters']['barcode_entity_target_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  /* Filter criterion: person: FOA (field_foa) */
+  $handler->display->display_options['filters']['field_foa_value']['id'] = 'field_foa_value';
+  $handler->display->display_options['filters']['field_foa_value']['table'] = 'field_data_field_foa';
+  $handler->display->display_options['filters']['field_foa_value']['field'] = 'field_foa_value';
+  $handler->display->display_options['filters']['field_foa_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_foa_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_foa_value']['expose']['operator_id'] = 'field_foa_value_op';
+  $handler->display->display_options['filters']['field_foa_value']['expose']['label'] = 'FOA (field_foa)';
+  $handler->display->display_options['filters']['field_foa_value']['expose']['operator'] = 'field_foa_value_op';
+  $handler->display->display_options['filters']['field_foa_value']['expose']['identifier'] = 'field_foa_value';
+  $handler->display->display_options['filters']['field_foa_value']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_foa_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  /* Filter criterion: person: Last Name (last) */
+  $handler->display->display_options['filters']['last_value']['id'] = 'last_value';
+  $handler->display->display_options['filters']['last_value']['table'] = 'field_data_last';
+  $handler->display->display_options['filters']['last_value']['field'] = 'last_value';
+  $handler->display->display_options['filters']['last_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['last_value']['group'] = 1;
+  $handler->display->display_options['filters']['last_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['last_value']['expose']['operator_id'] = 'last_value_op';
+  $handler->display->display_options['filters']['last_value']['expose']['label'] = 'Last Name';
+  $handler->display->display_options['filters']['last_value']['expose']['operator'] = 'last_value_op';
+  $handler->display->display_options['filters']['last_value']['expose']['identifier'] = 'last_value';
+  $handler->display->display_options['filters']['last_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  /* Filter criterion: person: First Name (first) */
+  $handler->display->display_options['filters']['first_value']['id'] = 'first_value';
+  $handler->display->display_options['filters']['first_value']['table'] = 'field_data_first';
+  $handler->display->display_options['filters']['first_value']['field'] = 'first_value';
+  $handler->display->display_options['filters']['first_value']['group'] = 1;
+  $handler->display->display_options['filters']['first_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['first_value']['expose']['operator_id'] = 'first_value_op';
+  $handler->display->display_options['filters']['first_value']['expose']['label'] = 'First Name';
+  $handler->display->display_options['filters']['first_value']['expose']['operator'] = 'first_value_op';
+  $handler->display->display_options['filters']['first_value']['expose']['identifier'] = 'first_value';
+  $handler->display->display_options['filters']['first_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  /* Filter criterion: person: Middle Name (middle) */
+  $handler->display->display_options['filters']['middle_value']['id'] = 'middle_value';
+  $handler->display->display_options['filters']['middle_value']['table'] = 'field_data_middle';
+  $handler->display->display_options['filters']['middle_value']['field'] = 'middle_value';
+  $handler->display->display_options['filters']['middle_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['middle_value']['group'] = 1;
+  $handler->display->display_options['filters']['middle_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['middle_value']['expose']['operator_id'] = 'middle_value_op';
+  $handler->display->display_options['filters']['middle_value']['expose']['label'] = 'Middle Name';
+  $handler->display->display_options['filters']['middle_value']['expose']['operator'] = 'middle_value_op';
+  $handler->display->display_options['filters']['middle_value']['expose']['identifier'] = 'middle_value';
+  $handler->display->display_options['filters']['middle_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  /* Filter criterion: person: Status (field_status) */
+  $handler->display->display_options['filters']['field_status_value']['id'] = 'field_status_value';
+  $handler->display->display_options['filters']['field_status_value']['table'] = 'field_data_field_status';
+  $handler->display->display_options['filters']['field_status_value']['field'] = 'field_status_value';
+  $handler->display->display_options['filters']['field_status_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_status_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_status_value']['expose']['operator_id'] = 'field_status_value_op';
+  $handler->display->display_options['filters']['field_status_value']['expose']['label'] = 'Status (field_status)';
+  $handler->display->display_options['filters']['field_status_value']['expose']['operator'] = 'field_status_value_op';
+  $handler->display->display_options['filters']['field_status_value']['expose']['identifier'] = 'field_status_value';
+  $handler->display->display_options['filters']['field_status_value']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['field_status_value']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_status_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  /* Filter criterion: person: Patron Type (patron_type) */
+  $handler->display->display_options['filters']['patron_type_value']['id'] = 'patron_type_value';
+  $handler->display->display_options['filters']['patron_type_value']['table'] = 'field_data_patron_type';
+  $handler->display->display_options['filters']['patron_type_value']['field'] = 'patron_type_value';
+  $handler->display->display_options['filters']['patron_type_value']['group'] = 1;
+  $handler->display->display_options['filters']['patron_type_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['patron_type_value']['expose']['operator_id'] = 'patron_type_value_op';
+  $handler->display->display_options['filters']['patron_type_value']['expose']['label'] = 'Patron Type (patron_type)';
+  $handler->display->display_options['filters']['patron_type_value']['expose']['operator'] = 'patron_type_value_op';
+  $handler->display->display_options['filters']['patron_type_value']['expose']['identifier'] = 'patron_type_value';
+  $handler->display->display_options['filters']['patron_type_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  /* Filter criterion: Company: Company Name */
+  $handler->display->display_options['filters']['company_name']['id'] = 'company_name';
+  $handler->display->display_options['filters']['company_name']['table'] = 'eck_company';
+  $handler->display->display_options['filters']['company_name']['field'] = 'company_name';
+  $handler->display->display_options['filters']['company_name']['relationship'] = 'field_company_target_id';
+  $handler->display->display_options['filters']['company_name']['operator'] = 'contains';
+  $handler->display->display_options['filters']['company_name']['group'] = 1;
+  $handler->display->display_options['filters']['company_name']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['company_name']['expose']['operator_id'] = 'company_name_op';
+  $handler->display->display_options['filters']['company_name']['expose']['label'] = 'Company Name';
+  $handler->display->display_options['filters']['company_name']['expose']['operator'] = 'company_name_op';
+  $handler->display->display_options['filters']['company_name']['expose']['identifier'] = 'company_name';
+  $handler->display->display_options['filters']['company_name']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  /* Filter criterion: Field: Expiration Date (exp_date) */
+  $handler->display->display_options['filters']['exp_date_value']['id'] = 'exp_date_value';
+  $handler->display->display_options['filters']['exp_date_value']['table'] = 'field_data_exp_date';
+  $handler->display->display_options['filters']['exp_date_value']['field'] = 'exp_date_value';
+  $handler->display->display_options['filters']['exp_date_value']['group'] = 1;
+  $handler->display->display_options['filters']['exp_date_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['exp_date_value']['expose']['operator_id'] = 'exp_date_value_op';
+  $handler->display->display_options['filters']['exp_date_value']['expose']['label'] = 'Expiration Date';
+  $handler->display->display_options['filters']['exp_date_value']['expose']['operator'] = 'exp_date_value_op';
+  $handler->display->display_options['filters']['exp_date_value']['expose']['identifier'] = 'exp_date_value';
+  $handler->display->display_options['filters']['exp_date_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  $handler->display->display_options['filters']['exp_date_value']['form_type'] = 'date_popup';
+  /* Filter criterion: address: address (address:premise) */
+  $handler->display->display_options['filters']['address_premise']['id'] = 'address_premise';
+  $handler->display->display_options['filters']['address_premise']['table'] = 'field_data_address';
+  $handler->display->display_options['filters']['address_premise']['field'] = 'address_premise';
+  $handler->display->display_options['filters']['address_premise']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['filters']['address_premise']['group'] = 1;
+  $handler->display->display_options['filters']['address_premise']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['address_premise']['expose']['operator_id'] = 'address_premise_op';
+  $handler->display->display_options['filters']['address_premise']['expose']['label'] = 'Address Line 1';
+  $handler->display->display_options['filters']['address_premise']['expose']['operator'] = 'address_premise_op';
+  $handler->display->display_options['filters']['address_premise']['expose']['identifier'] = 'address_premise';
+  $handler->display->display_options['filters']['address_premise']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  /* Filter criterion: address: address (address:thoroughfare) */
+  $handler->display->display_options['filters']['address_thoroughfare']['id'] = 'address_thoroughfare';
+  $handler->display->display_options['filters']['address_thoroughfare']['table'] = 'field_data_address';
+  $handler->display->display_options['filters']['address_thoroughfare']['field'] = 'address_thoroughfare';
+  $handler->display->display_options['filters']['address_thoroughfare']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['filters']['address_thoroughfare']['group'] = 1;
+  $handler->display->display_options['filters']['address_thoroughfare']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['address_thoroughfare']['expose']['operator_id'] = 'address_thoroughfare_op';
+  $handler->display->display_options['filters']['address_thoroughfare']['expose']['label'] = 'Address Line 2';
+  $handler->display->display_options['filters']['address_thoroughfare']['expose']['operator'] = 'address_thoroughfare_op';
+  $handler->display->display_options['filters']['address_thoroughfare']['expose']['identifier'] = 'address_thoroughfare';
+  $handler->display->display_options['filters']['address_thoroughfare']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  /* Filter criterion: address: address (address:locality) */
+  $handler->display->display_options['filters']['address_locality']['id'] = 'address_locality';
+  $handler->display->display_options['filters']['address_locality']['table'] = 'field_data_address';
+  $handler->display->display_options['filters']['address_locality']['field'] = 'address_locality';
+  $handler->display->display_options['filters']['address_locality']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['filters']['address_locality']['group'] = 1;
+  $handler->display->display_options['filters']['address_locality']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['address_locality']['expose']['operator_id'] = 'address_locality_op';
+  $handler->display->display_options['filters']['address_locality']['expose']['label'] = 'City';
+  $handler->display->display_options['filters']['address_locality']['expose']['operator'] = 'address_locality_op';
+  $handler->display->display_options['filters']['address_locality']['expose']['identifier'] = 'address_locality';
+  $handler->display->display_options['filters']['address_locality']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  $handler->display->display_options['filters']['address_locality']['group_info']['label'] = 'address (address:locality)';
+  $handler->display->display_options['filters']['address_locality']['group_info']['identifier'] = 'address_locality';
+  $handler->display->display_options['filters']['address_locality']['group_info']['remember'] = FALSE;
+  $handler->display->display_options['filters']['address_locality']['group_info']['group_items'] = array(
+    1 => array(),
+    2 => array(),
+    3 => array(),
+  );
+  /* Filter criterion: address: address (address:administrative_area) */
+  $handler->display->display_options['filters']['address_administrative_area']['id'] = 'address_administrative_area';
+  $handler->display->display_options['filters']['address_administrative_area']['table'] = 'field_data_address';
+  $handler->display->display_options['filters']['address_administrative_area']['field'] = 'address_administrative_area';
+  $handler->display->display_options['filters']['address_administrative_area']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['filters']['address_administrative_area']['operator'] = 'contains';
+  $handler->display->display_options['filters']['address_administrative_area']['group'] = 1;
+  $handler->display->display_options['filters']['address_administrative_area']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['address_administrative_area']['expose']['operator_id'] = 'address_administrative_area_op';
+  $handler->display->display_options['filters']['address_administrative_area']['expose']['label'] = 'State';
+  $handler->display->display_options['filters']['address_administrative_area']['expose']['operator'] = 'address_administrative_area_op';
+  $handler->display->display_options['filters']['address_administrative_area']['expose']['identifier'] = 'address_administrative_area';
+  $handler->display->display_options['filters']['address_administrative_area']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  /* Filter criterion: address: address (address:postal_code) */
+  $handler->display->display_options['filters']['address_postal_code']['id'] = 'address_postal_code';
+  $handler->display->display_options['filters']['address_postal_code']['table'] = 'field_data_address';
+  $handler->display->display_options['filters']['address_postal_code']['field'] = 'address_postal_code';
+  $handler->display->display_options['filters']['address_postal_code']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['filters']['address_postal_code']['group'] = 1;
+  $handler->display->display_options['filters']['address_postal_code']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['address_postal_code']['expose']['operator_id'] = 'address_postal_code_op';
+  $handler->display->display_options['filters']['address_postal_code']['expose']['label'] = 'Zip';
+  $handler->display->display_options['filters']['address_postal_code']['expose']['operator'] = 'address_postal_code_op';
+  $handler->display->display_options['filters']['address_postal_code']['expose']['identifier'] = 'address_postal_code';
+  $handler->display->display_options['filters']['address_postal_code']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  /* Filter criterion: person: suffix (suffix) */
+  $handler->display->display_options['filters']['suffix_value']['id'] = 'suffix_value';
+  $handler->display->display_options['filters']['suffix_value']['table'] = 'field_data_suffix';
+  $handler->display->display_options['filters']['suffix_value']['field'] = 'suffix_value';
+  $handler->display->display_options['filters']['suffix_value']['group'] = 1;
+  $handler->display->display_options['filters']['suffix_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['suffix_value']['expose']['operator_id'] = 'suffix_value_op';
+  $handler->display->display_options['filters']['suffix_value']['expose']['label'] = 'Suffix';
+  $handler->display->display_options['filters']['suffix_value']['expose']['operator'] = 'suffix_value_op';
+  $handler->display->display_options['filters']['suffix_value']['expose']['identifier'] = 'suffix_value';
+  $handler->display->display_options['filters']['suffix_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  /* Filter criterion: person: Esquire (esquire) */
+  $handler->display->display_options['filters']['esquire_value']['id'] = 'esquire_value';
+  $handler->display->display_options['filters']['esquire_value']['table'] = 'field_data_esquire';
+  $handler->display->display_options['filters']['esquire_value']['field'] = 'esquire_value';
+  $handler->display->display_options['filters']['esquire_value']['group'] = 1;
+  $handler->display->display_options['filters']['esquire_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['esquire_value']['expose']['operator_id'] = 'esquire_value_op';
+  $handler->display->display_options['filters']['esquire_value']['expose']['label'] = 'Esquire';
+  $handler->display->display_options['filters']['esquire_value']['expose']['operator'] = 'esquire_value_op';
+  $handler->display->display_options['filters']['esquire_value']['expose']['identifier'] = 'esquire_value';
+  $handler->display->display_options['filters']['esquire_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  /* Filter criterion: Field: Customer Service Notes (cust_notes) */
+  $handler->display->display_options['filters']['cust_notes_value']['id'] = 'cust_notes_value';
+  $handler->display->display_options['filters']['cust_notes_value']['table'] = 'field_data_cust_notes';
+  $handler->display->display_options['filters']['cust_notes_value']['field'] = 'cust_notes_value';
+  $handler->display->display_options['filters']['cust_notes_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['cust_notes_value']['group'] = 1;
+  $handler->display->display_options['filters']['cust_notes_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['cust_notes_value']['expose']['operator_id'] = 'cust_notes_value_op';
+  $handler->display->display_options['filters']['cust_notes_value']['expose']['label'] = 'Customer Service Notes';
+  $handler->display->display_options['filters']['cust_notes_value']['expose']['operator'] = 'cust_notes_value_op';
+  $handler->display->display_options['filters']['cust_notes_value']['expose']['identifier'] = 'cust_notes_value';
+  $handler->display->display_options['filters']['cust_notes_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  /* Filter criterion: person: Email (email) */
+  $handler->display->display_options['filters']['email_value']['id'] = 'email_value';
+  $handler->display->display_options['filters']['email_value']['table'] = 'field_data_email';
+  $handler->display->display_options['filters']['email_value']['field'] = 'email_value';
+  $handler->display->display_options['filters']['email_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['email_value']['group'] = 1;
+  $handler->display->display_options['filters']['email_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['email_value']['expose']['operator_id'] = 'email_value_op';
+  $handler->display->display_options['filters']['email_value']['expose']['label'] = 'Email';
+  $handler->display->display_options['filters']['email_value']['expose']['operator'] = 'email_value_op';
+  $handler->display->display_options['filters']['email_value']['expose']['identifier'] = 'email_value';
+  $handler->display->display_options['filters']['email_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  /* Filter criterion: person: cle_special (cle_special) */
+  $handler->display->display_options['filters']['cle_special_value']['id'] = 'cle_special_value';
+  $handler->display->display_options['filters']['cle_special_value']['table'] = 'field_data_cle_special';
+  $handler->display->display_options['filters']['cle_special_value']['field'] = 'cle_special_value';
+  $handler->display->display_options['filters']['cle_special_value']['group'] = 1;
+  $handler->display->display_options['filters']['cle_special_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['cle_special_value']['expose']['operator_id'] = 'cle_special_value_op';
+  $handler->display->display_options['filters']['cle_special_value']['expose']['label'] = 'cle_special (cle_special)';
+  $handler->display->display_options['filters']['cle_special_value']['expose']['operator'] = 'cle_special_value_op';
+  $handler->display->display_options['filters']['cle_special_value']['expose']['identifier'] = 'cle_special_value';
+  $handler->display->display_options['filters']['cle_special_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  /* Filter criterion: Field: Suspended (suspended) */
+  $handler->display->display_options['filters']['suspended_value']['id'] = 'suspended_value';
+  $handler->display->display_options['filters']['suspended_value']['table'] = 'field_data_suspended';
+  $handler->display->display_options['filters']['suspended_value']['field'] = 'suspended_value';
+  $handler->display->display_options['filters']['suspended_value']['group'] = 1;
+  $handler->display->display_options['filters']['suspended_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['suspended_value']['expose']['operator_id'] = 'suspended_value_op';
+  $handler->display->display_options['filters']['suspended_value']['expose']['label'] = 'Suspended (suspended)';
+  $handler->display->display_options['filters']['suspended_value']['expose']['operator'] = 'suspended_value_op';
+  $handler->display->display_options['filters']['suspended_value']['expose']['identifier'] = 'suspended_value';
+  $handler->display->display_options['filters']['suspended_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  /* Filter criterion: person: Membership Notes (memb_notes) */
+  $handler->display->display_options['filters']['memb_notes_value']['id'] = 'memb_notes_value';
+  $handler->display->display_options['filters']['memb_notes_value']['table'] = 'field_data_memb_notes';
+  $handler->display->display_options['filters']['memb_notes_value']['field'] = 'memb_notes_value';
+  $handler->display->display_options['filters']['memb_notes_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['memb_notes_value']['group'] = 1;
+  $handler->display->display_options['filters']['memb_notes_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['memb_notes_value']['expose']['operator_id'] = 'memb_notes_value_op';
+  $handler->display->display_options['filters']['memb_notes_value']['expose']['label'] = 'Membership Notes';
+  $handler->display->display_options['filters']['memb_notes_value']['expose']['operator'] = 'memb_notes_value_op';
+  $handler->display->display_options['filters']['memb_notes_value']['expose']['identifier'] = 'memb_notes_value';
+  $handler->display->display_options['filters']['memb_notes_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  /* Filter criterion: person: PA Attorney ID (pa_attorney_id) */
+  $handler->display->display_options['filters']['pa_attorney_id_value']['id'] = 'pa_attorney_id_value';
+  $handler->display->display_options['filters']['pa_attorney_id_value']['table'] = 'field_data_pa_attorney_id';
+  $handler->display->display_options['filters']['pa_attorney_id_value']['field'] = 'pa_attorney_id_value';
+  $handler->display->display_options['filters']['pa_attorney_id_value']['group'] = 1;
+  $handler->display->display_options['filters']['pa_attorney_id_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['pa_attorney_id_value']['expose']['operator_id'] = 'pa_attorney_id_value_op';
+  $handler->display->display_options['filters']['pa_attorney_id_value']['expose']['label'] = 'PA Attorney ID';
+  $handler->display->display_options['filters']['pa_attorney_id_value']['expose']['operator'] = 'pa_attorney_id_value_op';
+  $handler->display->display_options['filters']['pa_attorney_id_value']['expose']['identifier'] = 'pa_attorney_id_value';
+  $handler->display->display_options['filters']['pa_attorney_id_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
   );
 
   /* Display: Page */
