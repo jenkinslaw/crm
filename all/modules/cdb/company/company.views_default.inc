@@ -105,7 +105,10 @@ function company_views_default_views() {
   $handler->display->display_options['title'] = 'Company Search';
   $handler->display->display_options['hide_attachment_summary'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    2 => '2',
+  );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'input_required';
@@ -588,6 +591,16 @@ function company_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'company/search';
+  $handler->display->display_options['menu']['type'] = 'default tab';
+  $handler->display->display_options['menu']['title'] = 'Search';
+  $handler->display->display_options['menu']['description'] = 'Regular Company Search';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+  $handler->display->display_options['tab_options']['type'] = 'normal';
+  $handler->display->display_options['tab_options']['title'] = 'Search';
+  $handler->display->display_options['tab_options']['description'] = 'Company Search';
+  $handler->display->display_options['tab_options']['weight'] = '0';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page_1');
@@ -637,6 +650,13 @@ function company_views_default_views() {
     ),
   );
   $handler->display->display_options['path'] = 'company/multi-search';
+  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['menu']['title'] = 'Multi Name Search';
+  $handler->display->display_options['menu']['description'] = 'Multiple Names Company Search';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+  $handler->display->display_options['tab_options']['weight'] = '0';
   $export['company_search'] = $view;
 
   return $export;
