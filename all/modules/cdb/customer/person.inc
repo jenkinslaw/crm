@@ -28,7 +28,9 @@ class PersonMigration extends BasicMigration {
     parent::__construct();
     $this->description = t('Person Migration');
 
-    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/customer.php';
+    $limit = get_cdb_migrate_limit();
+
+    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/customer.php?' . $limit;
     $fields = array(
       'id' => 'Cutomer Record ID.',
       'barcode' => 'Barcode ID.',

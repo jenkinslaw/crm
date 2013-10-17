@@ -37,7 +37,9 @@ class BarcodeMigration extends BasicMigration {
       'status' => 'The barcode status: 1',
     );
 
-    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/barcode.php';
+    $limit = get_cdb_migrate_limit();
+
+    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/barcode.php?' . $limit;
 
     $this->source = new MigrateSourceJSON($source_url, 'id', $fields,
       array('reader_class' => 'BarcodeJSONReader'));

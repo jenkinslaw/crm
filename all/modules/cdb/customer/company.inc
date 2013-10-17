@@ -78,8 +78,9 @@ class CompanyMigration extends BasicMigration {
       'billing_contact' => 'Person ID for billing contact.',
       'mas90_name' => 'Mas90 Name.',
     );
+    $limit = get_cdb_migrate_limit();
 
-    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/company.php?';
+    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/company.php?' . $limit;
 
     $this->source = new MigrateSourceJSON($source_url, 'id', $fields,
       array('reader_class' => 'CompanyJSONReader'));

@@ -30,7 +30,9 @@ class AddressMigration extends BasicMigration {
     parent::__construct();
     $this->description = t('Address Migration');
 
-    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/address.php';
+    $limit = get_cdb_migrate_limit();
+
+    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/address.php?' . $limit;
     $fields = array(
       "id"     => "The Address id",
       "title" => "Address Blurb",

@@ -27,7 +27,8 @@ class PhoneMigration extends BasicMigration {
     parent::__construct();
     $this->description = t('Phone Migration');
 
-    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/phone.php';
+    $limit = get_cdb_migrate_limit();
+    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/phone.php?' . $limit;
 
     $fields = array(
       'id'         => "The unique identifier for this phone number record",

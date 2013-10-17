@@ -4,3 +4,15 @@
  * @file
  * customer.module
  */
+
+/**
+ * Return a URL limit variable for customer migration.
+ */
+function get_cdb_migrate_limit() {
+  $limit = '';
+
+  if (isset($_ENV['CDB_MIGRATE_LIMIT'])) {
+    $limit = 'limit=' . $_ENV['CDB_MIGRATE_LIMIT'];
+  }
+  return $limit;
+}
