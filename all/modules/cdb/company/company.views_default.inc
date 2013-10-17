@@ -590,6 +590,127 @@ function company_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Bulk operations: Company */
+  $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'eck_company';
+  $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '1';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
+    'action::views_bulk_operations_delete_item' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::views_bulk_operations_script_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::views_bulk_operations_modify_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+      'settings' => array(
+        'show_all_tokens' => 1,
+        'display_values' => array(
+          '_all_' => '_all_',
+        ),
+      ),
+    ),
+    'action::views_bulk_operations_argument_selector_action' => array(
+      'selected' => 1,
+      'skip_confirmation' => 1,
+      'override_label' => 1,
+      'label' => 'Export to Excel',
+      'settings' => array(
+        'url' => 'company/search/export',
+      ),
+    ),
+    'action::system_send_email_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+  );
+  /* Field: Company: Id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'eck_company';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  $handler->display->display_options['fields']['id']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['id']['alter']['path'] = 'company/company/[id]';
+  $handler->display->display_options['fields']['id']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['id']['separator'] = '';
+  /* Field: Company: Account Number */
+  $handler->display->display_options['fields']['account_number']['id'] = 'account_number';
+  $handler->display->display_options['fields']['account_number']['table'] = 'eck_company';
+  $handler->display->display_options['fields']['account_number']['field'] = 'account_number';
+  $handler->display->display_options['fields']['account_number']['label'] = 'Account No.';
+  $handler->display->display_options['fields']['account_number']['element_label_colon'] = FALSE;
+  /* Field: Company: Company Name */
+  $handler->display->display_options['fields']['company_name']['id'] = 'company_name';
+  $handler->display->display_options['fields']['company_name']['table'] = 'eck_company';
+  $handler->display->display_options['fields']['company_name']['field'] = 'company_name';
+  $handler->display->display_options['fields']['company_name']['element_label_colon'] = FALSE;
+  /* Field: company: Phone Number */
+  $handler->display->display_options['fields']['phone_entity']['id'] = 'phone_entity';
+  $handler->display->display_options['fields']['phone_entity']['table'] = 'field_data_phone_entity';
+  $handler->display->display_options['fields']['phone_entity']['field'] = 'phone_entity';
+  $handler->display->display_options['fields']['phone_entity']['label'] = 'Phone';
+  $handler->display->display_options['fields']['phone_entity']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['phone_entity']['settings'] = array(
+    'link' => 0,
+  );
+  $handler->display->display_options['fields']['phone_entity']['delta_offset'] = '0';
+  /* Field: Company: Number of Attorneys */
+  $handler->display->display_options['fields']['number_of_attorneys']['id'] = 'number_of_attorneys';
+  $handler->display->display_options['fields']['number_of_attorneys']['table'] = 'eck_company';
+  $handler->display->display_options['fields']['number_of_attorneys']['field'] = 'number_of_attorneys';
+  $handler->display->display_options['fields']['number_of_attorneys']['label'] = '# Attys';
+  $handler->display->display_options['fields']['number_of_attorneys']['element_label_colon'] = FALSE;
+  /* Field: Field: Expiration Date */
+  $handler->display->display_options['fields']['exp_date']['id'] = 'exp_date';
+  $handler->display->display_options['fields']['exp_date']['table'] = 'field_data_exp_date';
+  $handler->display->display_options['fields']['exp_date']['field'] = 'exp_date';
+  $handler->display->display_options['fields']['exp_date']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['exp_date']['settings'] = array(
+    'format_type' => 'short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: company: Company Category */
+  $handler->display->display_options['fields']['company_category']['id'] = 'company_category';
+  $handler->display->display_options['fields']['company_category']['table'] = 'field_data_company_category';
+  $handler->display->display_options['fields']['company_category']['field'] = 'company_category';
+  $handler->display->display_options['fields']['company_category']['label'] = 'Category';
+  $handler->display->display_options['fields']['company_category']['element_label_colon'] = FALSE;
+  /* Field: company: Billing Area */
+  $handler->display->display_options['fields']['billing_area']['id'] = 'billing_area';
+  $handler->display->display_options['fields']['billing_area']['table'] = 'field_data_billing_area';
+  $handler->display->display_options['fields']['billing_area']['field'] = 'billing_area';
+  $handler->display->display_options['fields']['billing_area']['label'] = 'Area';
+  $handler->display->display_options['fields']['billing_area']['element_label_colon'] = FALSE;
+  /* Field: Field: Address */
+  $handler->display->display_options['fields']['address_entity']['id'] = 'address_entity';
+  $handler->display->display_options['fields']['address_entity']['table'] = 'field_data_address_entity';
+  $handler->display->display_options['fields']['address_entity']['field'] = 'address_entity';
+  $handler->display->display_options['fields']['address_entity']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['address_entity']['settings'] = array(
+    'link' => 0,
+  );
   $handler->display->display_options['path'] = 'company/search';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'Search';
@@ -604,6 +725,127 @@ function company_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Bulk operations: Company */
+  $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'eck_company';
+  $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '1';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
+    'action::views_bulk_operations_delete_item' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::views_bulk_operations_script_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::views_bulk_operations_modify_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+      'settings' => array(
+        'show_all_tokens' => 1,
+        'display_values' => array(
+          '_all_' => '_all_',
+        ),
+      ),
+    ),
+    'action::views_bulk_operations_argument_selector_action' => array(
+      'selected' => 1,
+      'skip_confirmation' => 1,
+      'override_label' => 1,
+      'label' => 'Export to Excel',
+      'settings' => array(
+        'url' => 'company/search/export',
+      ),
+    ),
+    'action::system_send_email_action' => array(
+      'selected' => 0,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+  );
+  /* Field: Company: Id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'eck_company';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  $handler->display->display_options['fields']['id']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['id']['alter']['path'] = 'company/company/[id]';
+  $handler->display->display_options['fields']['id']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['id']['separator'] = '';
+  /* Field: Company: Account Number */
+  $handler->display->display_options['fields']['account_number']['id'] = 'account_number';
+  $handler->display->display_options['fields']['account_number']['table'] = 'eck_company';
+  $handler->display->display_options['fields']['account_number']['field'] = 'account_number';
+  $handler->display->display_options['fields']['account_number']['label'] = 'Account No.';
+  $handler->display->display_options['fields']['account_number']['element_label_colon'] = FALSE;
+  /* Field: Company: Company Name */
+  $handler->display->display_options['fields']['company_name']['id'] = 'company_name';
+  $handler->display->display_options['fields']['company_name']['table'] = 'eck_company';
+  $handler->display->display_options['fields']['company_name']['field'] = 'company_name';
+  $handler->display->display_options['fields']['company_name']['element_label_colon'] = FALSE;
+  /* Field: company: Phone Number */
+  $handler->display->display_options['fields']['phone_entity']['id'] = 'phone_entity';
+  $handler->display->display_options['fields']['phone_entity']['table'] = 'field_data_phone_entity';
+  $handler->display->display_options['fields']['phone_entity']['field'] = 'phone_entity';
+  $handler->display->display_options['fields']['phone_entity']['label'] = 'Phone';
+  $handler->display->display_options['fields']['phone_entity']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['phone_entity']['settings'] = array(
+    'link' => 0,
+  );
+  $handler->display->display_options['fields']['phone_entity']['delta_offset'] = '0';
+  /* Field: Company: Number of Attorneys */
+  $handler->display->display_options['fields']['number_of_attorneys']['id'] = 'number_of_attorneys';
+  $handler->display->display_options['fields']['number_of_attorneys']['table'] = 'eck_company';
+  $handler->display->display_options['fields']['number_of_attorneys']['field'] = 'number_of_attorneys';
+  $handler->display->display_options['fields']['number_of_attorneys']['label'] = '# Attys';
+  $handler->display->display_options['fields']['number_of_attorneys']['element_label_colon'] = FALSE;
+  /* Field: Field: Expiration Date */
+  $handler->display->display_options['fields']['exp_date']['id'] = 'exp_date';
+  $handler->display->display_options['fields']['exp_date']['table'] = 'field_data_exp_date';
+  $handler->display->display_options['fields']['exp_date']['field'] = 'exp_date';
+  $handler->display->display_options['fields']['exp_date']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['exp_date']['settings'] = array(
+    'format_type' => 'short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: company: Company Category */
+  $handler->display->display_options['fields']['company_category']['id'] = 'company_category';
+  $handler->display->display_options['fields']['company_category']['table'] = 'field_data_company_category';
+  $handler->display->display_options['fields']['company_category']['field'] = 'company_category';
+  $handler->display->display_options['fields']['company_category']['label'] = 'Category';
+  $handler->display->display_options['fields']['company_category']['element_label_colon'] = FALSE;
+  /* Field: company: Billing Area */
+  $handler->display->display_options['fields']['billing_area']['id'] = 'billing_area';
+  $handler->display->display_options['fields']['billing_area']['table'] = 'field_data_billing_area';
+  $handler->display->display_options['fields']['billing_area']['field'] = 'billing_area';
+  $handler->display->display_options['fields']['billing_area']['label'] = 'Area';
+  $handler->display->display_options['fields']['billing_area']['element_label_colon'] = FALSE;
+  /* Field: Field: Address */
+  $handler->display->display_options['fields']['address_entity']['id'] = 'address_entity';
+  $handler->display->display_options['fields']['address_entity']['table'] = 'field_data_address_entity';
+  $handler->display->display_options['fields']['address_entity']['field'] = 'address_entity';
+  $handler->display->display_options['fields']['address_entity']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['address_entity']['settings'] = array(
+    'link' => 0,
+  );
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Company: Company Name */
@@ -657,6 +899,96 @@ function company_views_default_views() {
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
   $handler->display->display_options['tab_options']['weight'] = '0';
+
+  /* Display: Data export */
+  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_xls';
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['filename'] = 'companies.xls';
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Company: Id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'eck_company';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  $handler->display->display_options['fields']['id']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['id']['alter']['path'] = 'company/company/[id]';
+  $handler->display->display_options['fields']['id']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['id']['separator'] = '';
+  /* Field: Company: Account Number */
+  $handler->display->display_options['fields']['account_number']['id'] = 'account_number';
+  $handler->display->display_options['fields']['account_number']['table'] = 'eck_company';
+  $handler->display->display_options['fields']['account_number']['field'] = 'account_number';
+  $handler->display->display_options['fields']['account_number']['label'] = 'Account No.';
+  $handler->display->display_options['fields']['account_number']['element_label_colon'] = FALSE;
+  /* Field: Company: Company Name */
+  $handler->display->display_options['fields']['company_name']['id'] = 'company_name';
+  $handler->display->display_options['fields']['company_name']['table'] = 'eck_company';
+  $handler->display->display_options['fields']['company_name']['field'] = 'company_name';
+  $handler->display->display_options['fields']['company_name']['element_label_colon'] = FALSE;
+  /* Field: company: Phone Number */
+  $handler->display->display_options['fields']['phone_entity']['id'] = 'phone_entity';
+  $handler->display->display_options['fields']['phone_entity']['table'] = 'field_data_phone_entity';
+  $handler->display->display_options['fields']['phone_entity']['field'] = 'phone_entity';
+  $handler->display->display_options['fields']['phone_entity']['label'] = 'Phone';
+  $handler->display->display_options['fields']['phone_entity']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['phone_entity']['settings'] = array(
+    'link' => 0,
+  );
+  $handler->display->display_options['fields']['phone_entity']['delta_offset'] = '0';
+  /* Field: Company: Number of Attorneys */
+  $handler->display->display_options['fields']['number_of_attorneys']['id'] = 'number_of_attorneys';
+  $handler->display->display_options['fields']['number_of_attorneys']['table'] = 'eck_company';
+  $handler->display->display_options['fields']['number_of_attorneys']['field'] = 'number_of_attorneys';
+  $handler->display->display_options['fields']['number_of_attorneys']['label'] = '# Attys';
+  $handler->display->display_options['fields']['number_of_attorneys']['element_label_colon'] = FALSE;
+  /* Field: Field: Expiration Date */
+  $handler->display->display_options['fields']['exp_date']['id'] = 'exp_date';
+  $handler->display->display_options['fields']['exp_date']['table'] = 'field_data_exp_date';
+  $handler->display->display_options['fields']['exp_date']['field'] = 'exp_date';
+  $handler->display->display_options['fields']['exp_date']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['exp_date']['settings'] = array(
+    'format_type' => 'short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: company: Company Category */
+  $handler->display->display_options['fields']['company_category']['id'] = 'company_category';
+  $handler->display->display_options['fields']['company_category']['table'] = 'field_data_company_category';
+  $handler->display->display_options['fields']['company_category']['field'] = 'company_category';
+  $handler->display->display_options['fields']['company_category']['label'] = 'Category';
+  $handler->display->display_options['fields']['company_category']['element_label_colon'] = FALSE;
+  /* Field: company: Billing Area */
+  $handler->display->display_options['fields']['billing_area']['id'] = 'billing_area';
+  $handler->display->display_options['fields']['billing_area']['table'] = 'field_data_billing_area';
+  $handler->display->display_options['fields']['billing_area']['field'] = 'billing_area';
+  $handler->display->display_options['fields']['billing_area']['label'] = 'Area';
+  $handler->display->display_options['fields']['billing_area']['element_label_colon'] = FALSE;
+  /* Field: Field: Address */
+  $handler->display->display_options['fields']['address_entity']['id'] = 'address_entity';
+  $handler->display->display_options['fields']['address_entity']['table'] = 'field_data_address_entity';
+  $handler->display->display_options['fields']['address_entity']['field'] = 'address_entity';
+  $handler->display->display_options['fields']['address_entity']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['address_entity']['settings'] = array(
+    'link' => 0,
+  );
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Company: Id */
+  $handler->display->display_options['arguments']['id']['id'] = 'id';
+  $handler->display->display_options['arguments']['id']['table'] = 'eck_company';
+  $handler->display->display_options['arguments']['id']['field'] = 'id';
+  $handler->display->display_options['arguments']['id']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['id']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['id']['break_phrase'] = TRUE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  $handler->display->display_options['path'] = 'company/search/export';
   $export['company_search'] = $view;
 
   return $export;
