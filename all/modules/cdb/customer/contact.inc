@@ -29,7 +29,9 @@ class ContactMigration extends BasicMigration {
     $this->description = t('Contact Migration');
 
     $this->dependencies = array('Address','Phone');
-    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/contact.php?increment=100000';
+    $limit = get_cdb_migrate_limit();
+
+    $source_url = 'http://staging.website.dev.jenkinslaw.org/sites/all/modules/jenkins/cdb_access/cdbapi/migration/contact.php?increment=100000+' . $limit;
     $fields = array(
       'id' => 'Cutomer Record ID.',
       'patron_type' => 'Essentially type of patron occupation (i.e. Attorney)',
