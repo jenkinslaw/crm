@@ -278,6 +278,13 @@ function company_views_default_views() {
   $handler->display->display_options['fields']['address_entity']['settings'] = array(
     'link' => 0,
   );
+  /* Sort criterion: address: address (address:administrative_area) */
+  $handler->display->display_options['sorts']['address_administrative_area']['id'] = 'address_administrative_area';
+  $handler->display->display_options['sorts']['address_administrative_area']['table'] = 'field_data_address';
+  $handler->display->display_options['sorts']['address_administrative_area']['field'] = 'address_administrative_area';
+  $handler->display->display_options['sorts']['address_administrative_area']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['sorts']['address_administrative_area']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['address_administrative_area']['expose']['label'] = 'address (address:administrative_area)';
   /* Filter criterion: Company: company type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'eck_company';
@@ -968,14 +975,67 @@ function company_views_default_views() {
   $handler->display->display_options['fields']['billing_area']['field'] = 'billing_area';
   $handler->display->display_options['fields']['billing_area']['label'] = 'Area';
   $handler->display->display_options['fields']['billing_area']['element_label_colon'] = FALSE;
-  /* Field: Field: Address */
-  $handler->display->display_options['fields']['address_entity']['id'] = 'address_entity';
-  $handler->display->display_options['fields']['address_entity']['table'] = 'field_data_address_entity';
-  $handler->display->display_options['fields']['address_entity']['field'] = 'address_entity';
-  $handler->display->display_options['fields']['address_entity']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['address_entity']['settings'] = array(
-    'link' => 0,
+  /* Field: address: address */
+  $handler->display->display_options['fields']['address']['id'] = 'address';
+  $handler->display->display_options['fields']['address']['table'] = 'field_data_address';
+  $handler->display->display_options['fields']['address']['field'] = 'address';
+  $handler->display->display_options['fields']['address']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['fields']['address']['label'] = 'Street Addresss';
+  $handler->display->display_options['fields']['address']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['address']['click_sort_column'] = 'country';
+  $handler->display->display_options['fields']['address']['type'] = 'addressfield_components';
+  $handler->display->display_options['fields']['address']['settings'] = array(
+    'components' => array(
+      'thoroughfare' => 'thoroughfare',
+    ),
+    'separator' => ', ',
   );
+  /* Field: address: address */
+  $handler->display->display_options['fields']['address_1']['id'] = 'address_1';
+  $handler->display->display_options['fields']['address_1']['table'] = 'field_data_address';
+  $handler->display->display_options['fields']['address_1']['field'] = 'address';
+  $handler->display->display_options['fields']['address_1']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['fields']['address_1']['label'] = 'City';
+  $handler->display->display_options['fields']['address_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['address_1']['click_sort_column'] = 'country';
+  $handler->display->display_options['fields']['address_1']['type'] = 'addressfield_components';
+  $handler->display->display_options['fields']['address_1']['settings'] = array(
+    'components' => array(
+      'locality' => 'locality',
+    ),
+    'separator' => ', ',
+  );
+  /* Field: address: address */
+  $handler->display->display_options['fields']['address_2']['id'] = 'address_2';
+  $handler->display->display_options['fields']['address_2']['table'] = 'field_data_address';
+  $handler->display->display_options['fields']['address_2']['field'] = 'address';
+  $handler->display->display_options['fields']['address_2']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['fields']['address_2']['label'] = 'State';
+  $handler->display->display_options['fields']['address_2']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['address_2']['click_sort_column'] = 'country';
+  $handler->display->display_options['fields']['address_2']['type'] = 'addressfield_components';
+  $handler->display->display_options['fields']['address_2']['settings'] = array(
+    'components' => array(
+      'administrative_area' => 'administrative_area',
+    ),
+    'separator' => ', ',
+  );
+  /* Field: address: address */
+  $handler->display->display_options['fields']['address_3']['id'] = 'address_3';
+  $handler->display->display_options['fields']['address_3']['table'] = 'field_data_address';
+  $handler->display->display_options['fields']['address_3']['field'] = 'address';
+  $handler->display->display_options['fields']['address_3']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['fields']['address_3']['label'] = 'Zip';
+  $handler->display->display_options['fields']['address_3']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['address_3']['click_sort_column'] = 'country';
+  $handler->display->display_options['fields']['address_3']['type'] = 'addressfield_components';
+  $handler->display->display_options['fields']['address_3']['settings'] = array(
+    'components' => array(
+      'postal_code' => 'postal_code',
+    ),
+    'separator' => ', ',
+  );
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Company: Id */
   $handler->display->display_options['arguments']['id']['id'] = 'id';
