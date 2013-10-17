@@ -16,6 +16,7 @@ dependencies[] = file
 dependencies[] = ctools
 dependencies[] = features
 dependencies[] = views
+dependencies[] = views_data_export
 dependencies[] = panels
 dependencies[] = entity
 
