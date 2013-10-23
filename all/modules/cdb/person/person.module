@@ -7,6 +7,9 @@
 #include_once 'person.features.inc';
 #include_once 'includes/Person.inc';
 
+/**
+ * Implements hook_views_pre_render().
+ */
 function person_views_pre_render(&$view) {
   if ($view->name == "person_search") {
     foreach ($view->result as &$result) {
