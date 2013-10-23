@@ -31,7 +31,10 @@ function person_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
   $handler->display->display_options['exposed_form']['options']['text_input_required_format'] = 'filtered_html';
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '100';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'id' => 'id',
@@ -253,6 +256,10 @@ function person_views_default_views() {
   $handler->display->display_options['fields']['id']['table'] = 'eck_person';
   $handler->display->display_options['fields']['id']['field'] = 'id';
   $handler->display->display_options['fields']['id']['label'] = 'Member Number';
+  $handler->display->display_options['fields']['id']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['id']['alter']['path'] = '/person/person/[id]';
+  $handler->display->display_options['fields']['id']['alter']['absolute'] = TRUE;
+  $handler->display->display_options['fields']['id']['alter']['alt'] = 'Full Record for this person';
   $handler->display->display_options['fields']['id']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['id']['separator'] = '';
   /* Field: person: Barcode */
@@ -403,12 +410,14 @@ function person_views_default_views() {
     'link' => 0,
   );
   $handler->display->display_options['fields']['phone_number_entity']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['phone_number_entity']['multi_type'] = 'ul';
   /* Field: company: Phone Number */
   $handler->display->display_options['fields']['phone_entity']['id'] = 'phone_entity';
   $handler->display->display_options['fields']['phone_entity']['table'] = 'field_data_phone_entity';
   $handler->display->display_options['fields']['phone_entity']['field'] = 'phone_entity';
   $handler->display->display_options['fields']['phone_entity']['relationship'] = 'field_company_target_id';
   $handler->display->display_options['fields']['phone_entity']['label'] = 'Company Phone';
+  $handler->display->display_options['fields']['phone_entity']['exclude'] = TRUE;
   $handler->display->display_options['fields']['phone_entity']['settings'] = array(
     'link' => 0,
   );
@@ -1037,7 +1046,7 @@ function person_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'person-search';
+  $handler->display->display_options['path'] = 'person/search';
   $export['person_search'] = $view;
 
   return $export;
