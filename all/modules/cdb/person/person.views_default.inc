@@ -586,7 +586,7 @@ function person_views_default_views() {
   $handler->display->display_options['filters']['field_foa_value']['group'] = 1;
   $handler->display->display_options['filters']['field_foa_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_foa_value']['expose']['operator_id'] = 'field_foa_value_op';
-  $handler->display->display_options['filters']['field_foa_value']['expose']['label'] = 'FOA (field_foa)';
+  $handler->display->display_options['filters']['field_foa_value']['expose']['label'] = 'FOA';
   $handler->display->display_options['filters']['field_foa_value']['expose']['operator'] = 'field_foa_value_op';
   $handler->display->display_options['filters']['field_foa_value']['expose']['identifier'] = 'field_foa_value';
   $handler->display->display_options['filters']['field_foa_value']['expose']['remember_roles'] = array(
@@ -672,7 +672,7 @@ function person_views_default_views() {
   $handler->display->display_options['filters']['field_status_value']['group'] = 1;
   $handler->display->display_options['filters']['field_status_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_status_value']['expose']['operator_id'] = 'field_status_value_op';
-  $handler->display->display_options['filters']['field_status_value']['expose']['label'] = 'Status (field_status)';
+  $handler->display->display_options['filters']['field_status_value']['expose']['label'] = 'Status';
   $handler->display->display_options['filters']['field_status_value']['expose']['operator'] = 'field_status_value_op';
   $handler->display->display_options['filters']['field_status_value']['expose']['identifier'] = 'field_status_value';
   $handler->display->display_options['filters']['field_status_value']['expose']['remember'] = TRUE;
@@ -694,7 +694,7 @@ function person_views_default_views() {
   $handler->display->display_options['filters']['patron_type_value']['group'] = 1;
   $handler->display->display_options['filters']['patron_type_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['patron_type_value']['expose']['operator_id'] = 'patron_type_value_op';
-  $handler->display->display_options['filters']['patron_type_value']['expose']['label'] = 'Patron Type (patron_type)';
+  $handler->display->display_options['filters']['patron_type_value']['expose']['label'] = 'Patron Type';
   $handler->display->display_options['filters']['patron_type_value']['expose']['operator'] = 'patron_type_value_op';
   $handler->display->display_options['filters']['patron_type_value']['expose']['identifier'] = 'patron_type_value';
   $handler->display->display_options['filters']['patron_type_value']['expose']['remember_roles'] = array(
@@ -965,7 +965,7 @@ function person_views_default_views() {
   $handler->display->display_options['filters']['cle_special_value']['group'] = 1;
   $handler->display->display_options['filters']['cle_special_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['cle_special_value']['expose']['operator_id'] = 'cle_special_value_op';
-  $handler->display->display_options['filters']['cle_special_value']['expose']['label'] = 'cle_special (cle_special)';
+  $handler->display->display_options['filters']['cle_special_value']['expose']['label'] = 'cle_special';
   $handler->display->display_options['filters']['cle_special_value']['expose']['operator'] = 'cle_special_value_op';
   $handler->display->display_options['filters']['cle_special_value']['expose']['identifier'] = 'cle_special_value';
   $handler->display->display_options['filters']['cle_special_value']['expose']['remember_roles'] = array(
@@ -986,7 +986,7 @@ function person_views_default_views() {
   $handler->display->display_options['filters']['suspended_value']['group'] = 1;
   $handler->display->display_options['filters']['suspended_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['suspended_value']['expose']['operator_id'] = 'suspended_value_op';
-  $handler->display->display_options['filters']['suspended_value']['expose']['label'] = 'Suspended (suspended)';
+  $handler->display->display_options['filters']['suspended_value']['expose']['label'] = 'Suspended';
   $handler->display->display_options['filters']['suspended_value']['expose']['operator'] = 'suspended_value_op';
   $handler->display->display_options['filters']['suspended_value']['expose']['identifier'] = 'suspended_value';
   $handler->display->display_options['filters']['suspended_value']['expose']['remember_roles'] = array(
