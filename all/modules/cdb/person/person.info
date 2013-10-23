@@ -42,3 +42,4 @@ features[user_role][] = Person Administrator
 features[views_view][] = person_search
 files[] = includes/Person.inc
 files[] = tests/PersonEntity.test
+files[] = tests/PersonSearchView.test

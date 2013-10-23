@@ -1,0 +1,39 @@
+<?php
+/**
+ * @file
+ * Basic unit testing for Person Search View.
+ */
+
+
+class PersonSearchViewTestCase extends DrupalWebTestCase {
+
+  function setUp() {
+    $this->setup = TRUE;
+  }
+
+  function tearDown() {
+  }
+
+  /**
+   *  Initialize.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Person Search View tests.',
+      'description' => 'Unit tests for Person Search View.',
+      'group' => 'Jenkins',
+    );
+  }
+
+  public function test_result_field_combine() {
+    $result = (object) array(
+      'field1' => array(array("test" => "value")),
+      'field2' => array(array("test" => "another_value"))
+    );
+    
+    $combine = _result_field_combine($result, array('field1', 'field2'));
+    $expected = array(array("test" => "value"), (array("test" => "another_value")));
+    $this->assertEqual($combine->field1, $expected, "Arbitray fields are combined as expected");
+  }
+
+}
