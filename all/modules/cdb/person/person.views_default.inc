@@ -405,7 +405,7 @@ function person_views_default_views() {
   $handler->display->display_options['fields']['phone_number_entity']['id'] = 'phone_number_entity';
   $handler->display->display_options['fields']['phone_number_entity']['table'] = 'field_data_phone_number_entity';
   $handler->display->display_options['fields']['phone_number_entity']['field'] = 'phone_number_entity';
-  $handler->display->display_options['fields']['phone_number_entity']['label'] = 'Person Phone';
+  $handler->display->display_options['fields']['phone_number_entity']['label'] = 'Phone';
   $handler->display->display_options['fields']['phone_number_entity']['settings'] = array(
     'link' => 0,
   );
