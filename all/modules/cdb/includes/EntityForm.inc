@@ -6,6 +6,8 @@
  * This file defines the EntityForm class which is a wrapper for drupal forms.
  */
 
+module_load_include('inc', 'eck', 'eck.entity');
+
 class EntityForm {
 
   protected $form;
@@ -14,7 +16,7 @@ class EntityForm {
   /**
    * Entity Form Contructor.
    */
-  public function __construct(&$form) {
+  public function __construct(&$form = NULL) {
     $this->setForm($form);
   }
 

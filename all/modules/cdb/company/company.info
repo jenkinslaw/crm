@@ -39,5 +39,6 @@ features[user_role][] = Company Administrator
 features[views_view][] = company_people
 features[views_view][] = company_search
 files[] = tests/Company.test
+files[] = tests/CompanyModule.test
 files[] = includes/Company.inc
 files[] = includes/CompanyEntityForm.inc
