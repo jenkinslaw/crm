@@ -1,0 +1,72 @@
+<?php
+/**
+ * @file
+ * Unit test for company.module functions.
+ */
+
+module_load_include('module', 'company');
+
+class CompanyModuleTestCase extends DrupalWebTestCase {
+
+  /**
+   * Overrides parent::getInfo().
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Company Module Unit Tests',
+      'description' => 'Unit tests for functions within company.module',
+      'group' => 'Jenkins',
+    );
+  }
+
+  /**
+   * Sets up tests.
+   */
+  public function setUp() {
+    $this->setup = TRUE;
+  }
+
+  /**
+   * Teardown tests.
+   */
+  public function tearDown() {
+  }
+
+  /**
+   * Test company hook_menu().
+   */
+  public function testCompanyMenu() {
+    $actual = company_menu();
+    $expected['company/add'] = array(
+      'title' => 'Add New Company',
+      'description' => 'The form for adding a new Company.',
+      'page callback' => 'company_add_new_form',
+      'access arguments' => array('add company'),
+    );
+
+    $this->assertEqual($actual['company/add'], $expected['company/add'],
+      "the company/add slug is configured as expected.");
+  }
+
+  /**
+   * Test company hook_perms().
+   */
+  public function testCompanyPerms() {
+    $actual = company_permission();
+
+    $this->assertTrue(in_array('company add', array_keys($actual)),
+      "Company defines a 'company add' permission.");
+  }
+
+  /**
+   * Test company company_add_new_form().
+   */
+  public function testCompanyAddNewForm() {
+    $actual = company_add_new_form();
+
+    $this->assertTrue((is_string($actual) && !empty($actual)),
+      "Company add should return a  non empty string.");
+  }
+
+
+}
