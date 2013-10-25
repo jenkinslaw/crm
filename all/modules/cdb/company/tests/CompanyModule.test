@@ -41,7 +41,7 @@ class CompanyModuleTestCase extends DrupalWebTestCase {
       'title' => 'Add New Company',
       'description' => 'The form for adding a new Company.',
       'page callback' => 'company_add_new_form',
-      'access arguments' => array('add company'),
+      'access arguments' => array('company add'),
     );
 
     $this->assertEqual($actual['company/add'], $expected['company/add'],

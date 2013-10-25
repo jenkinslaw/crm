@@ -41,7 +41,7 @@ function company_menu() {
     'title' => 'Add New Company',
     'description' => 'The form for adding a new Company.',
     'page callback' => 'company_add_new_form',
-    'access arguments' => array('add company'),
+    'access arguments' => array('company add'),
   );
   return $items;
 }
