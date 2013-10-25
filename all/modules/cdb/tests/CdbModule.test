@@ -1,0 +1,74 @@
+<?php
+/**
+ * @file
+ * Unit test for cdb.module functions.
+ */
+
+module_load_include('module', 'cdb');
+
+class CdbModuleTestCase extends DrupalWebTestCase {
+
+  protected $niceMenu;
+
+  /**
+   * Overrides parent::getInfo().
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Cdb Module Unit Tests',
+      'description' => 'Unit tests for functions within cdb.module',
+      'group' => 'Jenkins',
+    );
+  }
+
+  /**
+   * Sets up tests.
+   */
+  public function setUp() {
+    $this->setup = TRUE;
+  }
+
+  /**
+   * Teardown tests.
+   */
+  public function tearDown() {
+  }
+
+  /**
+   * Test nice_menus functionality.
+   */
+  public function testNiceMenus() {
+    $variable['id'] = 2;
+    $variable['direction'] = 'horizontal';
+    $variable['menu_name'] = 'navigation';
+    $variable['depth'] = 3;
+
+    $user = new User();
+    $user->loginAs('Company Administrator');
+    $output = theme('nice_menus', $variable);
+
+    $this->assertTrue(is_string($output['content']),
+      "Nice menu is not empty for Company Administrator.");
+
+    // Set up for next test.
+    $this->niceMenu = $output['content'];
+    $user->reset();
+
+  }
+
+  /**
+   * Test cdb_page_preprocess().
+   */
+  public function testCdbPreprocessPage() {
+    $user = new User();
+    $user->loginAs('Company Administrator');
+
+    $actual = array();
+    cdb_preprocess_page($actual);
+
+    $this->assertEqual($actual['navigation-nice-menu'], $this->niceMenu,
+      "cdb_page_preprocessor adds the navigation nice_menu variable..");
+
+    $user->reset();
+  }
+}
