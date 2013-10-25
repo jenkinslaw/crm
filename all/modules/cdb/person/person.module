@@ -1,17 +1,23 @@
 <?php
 /**
  * @file
- * Code for the person feature.
+ * Code for the Person feature.
  */
 
-#include_once 'person.features.inc';
-#include_once 'includes/Person.inc';
+include_once 'person.features.inc';
+/**
+ * @file
+ * Code for the person feature.
+ */
 
 /**
  * Implements hook_views_pre_render().
  */
 function person_views_pre_render(&$view) {
   if ($view->name == "person_search") {
+    if (count($view->result) == 1) {
+      drupal_goto("person/person/" . $view->result[0]->id);
+    }
     foreach ($view->result as &$result) {
       $fields = array('field_phone_number_entity', 'field_phone_entity');
       $result = _result_field_combine($result, $fields);
@@ -21,7 +27,7 @@ function person_views_pre_render(&$view) {
 }
 
 /**
- * Combines multiple fields with the same structure
+ * Combines multiple fields with the same structure.
  * @result is a view's result object
  * @fields is a simple array of the fields to combine. All fields will be merged
  * into the first listed field
@@ -33,4 +39,3 @@ function _result_field_combine($result, $fields) {
   $result->$fields[0] = call_user_func_array('array_merge', $field_values);
   return $result;
 }
-
