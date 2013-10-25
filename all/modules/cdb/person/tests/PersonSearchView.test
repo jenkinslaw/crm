@@ -7,6 +7,7 @@
 
 class PersonSearchViewTestCase extends DrupalWebTestCase {
 
+
   function setUp() {
     $this->setup = TRUE;
   }
@@ -34,6 +35,15 @@ class PersonSearchViewTestCase extends DrupalWebTestCase {
     $combine = _result_field_combine($result, array('field1', 'field2'));
     $expected = array(array("test" => "value"), (array("test" => "another_value")));
     $this->assertEqual($combine->field1, $expected, "Arbitray fields are combined as expected");
+  }
+
+  public function test_single_result_redirect() {
+    $user->name = 'admin';
+    $user->pass_raw = 'buddy';
+    $this->drupalLogin($user);
+    $this->drupalGet("person/search", array("query" => array("id" => "12")));
+    $message = "Single result redirects to entity page";
+    $this->assertPattern('|page-person-person|', $message);
   }
 
 }
