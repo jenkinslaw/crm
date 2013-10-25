@@ -46,6 +46,17 @@ class CompanyModuleTestCase extends DrupalWebTestCase {
 
     $this->assertEqual($actual['company/add'], $expected['company/add'],
       "the company/add slug is configured as expected.");
+
+    $expected['company/view/%'] = array(
+      'title' => 'View Company',
+      'description' => 'View a Company page.',
+      'page callback' => 'company_view_page',
+      'access arguments' => array('company view'),
+      'page arguments' => array(2),
+    );
+    $this->assertEqual($actual['company/view/%'], $expected['company/view/%'],
+      "the company/view/% slug is configured as expected.");
+
   }
 
   /**
@@ -68,5 +79,17 @@ class CompanyModuleTestCase extends DrupalWebTestCase {
       "Company add should return a  non empty string.");
   }
 
+  /**
+   * Test company view page.
+   */
+  public function testCompanyViewPage() {
+    $company = new Company();
+    $company->company_name = "[unit-test] " . time();
+    $company->save();
+    $actual = company_view_page($company->id);
 
+    $this->assertTrue((is_string($actual) && !empty($actual)),
+      "Company view page returns a non empty string.");
+
+  }
 }

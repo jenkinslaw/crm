@@ -43,13 +43,31 @@ function company_menu() {
     'page callback' => 'company_add_new_form',
     'access arguments' => array('company add'),
   );
+
+  $items['company/view/%'] = array(
+    'title' => 'View Company',
+    'description' => 'View a Company page.',
+    'page callback' => 'company_view_page',
+    'access arguments' => array('company view'),
+    'page arguments' => array(2),
+  );
   return $items;
 }
 
 /**
- * Returns a company add form.
+ * A wrapper for eck__entity__add().
  */
 function company_add_new_form() {
   $form = eck__entity__add('company', 'company');
   return drupal_render($form);
+}
+
+/**
+ * Wrapper for eck__entity__view().
+ */
+function company_view_page($id) {
+  $company = eck__entity__view('company', 'company', $id);
+  $company_page = drupal_render($company);
+
+  return $company_page;
 }
