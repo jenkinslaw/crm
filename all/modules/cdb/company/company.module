@@ -21,11 +21,14 @@ function company_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
- * Implements hook_perms().
+ * Implements hook_permission().
  */
-function company_perm() {
+function company_permission() {
   $perms = array(
-    'company add',
+    'company add' => array(
+      'title' => 'Add New Company',
+      'description' => 'Users with this permission may add new Company records to the database.',
+    ),
   );
   return $perms;
 }
