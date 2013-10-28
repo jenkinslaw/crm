@@ -18,4 +18,3 @@ function company_set_defaults() {
   $company = new Company();
   $company->setDefaultElementValue('exp_date', 'Next Year January 1');
 }
-

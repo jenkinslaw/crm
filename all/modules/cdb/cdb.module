@@ -9,10 +9,21 @@ include_once 'includes/CdbEntity.inc';
 include_once 'includes/EntityForm.inc';
 
 /**
- * Iplements hook_preprocess().
+ * Implements hook_preprocess().
  */
 function cdb_preprocess_page(&$variable) {
   $variable['navigation_nice_menu'] = _cdb_get_navigation_nice_menus();
+}
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function cdb_entity_info_alter(&$entity_info) {
+
+  // Change some Company entity defaults.
+  $company =&  $entity_info['company']['bundles']['company'];
+  $company['crud']['add']['path'] = 'company/add';
+  $company['crud']['view']['path'] = 'company/view/%';
 }
 
 
@@ -28,4 +39,11 @@ function _cdb_get_navigation_nice_menus() {
   $output = theme('nice_menus', $variable);
 
   return $output['content'];
+}
+
+/**
+ * Returns a list of CDB entities.
+ */
+function get_cdb_entities() {
+  return array('company', 'person', 'barcode', 'phone_number');
 }

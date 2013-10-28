@@ -95,4 +95,5 @@ class CompanyModuleTestCase extends DrupalWebTestCase {
       "Company view page returns a non empty string.");
 
   }
+
 }
