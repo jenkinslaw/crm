@@ -44,6 +44,9 @@
 
   <target name="en-dev-perms">
     <exec  command='drush --yes role-add-perm "authenticated user" "access devel information"' />
+    <exec  command='drush --yes role-add-perm "authenticated user" "company add"' />
+    <exec  command='drush --yes role-add-perm "authenticated user" "company view"' />
+
     <exec  command="drush --yes role-add-perm 'anonymous user' 'access devel information'" />
     <exec  command="drush --yes role-add-perm 'Company Administrator' 'access devel information'" />
   </target>
