@@ -34,3 +34,5 @@ dependencies[] = barcode
 dependencies[] = company
 dependencies[] = person
 dependencies[] = migrate
+
+dependencies[] = nice_menus

@@ -3,6 +3,29 @@
  * @file
  * The CDB module will hold global domain space logic.
  */
+
 include_once 'cdb.features.inc';
 include_once 'includes/CdbEntity.inc';
 include_once 'includes/EntityForm.inc';
+
+/**
+ * Iplements hook_preprocess().
+ */
+function cdb_preprocess_page(&$variable) {
+  $variable['navigation_nice_menu'] = _cdb_get_navigation_nice_menus();
+}
+
+
+/**
+ * Returns navigation links as nice_menus.
+ */
+function _cdb_get_navigation_nice_menus() {
+  $variable['id'] = 2;
+  $variable['direction'] = 'horizontal';
+  $variable['menu_name'] = 'navigation';
+  $variable['depth'] = 3;
+
+  $output = theme('nice_menus', $variable);
+
+  return $output['content'];
+}

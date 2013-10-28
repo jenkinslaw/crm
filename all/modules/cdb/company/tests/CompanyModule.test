@@ -67,6 +67,9 @@ class CompanyModuleTestCase extends DrupalWebTestCase {
 
     $this->assertTrue(in_array('company add', array_keys($actual)),
       "Company defines a 'company add' permission.");
+
+    $this->assertTrue(in_array('company view', array_keys($actual)),
+      "Company defines a 'company view' permission.");
   }
 
   /**

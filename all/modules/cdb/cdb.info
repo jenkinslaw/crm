@@ -29,3 +29,4 @@ files[] = tests/Cdb.test
 files[] = tests/CdbEntity.test
 files[] = tests/CdbEntityAssumptions.test
 files[] = tests/User.test
+files[] = tests/CdbModule.test
