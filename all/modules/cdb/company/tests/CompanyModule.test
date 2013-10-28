@@ -95,4 +95,15 @@ class CompanyModuleTestCase extends DrupalWebTestCase {
       "Company view page returns a non empty string.");
 
   }
+
+  /**
+   * Test getCdbEntities.
+   */
+  public function getCdbEntities() {
+    $actual = get_cdb_entities();
+    $expected = array('company', 'person', 'barcode', 'phone_number');
+
+    $this->asserEqual($expected, $actual,
+      "get_cdb_entities() returns the expected list of CDB defined entities.");
+  }
 }
