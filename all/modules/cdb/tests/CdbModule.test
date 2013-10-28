@@ -55,7 +55,6 @@ class CdbModuleTestCase extends DrupalWebTestCase {
 
     // Check company alterations.
     $company_actual =& $entity_info['company']['bundles']['company'];
-    var_dump($company_actual['crud']);
     $this->assertEqual($company_actual['crud']['add']['path'], 'company/add',
       "The company entity add action path is 'company/add'");
 
@@ -95,7 +94,7 @@ class CdbModuleTestCase extends DrupalWebTestCase {
     $actual = array();
     cdb_preprocess_page($actual);
 
-    $this->assertEqual($actual['navigation-nice-menu'], $this->niceMenu,
+    $this->assertEqual($actual['navigation_nice_menu'], $this->niceMenu,
       "cdb_page_preprocessor adds the navigation nice_menu variable..");
 
     $user->reset();
