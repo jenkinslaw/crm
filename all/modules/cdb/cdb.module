@@ -15,6 +15,17 @@ function cdb_preprocess_page(&$variable) {
   $variable['navigation_nice_menu'] = _cdb_get_navigation_nice_menus();
 }
 
+/**
+ * Implements hook_entity_info_alter().
+ */
+function cdb_entity_info_alter(&$entity_info) {
+
+  // Change some Company entity defaults.
+  $company =&  $entity_info['company']['bundles']['company'];
+  $company['crud']['add']['path'] = 'company/add';
+  $company['crud']['view']['path'] = 'company/view/%';
+}
+
 
 /**
  * Returns navigation links as nice_menus.

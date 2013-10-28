@@ -35,6 +35,35 @@ class CdbModuleTestCase extends DrupalWebTestCase {
   }
 
   /**
+   * Test cdb_entity_info_alter().
+   */
+  public function testCdbEntityInfoAlter() {
+    $entity_info = array(
+      'company' => array(
+        'bundles' => array(
+          'company' => array(
+            'crud' => array(
+              'view' => '',
+              'add' => '',
+            ),
+          ),
+        ),
+      ),
+    );
+
+    cdb_entity_info_alter($entity_info);
+
+    // Check company alterations.
+    $company_actual =& $entity_info['company']['bundles']['company'];
+    var_dump($company_actual['crud']);
+    $this->assertEqual($company_actual['crud']['add']['path'], 'company/add',
+      "The company entity add action path is 'company/add'");
+
+    $this->assertEqual($company_actual['crud']['view']['path'], 'company/view/%',
+      "The company entity view action path is 'company/view/%'");
+  }
+
+  /**
    * Test nice_menus functionality.
    */
   public function testNiceMenus() {
@@ -71,4 +100,17 @@ class CdbModuleTestCase extends DrupalWebTestCase {
 
     $user->reset();
   }
+
+
+  /**
+   * Test getCdbEntities.
+   */
+  public function getCdbEntities() {
+    $actual = get_cdb_entities();
+    $expected = array('company', 'person', 'barcode', 'phone_number');
+
+    $this->asserEqual($expected, $actual,
+      "get_cdb_entities() returns the expected list of CDB defined entities.");
+  }
+
 }
