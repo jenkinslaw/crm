@@ -45,5 +45,5 @@ function _cdb_get_navigation_nice_menus() {
  * Returns a list of CDB entities.
  */
 function get_cdb_entities() {
-  return array('company', 'person', 'barcode', 'phone_number');
+  return array('company', 'person', 'barcode', 'phone_number', 'address');
 }
