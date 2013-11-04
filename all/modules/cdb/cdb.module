@@ -23,7 +23,7 @@ function cdb_entity_info_alter(&$entity_info) {
   // Change some Company entity defaults.
   $company =&  $entity_info['company']['bundles']['company'];
   $company['crud']['add']['path'] = 'company/add';
-  $company['crud']['view']['path'] = 'company/view/%';
+  $company['crud']['view']['path'] = 'company/%';
 }
 
 

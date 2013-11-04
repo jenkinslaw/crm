@@ -48,14 +48,32 @@ function company_menu() {
     'access arguments' => array('company add'),
   );
 
-  $items['company/view/%'] = array(
-    'title' => 'View Company',
-    'description' => 'View a Company page.',
-    'page callback' => 'company_view_page',
-    'access arguments' => array('company view'),
-    'page arguments' => array(2),
-  );
   return $items;
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function company_menu_alter(&$items) {
+
+  // View.
+  $items['company/%']['access callback'] = 'user_access';
+  $items['company/%']['access arguments'] = array('company view');
+  $items['company/%']['page callback'] = 'company_view_page';
+  $items['company/%']['page arguments'] = array(1);
+
+  // Edit.
+  $items['company/%/edit']['access callback'] = 'user_access';
+  $items['company/%/edit']['access arguments'] = array('company edit');
+  $items['company/%/edit']['page arguments'] = array(1);
+  $items['company/%/edit']['page callback'] = 'company_edit_page';
+
+  // Delete.
+  $items['company/%/delete']['access callback'] = 'user_access';
+  $items['company/%/delete']['access arguments'] = array('company delete');
+  $items['company/%/delete']['page arguments'] = array(1);
+  $items['company/%/delete']['page callback'] = 'company_delete_page';
+
 }
 
 /**
@@ -74,4 +92,24 @@ function company_view_page($id) {
   $company_page = drupal_render($company);
 
   return $company_page;
+}
+
+/**
+ * Wrapper for eck__entity__edit().
+ */
+function company_edit_page($id) {
+  $company = eck__entity__edit('company', 'company', $id);
+  $company_edit = drupal_render($company);
+
+  return $company_edit;
+}
+
+/**
+ * Wrapper for eck__entity__delete().
+ */
+function company_delete_page($id) {
+  $company = eck__entity__delete('company', 'company', $id);
+  $company_delete = drupal_render($company);
+
+  return $company_delete;
 }
