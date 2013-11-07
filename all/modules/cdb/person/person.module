@@ -14,7 +14,7 @@ include_once 'person.features.inc';
  * Implements hook_views_pre_render().
  */
 function person_views_pre_render(&$view) {
-  if ($view->current_display == "page") {
+  if ($view->name = "person_search" && $view->current_display == "page") {
     if (count($view->result) == 1) {
       drupal_goto("person/person/" . $view->result[0]->id);
     }
