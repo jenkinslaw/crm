@@ -58,8 +58,8 @@ class CdbModuleTestCase extends DrupalWebTestCase {
     $this->assertEqual($company_actual['crud']['add']['path'], 'company/add',
       "The company entity add action path is 'company/add'");
 
-    $this->assertEqual($company_actual['crud']['view']['path'], 'company/view/%',
-      "The company entity view action path is 'company/view/%'");
+    $this->assertEqual($company_actual['crud']['view']['path'], 'company/%',
+      "The company entity view action path is 'company/%'");
   }
 
   /**
