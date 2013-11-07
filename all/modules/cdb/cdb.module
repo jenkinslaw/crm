@@ -19,13 +19,71 @@ function cdb_preprocess_page(&$variable) {
  * Implements hook_entity_info_alter().
  */
 function cdb_entity_info_alter(&$entity_info) {
-
-  // Change some Company entity defaults.
-  $company =&  $entity_info['company']['bundles']['company'];
-  $company['crud']['add']['path'] = 'company/add';
-  $company['crud']['view']['path'] = 'company/view/%';
+  // Change some Cdb Entity defaults.
+  $cdb_entities = get_cdb_entities();
+  foreach ($cdb_entities as $entity) {
+    $cdb_entity =&  $entity_info[$entity]['bundles'][$entity];
+    $cdb_entity['crud']['add']['path'] = "$entity/add";
+    $cdb_entity['crud']['view']['path'] = "$entity/%";
+    $cdb_entity['crud']['edit']['path'] = "$entity/%/edit";
+    $cdb_entity['crud']['delete']['path'] = "$entity/%/delete";
+  }
 }
 
+/**
+ * Implements hook_permission().
+ */
+function cdb_permission() {
+  $perms = array();
+  foreach (get_cdb_entities() as $entity) {
+    // Create.
+    $perms["$entity add"] = array(
+      'title' => "Add new $entity",
+      'description' => "Users with this permission may add new $entity records to the database.",
+    );
+    // Read.
+    $perms["$entity view"] = array(
+      'title' => "View $entity",
+      'description' => "Users with this permission may view records of type $entity.",
+    );
+    // Update.
+    $perms["$entity edit"] = array(
+      'title' => "Edit $entity",
+      'description' => "Users with this permission may edit records of type $entity.",
+    );
+    // Delete.
+    $perms["$entity delete"] = array(
+      'title' => "Delete $entity",
+      'description' => "Users with this permission may delete records of type $entity.",
+    );
+  }
+  return $perms;
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function cdb_menu_alter(&$items) {
+  foreach (get_cdb_entities() as $entity) {
+    // View.
+    $items["$entity/%"]['access callback'] = 'user_access';
+    $items["$entity/%"]['access arguments'] = array("$entity view");
+    $items["$entity/%"]['page callback'] = 'cdb_view_page';
+    $items["$entity/%"]['page arguments'] = array(0, 1);
+
+    // Edit.
+    $items["$entity/%/edit"]['access callback'] = 'user_access';
+    $items["$entity/%/edit"]['access arguments'] = array("$entity edit");
+    $items["$entity/%/edit"]['page arguments'] = array(0, 1);
+    $items["$entity/%/edit"]['page callback'] = 'cdb_edit_page';
+
+    // Delete.
+    $items["$entity/%/delete"]['access callback'] = 'user_access';
+    $items["$entity/%/delete"]['access arguments'] = array("$entity delete");
+    $items["$entity/%/delete"]['page arguments'] = array(0, 1);
+    $items["$entity/%/delete"]['page callback'] = 'cdb_delete_page';
+  }
+}
 
 /**
  * Returns navigation links as nice_menus.
@@ -46,4 +104,42 @@ function _cdb_get_navigation_nice_menus() {
  */
 function get_cdb_entities() {
   return array('company', 'person', 'barcode', 'phone_number', 'address');
+}
+
+/**
+ * A wrapper for eck__entity__add().
+ */
+function cdb_add_new_form($entity) {
+  $form = eck__entity__add($entity, $entity);
+  return drupal_render($form);
+}
+
+/**
+ * Wrapper for eck__entity__view().
+ */
+function cdb_view_page($entity, $id) {
+  $cdb_entity = eck__entity__view($entity, $entity, $id);
+  $cdb_page = drupal_render($cdb_entity);
+
+  return $cdb_page;
+}
+
+/**
+ * Wrapper for eck__entity__edit().
+ */
+function cdb_edit_page($id) {
+  $cdb_entity = eck__entity__edit($entity, $entity, $id);
+  $cdb_edit = drupal_render($cdb_entity);
+
+  return $cdb_edit;
+}
+
+/**
+ * Wrapper for eck__entity__delete().
+ */
+function cdb_delete_page($id) {
+  $cdb_entity = eck__entity__delete('company', 'company', $id);
+  $cdb_delete = drupal_render($cdb_entity);
+
+  return $cdb_delete;
 }

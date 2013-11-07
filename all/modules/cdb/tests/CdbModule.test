@@ -52,14 +52,45 @@ class CdbModuleTestCase extends DrupalWebTestCase {
     );
 
     cdb_entity_info_alter($entity_info);
+    $cdb_entities = get_cdb_entities();
 
-    // Check company alterations.
-    $company_actual =& $entity_info['company']['bundles']['company'];
-    $this->assertEqual($company_actual['crud']['add']['path'], 'company/add',
-      "The company entity add action path is 'company/add'");
+    // Check correct CRUD alterations happen for all the cdb entity types.
+    foreach ($cdb_entities as $entity) {
+      $actual =& $entity_info[$entity]['bundles'][$entity];
+      // Create.
+      $this->assertEqual($actual['crud']['add']['path'], "$entity/add",
+        "The $entity entity add action path is '$entity/add'");
+      // Read.
+      $this->assertEqual($actual['crud']['view']['path'], "$entity/%",
+        "The $entity entity view action path is 'company/%'");
+      // Update.
+      $this->assertEqual($actual['crud']['edit']['path'], "$entity/%/edit",
+        "The $entity entity edit action path is '$entity/edit'");
+      // Delete.
+      $this->assertEqual($actual['crud']['delete']['path'], "$entity/%/delete",
+        "The $entity entity delete action path is '$entity/%/delete'");
+    }
+  }
 
-    $this->assertEqual($company_actual['crud']['view']['path'], 'company/view/%',
-      "The company entity view action path is 'company/view/%'");
+  /**
+   * Test cdb hook_perms().
+   */
+  public function testCdbPerms() {
+    $actual = cdb_permission();
+
+    foreach (get_cdb_entities() as $entity) {
+      $this->assertTrue(in_array("$entity add", array_keys($actual)),
+        "Cdb defines a '$entity add' permission.");
+
+      $this->assertTrue(in_array("$entity view", array_keys($actual)),
+        "Cdb defines a '$entity view' permission.");
+
+      $this->assertTrue(in_array("$entity edit", array_keys($actual)),
+        "Cdb defines a '$entity edit' permission.");
+
+      $this->assertTrue(in_array("$entity delete", array_keys($actual)),
+        "Cdb defines a '$entity delete' permission.");
+    }
   }
 
   /**
@@ -111,5 +142,30 @@ class CdbModuleTestCase extends DrupalWebTestCase {
     $this->asserEqual($expected, $actual,
       "get_cdb_entities() returns the expected list of CDB defined entities.");
   }
+
+  /**
+   * Test company cdb_add_new_form().
+   */
+  public function testCdbAddNewForm() {
+    $actual = cdb_add_new_form('company');
+
+    $this->assertTrue((is_string($actual) && !empty($actual)),
+      "Company add should return a  non empty string.");
+  }
+
+  /**
+   * Test cdb view page.
+   */
+  public function testCdbViewPage() {
+    $company = new Company();
+    $company->company_name = "[unit-test] " . time();
+    $company->save();
+    $actual = cdb_view_page('company', $company->id);
+
+    $this->assertTrue((is_string($actual) && !empty($actual)),
+      "Cdb view page returns a non empty string.");
+
+  }
+
 
 }
