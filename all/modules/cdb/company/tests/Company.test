@@ -191,7 +191,7 @@ class CompanyTestCase extends DrupalWebTestCase {
    * Verify last_updated field assertions.
    */
   public function testLastUpdatedField() {
-    $attribute = $this->company->getFieldInfo('last_updated');
+    $attribute = $this->company->getFieldInfo('changed');
     $this->assertEqual($attribute['label'], 'Last Updated', 'The last_updated attribute exists.');
     $this->assertEqual($attribute['type'], 'date', 'The last updated attribute is type date.');
   }
@@ -200,7 +200,7 @@ class CompanyTestCase extends DrupalWebTestCase {
    * Verify updated_by field assertions.
    */
   public function testUpdatedByField() {
-    $attribute = $this->company->getFieldInfo('updated_by');
+    $attribute = $this->company->getFieldInfo('uid');
     $this->assertEqual($attribute['label'], 'Last Updated By', 'The updated_by attribute exists.');
     $this->assertEqual($attribute['type'], 'user', 'The updated_by attribute is type user.');
   }
