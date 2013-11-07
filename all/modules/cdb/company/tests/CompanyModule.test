@@ -33,23 +33,6 @@ class CompanyModuleTestCase extends DrupalWebTestCase {
   }
 
   /**
-   * Test company hook_menu().
-   */
-  public function testCompanyMenu() {
-    $actual = company_menu();
-    $expected['company/add'] = array(
-      'title' => 'Add New Company',
-      'description' => 'The form for adding a new Company.',
-      'page callback' => 'company_add_new_form',
-      'access arguments' => array('company add'),
-    );
-
-    $this->assertEqual($actual['company/add'], $expected['company/add'],
-      "the company/add slug is configured as expected.");
-
-  }
-
-  /**
    * Test company hook_perms().
    */
   public function testCompanyPerms() {

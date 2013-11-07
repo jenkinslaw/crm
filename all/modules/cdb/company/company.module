@@ -3,7 +3,6 @@
  * @file
  * Main file to hold Copany Domain specific hook code.
  */
-
 require_once 'company.features.inc';
 require_once 'includes/Company.inc';
 require_once 'includes/CompanyEntityForm.inc';
@@ -37,19 +36,6 @@ function company_permission() {
   return $perms;
 }
 
-/**
- * Implements hook_menu().
- */
-function company_menu() {
-  $items['company/add'] = array(
-    'title' => 'Add New Company',
-    'description' => 'The form for adding a new Company.',
-    'page callback' => 'company_add_new_form',
-    'access arguments' => array('company add'),
-  );
-
-  return $items;
-}
 
 /**
  * Implements hook_menu_alter().
