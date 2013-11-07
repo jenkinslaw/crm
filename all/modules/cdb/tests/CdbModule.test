@@ -52,14 +52,24 @@ class CdbModuleTestCase extends DrupalWebTestCase {
     );
 
     cdb_entity_info_alter($entity_info);
+    $cdb_entities = get_cdb_entities();
 
-    // Check company alterations.
-    $company_actual =& $entity_info['company']['bundles']['company'];
-    $this->assertEqual($company_actual['crud']['add']['path'], 'company/add',
-      "The company entity add action path is 'company/add'");
-
-    $this->assertEqual($company_actual['crud']['view']['path'], 'company/%',
-      "The company entity view action path is 'company/%'");
+    // Check correct CRUD alterations happen for all the cdb entity types.
+    foreach ($cdb_entities as $entity) {
+      $actual =& $entity_info[$entity]['bundles'][$entity];
+      // Create.
+      $this->assertEqual($actual['crud']['add']['path'], "$entity/add",
+        "The $entity entity add action path is '$entity/add'");
+      // Read.
+      $this->assertEqual($actual['crud']['view']['path'], "$entity/%",
+        "The $entity entity view action path is 'company/%'");
+      // Update.
+      $this->assertEqual($actual['crud']['edit']['path'], "$entity/%/edit",
+        "The $entity entity edit action path is '$entity/edit'");
+      // Delete.
+      $this->assertEqual($actual['crud']['delete']['path'], "$entity/%/delete",
+        "The $entity entity delete action path is '$entity/%/delete'");
+    }
   }
 
   /**

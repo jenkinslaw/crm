@@ -19,11 +19,15 @@ function cdb_preprocess_page(&$variable) {
  * Implements hook_entity_info_alter().
  */
 function cdb_entity_info_alter(&$entity_info) {
-
-  // Change some Company entity defaults.
-  $company =&  $entity_info['company']['bundles']['company'];
-  $company['crud']['add']['path'] = 'company/add';
-  $company['crud']['view']['path'] = 'company/%';
+  // Change some Cdb Entity defaults.
+  $cdb_entities = get_cdb_entities();
+  foreach ($cdb_entities as $entity) {
+    $cdb_entity =&  $entity_info[$entity]['bundles'][$entity];
+    $cdb_entity['crud']['add']['path'] = "$entity/add";
+    $cdb_entity['crud']['view']['path'] = "$entity/%";
+    $cdb_entity['crud']['edit']['path'] = "$entity/%/edit";
+    $cdb_entity['crud']['delete']['path'] = "$entity/%/delete";
+  }
 }
 
 
