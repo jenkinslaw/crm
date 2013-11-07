@@ -10,6 +10,9 @@ class PersonSearchViewTestCase extends DrupalWebTestCase {
 
   function setUp() {
     $this->setup = TRUE;
+    $this->user->name = 'admin';
+    $this->user->pass_raw = 'buddy';
+
   }
 
   function tearDown() {
@@ -26,24 +29,26 @@ class PersonSearchViewTestCase extends DrupalWebTestCase {
     );
   }
 
-  public function test_result_field_combine() {
+  public function testResultFieldCombine() {
     $result = (object) array(
       'field1' => array(array("test" => "value")),
-      'field2' => array(array("test" => "another_value"))
+      'field2' => array(array("test" => "another_value")),
     );
-    
     $combine = _result_field_combine($result, array('field1', 'field2'));
     $expected = array(array("test" => "value"), (array("test" => "another_value")));
     $this->assertEqual($combine->field1, $expected, "Arbitray fields are combined as expected");
   }
 
-  public function test_single_result_redirect() {
-    $user->name = 'admin';
-    $user->pass_raw = 'buddy';
-    $this->drupalLogin($user);
+  public function test_singleResultRedirect() {
+    $this->drupalLogin($this->user);
+
     $this->drupalGet("person/search", array("query" => array("id" => "12")));
     $message = "Single result redirects to entity page";
     $this->assertPattern('|page-person-person|', $message);
+
+    $this->drupalGet("person/search", array("query" => array("field_status_value" => "2")));
+    $message = "Multiple results display the results on the search page";
+    $this->assertPattern('|views-table|', $message);
   }
 
 }

@@ -12,6 +12,7 @@ dependencies[] = inline_entity_form
 dependencies[] = list
 dependencies[] = number
 dependencies[] = views
+dependencies[] = views_data_export
 eck_entity_type[] = person
 features[ctools][] = field_group:field_group:1
 features[ctools][] = views:views_default:3.0
