@@ -47,16 +47,6 @@ class CompanyModuleTestCase extends DrupalWebTestCase {
     $this->assertEqual($actual['company/add'], $expected['company/add'],
       "the company/add slug is configured as expected.");
 
-    $expected['company/view/%'] = array(
-      'title' => 'View Company',
-      'description' => 'View a Company page.',
-      'page callback' => 'company_view_page',
-      'access arguments' => array('company view'),
-      'page arguments' => array(2),
-    );
-    $this->assertEqual($actual['company/view/%'], $expected['company/view/%'],
-      "the company/view/% slug is configured as expected.");
-
   }
 
   /**
