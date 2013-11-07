@@ -19,23 +19,6 @@ function company_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
-/**
- * Implements hook_permission().
- */
-function company_permission() {
-  $perms = array(
-    'company add' => array(
-      'title' => 'Add New Company',
-      'description' => 'Users with this permission may add new Company records to the database.',
-    ),
-    'company view' => array(
-      'title' => 'View a Company',
-      'description' => 'Users with this permission may view Company records in the database.',
-    ),
-  );
-  return $perms;
-}
-
 
 /**
  * Implements hook_menu_alter().

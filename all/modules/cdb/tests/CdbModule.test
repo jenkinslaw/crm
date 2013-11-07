@@ -73,6 +73,27 @@ class CdbModuleTestCase extends DrupalWebTestCase {
   }
 
   /**
+   * Test cdb hook_perms().
+   */
+  public function testCdbPerms() {
+    $actual = cdb_permission();
+
+    foreach (get_cdb_entities() as $entity) {
+      $this->assertTrue(in_array("$entity add", array_keys($actual)),
+        "Cdb defines a '$entity add' permission.");
+
+      $this->assertTrue(in_array("$entity view", array_keys($actual)),
+        "Cdb defines a '$entity view' permission.");
+
+      $this->assertTrue(in_array("$entity edit", array_keys($actual)),
+        "Cdb defines a '$entity edit' permission.");
+
+      $this->assertTrue(in_array("$entity delete", array_keys($actual)),
+        "Cdb defines a '$entity delete' permission.");
+    }
+  }
+
+  /**
    * Test nice_menus functionality.
    */
   public function testNiceMenus() {

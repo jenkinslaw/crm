@@ -30,6 +30,36 @@ function cdb_entity_info_alter(&$entity_info) {
   }
 }
 
+/**
+ * Implements hook_permission().
+ */
+function cdb_permission() {
+  $perms = array();
+  foreach (get_cdb_entities() as $entity) {
+    // Create.
+    $perms["$entity add"] = array(
+      'title' => "Add new $entity",
+      'description' => "Users with this permission may add new $entity records to the database.",
+    );
+    // Read.
+    $perms["$entity view"] = array(
+      'title' => "View $entity",
+      'description' => "Users with this permission may view records of type $entity.",
+    );
+    // Update.
+    $perms["$entity edit"] = array(
+      'title' => "Edit $entity",
+      'description' => "Users with this permission may edit records of type $entity.",
+    );
+    // Delete.
+    $perms["$entity delete"] = array(
+      'title' => "Delete $entity",
+      'description' => "Users with this permission may delete records of type $entity.",
+    );
+  }
+  return $perms;
+}
+
 
 /**
  * Returns navigation links as nice_menus.

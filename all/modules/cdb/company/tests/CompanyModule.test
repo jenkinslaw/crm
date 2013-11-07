@@ -32,18 +32,6 @@ class CompanyModuleTestCase extends DrupalWebTestCase {
   public function tearDown() {
   }
 
-  /**
-   * Test company hook_perms().
-   */
-  public function testCompanyPerms() {
-    $actual = company_permission();
-
-    $this->assertTrue(in_array('company add', array_keys($actual)),
-      "Company defines a 'company add' permission.");
-
-    $this->assertTrue(in_array('company view', array_keys($actual)),
-      "Company defines a 'company view' permission.");
-  }
 
   /**
    * Test company company_add_new_form().
