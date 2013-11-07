@@ -3,6 +3,7 @@
  * @file
  * Main file to hold Copany Domain specific hook code.
  */
+
 require_once 'company.features.inc';
 require_once 'includes/Company.inc';
 require_once 'includes/CompanyEntityForm.inc';
@@ -17,68 +18,4 @@ function company_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'views_exposed_form' && $form['#action'] == '/company/multi-search') {
     $form['company_name']['#type'] = 'textarea';
   }
-}
-
-
-/**
- * Implements hook_menu_alter().
- */
-function company_menu_alter(&$items) {
-
-  // View.
-  $items['company/%']['access callback'] = 'user_access';
-  $items['company/%']['access arguments'] = array('company view');
-  $items['company/%']['page callback'] = 'company_view_page';
-  $items['company/%']['page arguments'] = array(1);
-
-  // Edit.
-  $items['company/%/edit']['access callback'] = 'user_access';
-  $items['company/%/edit']['access arguments'] = array('company edit');
-  $items['company/%/edit']['page arguments'] = array(1);
-  $items['company/%/edit']['page callback'] = 'company_edit_page';
-
-  // Delete.
-  $items['company/%/delete']['access callback'] = 'user_access';
-  $items['company/%/delete']['access arguments'] = array('company delete');
-  $items['company/%/delete']['page arguments'] = array(1);
-  $items['company/%/delete']['page callback'] = 'company_delete_page';
-
-}
-
-/**
- * A wrapper for eck__entity__add().
- */
-function company_add_new_form() {
-  $form = eck__entity__add('company', 'company');
-  return drupal_render($form);
-}
-
-/**
- * Wrapper for eck__entity__view().
- */
-function company_view_page($id) {
-  $company = eck__entity__view('company', 'company', $id);
-  $company_page = drupal_render($company);
-
-  return $company_page;
-}
-
-/**
- * Wrapper for eck__entity__edit().
- */
-function company_edit_page($id) {
-  $company = eck__entity__edit('company', 'company', $id);
-  $company_edit = drupal_render($company);
-
-  return $company_edit;
-}
-
-/**
- * Wrapper for eck__entity__delete().
- */
-function company_delete_page($id) {
-  $company = eck__entity__delete('company', 'company', $id);
-  $company_delete = drupal_render($company);
-
-  return $company_delete;
 }

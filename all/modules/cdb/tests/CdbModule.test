@@ -143,4 +143,29 @@ class CdbModuleTestCase extends DrupalWebTestCase {
       "get_cdb_entities() returns the expected list of CDB defined entities.");
   }
 
+  /**
+   * Test company cdb_add_new_form().
+   */
+  public function testCdbAddNewForm() {
+    $actual = cdb_add_new_form('company');
+
+    $this->assertTrue((is_string($actual) && !empty($actual)),
+      "Company add should return a  non empty string.");
+  }
+
+  /**
+   * Test cdb view page.
+   */
+  public function testCdbViewPage() {
+    $company = new Company();
+    $company->company_name = "[unit-test] " . time();
+    $company->save();
+    $actual = cdb_view_page('company', $company->id);
+
+    $this->assertTrue((is_string($actual) && !empty($actual)),
+      "Cdb view page returns a non empty string.");
+
+  }
+
+
 }

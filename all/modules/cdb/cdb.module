@@ -60,6 +60,30 @@ function cdb_permission() {
   return $perms;
 }
 
+/**
+ * Implements hook_menu_alter().
+ */
+function cdb_menu_alter(&$items) {
+  foreach (get_cdb_entities() as $entity) {
+    // View.
+    $items["$entity/%"]['access callback'] = 'user_access';
+    $items["$entity/%"]['access arguments'] = array("$entity view");
+    $items["$entity/%"]['page callback'] = 'cdb_view_page';
+    $items["$entity/%"]['page arguments'] = array(0, 1);
+
+    // Edit.
+    $items["$entity/%/edit"]['access callback'] = 'user_access';
+    $items["$entity/%/edit"]['access arguments'] = array("$entity edit");
+    $items["$entity/%/edit"]['page arguments'] = array(0, 1);
+    $items["$entity/%/edit"]['page callback'] = 'cdb_edit_page';
+
+    // Delete.
+    $items["$entity/%/delete"]['access callback'] = 'user_access';
+    $items["$entity/%/delete"]['access arguments'] = array("$entity delete");
+    $items["$entity/%/delete"]['page arguments'] = array(0, 1);
+    $items["$entity/%/delete"]['page callback'] = 'cdb_delete_page';
+  }
+}
 
 /**
  * Returns navigation links as nice_menus.
@@ -80,4 +104,42 @@ function _cdb_get_navigation_nice_menus() {
  */
 function get_cdb_entities() {
   return array('company', 'person', 'barcode', 'phone_number', 'address');
+}
+
+/**
+ * A wrapper for eck__entity__add().
+ */
+function cdb_add_new_form($entity) {
+  $form = eck__entity__add($entity, $entity);
+  return drupal_render($form);
+}
+
+/**
+ * Wrapper for eck__entity__view().
+ */
+function cdb_view_page($entity, $id) {
+  $cdb_entity = eck__entity__view($entity, $entity, $id);
+  $cdb_page = drupal_render($cdb_entity);
+
+  return $cdb_page;
+}
+
+/**
+ * Wrapper for eck__entity__edit().
+ */
+function cdb_edit_page($id) {
+  $cdb_entity = eck__entity__edit($entity, $entity, $id);
+  $cdb_edit = drupal_render($cdb_entity);
+
+  return $cdb_edit;
+}
+
+/**
+ * Wrapper for eck__entity__delete().
+ */
+function cdb_delete_page($id) {
+  $cdb_entity = eck__entity__delete('company', 'company', $id);
+  $cdb_delete = drupal_render($cdb_entity);
+
+  return $cdb_delete;
 }
