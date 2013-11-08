@@ -48,7 +48,7 @@ class PersonSearchViewTestCase extends DrupalWebTestCase {
     $this->drupalLogin($this->user);
     $this->drupalGet("person/search", array("query" => array("id" => $person1->id)));
     $message = "Single result redirects to entity page";
-    $this->assertPattern('|page-person-person|', $message);
+    $this->assertPattern('|page-person|', $message);
 
     $person2 = new Person();
     $person2->name = "[unit-test] " . time();
@@ -62,5 +62,6 @@ class PersonSearchViewTestCase extends DrupalWebTestCase {
     $person1->delete();
     $person2->delete();
   }
+
 
 }
