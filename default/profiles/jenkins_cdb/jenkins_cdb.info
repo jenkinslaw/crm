@@ -1,38 +1,49 @@
-name = CDB Installation
-description = Install profile for installing the Jenkins Customer Database.
-version = "7.20"
-project = "drupal"
 core = 7.x
-
-dependencies[] = toolbar
-dependencies[] = menu
-dependencies[] = field_ui
-dependencies[] = block
-dependencies[] = list
-dependencies[] = number
-dependencies[] = options
-dependencies[] = file
+description = Install profile for installing the Jenkins Customer Database.
+name = CDB Installation
+project = "drupal"
+version = "7.20"
 
 dependencies[] = ctools
-dependencies[] = features
 dependencies[] = views
-dependencies[] = views_data_export
-dependencies[] = panels
+dependencies[] = features
 dependencies[] = entity
+dependencies[] = eck
+
+dependencies[] = entityreference
+dependencies[] = inline_entity_form
+dependencies[] = addressfield
+dependencies[] = number
+dependencies[] = list
+dependencies[] = file
+dependencies[] = url
+dependencies[] = options
+dependencies[] = date
+dependencies[] = date_popup
+dependencies[] = date_views
+dependencies[] = views_bulk_operations
+dependencies[] = views_data_export
+dependencies[] = field_ui
 
 dependencies[] = comment
+dependencies[] = menu
+dependencies[] = block
+
 dependencies[] = contextual
-dependencies[] = dashboard
-dependencies[] = help
-dependencies[] = path
 dependencies[] = dblog
+dependencies[] = panels
+dependencies[] = toolbar
+dependencies[] = dashboard
+dependencies[] = nice_menus
+dependencies[] = path
 dependencies[] = overlay
 
-dependencies[] = address
 dependencies[] = phone_number
 dependencies[] = barcode
+dependencies[] = address
 dependencies[] = company
 dependencies[] = person
-dependencies[] = migrate
+dependencies[] = cdb
 
-dependencies[] = nice_menus
+dependencies[] = migrate
+dependencies[] = help

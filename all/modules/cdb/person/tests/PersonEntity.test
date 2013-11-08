@@ -105,7 +105,7 @@ class PersonEntityTestCase extends DrupalWebTestCase {
 
   public function testPhoneNumber() {
     $phone = $this->person->phone_number_entity()->info();
-    $this->assertEqual($phone['type'], "phone_number", "Phone is a {$phone['type']}");
+    $this->assertEqual($phone['type'], "list<phone_number>", "Phone is a {$phone['type']}");
   }
 
   public function testCleSpecial() {
