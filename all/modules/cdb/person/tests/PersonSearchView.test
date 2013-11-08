@@ -7,12 +7,12 @@
 
 class PersonSearchViewTestCase extends DrupalWebTestCase {
 
+  protected $public_files_directory = 'files';
 
   function setUp() {
     $this->setup = TRUE;
     $this->user->name = 'admin';
     $this->user->pass_raw = 'buddy';
-
   }
 
   function tearDown() {
@@ -40,15 +40,27 @@ class PersonSearchViewTestCase extends DrupalWebTestCase {
   }
 
   public function test_singleResultRedirect() {
-    $this->drupalLogin($this->user);
+    $person1 = new Person();
+    $person1->name = "[unit-test] " . time();
+    $person1->status = 2;
+    $person1->save();
 
-    $this->drupalGet("person/search", array("query" => array("id" => "12")));
+    $this->drupalLogin($this->user);
+    $this->drupalGet("person/search", array("query" => array("id" => $person1->id)));
     $message = "Single result redirects to entity page";
     $this->assertPattern('|page-person-person|', $message);
+
+    $person2 = new Person();
+    $person2->name = "[unit-test] " . time();
+    $person1->status = 2;
+    $person2->save();
 
     $this->drupalGet("person/search", array("query" => array("field_status_value" => "2")));
     $message = "Multiple results display the results on the search page";
     $this->assertPattern('|views-table|', $message);
+
+    $person1->delete();
+    $person2->delete();
   }
 
 }
