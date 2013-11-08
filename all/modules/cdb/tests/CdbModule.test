@@ -38,8 +38,9 @@ class CdbModuleTestCase extends DrupalWebTestCase {
    * Test cdb_entity_info_alter().
    */
   public function testCdbEntityInfoAlter() {
-    $entity_info = array(
-      'company' => array(
+    $entity_info = array();
+    foreach (get_cdb_entities() as $entity) {
+      $entity_info[$entity] = array(
         'bundles' => array(
           'company' => array(
             'crud' => array(
@@ -48,9 +49,8 @@ class CdbModuleTestCase extends DrupalWebTestCase {
             ),
           ),
         ),
-      ),
-    );
-
+      );
+    }
     cdb_entity_info_alter($entity_info);
     $cdb_entities = get_cdb_entities();
 
