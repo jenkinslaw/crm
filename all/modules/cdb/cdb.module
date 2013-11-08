@@ -108,6 +108,8 @@ function get_cdb_entities() {
 
 /**
  * A wrapper for eck__entity__add().
+ *
+ * Assumes entity and bundle are same name for passing to eck__entity__add.
  */
 function cdb_add_new_form($entity) {
   $form = eck__entity__add($entity, $entity);
@@ -116,6 +118,8 @@ function cdb_add_new_form($entity) {
 
 /**
  * Wrapper for eck__entity__view().
+ *
+ * Assumes entity and bundle are same name for passing to eck__entity__view.
  */
 function cdb_view_page($entity, $id) {
   $cdb_entity = eck__entity__view($entity, $entity, $id);
@@ -126,8 +130,10 @@ function cdb_view_page($entity, $id) {
 
 /**
  * Wrapper for eck__entity__edit().
+ * 
+ * Assumes entity and bundle are same name for passing to eck__entity__edit.
  */
-function cdb_edit_page($id) {
+function cdb_edit_page($entity, $id) {
   $cdb_entity = eck__entity__edit($entity, $entity, $id);
   $cdb_edit = drupal_render($cdb_entity);
 
@@ -136,9 +142,11 @@ function cdb_edit_page($id) {
 
 /**
  * Wrapper for eck__entity__delete().
+ *
+ * Assumes entity and bundle are same name for passing to eck__entity__delete.
  */
-function cdb_delete_page($id) {
-  $cdb_entity = eck__entity__delete('company', 'company', $id);
+function cdb_delete_page($entity, $id) {
+  $cdb_entity = eck__entity__delete($entity, $entity, $id);
   $cdb_delete = drupal_render($cdb_entity);
 
   return $cdb_delete;
