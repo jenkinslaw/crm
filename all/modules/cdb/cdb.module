@@ -19,9 +19,13 @@ function cdb_preprocess_page(&$variable) {
  * Implements hook_entity_info_alter().
  */
 function cdb_entity_info_alter(&$entity_info) {
+
   // Change some Cdb Entity defaults.
   $cdb_entities = get_cdb_entities();
   foreach ($cdb_entities as $entity) {
+    if (!isset($entity_info["$entity"])) {
+      return FALSE;
+    }
     $cdb_entity =&  $entity_info[$entity]['bundles'][$entity];
     $cdb_entity['crud']['add']['path'] = "$entity/add";
     $cdb_entity['crud']['view']['path'] = "$entity/%";
@@ -64,7 +68,13 @@ function cdb_permission() {
  * Implements hook_menu_alter().
  */
 function cdb_menu_alter(&$items) {
+
   foreach (get_cdb_entities() as $entity) {
+
+    if (!isset($items["$entity/%"])) {
+      return FALSE;
+    }
+
     // View.
     $items["$entity/%"]['access callback'] = 'user_access';
     $items["$entity/%"]['access arguments'] = array("$entity view");
@@ -83,6 +93,8 @@ function cdb_menu_alter(&$items) {
     $items["$entity/%/delete"]['page arguments'] = array(0, 1);
     $items["$entity/%/delete"]['page callback'] = 'cdb_delete_page';
   }
+
+  return TRUE;
 }
 
 /**
