@@ -68,8 +68,13 @@ class CdbTestCase extends DrupalWebTestCase {
    */
   public function testCdbRoles() {
     // Verify Person Role.
+    $query = db_select('role');
+    $query->addField('role', 'rid');
+    $query->condition('name', 'Person Administrator', '=');
+    $result = $query->execute();
+
+    $actual = $result->rowCount();
     $expected = 1;
-    $actual = db_query('select count(*) from role where name = "Person Administrator"')->fetchColumn();
     $this->assertEqual($expected, $actual, "The Person Administrator role is present.");
   }
 
