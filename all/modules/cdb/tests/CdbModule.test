@@ -73,6 +73,32 @@ class CdbModuleTestCase extends DrupalWebTestCase {
   }
 
   /**
+   * Test cdb_menu_alter().
+   */
+  public function testCdbMenuAlter() {
+    $items = array();
+    $actual = cdb_menu_alter($items);
+    $this->assertFalse($actual, "cdb_menu_alter() does nothing by default.");
+
+    foreach (get_cdb_entities() as $entity) {
+      $items["$entity/%"] = array();
+    }
+    $actual = cdb_menu_alter($items);
+    $this->assertTrue($actual, "cdb_menu_alter() alters menu items when cdb enties are confirmed.");
+
+    foreach (get_cdb_entities() as $entity) {
+      foreach (array('edit', 'delete', '') as $mode) {
+        $key = !empty($mode) ? "$entity/%/$mode" : "$entity/%";
+        $action = !empty($mode) ? $mode : 'view';
+        $actual = $items[$key]['page callback'];
+        $expected = "cdb_${action}_page";
+
+        $this->assertEqual($actual, $expected, "cdb_menu_alter() works as expected $entity $action.");
+      }
+    }
+  }
+
+  /**
    * Test cdb hook_perms().
    */
   public function testCdbPerms() {
