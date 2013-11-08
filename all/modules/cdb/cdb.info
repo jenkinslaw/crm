@@ -16,6 +16,7 @@ dependencies[] = field
 dependencies[] = field_group
 dependencies[] = field_group_multiple
 dependencies[] = url
+dependencies[] = nice_menus
 
 
 features[features_api][] = api:1
