@@ -87,8 +87,6 @@ class PhoneNumberTestCase extends DrupalWebTestCase {
 
     $this->assertEqual($field['#options'], $expected_options,
       "field phone_type has the expected options: ");
-
-    var_export($field['#options']);
   }
 
   /**
