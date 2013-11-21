@@ -169,4 +169,20 @@ class CdbEntity {
     return variable_set("cdb_{$type}_{$element_id}_default_value", $value);
   }
 
+  /**
+   * Wrapper for hook_views_pre_render().
+   */
+  public function viewsPreRender(&$view) {
+    if ($view->name = "{$this->type}_search" && $view->current_display == "page") {
+      if (count($view->result) == 1) {
+        $path = "{$this->type}/{$view->result[0]->id}";
+        drupal_goto($path);
+      }
+      foreach ($view->result as &$result) {
+        $fields = array('field_phone_number_entity', 'field_phone_entity');
+        $result = _result_field_combine($result, $fields);
+      }
+    }
+  }
+
 }
