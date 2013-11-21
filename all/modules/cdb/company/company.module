@@ -19,3 +19,12 @@ function company_form_alter(&$form, &$form_state, $form_id) {
     $form['company_name']['#type'] = 'textarea';
   }
 }
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function company_views_pre_render(&$view) {
+  $company = new Company();
+  $company->viewsPreRender($view);
+  return $view;
+}
