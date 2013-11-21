@@ -260,7 +260,7 @@ function person_views_default_views() {
   $handler->display->display_options['fields']['id']['field'] = 'id';
   $handler->display->display_options['fields']['id']['label'] = 'Member Number';
   $handler->display->display_options['fields']['id']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['id']['alter']['path'] = '/person/person/[id]';
+  $handler->display->display_options['fields']['id']['alter']['path'] = '/person/[id]';
   $handler->display->display_options['fields']['id']['alter']['absolute'] = TRUE;
   $handler->display->display_options['fields']['id']['alter']['alt'] = 'Full Record for this person';
   $handler->display->display_options['fields']['id']['element_label_colon'] = FALSE;
@@ -1119,7 +1119,7 @@ function person_views_default_views() {
   $handler->display->display_options['fields']['id']['field'] = 'id';
   $handler->display->display_options['fields']['id']['label'] = 'Member Number';
   $handler->display->display_options['fields']['id']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['id']['alter']['path'] = '/person/person/[id]';
+  $handler->display->display_options['fields']['id']['alter']['path'] = '/person/[id]';
   $handler->display->display_options['fields']['id']['alter']['absolute'] = TRUE;
   $handler->display->display_options['fields']['id']['alter']['alt'] = 'Full Record for this person';
   $handler->display->display_options['fields']['id']['element_label_colon'] = FALSE;
