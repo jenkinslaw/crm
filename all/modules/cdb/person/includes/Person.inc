@@ -18,4 +18,12 @@ class Person extends CdbEntity {
     parent::__construct($id);
   }
 
+  /**
+   * Overrides CdbEntity::forEachResult().
+   */
+  protected function foreEachResult(&$result) {
+    $fields = array('field_phone_number_entity', 'field_phone_entity');
+    return $result = _result_field_combine($result, $fields);
+  }
+
 }
