@@ -173,16 +173,21 @@ class CdbEntity {
    * Wrapper for hook_views_pre_render().
    */
   public function viewsPreRender(&$view) {
-    if ($view->name = "{$this->type}_search" && $view->current_display == "page") {
+    if ($view->name == "{$this->type}_search" && $view->current_display == "page") {
       if (count($view->result) == 1) {
         $path = "{$this->type}/{$view->result[0]->id}";
         drupal_goto($path);
       }
       foreach ($view->result as &$result) {
-        $fields = array('field_phone_number_entity', 'field_phone_entity');
-        $result = _result_field_combine($result, $fields);
+        $this->forEeachResult($result);
       }
     }
+  }
+
+  /**
+   * Stub reference function to run code on each view result.
+   */
+  protected function foreEachResult(&$result) {
   }
 
 }
