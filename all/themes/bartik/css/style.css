@@ -1648,3 +1648,8 @@ div.admin-panel .description {
 #footer-wrapper .poll .bar .foreground {
   background-color: #ddd;
 }
+
+
+tr.odd.suspended, tr.even.suspended {
+  background-color : #FFDA73;
+}

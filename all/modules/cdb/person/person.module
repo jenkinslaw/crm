@@ -39,14 +39,13 @@ function _result_field_combine($result, $fields) {
 function _is_suspended(&$result) {
   $result->suspended = FALSE;
   if ($result->field_suspended) {
-    if ($result->field_suspended[0]['rendered']['#access']) {
+    if ($result->field_suspended[0]['raw']['value'] == ("Y"||"y")) {
       $result->suspended = TRUE;
     }
   }
   elseif ($result->field_suspended_1) {
-    if ($result->field_suspended_1[0]['rendered']['#access']) {
+    if ($result->field_suspended_1[0]['raw']['value'] == ("Y"||"y")) {
       $result->suspended = TRUE;
     }
   }
-  return $result;
 }

@@ -154,3 +154,19 @@ function bartik_field__taxonomy_term_reference($variables) {
 
   return $output;
 }
+
+/**
+ * Implements theme_preprocess_hook().
+ *
+ * Adds suspended class to person or comapny whose suspended field set is true; 
+ */
+function bartik_preprocess_views_view_table(&$vars) {
+  if ($vars['view']->name == "person_search") {
+    $result = $vars['view']->result;
+    foreach ($vars['rows'] as $id => $row) {
+      if ($result[$id]->suspended) {
+        $vars['row_classes'][$id][] = "suspended";
+      }
+    }
+  }
+}
