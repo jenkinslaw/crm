@@ -272,6 +272,39 @@ class CompanyTestCase extends DrupalWebTestCase {
     $this->assertEqual($array['test'], 'Hello', "We can reference objects from within other objects.");
     $this->assertTrue(TRUE, "This is cool.");
   }
+
+  /**
+   * Unit-test Company::getNumberOfAttorneys().
+   */
+  public function testGetNumberOfAttorneys() {
+    $company = new Company();
+    $company->company_name = "A Test Company";
+    $company->save();
+    $person_id_cache = array();
+
+    for ($att_count = 1; $att_count <= 10; $att_count++) {
+      $person = new Person();
+      $person->first = "First-$att_count";
+      $person->last = "Last-$att_count";
+      $person->company = $company->id;
+      // Status == 1 means Attorney.
+      $person->status = '1';
+      $person->save();
+      $person_id_cache[] = $person->id;
+
+      $actual = $company->getNumberOfAttorneys();
+      $expected = $att_count;
+      $this->assertEqual($actual, $expected,
+        "Company::getNumberOfAttorneys() works as expected.");
+    }
+
+    // Clean up.
+    foreach ($person_id_cache as $id) {
+      $person = new Person($id);
+      $person->delete();
+    }
+    $company->delete();
+  }
 }
 
 
