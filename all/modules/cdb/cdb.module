@@ -163,3 +163,53 @@ function cdb_delete_page($entity, $id) {
 
   return $cdb_delete;
 }
+
+/**
+ * Implements module_preprocess_hook().
+ *
+ * Adds suspended class to person or comapny whose suspended field set is true. 
+ */
+function cdb_preprocess_views_view_table(&$vars) {
+  if ($vars['view']->name == "person_search") {
+    $result = $vars['view']->result;
+    foreach ($vars['rows'] as $id => $row) {
+      if ($result[$id]->suspended) {
+        $vars['row_classes'][$id][] = "suspended";
+      }
+    }
+  }
+}
+
+/**
+ * Detect if the any suspended field is true & set a suspended attribute.
+ *
+ * $result - a views result object
+ * $fields - fields to check for suspension
+ */
+function cdb_is_suspended(&$result, Array $fields) {
+  $result->suspended = FALSE;
+  foreach ($fields as $field) {
+    _cdb_check_suspended_field($result, $field);
+  }
+}
+
+/**
+ * Check an individual field for suspension status. 
+ */
+function _cdb_check_suspended_field(&$result, $field) {
+  if ($result->$field) {
+    $value = $result->{$field}[0]['raw']['value'];
+    if (in_array($value, array("Y", "y"))){
+      $result->suspended = TRUE;
+    }
+  }
+}
+
+/**
+ * Implements hook_init().
+ *
+ * Place to insert custome css / js ntil we decide on a theme.
+ */
+function cdb_init() {
+  drupal_add_css(drupal_get_path('module', 'cdb') . "/theme/cdb.css");
+}

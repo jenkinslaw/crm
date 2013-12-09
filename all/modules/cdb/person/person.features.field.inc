@@ -106,7 +106,14 @@ function person_field_default_fields() {
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'barcode_entity',
-      'foreign keys' => array(),
+      'foreign keys' => array(
+        'eck_barcode' => array(
+          'columns' => array(
+            'target_id' => 'id',
+          ),
+          'table' => 'eck_barcode',
+        ),
+      ),
       'indexes' => array(
         'target_id' => array(
           0 => 'target_id',
@@ -1231,7 +1238,14 @@ function person_field_default_fields() {
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'phone_number_entity',
-      'foreign keys' => array(),
+      'foreign keys' => array(
+        'eck_phone_number' => array(
+          'columns' => array(
+            'target_id' => 'id',
+          ),
+          'table' => 'eck_phone_number',
+        ),
+      ),
       'indexes' => array(
         'target_id' => array(
           0 => 'target_id',

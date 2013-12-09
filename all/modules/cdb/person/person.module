@@ -32,3 +32,5 @@ function _result_field_combine($result, $fields) {
   $result->$fields[0] = call_user_func_array('array_merge', $field_values);
   return $result;
 }
+
+

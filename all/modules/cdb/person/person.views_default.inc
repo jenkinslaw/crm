@@ -1293,6 +1293,17 @@ function person_views_default_views() {
   $handler->display->display_options['fields']['cle_special']['table'] = 'field_data_cle_special';
   $handler->display->display_options['fields']['cle_special']['field'] = 'cle_special';
   $handler->display->display_options['fields']['cle_special']['label'] = 'CLE Special';
+  /* Field: Field: Suspended */
+  $handler->display->display_options['fields']['suspended']['id'] = 'suspended';
+  $handler->display->display_options['fields']['suspended']['table'] = 'field_data_suspended';
+  $handler->display->display_options['fields']['suspended']['field'] = 'suspended';
+  $handler->display->display_options['fields']['suspended']['relationship'] = 'field_company_target_id';
+  $handler->display->display_options['fields']['suspended']['exclude'] = TRUE;
+  /* Field: Field: Suspended */
+  $handler->display->display_options['fields']['suspended_1']['id'] = 'suspended_1';
+  $handler->display->display_options['fields']['suspended_1']['table'] = 'field_data_suspended';
+  $handler->display->display_options['fields']['suspended_1']['field'] = 'suspended';
+  $handler->display->display_options['fields']['suspended_1']['exclude'] = TRUE;
   $handler->display->display_options['path'] = 'person/search';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'Search';

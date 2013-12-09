@@ -23,7 +23,10 @@ class Person extends CdbEntity {
    */
   protected function foreEachResult(&$result) {
     $fields = array('field_phone_number_entity', 'field_phone_entity');
-    return $result = _result_field_combine($result, $fields);
+    $result = _result_field_combine($result, $fields);
+    $suspended_fields = array('field_suspended', 'field_suspended_1');
+    cdb_is_suspended($result, $suspended_fields);
+    return $result;
   }
 
 }
