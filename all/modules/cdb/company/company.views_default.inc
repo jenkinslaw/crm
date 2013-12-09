@@ -278,13 +278,59 @@ function company_views_default_views() {
   $handler->display->display_options['fields']['address_entity']['settings'] = array(
     'link' => 0,
   );
+  /* Sort criterion: Company: Company Name */
+  $handler->display->display_options['sorts']['company_name']['id'] = 'company_name';
+  $handler->display->display_options['sorts']['company_name']['table'] = 'eck_company';
+  $handler->display->display_options['sorts']['company_name']['field'] = 'company_name';
+  $handler->display->display_options['sorts']['company_name']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['company_name']['expose']['label'] = 'Name';
+  /* Sort criterion: address: address (address:thoroughfare) */
+  $handler->display->display_options['sorts']['address_thoroughfare']['id'] = 'address_thoroughfare';
+  $handler->display->display_options['sorts']['address_thoroughfare']['table'] = 'field_data_address';
+  $handler->display->display_options['sorts']['address_thoroughfare']['field'] = 'address_thoroughfare';
+  $handler->display->display_options['sorts']['address_thoroughfare']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['sorts']['address_thoroughfare']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['address_thoroughfare']['expose']['label'] = 'Address Line 1';
+  /* Sort criterion: address: address (address:premise) */
+  $handler->display->display_options['sorts']['address_premise']['id'] = 'address_premise';
+  $handler->display->display_options['sorts']['address_premise']['table'] = 'field_data_address';
+  $handler->display->display_options['sorts']['address_premise']['field'] = 'address_premise';
+  $handler->display->display_options['sorts']['address_premise']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['sorts']['address_premise']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['address_premise']['expose']['label'] = 'Address Line 2';
+  /* Sort criterion: address: address (address:locality) */
+  $handler->display->display_options['sorts']['address_locality']['id'] = 'address_locality';
+  $handler->display->display_options['sorts']['address_locality']['table'] = 'field_data_address';
+  $handler->display->display_options['sorts']['address_locality']['field'] = 'address_locality';
+  $handler->display->display_options['sorts']['address_locality']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['sorts']['address_locality']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['address_locality']['expose']['label'] = 'City';
   /* Sort criterion: address: address (address:administrative_area) */
   $handler->display->display_options['sorts']['address_administrative_area']['id'] = 'address_administrative_area';
   $handler->display->display_options['sorts']['address_administrative_area']['table'] = 'field_data_address';
   $handler->display->display_options['sorts']['address_administrative_area']['field'] = 'address_administrative_area';
   $handler->display->display_options['sorts']['address_administrative_area']['relationship'] = 'address_entity_target_id';
   $handler->display->display_options['sorts']['address_administrative_area']['exposed'] = TRUE;
-  $handler->display->display_options['sorts']['address_administrative_area']['expose']['label'] = 'address (address:administrative_area)';
+  $handler->display->display_options['sorts']['address_administrative_area']['expose']['label'] = 'State';
+  /* Sort criterion: address: address (address:postal_code) */
+  $handler->display->display_options['sorts']['address_postal_code']['id'] = 'address_postal_code';
+  $handler->display->display_options['sorts']['address_postal_code']['table'] = 'field_data_address';
+  $handler->display->display_options['sorts']['address_postal_code']['field'] = 'address_postal_code';
+  $handler->display->display_options['sorts']['address_postal_code']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['sorts']['address_postal_code']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['address_postal_code']['expose']['label'] = 'Zip';
+  /* Sort criterion: company: Billing Area (billing_area) */
+  $handler->display->display_options['sorts']['billing_area_value']['id'] = 'billing_area_value';
+  $handler->display->display_options['sorts']['billing_area_value']['table'] = 'field_data_billing_area';
+  $handler->display->display_options['sorts']['billing_area_value']['field'] = 'billing_area_value';
+  $handler->display->display_options['sorts']['billing_area_value']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['billing_area_value']['expose']['label'] = 'Billing Area';
+  /* Sort criterion: company: Company Category (company_category) */
+  $handler->display->display_options['sorts']['company_category_value']['id'] = 'company_category_value';
+  $handler->display->display_options['sorts']['company_category_value']['table'] = 'field_data_company_category';
+  $handler->display->display_options['sorts']['company_category_value']['field'] = 'company_category_value';
+  $handler->display->display_options['sorts']['company_category_value']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['company_category_value']['expose']['label'] = 'Co. Category';
   /* Filter criterion: Company: company type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'eck_company';
