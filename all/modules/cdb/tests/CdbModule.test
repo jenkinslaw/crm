@@ -190,8 +190,27 @@ class CdbModuleTestCase extends DrupalWebTestCase {
 
     $this->assertTrue((is_string($actual) && !empty($actual)),
       "Cdb view page returns a non empty string.");
-
   }
 
+  /**
+   * Test determining suspended status. 
+   */
+  public function testCheckSuspendedField() {
+    $suspended1 = new stdclass();  
+    $suspended1->field_suspended[] = array('raw' => array("value" => "Y"));
+    $suspended2 = new stdclass();  
+    $suspended2->field_suspended_1[] = array('raw' => array("value" => "y"));
+    $not_suspended = new stdclass();  
+    $not_suspended->field_suspended[] = array('raw' => array("value" => "n"));
+
+    _cdb_check_suspended_field($suspended1, 'field_suspended');
+    $this->assertTrue($suspended1->suspended, "Returns suspended on Y");
+
+    _cdb_check_suspended_field($suspended2, 'field_suspended_1');
+    $this->assertTrue($suspended2->suspended, "Returns suspended on y");
+
+    _cdb_check_suspended_field($not_suspended, 'field_suspended');
+    $this->assertFalse($not_suspended->suspended, "Returns not suspended on n");
+  }
 
 }
