@@ -28,3 +28,20 @@ function company_views_pre_render(&$view) {
   $company->viewsPreRender($view);
   return $view;
 }
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function company_views_query_alter(&$views) {
+  // Alter the view query to do multiple searches on company_name.
+  if ($views->name == 'company_search' && $views->current_display == 'page_1') {
+    unset ($views->query->where);
+    $views->query->set_where_group('OR', 0);
+
+    $lines = explode("\n", $views->exposed_raw_input['company_name']);
+    foreach ($lines as $line) {
+      $value = '%' . trim($line) . '%';
+      $views->query->add_where(0, 'company_name', $value, 'LIKE');
+    }
+  }
+}
