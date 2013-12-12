@@ -211,5 +211,5 @@ function _cdb_check_suspended_field(&$result, $field) {
  * Place to insert custom css / js until we decide on a theme.
  */
 function cdb_init() {
-  drupal_add_css(drupal_get_path('module', 'cdb') . "/themes/cdb.css");
+  drupal_add_css(drupal_get_path('module', 'cdb') . "/theme/cdb.css");
 }
