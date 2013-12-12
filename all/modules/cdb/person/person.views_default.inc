@@ -1053,6 +1053,7 @@ function person_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Bulk operations: Person */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
@@ -1304,6 +1305,91 @@ function person_views_default_views() {
   $handler->display->display_options['fields']['suspended_1']['table'] = 'field_data_suspended';
   $handler->display->display_options['fields']['suspended_1']['field'] = 'suspended';
   $handler->display->display_options['fields']['suspended_1']['exclude'] = TRUE;
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Person: Id */
+  $handler->display->display_options['sorts']['id']['id'] = 'id';
+  $handler->display->display_options['sorts']['id']['table'] = 'eck_person';
+  $handler->display->display_options['sorts']['id']['field'] = 'id';
+  $handler->display->display_options['sorts']['id']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['id']['expose']['label'] = 'Member Number';
+  /* Sort criterion: person: Barcode (barcode_entity) */
+  $handler->display->display_options['sorts']['barcode_entity_target_id']['id'] = 'barcode_entity_target_id';
+  $handler->display->display_options['sorts']['barcode_entity_target_id']['table'] = 'field_data_barcode_entity';
+  $handler->display->display_options['sorts']['barcode_entity_target_id']['field'] = 'barcode_entity_target_id';
+  $handler->display->display_options['sorts']['barcode_entity_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['barcode_entity_target_id']['expose']['label'] = 'Barcode';
+  /* Sort criterion: person: Status (field_status) */
+  $handler->display->display_options['sorts']['field_status_value']['id'] = 'field_status_value';
+  $handler->display->display_options['sorts']['field_status_value']['table'] = 'field_data_field_status';
+  $handler->display->display_options['sorts']['field_status_value']['field'] = 'field_status_value';
+  $handler->display->display_options['sorts']['field_status_value']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['field_status_value']['expose']['label'] = 'Status';
+  /* Sort criterion: person: Patron Type (patron_type) */
+  $handler->display->display_options['sorts']['patron_type_value']['id'] = 'patron_type_value';
+  $handler->display->display_options['sorts']['patron_type_value']['table'] = 'field_data_patron_type';
+  $handler->display->display_options['sorts']['patron_type_value']['field'] = 'patron_type_value';
+  $handler->display->display_options['sorts']['patron_type_value']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['patron_type_value']['expose']['label'] = 'Patron Type';
+  /* Sort criterion: person: FOA (field_foa) */
+  $handler->display->display_options['sorts']['field_foa_value']['id'] = 'field_foa_value';
+  $handler->display->display_options['sorts']['field_foa_value']['table'] = 'field_data_field_foa';
+  $handler->display->display_options['sorts']['field_foa_value']['field'] = 'field_foa_value';
+  $handler->display->display_options['sorts']['field_foa_value']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['field_foa_value']['expose']['label'] = 'FOA';
+  /* Sort criterion: person: Last Name (last) */
+  $handler->display->display_options['sorts']['last_value']['id'] = 'last_value';
+  $handler->display->display_options['sorts']['last_value']['table'] = 'field_data_last';
+  $handler->display->display_options['sorts']['last_value']['field'] = 'last_value';
+  $handler->display->display_options['sorts']['last_value']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['last_value']['expose']['label'] = 'Last Name';
+  /* Sort criterion: person: First Name (first) */
+  $handler->display->display_options['sorts']['first_value']['id'] = 'first_value';
+  $handler->display->display_options['sorts']['first_value']['table'] = 'field_data_first';
+  $handler->display->display_options['sorts']['first_value']['field'] = 'first_value';
+  $handler->display->display_options['sorts']['first_value']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['first_value']['expose']['label'] = 'First Name';
+  /* Sort criterion: Company: Company Name */
+  $handler->display->display_options['sorts']['company_name']['id'] = 'company_name';
+  $handler->display->display_options['sorts']['company_name']['table'] = 'eck_company';
+  $handler->display->display_options['sorts']['company_name']['field'] = 'company_name';
+  $handler->display->display_options['sorts']['company_name']['relationship'] = 'field_company_target_id';
+  $handler->display->display_options['sorts']['company_name']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['company_name']['expose']['label'] = 'Company';
+  /* Sort criterion: address: address (address:premise) */
+  $handler->display->display_options['sorts']['address_premise']['id'] = 'address_premise';
+  $handler->display->display_options['sorts']['address_premise']['table'] = 'field_data_address';
+  $handler->display->display_options['sorts']['address_premise']['field'] = 'address_premise';
+  $handler->display->display_options['sorts']['address_premise']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['sorts']['address_premise']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['address_premise']['expose']['label'] = 'Address Line 1';
+  /* Sort criterion: address: address (address:thoroughfare) */
+  $handler->display->display_options['sorts']['address_thoroughfare']['id'] = 'address_thoroughfare';
+  $handler->display->display_options['sorts']['address_thoroughfare']['table'] = 'field_data_address';
+  $handler->display->display_options['sorts']['address_thoroughfare']['field'] = 'address_thoroughfare';
+  $handler->display->display_options['sorts']['address_thoroughfare']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['sorts']['address_thoroughfare']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['address_thoroughfare']['expose']['label'] = 'Address Line 2';
+  /* Sort criterion: address: address (address:locality) */
+  $handler->display->display_options['sorts']['address_locality']['id'] = 'address_locality';
+  $handler->display->display_options['sorts']['address_locality']['table'] = 'field_data_address';
+  $handler->display->display_options['sorts']['address_locality']['field'] = 'address_locality';
+  $handler->display->display_options['sorts']['address_locality']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['sorts']['address_locality']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['address_locality']['expose']['label'] = 'City';
+  /* Sort criterion: address: address (address:administrative_area) */
+  $handler->display->display_options['sorts']['address_administrative_area']['id'] = 'address_administrative_area';
+  $handler->display->display_options['sorts']['address_administrative_area']['table'] = 'field_data_address';
+  $handler->display->display_options['sorts']['address_administrative_area']['field'] = 'address_administrative_area';
+  $handler->display->display_options['sorts']['address_administrative_area']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['sorts']['address_administrative_area']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['address_administrative_area']['expose']['label'] = 'State';
+  /* Sort criterion: address: address (address:postal_code) */
+  $handler->display->display_options['sorts']['address_postal_code']['id'] = 'address_postal_code';
+  $handler->display->display_options['sorts']['address_postal_code']['table'] = 'field_data_address';
+  $handler->display->display_options['sorts']['address_postal_code']['field'] = 'address_postal_code';
+  $handler->display->display_options['sorts']['address_postal_code']['relationship'] = 'address_entity_target_id';
+  $handler->display->display_options['sorts']['address_postal_code']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['address_postal_code']['expose']['label'] = 'Zip';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: person: Person Category (field_person_category) */
