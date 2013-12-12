@@ -63,5 +63,42 @@ class PersonSearchViewTestCase extends DrupalWebTestCase {
     $person2->delete();
   }
 
+  public function testPersonViewsQueryAlter() {
+    $views = views_get_view('person_search');
+    $views->set_display('page_1');
+    $input = array(
+      'last_value' => "test1\ntest2\ntest3",
+      'sort_by' => 'last_value',
+      'sort_order' => 'ASC',
+    );
+    $views->set_exposed_input($input);
+    $views->execute();
 
+    // Check that the condition type has been set to 'OR'.
+    $actual = $views->query->where[0]['type'];
+    $expected = 'OR';
+    $this->assertEqual($actual, $expected, 'The where clause are added as OR statements.');
+
+    // Check that multi names search query alter works as expected.
+    $actual = $views->query->where[0]['conditions'];
+    $expected = array(
+      0 => array(
+        'field' => 'last_value',
+        'value' => '%test1%',
+        'operator' => 'LIKE',
+      ),
+      1 => array(
+        'field' => 'last_value',
+        'value' => '%test2%',
+        'operator' => 'LIKE',
+      ),
+      2 => array(
+        'field' => 'last_value',
+        'value' => '%test3%',
+        'operator' => 'LIKE',
+      ),
+    );
+    $this->assertEqual($actual, $expected,
+      'The expected conditions are added to the company multi name s query.');
+  }
 }
