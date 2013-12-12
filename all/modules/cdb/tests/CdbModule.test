@@ -210,7 +210,7 @@ class CdbModuleTestCase extends DrupalWebTestCase {
     $this->assertTrue($suspended2->suspended, "Returns suspended on y");
 
     _cdb_check_suspended_field($not_suspended, 'field_suspended');
-    $this->assertFalse($not_suspended->suspended, "Returns not suspended on n");
+    $this->assertFalse(isset($not_suspended->suspended), "Suspended field is not set");
   }
 
   /**
