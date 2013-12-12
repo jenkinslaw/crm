@@ -196,11 +196,11 @@ class CdbModuleTestCase extends DrupalWebTestCase {
    * Test determining suspended status. 
    */
   public function testCheckSuspendedField() {
-    $suspended1 = new stdclass();  
+    $suspended1 = new stdclass();
     $suspended1->field_suspended[] = array('raw' => array("value" => "Y"));
-    $suspended2 = new stdclass();  
+    $suspended2 = new stdclass();
     $suspended2->field_suspended_1[] = array('raw' => array("value" => "y"));
-    $not_suspended = new stdclass();  
+    $not_suspended = new stdclass();
     $not_suspended->field_suspended[] = array('raw' => array("value" => "n"));
 
     _cdb_check_suspended_field($suspended1, 'field_suspended');
@@ -224,12 +224,12 @@ class CdbModuleTestCase extends DrupalWebTestCase {
     );
     $result = cdb_which_sorts_to_add($data);
     $expected = array("last_value", "first_value");
-    $this->assertEqual($result, $expected, "$result[0] : $result[1]" );
+    $this->assertEqual($result, $expected, "$result[0] : $result[1]");
 
     $data = array(
       "sort_by"   => "id",
       "sort_by_1" => "last_value",
-      "sort_by_2" => "id"
+      "sort_by_2" => "id",
     );
     $result = cdb_which_sorts_to_add($data);
     $expected = array("last_value");
@@ -238,7 +238,7 @@ class CdbModuleTestCase extends DrupalWebTestCase {
     $data = array(
       "sort_by"   => "id",
       "sort_by_1" => "id",
-      "sort_by_2" => "first_value"
+      "sort_by_2" => "first_value",
     );
     $result = cdb_which_sorts_to_add($data);
     $expected = array("first_value");
@@ -247,7 +247,7 @@ class CdbModuleTestCase extends DrupalWebTestCase {
     $data = array(
       "sort_by"   => "id",
       "sort_by_1" => "id",
-      "sort_by_2" => "id"
+      "sort_by_2" => "id",
     );
     $result = cdb_which_sorts_to_add($data);
     $expected = array();
@@ -256,46 +256,50 @@ class CdbModuleTestCase extends DrupalWebTestCase {
     $data = array(
       "sort_by"   => "id",
       "sort_by_1" => "",
-      "sort_by_2" => ""
+      "sort_by_2" => "",
     );
     $result = cdb_which_sorts_to_add($data);
     $expected = array();
     $this->assertEqual($result, $expected, "Blank extra sort value returned correctly");
   }
 
-/**
- * Tests that passing the view extra sort filter actually affects result
- * sorting.
- */
+  /**
+   * Test cdb_views_query_alter().
+   *
+   * Tests that passing the view extra sort filter actually affects result
+   * sorting.
+   */
   public function testViewQueryAlter() {
-    $twoSort = views_get_view('person_search');
-    $twoSort->set_display('page');
-    $twoSort->set_exposed_input(array(
+    $two_sort = views_get_view('person_search');
+    $two_sort->set_display('page');
+    $two_sort->set_exposed_input(array(
       "field_person_category_value" => "m",
       "sort_by"                     => "last_value",
       "sort_order"                  => "ASC",
       "sort_by_1"                   => "first_value",
       "sort_by_2"                   => "first_value",
     ));
-    $twoSort->pre_execute();
-    $twoSort->execute();
-    $orderby = $twoSort->query->orderby;
+    $two_sort->pre_execute();
+    $two_sort->execute();
+    $orderby = $two_sort->query->orderby;
     $count = count($orderby);
-    $this->assertEqual($count, 2, "The query sort attribute is the expected size : $count.");
+    $this->assertEqual($count, 2,
+      "The query sort attribute is the expected size : $count.");
 
-    $threeSort = views_get_view('person_search');
-    $threeSort->set_display('page');
-    $threeSort->set_exposed_input(array(
+    $three_sort = views_get_view('person_search');
+    $three_sort->set_display('page');
+    $three_sort->set_exposed_input(array(
       "field_person_category_value" => "m",
       "sort_by"                     => "last_value",
       "sort_order"                  => "ASC",
       "sort_by_1"                   => "first_value",
       "sort_by_2"                   => "field_status_value",
     ));
-    $threeSort->pre_execute();
-    $threeSort->execute();
-    $orderby2 = $threeSort->query->orderby;
+    $three_sort->pre_execute();
+    $three_sort->execute();
+    $orderby2 = $three_sort->query->orderby;
     $count = count($orderby2);
-    $this->assertEqual($count, 3, "The query sort attribute is the expected size : $count.");
+    $this->assertEqual($count, 3,
+      "The query sort attribute is the expected size : $count.");
   }
 }

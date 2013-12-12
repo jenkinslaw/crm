@@ -219,11 +219,11 @@ function cdb_init() {
  *
  * Copies the existing sort field twice to allow three levels of search.
  */
-function cdb_form_alter(&$form, &$form_state, $form_id){
-   if ($form['#id'] == 'views-exposed-form-person-search-page') {
-     $form['sort_by_1'] = $form['sort_by'];
-     $form['sort_by_2'] = $form['sort_by'];
-   }
+function cdb_form_alter(&$form, &$form_state, $form_id) {
+  if ($form['#id'] == 'views-exposed-form-person-search-page') {
+    $form['sort_by_1'] = $form['sort_by'];
+    $form['sort_by_2'] = $form['sort_by'];
+  }
 }
 
 /**
@@ -232,7 +232,6 @@ function cdb_form_alter(&$form, &$form_state, $form_id){
  * Alters view query with sortby info from form.
  */
 function cdb_views_query_alter(&$view, &$query) {
-  dsm($view);
   $fields = cdb_which_sorts_to_add($view->exposed_data);
   foreach ($fields as $field) {
     $view->sort[$field]->query();
@@ -240,7 +239,7 @@ function cdb_views_query_alter(&$view, &$query) {
 }
 
 /**
- * Decides which sort_by fields should be added to query, removing dupes.
+ * Removes duplicate sorts from input.
  */
 function cdb_which_sorts_to_add($data) {
   $sort[] = $data['sort_by'];
@@ -254,4 +253,3 @@ function cdb_which_sorts_to_add($data) {
   array_shift($sort);
   return $sort;
 }
-
