@@ -232,9 +232,11 @@ function cdb_form_alter(&$form, &$form_state, $form_id) {
  * Alters view query with sortby info from form.
  */
 function cdb_views_query_alter(&$view, &$query) {
-  $fields = cdb_which_sorts_to_add($view->exposed_data);
-  foreach ($fields as $field) {
-    $view->sort[$field]->query();
+  if ($view->name == "person_search") {
+    $fields = cdb_which_sorts_to_add($view->exposed_data);
+    foreach ($fields as $field) {
+      $view->sort[$field]->query();
+    }
   }
 }
 
