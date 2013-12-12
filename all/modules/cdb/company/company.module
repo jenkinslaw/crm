@@ -30,8 +30,17 @@ function company_views_pre_render(&$view) {
  * Implements hook_views_query_alter().
  */
 function company_views_query_alter(&$views) {
-  // Alter the view query to do multiple searches on company_name.
-  if ($views->name == 'company_search' && $views->current_display == 'page_1') {
+  if ($views->name == 'company_search') {
+    company_process_multiple_search($views);
+  }
+}
+
+/**
+ * Process query alters for the mulitple company search.
+ */
+function company_process_multiple_search(&$views) {
+  if ($views->current_display == 'page_1') {
+    // Alter the view query to do multiple searches on company_name.
     unset ($views->query->where);
     $views->query->set_where_group('OR', 0);
 
@@ -40,5 +49,8 @@ function company_views_query_alter(&$views) {
       $value = '%' . trim($line) . '%';
       $views->query->add_where(0, 'company_name', $value, 'LIKE');
     }
+
+    // Alter the query to allow for multiple level sorts.
+    cdb_views_add_sorts($views);
   }
 }
