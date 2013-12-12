@@ -46,7 +46,7 @@ class CompanyModuleTestCase extends DrupalWebTestCase {
     $views->set_exposed_input($input);
     $views->execute();
 
-    // Check that the condition type has been set to 'OR'
+    // Check that the condition type has been set to 'OR'.
     $actual = $views->query->where[0]['type'];
     $expected = 'OR';
     $this->assertEqual($actual, $expected, 'The where clause are added as OR statements.');

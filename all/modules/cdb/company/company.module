@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Main file to hold Copany Domain specific hook code.
+ * Main file to hold Company Domain specific hook code.
  */
 
 require_once 'company.features.inc';
