@@ -173,7 +173,7 @@ class CdbEntity {
    * Wrapper for hook_views_pre_render().
    */
   public function viewsPreRender(&$view) {
-    if ($view->name == "{$this->type}_search" && $view->current_display == "page") {
+    if ($view->name == "{$this->type}_search") {
       if (count($view->result) == 1) {
         $path = "{$this->type}/{$view->result[0]->id}";
         drupal_goto($path);
