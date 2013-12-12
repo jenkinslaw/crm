@@ -17,6 +17,9 @@ class CompanyEntityForm extends EntityForm {
       $this->setDefaultExpDate();
       $this->makeBillingAreaRequired();
     }
+    elseif ($this->isCompanyViewsMultiSearchForm()) {
+      $this->form['company_name']['#type'] = 'textarea';
+    }
   }
 
   /**
@@ -24,6 +27,15 @@ class CompanyEntityForm extends EntityForm {
    */
   protected function isCompanyForm() {
     return ($this->type == 'company_entity_form');
+  }
+
+  /**
+   * Checks to see if this is a Company Related Views Form.
+   */
+  protected function isCompanyViewsMultiSearchForm() {
+    $action = "/company/multi-search";
+    return ($this->isViewsExposedForm() &&
+      $this->form['#action'] == $action);
   }
 
   /**
