@@ -199,6 +199,11 @@ function company_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  $handler->display->display_options['header']['result']['content'] = 'Total Number of Records Found: @total';
   /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['phone_entity_target_id']['id'] = 'phone_entity_target_id';
   $handler->display->display_options['relationships']['phone_entity_target_id']['table'] = 'field_data_phone_entity';
