@@ -187,4 +187,27 @@ class EntityForm {
     return (isset($this->form['form_id']) &&
       $this->form['form_id']['#value'] == 'views_exposed_form');
   }
+
+  /**
+   * Duplicates the specied form field N times.
+   *
+   * @param String $field
+   *   field name
+   *
+   * @param Int $n
+   *   Number of times to duplicate the field. 
+   *
+   * @return ref
+   *   Wheter or not the field duplciation occurs.
+   */
+  protected function duplicateField($field, $n = 2) {
+    if (!isset($this->form[$field])) {
+      return FALSE;
+    }
+    $item = $this->form[$field];
+    for ($i = 1; $i <= $n; $i++) {
+      $this->form["{$field}_$i"] = $item;
+    }
+    return TRUE;
+  }
 }

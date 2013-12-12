@@ -95,5 +95,34 @@ class CompanyModuleTestCase extends DrupalWebTestCase {
     $expected = 'textarea';
     $this->assertEqual($actual, $expected,
       "The company_name field is changed to a text in the multi-name search form as expected.");
+
+    // Verify that sort_by fields get duplicated.
+    $actual = isset($form['sort_by_1']) && isset($form['sort_by_2']);
+    $this->assertTrue($actual, "The multi-search-exposed form has it's sort_byfields duplicated.");
+  }
+
+  /**
+   * Test company_views_query_alter().
+   *
+   * Tests that passing the view extra sort filter actually affects result
+   * sorting for company multi_search.
+   */
+  public function testViewQueryAlter() {
+    $two_sort = views_get_view('company_search');
+    $two_sort->set_display('page_1');
+    $two_sort->set_exposed_input(array(
+      "company_name" => "test",
+      "sort_by"                     => "company_name",
+      "sort_order"                  => "ASC",
+      "sort_by_1"                   => "billing_area_value",
+      "sort_by_2"                   => "billing_area_value",
+    ));
+    $two_sort->pre_execute();
+    $two_sort->execute();
+    $orderby = $two_sort->query->orderby;
+    $count = count($orderby);
+    $this->assertEqual($count, 2,
+      "The query sort attribute is the expected size : $count.");
+
   }
 }

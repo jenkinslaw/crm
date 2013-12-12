@@ -19,11 +19,12 @@ class CompanyEntityForm extends EntityForm {
     }
     elseif ($this->isCompanyViewsMultiSearchForm()) {
       $this->form['company_name']['#type'] = 'textarea';
+      $this->duplicateField('sort_by');
     }
   }
 
   /**
-   * Checks to see if this is ic a Company form.
+   * Checks to see if this is a Company form.
    */
   protected function isCompanyForm() {
     return ($this->type == 'company_entity_form');
