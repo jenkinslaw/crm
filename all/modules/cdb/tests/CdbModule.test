@@ -213,4 +213,89 @@ class CdbModuleTestCase extends DrupalWebTestCase {
     $this->assertFalse($not_suspended->suspended, "Returns not suspended on n");
   }
 
+  /**
+   * Tests determining which user selected sorts should alter the query.
+   */
+  public function testDecideWhichSortsToAdd() {
+    $data = array(
+      "sort_by"   => "id",
+      "sort_by_1" => "last_value",
+      "sort_by_2" => "first_value",
+    );
+    $result = cdb_which_sorts_to_add($data);
+    $expected = array("last_value", "first_value");
+    $this->assertEqual($result, $expected, "$result[0] : $result[1]" );
+
+    $data = array(
+      "sort_by"   => "id",
+      "sort_by_1" => "last_value",
+      "sort_by_2" => "id"
+    );
+    $result = cdb_which_sorts_to_add($data);
+    $expected = array("last_value");
+    $this->assertEqual($result, $expected, "First sort value returned correctly");
+
+    $data = array(
+      "sort_by"   => "id",
+      "sort_by_1" => "id",
+      "sort_by_2" => "first_value"
+    );
+    $result = cdb_which_sorts_to_add($data);
+    $expected = array("first_value");
+    $this->assertEqual($result, $expected, "Second sort value returned correctly");
+
+    $data = array(
+      "sort_by"   => "id",
+      "sort_by_1" => "id",
+      "sort_by_2" => "id"
+    );
+    $result = cdb_which_sorts_to_add($data);
+    $expected = array();
+    $this->assertEqual($result, $expected, "All repeated extra sort values returned correctly");
+
+    $data = array(
+      "sort_by"   => "id",
+      "sort_by_1" => "",
+      "sort_by_2" => ""
+    );
+    $result = cdb_which_sorts_to_add($data);
+    $expected = array();
+    $this->assertEqual($result, $expected, "Blank extra sort value returned correctly");
+  }
+
+/**
+ * Tests that passing the view extra sort filter actually affects result
+ * sorting.
+ */
+  public function testViewQueryAlter() {
+    $twoSort = views_get_view('person_search');
+    $twoSort->set_display('page');
+    $twoSort->set_exposed_input(array(
+      "field_person_category_value" => "m",
+      "sort_by"                     => "last_value",
+      "sort_order"                  => "ASC",
+      "sort_by_1"                   => "first_value",
+      "sort_by_2"                   => "first_value",
+    ));
+    $twoSort->pre_execute();
+    $twoSort->execute();
+    $orderby = $twoSort->query->orderby;
+    $count = count($orderby);
+    $this->assertEqual($count, 2, "The query sort attribute is the expected size : $count.");
+
+    $threeSort = views_get_view('person_search');
+    $threeSort->set_display('page');
+    $threeSort->set_exposed_input(array(
+      "field_person_category_value" => "m",
+      "sort_by"                     => "last_value",
+      "sort_order"                  => "ASC",
+      "sort_by_1"                   => "first_value",
+      "sort_by_2"                   => "field_status_value",
+    ));
+    $threeSort->pre_execute();
+    $threeSort->execute();
+    $orderby2 = $threeSort->query->orderby;
+    $count = count($orderby2);
+    $this->assertEqual($count, 3, "The query sort attribute is the expected size : $count.");
+  }
 }

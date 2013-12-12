@@ -213,3 +213,45 @@ function _cdb_check_suspended_field(&$result, $field) {
 function cdb_init() {
   drupal_add_css(drupal_get_path('module', 'cdb') . "/theme/cdb.css");
 }
+
+/**
+ * Implements hook_form_alter().
+ *
+ * Copies the existing sort field twice to allow three levels of search.
+ */
+function cdb_form_alter(&$form, &$form_state, $form_id){
+   if ($form['#id'] == 'views-exposed-form-person-search-page') {
+     $form['sort_by_1'] = $form['sort_by'];
+     $form['sort_by_2'] = $form['sort_by'];
+   }
+}
+
+/**
+ * Implements hook_views_query_alter().
+ *
+ * Alters view query with sortby info from form.
+ */
+function cdb_views_query_alter(&$view, &$query) {
+  dsm($view);
+  $fields = cdb_which_sorts_to_add($view->exposed_data);
+  foreach ($fields as $field) {
+    $view->sort[$field]->query();
+  }
+}
+
+/**
+ * Decides which sort_by fields should be added to query, removing dupes.
+ */
+function cdb_which_sorts_to_add($data) {
+  $sort[] = $data['sort_by'];
+  $newsort = array($data['sort_by_1'], $data['sort_by_2']);
+
+  foreach ($newsort as $new) {
+    if ($new && !in_array($new, $sort)) {
+      $sort[] = $new;
+    }
+  }
+  array_shift($sort);
+  return $sort;
+}
+
