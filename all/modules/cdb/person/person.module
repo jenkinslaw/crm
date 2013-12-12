@@ -33,4 +33,9 @@ function _result_field_combine($result, $fields) {
   return $result;
 }
 
+function person_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'views_exposed_form' && $form['#action'] == '/person/multi-search') {
+    $form['last_value']['#type'] = 'textarea';
+  }
+}
 

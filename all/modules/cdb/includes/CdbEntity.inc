@@ -184,6 +184,23 @@ class CdbEntity {
     }
   }
 
+/**
+ * Alter query for multisearch forms.
+ */
+  public function multiNameSearch(&$view) {
+    // Alter the view query to do multiple searches on company_name.
+    if ($view->name == "{$this->type}_search" && $view->current_display == 'page_1') {
+      unset ($view->query->where);
+      $view->query->set_where_group('OR', 0);
+      $field = $this->type == 'person' ? 'last_value' : 'company_name';
+
+      $lines = explode("\n", $view->exposed_raw_input[$field]);
+      foreach ($lines as $line) {
+        $value = '%' . trim($line) . '%';
+        $view->query->add_where(0, $field, $value, 'LIKE');
+      }
+    }
+  }
   /**
    * Stub reference function to run code on each view result.
    */
