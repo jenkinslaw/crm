@@ -1987,6 +1987,43 @@ function person_views_default_views() {
     'page' => 0,
   );
   $handler->display->display_options['sitename_title'] = 0;
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Mutliperson Search';
+  $handler->display->display_options['display_description'] = 'Search for multiple people';
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  $handler->display->display_options['header']['result']['content'] = 'Total Number of Results:  @total';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: person: Last Name (last) */
+  $handler->display->display_options['filters']['last_value']['id'] = 'last_value';
+  $handler->display->display_options['filters']['last_value']['table'] = 'field_data_last';
+  $handler->display->display_options['filters']['last_value']['field'] = 'last_value';
+  $handler->display->display_options['filters']['last_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['last_value']['group'] = 1;
+  $handler->display->display_options['filters']['last_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['last_value']['expose']['operator_id'] = 'last_value_op';
+  $handler->display->display_options['filters']['last_value']['expose']['label'] = 'Last Name';
+  $handler->display->display_options['filters']['last_value']['expose']['operator'] = 'last_value_op';
+  $handler->display->display_options['filters']['last_value']['expose']['identifier'] = 'last_value';
+  $handler->display->display_options['filters']['last_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+    8 => 0,
+    5 => 0,
+    7 => 0,
+    6 => 0,
+    9 => 0,
+  );
+  $handler->display->display_options['path'] = 'person/multi-search';
   $export['person_search'] = $view;
 
   return $export;
