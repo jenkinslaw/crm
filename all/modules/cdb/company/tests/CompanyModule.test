@@ -32,4 +32,46 @@ class CompanyModuleTestCase extends DrupalWebTestCase {
   public function tearDown() {
   }
 
+  /**
+   * Test company_views_query_alter().
+   */
+  public function testCompanyViewsQueryAlter() {
+    $views = views_get_view('company_search');
+    $views->set_display('page_1');
+    $input = array(
+      'company_name' => "test1\ntest2\ntest3",
+      'sort_by' => 'company_name',
+      'sort_order' => 'ASC',
+    );
+    $views->set_exposed_input($input);
+    $views->execute();
+
+    // Check that the condition type has been set to 'OR'.
+    $actual = $views->query->where[0]['type'];
+    $expected = 'OR';
+    $this->assertEqual($actual, $expected, 'The where clause are added as OR statements.');
+
+    // Check that multi names search query alter works as expected.
+    $actual = $views->query->where[0]['conditions'];
+    $expected = array(
+      0 => array(
+        'field' => 'company_name',
+        'value' => '%test1%',
+        'operator' => 'LIKE',
+      ),
+      1 => array(
+        'field' => 'company_name',
+        'value' => '%test2%',
+        'operator' => 'LIKE',
+      ),
+      2 => array(
+        'field' => 'company_name',
+        'value' => '%test3%',
+        'operator' => 'LIKE',
+      ),
+    );
+    $this->assertEqual($actual, $expected,
+      'The expected conditions are added to the company multi name s query.');
+  }
+
 }
