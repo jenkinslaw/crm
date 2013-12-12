@@ -1054,6 +1054,11 @@ function person_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  $handler->display->display_options['header']['result']['content'] = 'Total Number of Records Found: @total';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Bulk operations: Person */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
