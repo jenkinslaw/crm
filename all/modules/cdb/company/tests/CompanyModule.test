@@ -74,4 +74,26 @@ class CompanyModuleTestCase extends DrupalWebTestCase {
       'The expected conditions are added to the company multi name s query.');
   }
 
+  /**
+   * Test company_form_alter() for multi_search_exposed form.
+   */
+  public function testCompanyMuiltiSearchFormAlter() {
+    // Initialize the tests.
+    $views = views_get_view('company_search');
+    $views->set_display('page_1');
+    $views->init_handlers();
+    $views->execute();
+    $form_state = array(
+      'view' => $views,
+      'display' => $views->display_handler->display,
+      'exposed_form_plugin' => $views->display_handler->get_plugin('exposed_form'),
+    );
+    $form = drupal_build_form('views_exposed_form', $form_state);
+
+    // Verify that the company_name is converted to a textarea.
+    $actual = $form['company_name']['#type'];
+    $expected = 'textarea';
+    $this->assertEqual($actual, $expected,
+      "The company_name field is changed to a text in the multi-name search form as expected.");
+  }
 }

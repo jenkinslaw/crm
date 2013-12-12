@@ -173,10 +173,18 @@ class EntityForm {
     $value = variable_get("cdb_{$type}_{$element_id}_default_value", '');
     return $value;
   }
+
   /**
    * Helper function for hooking into hook_form_alter.
    */
   public function hookForm() {
   }
 
+  /**
+   * Checks whether the form is a views exposed form.
+   */
+  public function isViewsExposedForm() {
+    return (isset($this->form['form_id']) &&
+      $this->form['form_id']['#value'] == 'views_exposed_form');
+  }
 }
