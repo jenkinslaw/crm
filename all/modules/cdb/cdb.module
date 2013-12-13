@@ -220,20 +220,9 @@ function cdb_init() {
  * Copies the existing sort field twice to allow three levels of search.
  */
 function cdb_form_alter(&$form, &$form_state, $form_id) {
-  if ($form['#id'] == 'views-exposed-form-person-search-page') {
+  if (isset($form_state['view']) && $form_state['view']->name == "person_search") {
     $form['sort_by_1'] = $form['sort_by'];
     $form['sort_by_2'] = $form['sort_by'];
-  }
-}
-
-/**
- * Implements hook_views_query_alter().
- *
- * Alters view query with sortby info from form.
- */
-function cdb_views_query_alter(&$view, &$query) {
-  if ($view->name == "person_search") {
-    cdb_views_add_sorts($view);
   }
 }
 

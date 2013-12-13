@@ -173,13 +173,48 @@ class CdbEntity {
    * Wrapper for hook_views_pre_render().
    */
   public function viewsPreRender(&$view) {
-    if ($view->name == "{$this->type}_search" && $view->current_display == "page") {
+    if ($view->name == "{$this->type}_search") {
       if (count($view->result) == 1) {
         $path = "{$this->type}/{$view->result[0]->id}";
         drupal_goto($path);
       }
       foreach ($view->result as &$result) {
         $this->forEeachResult($result);
+      }
+    }
+  }
+
+  /**
+   * Stub for hook_views_query_alter().
+   * 
+   * @param Views $view
+   *   A reference to a Drupal Views object.
+   *
+   * @return Boolean
+   *   TRUE if a $view is a CDB related view, FALSE otherwise.
+   */
+  public function hookViewsQueryAlter(&$view) {
+    if ($view->name == "{$this->type}_search") {
+      $this->multiNameSearchQueryAlter($view);
+      return TRUE;
+    }
+    return FALSE;
+  }
+
+  /**
+   * Alter query for multisearch forms.
+   */
+  public function multiNameSearchQueryAlter(&$view) {
+    // Alter the view query to do multiple searches on company_name.
+    if ($view->current_display == 'page_1') {
+      unset ($view->query->where);
+      $view->query->set_where_group('OR', 0);
+      $field = $this->type == 'person' ? 'last_value' : 'company_name';
+
+      $lines = explode("\n", $view->exposed_raw_input[$field]);
+      foreach ($lines as $line) {
+        $value = '%' . trim($line) . '%';
+        $view->query->add_where(0, $field, $value, 'LIKE');
       }
     }
   }

@@ -123,6 +123,5 @@ class CompanyModuleTestCase extends DrupalWebTestCase {
     $count = count($orderby);
     $this->assertEqual($count, 2,
       "The query sort attribute is the expected size : $count.");
-
   }
 }
