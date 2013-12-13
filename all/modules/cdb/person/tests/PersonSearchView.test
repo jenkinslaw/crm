@@ -64,7 +64,7 @@ class PersonSearchViewTestCase extends DrupalWebTestCase {
 
     $person2 = new Person();
     $person2->name = "[unit-test] " . time();
-    $person1->status = 2;
+    $person2->status = 2;
     $person2->save();
 
     $this->drupalGet("person/search", array("query" => array("field_status_value" => "2")));
