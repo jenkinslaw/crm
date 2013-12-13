@@ -20,6 +20,19 @@ function person_views_pre_render(&$view) {
 }
 
 /**
+ * Implements hook_views_query_alter().
+ *
+ * Alters view query with sortby info from form.
+ */
+function cdb_views_query_alter(&$view, &$query) {
+  $person = new Person();
+  $person->hookViewsQueryAlter($view);
+  if ($view->name == "person_search") {
+    cdb_views_add_sorts($view);
+  }
+}
+
+/**
  * Combines multiple fields with the same structure.
  * @result is a view's result object
  * @fields is a simple array of the fields to combine. All fields will be merged
@@ -33,9 +46,11 @@ function _result_field_combine($result, $fields) {
   return $result;
 }
 
+/**
+ * Implements hook_form_alter().
+ */
 function person_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'views_exposed_form' && $form['#action'] == '/person/multi-search') {
     $form['last_value']['#type'] = 'textarea';
   }
 }
-

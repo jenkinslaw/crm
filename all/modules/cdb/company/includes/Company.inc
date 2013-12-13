@@ -32,8 +32,17 @@ class Company extends CdbEntity {
       $query->condition('field_status_value', '1', '=');
       $query->fields('u', array('field_company_target_id'));
 
-      return  $query->countQuery()->execute()->fetchField();
+      return $query->countQuery()->execute()->fetchField();
     }
     return 0;
+  }
+
+  /**
+   * Overrides parent::hookViewsQueryAlter().
+   */
+  public function hookViewsQueryAlter(&$view) {
+    if (parent::hookViewsQueryAlter($view)) {
+      cdb_views_add_sorts($view);
+    }
   }
 }

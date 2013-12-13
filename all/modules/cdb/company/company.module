@@ -15,9 +15,6 @@ require_once 'includes/CompanyEntityForm.inc';
 function company_form_alter(&$form, &$form_state, $form_id) {
   $company_form = new CompanyEntityForm($form);
   $company_form->hookForm();
-  if ($form_id == 'views_exposed_form' && $form['#action'] == '/company/multi-search') {
-    $form['company_name']['#type'] = 'textarea';
-  }
 }
 
 /**
@@ -34,5 +31,5 @@ function company_views_pre_render(&$view) {
  */
 function company_views_query_alter(&$view) {
   $company = new Company();
-  $company->multiNameSearch($view);
+  $company->hookViewsQueryAlter($view);
 }

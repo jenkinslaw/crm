@@ -227,18 +227,12 @@ function cdb_form_alter(&$form, &$form_state, $form_id) {
 }
 
 /**
- * Implements hook_views_query_alter().
- *
- * Alters view query with sortby info from form.
+ * Adds extra sorts to a view.
  */
-function cdb_views_query_alter(&$view, &$query) {
-  $person = new Person();
-  $person->multiNameSearch($view);
-  if ($view->name == "person_search") {
-    $fields = cdb_which_sorts_to_add($view->exposed_data);
-    foreach ($fields as $field) {
-      $view->sort[$field]->query();
-    }
+function cdb_views_add_sorts(&$view) {
+  $fields = cdb_which_sorts_to_add($view->exposed_data);
+  foreach ($fields as $field) {
+    $view->sort[$field]->query();
   }
 }
 
@@ -257,5 +251,3 @@ function cdb_which_sorts_to_add($data) {
   array_shift($sort);
   return $sort;
 }
-
-

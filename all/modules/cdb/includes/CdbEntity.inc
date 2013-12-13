@@ -184,12 +184,29 @@ class CdbEntity {
     }
   }
 
-/**
- * Alter query for multisearch forms.
- */
-  public function multiNameSearch(&$view) {
+  /**
+   * Stub for hook_views_query_alter().
+   * 
+   * @param Views $view
+   *   A reference to a Drupal Views object.
+   *
+   * @return Boolean
+   *   TRUE if a $view is a CDB related view, FALSE otherwise.
+   */
+  public function hookViewsQueryAlter(&$view) {
+    if ($view->name == "{$this->type}_search") {
+      $this->multiNameSearchQueryAlter($view);
+      return TRUE;
+    }
+    return FALSE;
+  }
+
+  /**
+   * Alter query for multisearch forms.
+   */
+  public function multiNameSearchQueryAlter(&$view) {
     // Alter the view query to do multiple searches on company_name.
-    if ($view->name == "{$this->type}_search" && $view->current_display == 'page_1') {
+    if ($view->current_display == 'page_1') {
       unset ($view->query->where);
       $view->query->set_where_group('OR', 0);
       $field = $this->type == 'person' ? 'last_value' : 'company_name';
@@ -201,6 +218,7 @@ class CdbEntity {
       }
     }
   }
+
   /**
    * Stub reference function to run code on each view result.
    */
