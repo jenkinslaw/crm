@@ -79,7 +79,6 @@ class PersonSearchViewTestCase extends DrupalWebTestCase {
    * Unit test person_views_query_alter().
    */
   public function testPersonViewsQueryAlter() {
-    return;
     $views = views_get_view('person_search');
     $views->set_display('page_1');
     $input = array(
@@ -115,6 +114,6 @@ class PersonSearchViewTestCase extends DrupalWebTestCase {
       ),
     );
     $this->assertEqual($actual, $expected,
-      'The expected conditions are added to the company multi name s query.');
+      'The expected conditions are added to the person multi name s query.');
   }
 }
