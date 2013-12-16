@@ -6,3 +6,8 @@ watch( 'company.module|CompanyEntityForm' ) {|md| `drush test-run CompanyModuleT
 watch( 'cdb.module' ) {|md| `drush test-run CdbModuleTestCase`}
 
 watch( 'EntityForm|CompanyEntityForm' ) {|md| `drush test-run CdbEntityTestCase`}
+
+watch( '.*\.test' ) { |md| 
+  puts `run-tests.sh --url 'http://localhost' --color --verbose --file 'sites/all/modules/cdb/#{md[0]}'`
+}
+
