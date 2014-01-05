@@ -15,7 +15,7 @@ class CdbTestCase extends DrupalWebTestCase {
     return array(
       'name' => 'Customer Detabase Default Tests.',
       'description' => 'Some test for our Customer Database Web app',
-      'group' => 'Jenkins',
+      'group' => 'Jenkins Slow',
     );
   }
 
